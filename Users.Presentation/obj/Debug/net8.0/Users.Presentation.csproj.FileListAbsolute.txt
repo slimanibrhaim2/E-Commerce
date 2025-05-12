@@ -1,0 +1,12 @@
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\bin\Debug\net8.0\Users.Presentation.deps.json
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\bin\Debug\net8.0\Users.Presentation.dll
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\bin\Debug\net8.0\Users.Presentation.pdb
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.dll
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\refint\Users.Presentation.dll
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.pdb
+C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\ref\Users.Presentation.dll

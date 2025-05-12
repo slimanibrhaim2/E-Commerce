@@ -1,0 +1,15 @@
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\bin\Debug\net8.0\Users.Application.deps.json
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\bin\Debug\net8.0\Users.Application.dll
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\bin\Debug\net8.0\Users.Application.pdb
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\bin\Debug\net8.0\Users.Domain.dll
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\bin\Debug\net8.0\Users.Domain.pdb
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\Users.Application.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\Users.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\Users.Application.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\Users.Application.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\Users.Application.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\Users.Ap.B414D118.Up2Date
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\Users.Application.dll
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\refint\Users.Application.dll
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\Users.Application.pdb
+C:\Users\ASUS\source\repos\E-Commerce\Users.Application\obj\Debug\net8.0\ref\Users.Application.dll
