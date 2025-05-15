@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Core.Abstraction;
 
 namespace Infrastructure.Models;
 
@@ -8,7 +9,6 @@ public partial class ECommerceContext : DbContext
 {
     public ECommerceContext()
     {
-
     }
 
     public ECommerceContext(DbContextOptions<ECommerceContext> options)
@@ -16,535 +16,426 @@ public partial class ECommerceContext : DbContext
     {
     }
 
-    public virtual DbSet<Address> Addresses { get; set; }
-
-    public virtual DbSet<Attachment> Attachments { get; set; }
-
-    public virtual DbSet<AttachmentType> AttachmentTypes { get; set; }
-
-    public virtual DbSet<BaseContent> BaseContents { get; set; }
-
-    public virtual DbSet<BaseItem> BaseItems { get; set; }
-
-    public virtual DbSet<Brand> Brands { get; set; }
-
-    public virtual DbSet<Cart> Carts { get; set; }
-
-    public virtual DbSet<CartItem> CartItems { get; set; }
-
-    public virtual DbSet<Category> Categories { get; set; }
-
-    public virtual DbSet<Comment> Comments { get; set; }
-
-    public virtual DbSet<Conversation> Conversations { get; set; }
-
-    public virtual DbSet<ConversationMember> ConversationMembers { get; set; }
-
-    public virtual DbSet<Coupon> Coupons { get; set; }
-
-    public virtual DbSet<DiscountType> DiscountTypes { get; set; }
-
-    public virtual DbSet<Favorite> Favorites { get; set; }
-
-    public virtual DbSet<Follower> Followers { get; set; }
-
-    public virtual DbSet<MediaType> MediaTypes { get; set; }
-
-    public virtual DbSet<Message> Messages { get; set; }
-
-    public virtual DbSet<Notification> Notifications { get; set; }
-
-    public virtual DbSet<Order> Orders { get; set; }
-
-    public virtual DbSet<OrderActivity> OrderActivities { get; set; }
-
-    public virtual DbSet<OrderItem> OrderItems { get; set; }
-
-    public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
-
-    public virtual DbSet<Payment> Payments { get; set; }
-
-    public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
-
-    public virtual DbSet<PaymentStatus> PaymentStatuses { get; set; }
-
-    public virtual DbSet<Product> Products { get; set; }
-
-    public virtual DbSet<ProductFeature> ProductFeatures { get; set; }
-
-    public virtual DbSet<ProductMedium> ProductMedia { get; set; }
-
-    public virtual DbSet<Service> Services { get; set; }
-
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<AddressDAO> Addresses { get; set; }
+    public virtual DbSet<AttachmentDAO> Attachments { get; set; }
+    public virtual DbSet<AttachmentTypeDAO> AttachmentTypes { get; set; }
+    public virtual DbSet<BaseContentDAO> BaseContents { get; set; }
+    public virtual DbSet<BaseItemDAO> BaseItems { get; set; }
+    public virtual DbSet<BrandDAO> Brands { get; set; }
+    public virtual DbSet<CartDAO> Carts { get; set; }
+    public virtual DbSet<CartItemDAO> CartItems { get; set; }
+    public virtual DbSet<CategoryDAO> Categories { get; set; }
+    public virtual DbSet<CommentDAO> Comments { get; set; }
+    public virtual DbSet<ConversationDAO> Conversations { get; set; }
+    public virtual DbSet<ConversationMemberDAO> ConversationMembers { get; set; }
+    public virtual DbSet<CouponDAO> Coupons { get; set; }
+    public virtual DbSet<DiscountTypeDAO> DiscountTypes { get; set; }
+    public virtual DbSet<FavoriteDAO> Favorites { get; set; }
+    public virtual DbSet<FollowerDAO> Followers { get; set; }
+    public virtual DbSet<MediaTypeDAO> MediaTypes { get; set; }
+    public virtual DbSet<MessageDAO> Messages { get; set; }
+    public virtual DbSet<NotificationDAO> Notifications { get; set; }
+    public virtual DbSet<OrderDAO> Orders { get; set; }
+    public virtual DbSet<OrderActivityDAO> OrderActivities { get; set; }
+    public virtual DbSet<OrderItemDAO> OrderItems { get; set; }
+    public virtual DbSet<OrderStatusDAO> OrderStatuses { get; set; }
+    public virtual DbSet<PaymentDAO> Payments { get; set; }
+    public virtual DbSet<PaymentMethodDAO> PaymentMethods { get; set; }
+    public virtual DbSet<PaymentStatusDAO> PaymentStatuses { get; set; }
+    public virtual DbSet<ProductDAO> Products { get; set; }
+    public virtual DbSet<ProductFeatureDAO> ProductFeatures { get; set; }
+    public virtual DbSet<ProductMediaDAO> ProductMedia { get; set; }
+    public virtual DbSet<ServiceDAO> Services { get; set; }
+    public virtual DbSet<UserDAO> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-4EV3LF36;Database=E-Commerce;Trusted_Connection=True;TrustServerCertificate=True;");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=DESKTOP-0JE77H7\\SQLEXPRESS;Database=E-Commerce;Trusted_Connection=True;TrustServerCertificate=True;");
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("Arabic_CI_AS");
 
-        modelBuilder.Entity<Address>(entity =>
+        // Configure audit fields for all entities
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
-            entity
-                .HasNoKey()
-                .ToTable("Address");
+            if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
+            {
+                modelBuilder.Entity(entityType.ClrType)
+                    .Property("CreatedAt")
+                    .IsRequired();
 
-            entity.Property(e => e.Name).HasMaxLength(50);
+                modelBuilder.Entity(entityType.ClrType)
+                    .Property("UpdatedAt")
+                    .IsRequired();
 
-            entity.HasOne(d => d.User).WithMany()
+                modelBuilder.Entity(entityType.ClrType)
+                    .Property("DeletedAt")
+                    .IsRequired(false);
+            }
+        }
+
+        modelBuilder.Entity<AddressDAO>(entity =>
+        {
+            entity.ToTable("Address");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.Latitude).IsRequired();
+            entity.Property(e => e.Longitude).IsRequired();
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Addresses)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Address_User");
         });
 
-        modelBuilder.Entity<Attachment>(entity =>
+        modelBuilder.Entity<AttachmentDAO>(entity =>
         {
             entity.ToTable("Attachment");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.FileUrl).HasMaxLength(500).IsRequired();
+            entity.Property(e => e.FileType).HasMaxLength(50).IsRequired();
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.ContentUrl).HasMaxLength(500);
-
-            entity.HasOne(d => d.AttachmentType).WithMany(p => p.Attachments)
-                .HasForeignKey(d => d.AttachmentTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Attachment_AttachmentType");
-
-            entity.HasOne(d => d.BaseContent).WithMany(p => p.Attachments)
+            entity.HasOne(d => d.BaseContent)
+                .WithMany(p => p.Attachments)
                 .HasForeignKey(d => d.BaseContentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Attachment_BaseContent");
         });
 
-        modelBuilder.Entity<AttachmentType>(entity =>
-        {
-            entity.ToTable("AttachmentType");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<BaseContent>(entity =>
+        modelBuilder.Entity<BaseContentDAO>(entity =>
         {
             entity.ToTable("BaseContent");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Title).HasMaxLength(200).IsRequired();
+            entity.Property(e => e.Description).HasMaxLength(2000);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.ContentText).HasMaxLength(500);
-            entity.Property(e => e.CreateAt).HasColumnType("datetime");
-
-            entity.HasOne(d => d.CreateByUser).WithMany(p => p.BaseContents)
-                .HasForeignKey(d => d.CreateByUserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.BaseContents)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_BaseContent_User");
-
-            entity.HasOne(d => d.Parent).WithMany(p => p.InverseParent)
-                .HasForeignKey(d => d.ParentId)
-                .HasConstraintName("FK_BaseContent_BaseContent");
         });
 
-        modelBuilder.Entity<BaseItem>(entity =>
+        modelBuilder.Entity<BaseItemDAO>(entity =>
         {
             entity.ToTable("BaseItem");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.AddedAt).HasColumnType("datetime");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).HasMaxLength(100).IsRequired();
             entity.Property(e => e.Description).HasMaxLength(500);
-            entity.Property(e => e.Name).HasMaxLength(50);
 
-            entity.HasOne(d => d.Category).WithMany(p => p.BaseItems)
+            entity.HasOne(d => d.Category)
+                .WithMany(p => p.BaseItems)
                 .HasForeignKey(d => d.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_BaseItem_Category");
 
-            entity.HasOne(d => d.User).WithMany(p => p.BaseItems)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.BaseItems)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_BaseItem_User");
         });
 
-        modelBuilder.Entity<Brand>(entity =>
-        {
-            entity.ToTable("Brand");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(50);
-
-            entity.HasOne(d => d.Parent).WithMany(p => p.InverseParent)
-                .HasForeignKey(d => d.ParentId)
-                .HasConstraintName("FK_Brand_Brand");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.Brands)
-                .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Brand_Product");
-        });
-
-        modelBuilder.Entity<Cart>(entity =>
+        modelBuilder.Entity<CartDAO>(entity =>
         {
             entity.ToTable("Cart");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.User).WithMany(p => p.Carts)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Carts)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Cart_User");
         });
 
-        modelBuilder.Entity<CartItem>(entity =>
+        modelBuilder.Entity<CartItemDAO>(entity =>
         {
             entity.ToTable("CartItem");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.CreationDate).HasColumnType("datetime");
-
-            entity.HasOne(d => d.BaseItem).WithMany(p => p.CartItems)
-                .HasForeignKey(d => d.BaseItemId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_CartItem_BaseItem");
-
-            entity.HasOne(d => d.Cart).WithMany(p => p.CartItems)
+            entity.HasOne(d => d.Cart)
+                .WithMany(p => p.CartItems)
                 .HasForeignKey(d => d.CartId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_CartItem_Cart");
+
+            entity.HasOne(d => d.BaseItem)
+                .WithMany(p => p.CartItems)
+                .HasForeignKey(d => d.BaseItemId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_CartItem_BaseItem");
         });
 
-        modelBuilder.Entity<Category>(entity =>
+        modelBuilder.Entity<CategoryDAO>(entity =>
         {
             entity.ToTable("Category");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.Description).HasMaxLength(200);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(50);
-
-            entity.HasOne(d => d.Parent).WithMany(p => p.InverseParent)
+            entity.HasOne(d => d.Parent)
+                .WithMany(p => p.InverseParent)
                 .HasForeignKey(d => d.ParentId)
-                .HasConstraintName("FK_Category_Category");
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Category_Parent");
         });
 
-        modelBuilder.Entity<Comment>(entity =>
+        modelBuilder.Entity<CommentDAO>(entity =>
         {
             entity.ToTable("Comment");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.BaseContent).WithMany(p => p.Comments)
+            entity.HasOne(d => d.BaseContent)
+                .WithMany()
                 .HasForeignKey(d => d.BaseContentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Comment_BaseContent");
 
-            entity.HasOne(d => d.BaseItem).WithMany(p => p.Comments)
+            entity.HasOne(d => d.BaseItem)
+                .WithMany(p => p.Comments)
                 .HasForeignKey(d => d.BaseItemId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Comment_BaseItem");
         });
 
-        modelBuilder.Entity<Conversation>(entity =>
+        modelBuilder.Entity<ConversationDAO>(entity =>
         {
             entity.ToTable("Conversation");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(50);
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Title).HasMaxLength(100).IsRequired();
         });
 
-        modelBuilder.Entity<ConversationMember>(entity =>
+        modelBuilder.Entity<ConversationMemberDAO>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("ConversationMember");
+            entity.ToTable("ConversationMember");
+            entity.HasKey(e => e.Id);
 
-            entity.HasOne(d => d.Conversation).WithMany()
+            entity.HasOne(d => d.Conversation)
+                .WithMany(p => p.ConversationMembers)
                 .HasForeignKey(d => d.ConversationId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_ConversationMember_Conversation");
 
-            entity.HasOne(d => d.User).WithMany()
+            entity.HasOne(d => d.User)
+                .WithMany()
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_ConversationMember_User");
         });
 
-        modelBuilder.Entity<Coupon>(entity =>
+        modelBuilder.Entity<CouponDAO>(entity =>
         {
             entity.ToTable("Coupon");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Code).HasMaxLength(50).IsRequired();
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Code).HasMaxLength(50);
-            entity.Property(e => e.EndDate).HasColumnType("datetime");
-            entity.Property(e => e.StartDate).HasColumnType("datetime");
-
-            entity.HasOne(d => d.BaseItem).WithMany(p => p.Coupons)
-                .HasForeignKey(d => d.BaseItemId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Coupon_BaseItem");
-
-            entity.HasOne(d => d.DiscountType).WithMany(p => p.Coupons)
-                .HasForeignKey(d => d.DiscountTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Coupon_DiscountType");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Coupons)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Coupons)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Coupon_User");
         });
 
-        modelBuilder.Entity<DiscountType>(entity =>
+        modelBuilder.Entity<FavoriteDAO>(entity =>
         {
-            entity.ToTable("DiscountType");
+            entity.ToTable("Favorite");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<Favorite>(entity =>
-        {
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-
-            entity.HasOne(d => d.BaseItem).WithMany(p => p.Favorites)
-                .HasForeignKey(d => d.BaseItemId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Favorites_BaseItem");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Favorites)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Favorites)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Favorites_User");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_Favorite_User");
+
+            entity.HasOne(d => d.Product)
+                .WithMany()
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Favorite_Product");
         });
 
-        modelBuilder.Entity<Follower>(entity =>
+        modelBuilder.Entity<FollowerDAO>(entity =>
         {
-            entity.HasKey(e => new { e.FollowerId, e.FollowingId });
-
             entity.ToTable("Follower");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.FollowedAt).HasColumnType("datetime");
-
-            entity.HasOne(d => d.FollowerNavigation).WithMany(p => p.FollowerFollowerNavigations)
+            entity.HasOne(d => d.Follower)
+                .WithMany()
                 .HasForeignKey(d => d.FollowerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Follower_User");
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Follower_Follower");
 
-            entity.HasOne(d => d.Following).WithMany(p => p.FollowerFollowings)
+            entity.HasOne(d => d.Following)
+                .WithMany(p => p.Followees)
                 .HasForeignKey(d => d.FollowingId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Follower_User1");
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Follower_Following");
         });
 
-        modelBuilder.Entity<MediaType>(entity =>
-        {
-            entity.ToTable("MediaType");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<Message>(entity =>
+        modelBuilder.Entity<MessageDAO>(entity =>
         {
             entity.ToTable("Message");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.ReadAt).HasColumnType("datetime");
-
-            entity.HasOne(d => d.BaseContent).WithMany(p => p.Messages)
+            entity.HasOne(d => d.BaseContent)
+                .WithMany()
                 .HasForeignKey(d => d.BaseContentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Message_BaseContent");
 
-            entity.HasOne(d => d.Conversation).WithMany(p => p.Messages)
+            entity.HasOne(d => d.Conversation)
+                .WithMany(p => p.Messages)
                 .HasForeignKey(d => d.ConversationId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Message_Conversation");
+
+            entity.HasOne(d => d.Sender)
+                .WithMany()
+                .HasForeignKey(d => d.SenderId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Message_Sender");
         });
 
-        modelBuilder.Entity<Notification>(entity =>
+        modelBuilder.Entity<NotificationDAO>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Notification");
+            entity.ToTable("Notification");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Title).HasMaxLength(100).IsRequired();
+            entity.Property(e => e.Message).HasMaxLength(500).IsRequired();
 
-            entity.Property(e => e.CreateAt).HasColumnType("datetime");
-            entity.Property(e => e.NotificationContenet).HasMaxLength(500);
-            entity.Property(e => e.ReadAt).HasColumnType("datetime");
-
-            entity.HasOne(d => d.IdNavigation).WithMany()
-                .HasForeignKey(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Notifications)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Notification_User");
         });
 
-        modelBuilder.Entity<Order>(entity =>
+        modelBuilder.Entity<OrderDAO>(entity =>
         {
             entity.ToTable("Order");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.OrderActivity).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.OrderActivityId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Order_OrderActivity");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Orders)
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Order_User");
+
+            entity.HasOne(d => d.OrderActivity)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(d => d.OrderActivityId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Order_OrderActivity");
         });
 
-        modelBuilder.Entity<OrderActivity>(entity =>
+        modelBuilder.Entity<OrderActivityDAO>(entity =>
         {
             entity.ToTable("OrderActivity");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.BecomeAt).HasColumnType("datetime");
-
-            entity.HasOne(d => d.OrderStatus).WithMany(p => p.OrderActivities)
-                .HasForeignKey(d => d.OrderStatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_OrderActivity_OrderStatus");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Status).HasMaxLength(50).IsRequired();
         });
 
-        modelBuilder.Entity<OrderItem>(entity =>
+        modelBuilder.Entity<OrderItemDAO>(entity =>
         {
             entity.ToTable("OrderItem");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.BaseItem).WithMany(p => p.OrderItems)
-                .HasForeignKey(d => d.BaseItemId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_OrderItem_BaseItem");
-
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
+            entity.HasOne(d => d.Order)
+                .WithMany(p => p.OrderItems)
                 .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_OrderItem_Order");
+
+            entity.HasOne(d => d.BaseItem)
+                .WithMany(p => p.OrderItems)
+                .HasForeignKey(d => d.BaseItemId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_OrderItem_BaseItem");
         });
 
-        modelBuilder.Entity<OrderStatus>(entity =>
-        {
-            entity.ToTable("OrderStatus");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<Payment>(entity =>
+        modelBuilder.Entity<PaymentDAO>(entity =>
         {
             entity.ToTable("Payment");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
-            entity.Property(e => e.TransactionId).HasMaxLength(50);
-
-            entity.HasOne(d => d.Method).WithMany(p => p.Payments)
-                .HasForeignKey(d => d.MethodId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Payment_PaymentMethod");
-
-            entity.HasOne(d => d.Order).WithMany(p => p.Payments)
+            entity.HasOne(d => d.Order)
+                .WithMany(p => p.Payments)
                 .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Payment_Order");
-
-            entity.HasOne(d => d.PaymentStatus).WithMany(p => p.Payments)
-                .HasForeignKey(d => d.PaymentStatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Payment_PaymentStatus");
         });
 
-        modelBuilder.Entity<PaymentMethod>(entity =>
-        {
-            entity.ToTable("PaymentMethod");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.CreatedId).HasColumnType("datetime");
-            entity.Property(e => e.Name).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<PaymentStatus>(entity =>
-        {
-            entity.ToTable("PaymentStatus");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<Product>(entity =>
+        modelBuilder.Entity<ProductDAO>(entity =>
         {
             entity.ToTable("Product");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.SKU).HasMaxLength(50).IsRequired();
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.BaseItem).WithMany(p => p.Products)
+            entity.HasOne(d => d.BaseItem)
+                .WithMany(p => p.Products)
                 .HasForeignKey(d => d.BaseItemId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Product_BaseItem");
         });
 
-        modelBuilder.Entity<ProductFeature>(entity =>
+        modelBuilder.Entity<ProductFeatureDAO>(entity =>
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Name).HasMaxLength(50);
-            entity.Property(e => e.Value).HasMaxLength(200);
+            entity.ToTable("ProductFeature");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).HasMaxLength(100).IsRequired();
+            entity.Property(e => e.Value).HasMaxLength(500).IsRequired();
 
-            entity.HasOne(d => d.Product).WithMany(p => p.ProductFeatures)
+            entity.HasOne(d => d.Product)
+                .WithMany(p => p.ProductFeatures)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ProductFeatures_Product");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ProductFeature_Product");
         });
 
-        modelBuilder.Entity<ProductMedium>(entity =>
+        modelBuilder.Entity<ProductMediaDAO>(entity =>
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.AddedAt).HasColumnType("datetime");
-            entity.Property(e => e.Url).HasMaxLength(500);
+            entity.ToTable("ProductMedia");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.MediaUrl).HasMaxLength(500).IsRequired();
+            entity.Property(e => e.MediaType).HasMaxLength(50).IsRequired();
 
-            entity.HasOne(d => d.BaseItem).WithMany(p => p.ProductMedia)
+            entity.HasOne(d => d.BaseItem)
+                .WithMany(p => p.ProductMedia)
                 .HasForeignKey(d => d.BaseItemId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_ProductMedia_BaseItem");
-
-            entity.HasOne(d => d.MediaType).WithMany(p => p.ProductMedia)
-                .HasForeignKey(d => d.MediaTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ProductMedia_MediaType");
         });
 
-        modelBuilder.Entity<Service>(entity =>
+        modelBuilder.Entity<ServiceDAO>(entity =>
         {
             entity.ToTable("Service");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.ServiceType).HasMaxLength(50).IsRequired();
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Duration).HasColumnType("datetime");
-            entity.Property(e => e.Location).HasMaxLength(50);
-
-            entity.HasOne(d => d.BaseItem).WithMany(p => p.Services)
+            entity.HasOne(d => d.BaseItem)
+                .WithMany(p => p.Services)
                 .HasForeignKey(d => d.BaseItemId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Service_BaseItem");
         });
 
-        modelBuilder.Entity<User>(entity =>
+        modelBuilder.Entity<UserDAO>(entity =>
         {
             entity.ToTable("User");
-
-            entity.HasIndex(e => e.Email, "EmailIndex").IsUnique();
-
-            entity.HasIndex(e => e.PhoneNumber, "PhoneNumberIndex").IsUnique();
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.CreationDate).HasColumnType("datetime");
-            entity.Property(e => e.Description).HasMaxLength(500);
-            entity.Property(e => e.Email).HasMaxLength(50);
-            entity.Property(e => e.FirstName).HasMaxLength(50);
-            entity.Property(e => e.LastName).HasMaxLength(50);
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.FirstName).HasMaxLength(50).IsRequired();
             entity.Property(e => e.MiddleName).HasMaxLength(50);
-            entity.Property(e => e.ModificationDate).HasColumnType("datetime");
-            entity.Property(e => e.PhoneNumber)
-                .HasMaxLength(20)
-                .IsUnicode(false);
-            entity.Property(e => e.ProfilePhoto).HasMaxLength(50);
+            entity.Property(e => e.LastName).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.PhoneNumber).HasMaxLength(20).IsRequired();
+            entity.Property(e => e.Email).HasMaxLength(100).IsRequired();
+            entity.Property(e => e.ProfilePhoto).HasMaxLength(500);
+            entity.Property(e => e.Description).HasMaxLength(1000);
         });
 
         OnModelCreatingPartial(modelBuilder);
