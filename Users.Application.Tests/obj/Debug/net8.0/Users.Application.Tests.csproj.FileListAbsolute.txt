@@ -1,0 +1,7 @@
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_Users.Application.Tests
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application.Tests\obj\Debug\net8.0\Users.Application.Tests.csproj.AssemblyReference.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application.Tests\obj\Debug\net8.0\Users.Application.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application.Tests\obj\Debug\net8.0\Users.Application.Tests.AssemblyInfoInputs.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application.Tests\obj\Debug\net8.0\Users.Application.Tests.AssemblyInfo.cs
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application.Tests\obj\Debug\net8.0\Users.Application.Tests.csproj.CoreCompileInputs.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application.Tests\obj\Debug\net8.0\Users.Application.Tests.sourcelink.json

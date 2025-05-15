@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\WebApi\\WebApi.csproj": {}
+    "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\Core.csproj": {
+    "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\obj\\",
+        "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\VISION\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VISION\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -43,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -64,24 +65,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\VISION\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VISION\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -95,7 +96,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -107,7 +112,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -152,24 +158,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Application\\Users.Application.csproj": {
+    "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\Users.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Application\\Users.Application.csproj",
-        "projectName": "Users.Application",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Application\\Users.Application.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Application\\obj\\",
+        "projectUniqueName": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\Users.Infrastructure.csproj",
+        "projectName": "Users.Infrastructure",
+        "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\Users.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\VISION\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VISION\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -184,8 +190,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Domain\\Users.Domain.csproj": {
-                "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Domain\\Users.Domain.csproj"
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj"
+              },
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj"
+              },
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj"
               }
             }
           }
@@ -199,7 +211,77 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Users.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Users.Application.csproj",
+        "projectName": "Users.Application",
+        "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Users.Application.csproj",
+        "packagesPath": "C:\\Users\\VISION\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\VISION\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -230,24 +312,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Domain\\Users.Domain.csproj": {
+    "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Domain\\Users.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj",
         "projectName": "Users.Domain",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Domain\\Users.Domain.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Domain\\obj\\",
+        "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj",
+        "packagesPath": "C:\\Users\\VISION\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VISION\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -262,8 +344,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\Core.csproj"
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Core.csproj"
               }
             }
           }
@@ -277,7 +359,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -298,94 +381,96 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj": {
+    "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj",
+        "projectUniqueName": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj",
+        "projectName": "Users.Infrastructure.Mapping",
+        "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj",
+        "packagesPath": "C:\\Users\\VISION\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\VISION\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj"
+              },
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj",
         "projectName": "Users.Presentation",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Presentation\\obj\\",
+        "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj",
+        "packagesPath": "C:\\Users\\VISION\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        }
-      },
-      "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "dependencies": {
-            "Microsoft.Extensions.DependencyInjection": {
-              "target": "Package",
-              "version": "[8.0.1, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\WebApi\\WebApi.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\WebApi\\WebApi.csproj",
-        "projectName": "WebApi",
-        "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\WebApi\\WebApi.csproj",
-        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\WebApi\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VISION\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -400,14 +485,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Infrastructure\\Infrastructure.csproj"
-              },
-              "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Application\\Users.Application.csproj": {
-                "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Application\\Users.Application.csproj"
-              },
-              "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj": {
-                "projectPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj"
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Users.Application.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Users.Application.csproj"
               }
             }
           }
@@ -421,7 +500,89 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\WebApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\WebApi.csproj",
+        "projectName": "WebApi",
+        "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\WebApi.csproj",
+        "packagesPath": "C:\\Users\\VISION\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\VISION\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj"
+              },
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\Users.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\Users.Infrastructure.csproj"
+              },
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Users.Application.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Users.Application.csproj"
+              },
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Users.Presentation.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -457,7 +618,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

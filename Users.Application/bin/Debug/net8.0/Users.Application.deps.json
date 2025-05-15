@@ -55,10 +55,21 @@
           }
         }
       },
+      "Core/1.0.0": {
+        "runtime": {
+          "Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Users.Domain/1.0.0": {
+        "dependencies": {
+          "Core": "1.0.0"
+        },
         "runtime": {
           "Users.Domain.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -98,6 +109,11 @@
       "sha512": "sha512-3iE7UF7MQkCv1cxzCahz+Y/guQbTqieyxyaWKhrRO91itI9cOKO76OHeQDahqG4MmW5umr3CcCvGmK92lWNlbg==",
       "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.2",
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512"
+    },
+    "Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Users.Domain/1.0.0": {
       "type": "project",

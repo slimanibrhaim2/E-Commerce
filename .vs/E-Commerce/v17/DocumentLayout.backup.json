@@ -1,18 +1,142 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\",
+  "WorkspaceRootPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|c:\\users\\asus\\source\\repos\\e-commerce\\core\\aggregate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|solutionrelative:core\\aggregate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250515221811_add_audit_feilds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250515221811_add_audit_feilds.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|c:\\users\\asus\\source\\repos\\e-commerce\\core\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|solutionrelative:core\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\asus\\source\\repos\\e-commerce\\infrastructure\\models\\ecommercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{893C2AA4-C5F6-478D-91A1-07CAFCD2D181}|Users.Presentation\\Users.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.presentation\\di\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{893C2AA4-C5F6-478D-91A1-07CAFCD2D181}|Users.Presentation\\Users.Presentation.csproj|solutionrelative:users.presentation\\di\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE81434E-7605-4257-B7E2-4502D39AC5B6}|User.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\user.infrastructure\\di\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE81434E-7605-4257-B7E2-4502D39AC5B6}|User.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:user.infrastructure\\di\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{897C7045-C65D-4726-9414-32348C5DE2A0}|Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.infrastructure.mapping\\usermapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{897C7045-C65D-4726-9414-32348C5DE2A0}|Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj|solutionrelative:users.infrastructure.mapping\\usermapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{897C7045-C65D-4726-9414-32348C5DE2A0}|Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.infrastructure.mapping\\followermapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{897C7045-C65D-4726-9414-32348C5DE2A0}|Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj|solutionrelative:users.infrastructure.mapping\\followermapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{897C7045-C65D-4726-9414-32348C5DE2A0}|Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.infrastructure.mapping\\addressmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{897C7045-C65D-4726-9414-32348C5DE2A0}|Users.Infrastructure.Mapping\\Users.Infrastructure.Mapping.csproj|solutionrelative:users.infrastructure.mapping\\addressmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C2ACAD1-1184-495F-A50E-5951B848B65C}|Users.Domain\\Users.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C2ACAD1-1184-495F-A50E-5951B848B65C}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\common\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\common\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\queries\\getallusers\\getallusersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\queries\\getallusers\\getallusersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\command\\createuser\\createusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\command\\createuser\\createusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{893C2AA4-C5F6-478D-91A1-07CAFCD2D181}|Users.Presentation\\Users.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.presentation\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{893C2AA4-C5F6-478D-91A1-07CAFCD2D181}|Users.Presentation\\Users.Presentation.csproj|solutionrelative:users.presentation\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\core\\results\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|solutionrelative:core\\results\\result.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\command\\updateuser\\updateusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\command\\updateuser\\updateusercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\queries\\getuserbyid\\getuserbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\queries\\getuserbyid\\getuserbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\migrations\\20250515082943_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20250515082943_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\queries\\getallfollowersbyuserid\\getallfollowersbyuseridqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\queries\\getallfollowersbyuserid\\getallfollowersbyuseridqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\models\\ecommercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\models\\ecommercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\di\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\di\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|solutionrelative:webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\dtos\\followerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\dtos\\followerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C2ACAD1-1184-495F-A50E-5951B848B65C}|Users.Domain\\Users.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.domain\\entities\\follower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C2ACAD1-1184-495F-A50E-5951B848B65C}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\entities\\follower.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C2ACAD1-1184-495F-A50E-5951B848B65C}|Users.Domain\\Users.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.domain\\entities\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C2ACAD1-1184-495F-A50E-5951B848B65C}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\entities\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C2ACAD1-1184-495F-A50E-5951B848B65C}|Users.Domain\\Users.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.domain\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C2ACAD1-1184-495F-A50E-5951B848B65C}|Users.Domain\\Users.Domain.csproj|solutionrelative:users.domain\\entities\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\core\\abstraction\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|solutionrelative:core\\abstraction\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\dtos\\addressdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\dtos\\addressdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\common\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\common\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\core\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|solutionrelative:core\\interfaces\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\core\\abstraction\\aggregate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|solutionrelative:core\\abstraction\\aggregate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\core\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|solutionrelative:core\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\command\\addfollowerbyuserid\\addfollowerbyuseridcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\command\\addfollowerbyuserid\\addfollowerbyuseridcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +151,415 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Aggregate.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\Aggregate.cs",
-              "RelativeDocumentMoniker": "Core\\Aggregate.cs",
-              "ToolTip": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\Aggregate.cs",
-              "RelativeToolTip": "Core\\Aggregate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Title": "20250515221811_add_audit_feilds.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250515221811_add_audit_feilds.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250515221811_add_audit_feilds.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250515221811_add_audit_feilds.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250515221811_add_audit_feilds.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T12:23:20.336Z",
+              "WhenOpened": "2025-05-15T22:18:11.561Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BaseEntity.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\BaseEntity.cs",
-              "RelativeDocumentMoniker": "Core\\BaseEntity.cs",
-              "ToolTip": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Core\\BaseEntity.cs",
-              "RelativeToolTip": "Core\\BaseEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "UserMapper.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\UserMapper.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure.Mapping\\UserMapper.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\UserMapper.cs",
+              "RelativeToolTip": "Users.Infrastructure.Mapping\\UserMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T12:23:19.118Z",
+              "WhenOpened": "2025-05-15T21:45:16.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetAllUsersQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
+              "RelativeToolTip": "Users.Application\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAhwDQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T18:57:36.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Program.cs",
+              "RelativeDocumentMoniker": "WebApi\\Program.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Program.cs",
+              "RelativeToolTip": "WebApi\\Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T20:36:28.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\DI\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "User.Infrastructure\\DI\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\DI\\DependencyInjection.cs",
+              "RelativeToolTip": "User.Infrastructure\\DI\\DependencyInjection.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABIAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T08:19:50.01Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\DI\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "Users.Presentation\\DI\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\DI\\DependencyInjection.cs",
+              "RelativeToolTip": "Users.Presentation\\DI\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAD4vwkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T08:19:12.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Users.Presentation\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Users.Presentation\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwBYAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T18:59:32.445Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AddressMapper.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\AddressMapper.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure.Mapping\\AddressMapper.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\AddressMapper.cs",
+              "RelativeToolTip": "Users.Infrastructure.Mapping\\AddressMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T20:12:45.474Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FollowerMapper.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\FollowerMapper.cs",
+              "RelativeDocumentMoniker": "Users.Infrastructure.Mapping\\FollowerMapper.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Infrastructure.Mapping\\FollowerMapper.cs",
+              "RelativeToolTip": "Users.Infrastructure.Mapping\\FollowerMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T20:31:46.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UpdateUserCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Command\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Command\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Command\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "RelativeToolTip": "Users.Application\\Command\\UpdateUser\\UpdateUserCommandHandler.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAjwDsAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T18:53:42.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BaseRepository.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Common\\BaseRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Common\\BaseRepository.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Common\\BaseRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Common\\BaseRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T17:42:02.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Entities\\User.cs",
+              "RelativeToolTip": "Users.Domain\\Entities\\User.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIA3wBUAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:34:12.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CreateUserCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Command\\CreateUser\\CreateUserCommandHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Command\\CreateUser\\CreateUserCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Command\\CreateUser\\CreateUserCommandHandler.cs",
+              "RelativeToolTip": "Users.Application\\Command\\CreateUser\\CreateUserCommandHandler.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAowEAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T19:32:37.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UserDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DTOs\\UserDTO.cs",
+              "RelativeDocumentMoniker": "Users.Application\\DTOs\\UserDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DTOs\\UserDTO.cs",
+              "RelativeToolTip": "Users.Application\\DTOs\\UserDTO.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAA6wAMAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T18:49:46.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Result.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Results\\Result.cs",
+              "RelativeDocumentMoniker": "Core\\Results\\Result.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Results\\Result.cs",
+              "RelativeToolTip": "Core\\Results\\Result.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAkwCEAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T11:17:49.238Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "GetAllFollowersByUserIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetAllFollowersByUserId\\GetAllFollowersByUserIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Queries\\GetAllFollowersByUserId\\GetAllFollowersByUserIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetAllFollowersByUserId\\GetAllFollowersByUserIdQueryHandler.cs",
+              "RelativeToolTip": "Users.Application\\Queries\\GetAllFollowersByUserId\\GetAllFollowersByUserIdQueryHandler.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAowDwAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T18:47:36.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "GetUserByIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetUserById\\GetUserByIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Queries\\GetUserById\\GetUserByIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetUserById\\GetUserByIdQueryHandler.cs",
+              "RelativeToolTip": "Users.Application\\Queries\\GetUserById\\GetUserByIdQueryHandler.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAjwCgAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T18:44:36.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "AddFollowerByUserIdCommand.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Command\\AddFollowerByUserId\\AddFollowerByUserIdCommand.cs",
+              "RelativeDocumentMoniker": "Users.Application\\Command\\AddFollowerByUserId\\AddFollowerByUserIdCommand.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Command\\AddFollowerByUserId\\AddFollowerByUserIdCommand.cs",
+              "RelativeToolTip": "Users.Application\\Command\\AddFollowerByUserId\\AddFollowerByUserIdCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T18:34:45.915Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "20250515082943_init.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250515082943_init.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250515082943_init.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250515082943_init.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250515082943_init.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAsAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T08:29:43.955Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Infrastructure.csproj",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Infrastructure\\Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj",
+              "RelativeToolTip": "Infrastructure\\Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-15T08:29:33.778Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "Infrastructure\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T08:22:25.721Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "ECommerceContext.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Infrastructure\\Models\\ECommerceContext.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Models\\ECommerceContext.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Models\\ECommerceContext.cs",
-              "ToolTip": "C:\\Users\\ASUS\\source\\repos\\E-Commerce\\Infrastructure\\Models\\ECommerceContext.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Models\\ECommerceContext.cs",
               "RelativeToolTip": "Infrastructure\\Models\\ECommerceContext.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBwAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAADwv1IAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-10T21:33:47.76Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\appsettings.json",
+              "RelativeDocumentMoniker": "WebApi\\appsettings.json",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\appsettings.json",
+              "RelativeToolTip": "WebApi\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-15T08:14:04.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DI\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "Users.Application\\DI\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DI\\DependencyInjection.cs",
+              "RelativeToolTip": "Users.Application\\DI\\DependencyInjection.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T21:00:14.064Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Follower.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Entities\\Follower.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Entities\\Follower.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Entities\\Follower.cs",
+              "RelativeToolTip": "Users.Domain\\Entities\\Follower.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAgwA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:33:47.735Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "FollowerDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DTOs\\FollowerDTO.cs",
+              "RelativeDocumentMoniker": "Users.Application\\DTOs\\FollowerDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DTOs\\FollowerDTO.cs",
+              "RelativeToolTip": "Users.Application\\DTOs\\FollowerDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T12:10:29.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Entities\\Notification.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Entities\\Notification.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Entities\\Notification.cs",
+              "RelativeToolTip": "Users.Domain\\Entities\\Notification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:34:00.283Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Address.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Entities\\Address.cs",
+              "RelativeDocumentMoniker": "Users.Domain\\Entities\\Address.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Entities\\Address.cs",
+              "RelativeToolTip": "Users.Domain\\Entities\\Address.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:33:34.533Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Abstraction\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "Core\\Abstraction\\BaseEntity.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Abstraction\\BaseEntity.cs",
+              "RelativeToolTip": "Core\\Abstraction\\BaseEntity.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAcwBoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T12:23:19.118Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "AddressDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DTOs\\AddressDTO.cs",
+              "RelativeDocumentMoniker": "Users.Application\\DTOs\\AddressDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DTOs\\AddressDTO.cs",
+              "RelativeToolTip": "Users.Application\\DTOs\\AddressDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T10:13:28.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "UnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Common\\UnitOfWork.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Common\\UnitOfWork.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Common\\UnitOfWork.cs",
+              "RelativeToolTip": "Infrastructure\\Common\\UnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T18:10:10.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Interfaces\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "Core\\Interfaces\\IUnitOfWork.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Interfaces\\IUnitOfWork.cs",
+              "RelativeToolTip": "Core\\Interfaces\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T17:50:36.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Aggregate.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Abstraction\\Aggregate.cs",
+              "RelativeDocumentMoniker": "Core\\Abstraction\\Aggregate.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Abstraction\\Aggregate.cs",
+              "RelativeToolTip": "Core\\Abstraction\\Aggregate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T12:23:20.336Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Interfaces\\IRepository.cs",
+              "RelativeDocumentMoniker": "Core\\Interfaces\\IRepository.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Interfaces\\IRepository.cs",
+              "RelativeToolTip": "Core\\Interfaces\\IRepository.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAYwAwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T17:05:10.835Z"
             }
           ]
         }

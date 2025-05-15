@@ -12,6 +12,7 @@
           "Microsoft.EntityFrameworkCore.Design": "8.0.14",
           "Swashbuckle.AspNetCore": "6.6.2",
           "Users.Application": "1.0.0",
+          "Users.Infrastructure": "1.0.0",
           "Users.Presentation": "1.0.0"
         },
         "runtime": {
@@ -962,8 +963,17 @@
           }
         }
       },
+      "Core/1.0.0": {
+        "runtime": {
+          "Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Infrastructure/1.0.0": {
         "dependencies": {
+          "Core": "1.0.0",
           "Microsoft.EntityFrameworkCore": "8.0.14",
           "Microsoft.EntityFrameworkCore.Relational": "8.0.14",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.14",
@@ -971,7 +981,7 @@
         },
         "runtime": {
           "Infrastructure.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -984,26 +994,54 @@
         },
         "runtime": {
           "Users.Application.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
       },
       "Users.Domain/1.0.0": {
+        "dependencies": {
+          "Core": "1.0.0"
+        },
         "runtime": {
           "Users.Domain.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Users.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Infrastructure": "1.0.0",
+          "Users.Domain": "1.0.0",
+          "Users.Infrastructure.Mapping": "1.0.0"
+        },
+        "runtime": {
+          "Users.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Users.Infrastructure.Mapping/1.0.0": {
+        "dependencies": {
+          "Infrastructure": "1.0.0",
+          "Users.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Users.Infrastructure.Mapping.dll": {
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
       },
       "Users.Presentation/1.0.0": {
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "8.0.1"
+          "Users.Application": "1.0.0"
         },
         "runtime": {
           "Users.Presentation.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -1597,6 +1635,11 @@
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
+    "Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -1608,6 +1651,16 @@
       "sha512": ""
     },
     "Users.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Users.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Users.Infrastructure.Mapping/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

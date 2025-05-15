@@ -12,3 +12,21 @@ C:\Users\ASUS\source\repos\E-Commerce\Infrastructure\obj\Debug\net8.0\refint\Inf
 C:\Users\ASUS\source\repos\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.pdb
 C:\Users\ASUS\source\repos\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.genruntimeconfig.cache
 C:\Users\ASUS\source\repos\E-Commerce\Infrastructure\obj\Debug\net8.0\ref\Infrastructure.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\bin\Debug\net8.0\Infrastructure.deps.json
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\bin\Debug\net8.0\Infrastructure.runtimeconfig.json
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\bin\Debug\net8.0\Infrastructure.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\bin\Debug\net8.0\Infrastructure.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\bin\Debug\net8.0\Core.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\bin\Debug\net8.0\Core.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.AssemblyInfo.cs
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.sourcelink.json
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastr.15EFFBFE.Up2Date
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\refint\Infrastructure.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\Infrastructure.genruntimeconfig.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Infrastructure\obj\Debug\net8.0\ref\Infrastructure.dll
