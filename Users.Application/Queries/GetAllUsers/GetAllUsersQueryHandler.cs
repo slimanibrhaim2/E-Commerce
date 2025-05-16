@@ -39,8 +39,7 @@ namespace Users.Application.Queries.GetAllUsers
                     Description = u.Description,
                     
                 })
-                .ToList()
-                .AsEnumerable();
+                .ToList();
 
                 return Result<IEnumerable<UserDTO>>.Ok(
                     data: dtoList,

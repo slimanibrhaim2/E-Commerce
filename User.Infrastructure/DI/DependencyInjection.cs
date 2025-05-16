@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Users.Domain.Repositories;
-using Users.Infrastructure.Mapping;
 using Users.Infrastructure.Repositories;
 using Users.Domain.Entities;
+using Users.Infrastructure.Mapping.Mappers;
 
 namespace Users.Infrastructure.DI;
 
