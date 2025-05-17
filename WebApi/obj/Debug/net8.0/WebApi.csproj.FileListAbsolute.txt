@@ -318,3 +318,14 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Infrastructure.Mapping.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Infrastructure.Mapping.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Application.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Domain.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Infrastructure.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Infrastructure.Mapping.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Presentation.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Infrastructure.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Presentation.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Application.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Domain.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Infrastructure.Mapping.pdb

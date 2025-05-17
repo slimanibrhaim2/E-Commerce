@@ -11,14 +11,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Catalogs.Infrastructure\Catalogs.Infrastructure.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\User.Infrastructure\Users.Infrastructure.csproj" />
-    <ProjectReference Include="..\Users.Application\Users.Application.csproj" />
     <ProjectReference Include="..\Users.Presentation\Users.Presentation.csproj" />
+    <ProjectReference Include="..\Catalogs.Presentation\Catalogs.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

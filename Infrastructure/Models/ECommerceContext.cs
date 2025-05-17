@@ -438,6 +438,12 @@ public partial class ECommerceContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(1000);
         });
 
+        modelBuilder.Entity<UserDAO>()
+            .HasMany(u => u.Addresses)
+            .WithOne(a => a.User)
+            .HasForeignKey(a => a.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         OnModelCreatingPartial(modelBuilder);
     }
 

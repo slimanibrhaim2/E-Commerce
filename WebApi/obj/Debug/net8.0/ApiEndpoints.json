@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Users.Application.DTOs.UserDTO",
+        "Type": "Users.Application.DTOs.CreateUserDTO",
         "IsRequired": true
       }
     ],
@@ -93,7 +93,7 @@
       },
       {
         "Name": "dto",
-        "Type": "Users.Application.DTOs.AddressDTO",
+        "Type": "Users.Application.DTOs.AddAddressDTO",
         "IsRequired": true
       }
     ],

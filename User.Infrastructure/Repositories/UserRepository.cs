@@ -55,7 +55,15 @@ public class UserRepository : BaseRepository<UserDAO>, IUserRepository
     public void Update(User entity)
     {
         var infraUser = _userMapper.MapBack(entity);
-        _dbSet.Update(infraUser);
+        var existingUser = _dbSet.Local.FirstOrDefault(u => u.Id == infraUser.Id);
+        if (existingUser != null)
+        {
+            _ctx.Entry(existingUser).CurrentValues.SetValues(infraUser);
+        }
+        else
+        {
+            _dbSet.Update(infraUser);
+        }
     }
 
     public void Remove(User entity)

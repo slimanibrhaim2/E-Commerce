@@ -19,7 +19,6 @@ public static class DependencyInjection
     public static IServiceCollection AddUserInfrastructure(this IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
-        
         // Register mappers
         services.AddScoped<IMapper<UserDAO, User>, UserMapper>();
         services.AddScoped<IMapper<AddressDAO, Address>, AddressMapper>();
