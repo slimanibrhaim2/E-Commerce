@@ -1,14 +1,10 @@
 ﻿// Users.Application/Commands/AddAddressByUserId/AddAddressByUserIdCommandHandler.cs
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Core.Interfaces;
 using Core.Result;
-using Users.Application.DTOs;
 using Users.Domain.Entities;
 using Users.Domain.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace Users.Application.Commands.AddAddressByUserId
 {
@@ -17,9 +13,10 @@ namespace Users.Application.Commands.AddAddressByUserId
     {
         private readonly IUserRepository _repo;
         private readonly IUnitOfWork _uow;
+        private readonly ILogger<AddAddressByUserIdCommandHandler> _logger;
 
-        public AddAddressByUserIdCommandHandler(IUserRepository repo, IUnitOfWork uow)
-            => (_repo, _uow) = (repo, uow);
+        public AddAddressByUserIdCommandHandler(IUserRepository repo, IUnitOfWork uow, ILogger<AddAddressByUserIdCommandHandler> logger)
+            => (_repo, _uow, _logger) = (repo, uow, logger);
 
         public async Task<Result> Handle(
             AddAddressByUserIdCommand request,
@@ -29,6 +26,13 @@ namespace Users.Application.Commands.AddAddressByUserId
             {
                 // 1. Load full user aggregate (with Addresses)
                 var user = await _repo.GetByIdWithDetails(request.UserId);
+                
+                // Add logging here
+                _logger.LogInformation($"User found: {user != null}");
+                if (user != null)
+                {
+                    _logger.LogInformation($"User addresses count: {user.Addresses?.Count ?? 0}");
+                }
 
                 if(user is null)
                 {
@@ -41,9 +45,9 @@ namespace Users.Application.Commands.AddAddressByUserId
                 var address = new Address
                 {
                     Id = Guid.NewGuid(),
-                    Longitude = request.Longitude,
-                    Latitude = request.Latitude,
-                    Name = request.Name,
+                    Longitude = request.addressDTO.Longitude,
+                    Latitude = request.addressDTO.Latitude,
+                    Name = request.addressDTO.Name,
                     UserId = request.UserId
                 };
 
@@ -63,6 +67,8 @@ namespace Users.Application.Commands.AddAddressByUserId
             }
             catch (Exception ex)
             {
+                // Add detailed logging
+                _logger.LogError(ex, "Error adding address: {Message}", ex.Message);
                 return Result.Fail(
                     message: "حدث خطأ أثناء إضافة العنوان",
                     errorType: "AddAddressFailed",

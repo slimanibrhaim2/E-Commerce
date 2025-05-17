@@ -3,6 +3,7 @@ using MediatR;
 using Users.Domain.Entities;
 using Users.Domain.Repositories;
 using Core.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Users.Application.Command.AddFollowerByUserId
 {
@@ -10,56 +11,100 @@ namespace Users.Application.Command.AddFollowerByUserId
     {
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<AddFollowerByUserIdCommandHandler> _logger;
 
-        public AddFollowerByUserIdCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public AddFollowerByUserIdCommandHandler(
+            IUserRepository userRepository, 
+            IUnitOfWork unitOfWork,
+            ILogger<AddFollowerByUserIdCommandHandler> logger)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public async Task<Result<Guid>> Handle(AddFollowerByUserIdCommand request, CancellationToken cancellationToken)
         {
-            var followingUser = await _userRepository.GetByIdWithDetails(request.FollowingId);
-            if (followingUser == null)
+            try
             {
-                return Result<Guid>.Fail(
-                    message: "User not found",
-                    errorType: "NotFound",
-                    resultStatus: ResultStatus.ValidationError);
+                _logger.LogInformation("Attempting to add follower. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                    request.FollowerId, request.FollowingId);
+
+                var followingUser = await _userRepository.GetByIdWithDetails(request.FollowingId);
+                if (followingUser == null)
+                {
+                    _logger.LogWarning("User not found with ID: {FollowingId}", request.FollowingId);
+                    return Result<Guid>.Fail(
+                        message: "المستخدم غير موجود",
+                        errorType: "NotFound",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
+                if (request.FollowerId == request.FollowingId)
+                {
+                    _logger.LogWarning("User attempted to follow themselves. UserId: {UserId}", request.FollowerId);
+                    return Result<Guid>.Fail(
+                        message: "لا يمكن للمستخدم متابعة نفسه",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
+                // Initialize Followees collection if null
+                followingUser.Followees ??= new List<Follower>();
+
+                if (followingUser.Followees.Exists(f => f.FollowerId == request.FollowerId))
+                {
+                    _logger.LogWarning("User already following. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                        request.FollowerId, request.FollowingId);
+                    return Result<Guid>.Fail(
+                        message: "المستخدم يتابع هذا المستخدم بالفعل",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
+                var follower = new Follower
+                {
+                    Id = Guid.NewGuid(),
+                    FollowerId = request.FollowerId,
+                    FollowingId = request.FollowingId,
+                    FollowedAt = DateTime.UtcNow
+                };
+
+                followingUser.Followees.Add(follower);
+                _userRepository.Update(followingUser);
+
+                try
+                {
+                    await _unitOfWork.SaveChangesAsync();
+                    _logger.LogInformation("Successfully added follower. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                        request.FollowerId, request.FollowingId);
+                    
+                    return Result<Guid>.Ok(
+                        data: follower.Id,
+                        message: "تم إضافة المتابع بنجاح",
+                        resultStatus: ResultStatus.Success);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error saving changes while adding follower. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                        request.FollowerId, request.FollowingId);
+                    return Result<Guid>.Fail(
+                        message: "فشل في إضافة المتابع",
+                        errorType: "AddFollowerFailed",
+                        resultStatus: ResultStatus.Failed,
+                        exception: ex);
+                }
             }
-
-            if (request.FollowerId == request.FollowingId)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Unexpected error while adding follower. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                    request.FollowerId, request.FollowingId);
                 return Result<Guid>.Fail(
-                    message: "User cannot follow themselves",
-                    errorType: "ValidationError",
-                    resultStatus: ResultStatus.ValidationError);
+                    message: "فشل في إضافة المتابع",
+                    errorType: "AddFollowerFailed",
+                    resultStatus: ResultStatus.Failed,
+                    exception: ex);
             }
-
-            if (followingUser.Followees.Exists(f => f.FollowerId == request.FollowerId))
-            {
-                return Result<Guid>.Fail(
-                    message: "User is already following this user",
-                    errorType: "ValidationError",
-                    resultStatus: ResultStatus.ValidationError);
-            }
-
-            var follower = new Follower
-            {
-                Id = Guid.NewGuid(),
-                FollowerId = request.FollowerId,
-                FollowingId = request.FollowingId,
-                FollowedAt = DateTime.UtcNow
-            };
-
-            followingUser.Followees.Add(follower);
-            _userRepository.Update(followingUser);
-            await _unitOfWork.SaveChangesAsync();
-
-            return Result<Guid>.Ok(
-                data: follower.Id,
-                message: "Follower added successfully",
-                resultStatus: ResultStatus.Success);
         }
     }
 } 

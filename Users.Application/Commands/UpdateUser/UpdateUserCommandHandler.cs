@@ -27,7 +27,7 @@ namespace Users.Application.Commands.UpdateUser
             try
             {
                 // 1. Load full user aggregate (with Addresses)
-                var user = await _repo.GetByIdWithDetails(request.Id);
+                var user = await _repo.GetByIdWithDetails(request.User.Id);
 
                 if(user is null)
                 {
@@ -38,13 +38,13 @@ namespace Users.Application.Commands.UpdateUser
                 }
 
                 // 2. Update scalar properties
-                user.FirstName = request.FirstName;
-                user.MiddleName = request.MiddleName;
-                user.LastName = request.LastName;
-                user.PhoneNumber = request.PhoneNumber;
-                user.Email = request.Email;
-                user.ProfilePhoto = request.ProfilePhoto;
-                user.Description = request.Description;
+                user.FirstName = request.User.FirstName;
+                user.MiddleName = request.User.MiddleName;
+                user.LastName = request.User.LastName;
+                user.PhoneNumber = request.User.PhoneNumber;
+                user.Email = request.User.Email;
+                user.ProfilePhoto = request.User.ProfilePhoto;
+                user.Description = request.User.Description;
 
                 // Update audit field
                 user.UpdateUpdatedAt();

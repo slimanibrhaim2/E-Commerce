@@ -18,45 +18,69 @@ namespace Users.Presentation.Controllers
         public UsersController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UserDTO dto)
+        public async Task<IActionResult> Create([FromBody] CreateUserDTO dto)
         {
             var result = await _mediator.Send(new CreateUserCommand(dto));
-            if (!result.Success) return BadRequest(result);
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, null);
+            if (!result.Success) 
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إنشاء المستخدم",
+                    errorType: "CreateUserFailed",
+                    resultStatus: ResultStatus.Failed));
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result.Ok(
+                message: "تم إنشاء المستخدم بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _mediator.Send(new GetAllUsersQuery());
-            return result.Success
-                ? Ok(result.Data)
-                : StatusCode(500, result);
+            var query = new GetAllUsersQuery();
+            var result = await _mediator.Send(query);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب المستخدمين",
+                    errorType: "GetAllFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<IEnumerable<UserDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب المستخدمين بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediator.Send(new GetUserByIdQuery(id));
+            var query = new GetUserByIdQuery(id);
+            var result = await _mediator.Send(query);
             if (!result.Success)
-                return result.ResultStatus == ResultStatus.ValidationError
-                    ? NotFound(result)
-                    : StatusCode(500, result);
-            return Ok(result.Data);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب بيانات المستخدم",
+                    errorType: "GetByIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<UserDTO>.Ok(
+                data: result.Data,
+                message: "تم جلب بيانات المستخدم بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] UserDTO dto)
         {
             if (id != dto.Id)
-                return BadRequest(Result.Fail("Mismatched Id", "BadRequest", ResultStatus.ValidationError));
+                return StatusCode(500, Result.Fail(
+                    message: "معرف المستخدم غير متطابق",
+                    errorType: "MismatchedId",
+                    resultStatus: ResultStatus.ValidationError));
 
             var result = await _mediator.Send(new UpdateUserCommand(dto));
             if (!result.Success)
-                return result.ResultStatus == ResultStatus.ValidationError
-                    ? NotFound(result)
-                    : StatusCode(500, result);
-            return NoContent();
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث المستخدم",
+                    errorType: "UpdateUserFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم تحديث المستخدم بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("{id:guid}")]
@@ -64,10 +88,13 @@ namespace Users.Presentation.Controllers
         {
             var result = await _mediator.Send(new DeleteUserCommand(id));
             if (!result.Success)
-                return result.ResultStatus == ResultStatus.ValidationError
-                    ? NotFound(result)
-                    : StatusCode(500, result);
-            return NoContent();
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف المستخدم",
+                    errorType: "DeleteUserFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم حذف المستخدم بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 }

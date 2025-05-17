@@ -24,10 +24,10 @@ namespace Users.Application.Commands.CreateUser
             try
             {
                 // 0. Duplication check
-                var existing = await _repo.GetByEmail(request.Email);
+                var existing = await _repo.GetByEmail(request.userDTO.Email);
                 if (existing is not null)
                     return Result<Guid>.Fail(
-                        message: $"البريد الإلكتروني '{request.Email}' مستخدم بالفعل",
+                        message: $"البريد الإلكتروني '{request.userDTO.Email}' مستخدم بالفعل",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
 
@@ -35,13 +35,13 @@ namespace Users.Application.Commands.CreateUser
                 var user = new User
                 {
                     Id = Guid.NewGuid(),
-                    FirstName = request.FirstName,
-                    MiddleName = request.MiddleName,
-                    LastName = request.LastName,
-                    PhoneNumber = request.PhoneNumber,
-                    Email = request.Email,
-                    ProfilePhoto = request.ProfilePhoto,
-                    Description = request.Description,
+                    FirstName = request.userDTO.FirstName,
+                    MiddleName = request.userDTO.MiddleName,
+                    LastName = request.userDTO.LastName,
+                    PhoneNumber = request.userDTO.PhoneNumber,
+                    Email = request.userDTO.Email,
+                    ProfilePhoto = request.userDTO.ProfilePhoto,
+                    Description = request.userDTO.Description,
                 };
 
                 // Initialize audit fields

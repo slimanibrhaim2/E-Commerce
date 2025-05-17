@@ -18,27 +18,34 @@ namespace Users.Presentation.Controllers
         public AddressesController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost]
-        public async Task<IActionResult> Add(Guid userId, [FromBody] AddressDTO dto)
+        public async Task<IActionResult> Add(Guid userId, [FromBody] AddAddressDTO dto)
         {
             var cmd = new AddAddressByUserIdCommand(userId, dto);
             var result = await _mediator.Send(cmd);
             if (!result.Success)
-                return result.ResultStatus == ResultStatus.ValidationError
-                    ? NotFound(result)
-                    : StatusCode(500, result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إضافة العنوان",
+                    errorType: "AddAddressFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم إضافة العنوان بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll(Guid userId)
+        [HttpGet("{userId}/addresses")]
+        public async Task<IActionResult> GetAddresses(Guid userId)
         {
             var query = new GetAddressesByUserIdQuery(userId);
             var result = await _mediator.Send(query);
-            return result.Success
-                ? Ok(result.Data)
-                : result.ResultStatus == ResultStatus.ValidationError
-                    ? NotFound(result)
-                    : StatusCode(500, result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب العناوين",
+                    errorType: "GetAddressesFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<IEnumerable<AddressDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب العناوين بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 }

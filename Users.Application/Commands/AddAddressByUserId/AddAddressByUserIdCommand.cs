@@ -8,8 +8,7 @@ namespace Users.Application.Commands.AddAddressByUserId
 {
     public record AddAddressByUserIdCommand(
         Guid UserId,
-        double Latitude,
-        double Longitude,
-        string Name 
+        AddAddressDTO addressDTO
     ) : IRequest<Result>;
 }
+

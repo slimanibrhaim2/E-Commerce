@@ -7,12 +7,6 @@ using Core.Result;
 namespace Users.Application.Commands.CreateUser
 {
     public record CreateUserCommand(
-        string FirstName,
-        string? MiddleName,
-        string LastName,
-        string PhoneNumber,
-        string Email,
-        string? ProfilePhoto,
-        string? Description
+        CreateUserDTO userDTO
     ) : IRequest<Result<Guid>>;
 }

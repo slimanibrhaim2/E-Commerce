@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Users.Application.Command.AddFollowerByUserId;
 using Users.Application.Queries.GetAllFollowersByUserId;
 using Core.Result;
+using System.Collections.Generic;
+using Users.Application.DTOs;
 
 namespace Users.Presentation.Controllers
 {
@@ -22,10 +24,13 @@ namespace Users.Presentation.Controllers
             var cmd = new AddFollowerByUserIdCommand(userId, followerId);
             var result = await _mediator.Send(cmd);
             if (!result.Success)
-                return result.ResultStatus == ResultStatus.ValidationError
-                    ? NotFound(result)
-                    : StatusCode(500, result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إضافة المتابع",
+                    errorType: "AddFollowerFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم إضافة المتابع بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet]
@@ -33,11 +38,15 @@ namespace Users.Presentation.Controllers
         {
             var query = new GetAllFollowersByUserIdQuery(userId);
             var result = await _mediator.Send(query);
-            return result.Success
-                ? Ok(result.Data)
-                : result.ResultStatus == ResultStatus.ValidationError
-                    ? NotFound(result)
-                    : StatusCode(500, result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب المتابعين",
+                    errorType: "GetFollowersFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<IEnumerable<FollowerDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب المتابعين بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 }
