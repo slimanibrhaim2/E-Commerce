@@ -32,16 +32,17 @@ namespace Users.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllUsersQuery();
+            var pagination = new Core.Models.PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllUsersQuery(pagination);
             var result = await _mediator.Send(query);
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في جلب المستخدمين",
                     errorType: "GetAllFailed",
                     resultStatus: ResultStatus.Failed));
-            return Ok(Result<IEnumerable<UserDTO>>.Ok(
+            return Ok(Result<Core.Models.PaginatedResult<UserDTO>>.Ok(
                 data: result.Data,
                 message: "تم جلب المستخدمين بنجاح",
                 resultStatus: ResultStatus.Success));

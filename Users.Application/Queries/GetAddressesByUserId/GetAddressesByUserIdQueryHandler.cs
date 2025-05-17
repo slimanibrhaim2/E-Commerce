@@ -8,37 +8,33 @@ using System.Threading.Tasks;
 using Core.Result;
 using Users.Application.DTOs;
 using Users.Domain.Repositories;
+using Core.Models;
 
 namespace Users.Application.Queries.GetAddressesByUserId
 {
     public class GetAddressesByUserIdQueryHandler
-        : IRequestHandler<GetAddressesByUserIdQuery, Result<IEnumerable<AddressDTO>>>
+        : IRequestHandler<GetAddressesByUserIdQuery, Result<PaginatedResult<AddressDTO>>>
     {
         private readonly IUserRepository _repo;
 
         public GetAddressesByUserIdQueryHandler(IUserRepository repo)
             => _repo = repo;
 
-        public async Task<Result<IEnumerable<AddressDTO>>> Handle(
+        public async Task<Result<PaginatedResult<AddressDTO>>> Handle(
             GetAddressesByUserIdQuery request,
             CancellationToken cancellationToken)
         {
             try
             {
-                // 1. Load addresses directly
-                var addresses = await _repo.GetAddressesByUserId(request.UserId);
+                var addresses = (await _repo.GetAddressesByUserId(request.UserId)).ToList();
+                var totalCount = addresses.Count;
+                var pageNumber = request.Parameters.PageNumber;
+                var pageSize = request.Parameters.PageSize;
+                var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
 
-                // 2. If empty and user might not exist, we can check existence:
-                if (!addresses.Any())
-                {
-                    // Optionally verify user exists:
-                    var userExists = await _repo.GetByIdWithDetails(request.UserId) != null;
-                    if (!userExists)
-                        throw new KeyNotFoundException($"User with Id {request.UserId} not found.");
-                }
-
-                // 3. Map to DTOs
-                var dtos = addresses
+                var pagedAddresses = addresses
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
                     .Select(a => new AddressDTO
                     {
                         Id = a.Id,
@@ -46,26 +42,25 @@ namespace Users.Application.Queries.GetAddressesByUserId
                         Longitude = a.Longitude,
                         Name = a.Name
                     })
-                    .ToList()
-                    .AsEnumerable();
+                    .ToList();
 
-                // 4. Return success
-                return Result<IEnumerable<AddressDTO>>.Ok(
-                    data: dtos,
+                var paginatedResult = new PaginatedResult<AddressDTO>
+                {
+                    Data = pagedAddresses,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    TotalPages = totalPages,
+                    TotalCount = totalCount
+                };
+
+                return Result<PaginatedResult<AddressDTO>>.Ok(
+                    data: paginatedResult,
                     message: "تم جلب العناوين بنجاح",
                     resultStatus: ResultStatus.Success);
             }
-            catch (KeyNotFoundException knf)
-            {
-                return Result<IEnumerable<AddressDTO>>.Fail(
-                    message: knf.Message,
-                    errorType: "NotFound",
-                    resultStatus: ResultStatus.ValidationError,
-                    exception: knf);
-            }
             catch (Exception ex)
             {
-                return Result<IEnumerable<AddressDTO>>.Fail(
+                return Result<PaginatedResult<AddressDTO>>.Fail(
                     message: "حدث خطأ أثناء جلب العناوين",
                     errorType: "GetAddressesFailed",
                     resultStatus: ResultStatus.Failed,

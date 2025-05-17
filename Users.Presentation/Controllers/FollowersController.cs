@@ -8,6 +8,7 @@ using Users.Application.Queries.GetAllFollowersByUserId;
 using Core.Result;
 using System.Collections.Generic;
 using Users.Application.DTOs;
+using Users.Application.Commands.AddFollowerByUserId;
 
 namespace Users.Presentation.Controllers
 {
@@ -34,19 +35,28 @@ namespace Users.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(Guid userId)
+        public async Task<IActionResult> GetAll(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllFollowersByUserIdQuery(userId);
+            var pagination = new Core.Models.PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllFollowersByUserIdQuery(userId, pagination);
             var result = await _mediator.Send(query);
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في جلب المتابعين",
                     errorType: "GetFollowersFailed",
                     resultStatus: ResultStatus.Failed));
-            return Ok(Result<IEnumerable<FollowerDTO>>.Ok(
+            return Ok(Result<Core.Models.PaginatedResult<FollowerDTO>>.Ok(
                 data: result.Data,
                 message: "تم جلب المتابعين بنجاح",
                 resultStatus: ResultStatus.Success));
+        }
+
+        [HttpDelete("{followerId}")]
+        public async Task<IActionResult> DeleteFollower(Guid followerId)
+        {
+            var command = new DeleteFollowerCommand(followerId);
+            var result = await _mediator.Send(command);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
     }
 }
