@@ -18,5 +18,8 @@ namespace Users.Domain.Repositories
 
         // used by GetAddressesByUserIdQuery
         Task<IEnumerable<Address>> GetAddressesByUserId(Guid userId);
+
+        Task<User?> GetByAddressId(Guid addressId);
+        Task<User?> GetByFollowerId(Guid followerId);
     }
 }

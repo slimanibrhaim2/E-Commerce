@@ -30,13 +30,22 @@ namespace Users.Application.Command.AddFollowerByUserId
                 _logger.LogInformation("Attempting to add follower. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
                     request.FollowerId, request.FollowingId);
 
-                var followingUser = await _userRepository.GetByIdWithDetails(request.FollowingId);
-                if (followingUser == null)
+                // Validation
+                if (request.FollowingId == Guid.Empty)
                 {
-                    _logger.LogWarning("User not found with ID: {FollowingId}", request.FollowingId);
+                    _logger.LogWarning("Invalid FollowingId: {FollowingId}", request.FollowingId);
                     return Result<Guid>.Fail(
-                        message: "المستخدم غير موجود",
-                        errorType: "NotFound",
+                        message: "معرف المستخدم المتابَع غير صالح",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
+                if (request.FollowerId == Guid.Empty)
+                {
+                    _logger.LogWarning("Invalid FollowerId: {FollowerId}", request.FollowerId);
+                    return Result<Guid>.Fail(
+                        message: "معرف المستخدم المتابِع غير صالح",
+                        errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
 
@@ -49,9 +58,32 @@ namespace Users.Application.Command.AddFollowerByUserId
                         resultStatus: ResultStatus.ValidationError);
                 }
 
+                // Check if following user exists
+                var followingUser = await _userRepository.GetByIdWithDetails(request.FollowingId);
+                if (followingUser == null)
+                {
+                    _logger.LogWarning("User not found with ID: {FollowingId}", request.FollowingId);
+                    return Result<Guid>.Fail(
+                        message: "المستخدم المتابَع غير موجود",
+                        errorType: "NotFound",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
+                // Check if follower user exists
+                var followerUser = await _userRepository.GetByIdWithDetails(request.FollowerId);
+                if (followerUser == null)
+                {
+                    _logger.LogWarning("User not found with ID: {FollowerId}", request.FollowerId);
+                    return Result<Guid>.Fail(
+                        message: "المستخدم المتابِع غير موجود",
+                        errorType: "NotFound",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
                 // Initialize Followees collection if null
                 followingUser.Followees ??= new List<Follower>();
 
+                // Check if already following
                 if (followingUser.Followees.Exists(f => f.FollowerId == request.FollowerId))
                 {
                     _logger.LogWarning("User already following. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 

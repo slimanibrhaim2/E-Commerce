@@ -114,4 +114,30 @@ public class UserRepository : BaseRepository<UserDAO>, IUserRepository
             Longitude = a.Longitude ?? 0
         });
     }
+
+    public async Task<User?> GetByAddressId(Guid addressId)
+    {
+        var address = await _ctx.Set<AddressDAO>()
+            .FirstOrDefaultAsync(a => a.Id == addressId);
+        if (address == null)
+            return null;
+
+        var user = await _dbSet
+            .Include(u => u.Addresses)
+            .FirstOrDefaultAsync(u => u.Id == address.UserId);
+        return user != null ? _userMapper.Map(user) : null;
+    }
+
+    public async Task<User?> GetByFollowerId(Guid followerId)
+    {
+        var follower = await _ctx.Set<FollowerDAO>()
+            .FirstOrDefaultAsync(f => f.Id == followerId);
+        if (follower == null)
+            return null;
+
+        var user = await _dbSet
+            .Include(u => u.Followees)
+            .FirstOrDefaultAsync(u => u.Id == follower.FollowingId);
+        return user != null ? _userMapper.Map(user) : null;
+    }
 }

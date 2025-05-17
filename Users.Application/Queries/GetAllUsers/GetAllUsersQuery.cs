@@ -3,9 +3,11 @@ using MediatR;
 using System.Collections.Generic;
 using Users.Application.DTOs;
 using Core.Result;
+using Core.Models;
 
 namespace Users.Application.Queries.GetAllUsers
 {
     // Now returns a Core.Result<IEnumerable<UserDTO>>
-    public record GetAllUsersQuery() : IRequest<Result<IEnumerable<UserDTO>>>;
+    public record GetAllUsersQuery(PaginationParameters Parameters) 
+        : IRequest<Result<PaginatedResult<UserDTO>>>;
 }
