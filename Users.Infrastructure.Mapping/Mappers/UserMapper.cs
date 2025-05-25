@@ -19,6 +19,9 @@ public class UserMapper : BaseMapper<UserDAO, User>
             Rate = null,
             ProfilePhoto = s.ProfilePhoto,
             Description = null,
+            CreatedAt = s.CreatedAt,
+            DeletedAt = s.DeletedAt,
+            UpdatedAt = s.UpdatedAt
         });
     }
 
@@ -32,6 +35,10 @@ public class UserMapper : BaseMapper<UserDAO, User>
             PhoneNumber = t.PhoneNumber,
             Email = t.Email,
             ProfilePhoto = t.ProfilePhoto,
+            Description = t.Description,
+            CreatedAt=t.CreatedAt,
+            UpdatedAt=t.UpdatedAt,
+            DeletedAt=t.DeletedAt
         });
     }
 }

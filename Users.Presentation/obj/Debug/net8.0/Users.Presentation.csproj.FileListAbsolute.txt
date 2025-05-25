@@ -10,12 +10,6 @@ C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.
 C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\refint\Users.Presentation.dll
 C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.pdb
 C:\Users\ASUS\source\repos\E-Commerce\Users.Presentation\obj\Debug\net8.0\ref\Users.Presentation.dll
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.csproj.AssemblyReference.cache
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.AssemblyInfoInputs.cache
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.AssemblyInfo.cs
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.csproj.CoreCompileInputs.cache
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.sourcelink.json
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\bin\Debug\net8.0\Users.Presentation.deps.json
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\bin\Debug\net8.0\Users.Presentation.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\bin\Debug\net8.0\Users.Presentation.pdb
@@ -25,6 +19,12 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentati
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\bin\Debug\net8.0\Users.Application.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\bin\Debug\net8.0\Core.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\bin\Debug\net8.0\Users.Domain.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.csproj.AssemblyReference.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.AssemblyInfoInputs.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.AssemblyInfo.cs
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.csproj.CoreCompileInputs.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.sourcelink.json
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Pr.C0F23112.Up2Date
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\Users.Presentation.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Presentation\obj\Debug\net8.0\refint\Users.Presentation.dll

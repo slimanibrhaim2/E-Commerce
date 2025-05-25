@@ -1,12 +1,15 @@
-﻿using Core.Abstraction;
+﻿namespace Users.Domain.Entities;
 
-namespace Users.Domain.Entities;
-
-public class Follower : BaseEntity
+public class Follower 
 {
+    public Guid Id { get; set; }
     public Guid FollowerId { get; set; }
     public Guid FollowingId { get; set; }
-    public DateTime FollowedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
+
+    public DateTime UpdatedAt { get; set; }
+
+    public DateTime? DeletedAt { get; set; }
 
     // Navigation properties
     public User FollowerUser { get; set; } = null!;
@@ -14,6 +17,6 @@ public class Follower : BaseEntity
 
     public Follower()
     {
-        FollowedAt = DateTime.Now;
+        CreatedAt = DateTime.Now;
     }
 }

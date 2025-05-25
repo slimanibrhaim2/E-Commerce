@@ -8,7 +8,8 @@ using Users.Application.Queries.GetAllFollowersByUserId;
 using Core.Result;
 using System.Collections.Generic;
 using Users.Application.DTOs;
-using Users.Application.Commands.AddFollowerByUserId;
+using Users.Application.Commands.DeleteFollower;
+using Core.Pagination;
 
 namespace Users.Presentation.Controllers
 {
@@ -37,7 +38,7 @@ namespace Users.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var pagination = new Core.Models.PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var pagination = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAllFollowersByUserIdQuery(userId, pagination);
             var result = await _mediator.Send(query);
             if (!result.Success)
@@ -45,7 +46,7 @@ namespace Users.Presentation.Controllers
                     message: "فشل في جلب المتابعين",
                     errorType: "GetFollowersFailed",
                     resultStatus: ResultStatus.Failed));
-            return Ok(Result<Core.Models.PaginatedResult<FollowerDTO>>.Ok(
+            return Ok(Result<PaginatedResult<FollowerDTO>>.Ok(
                 data: result.Data,
                 message: "تم جلب المتابعين بنجاح",
                 resultStatus: ResultStatus.Success));

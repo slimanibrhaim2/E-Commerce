@@ -108,11 +108,9 @@ namespace Users.Application.Commands.CreateUser
                     Description = request.userDTO.Description,
                 };
 
-                // Initialize audit fields
-                user.InitCreatedAt();
-                user.UpdateUpdatedAt();
+                
 
-                _repo.Add(user);
+                await _repo.AddAsync(user);
                 await _uow.SaveChangesAsync();
 
                 _logger.LogInformation("Successfully created user with ID: {UserId}", user.Id);

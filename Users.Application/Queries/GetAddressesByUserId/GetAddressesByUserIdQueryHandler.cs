@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 using Core.Result;
 using Users.Application.DTOs;
 using Users.Domain.Repositories;
-using Core.Models;
+using Core.Pagination;
 
 namespace Users.Application.Queries.GetAddressesByUserId
 {
     public class GetAddressesByUserIdQueryHandler
         : IRequestHandler<GetAddressesByUserIdQuery, Result<PaginatedResult<AddressDTO>>>
     {
-        private readonly IUserRepository _repo;
+        private readonly IAddressRepository _repo;
 
-        public GetAddressesByUserIdQueryHandler(IUserRepository repo)
+        public GetAddressesByUserIdQueryHandler(IAddressRepository repo)
             => _repo = repo;
 
         public async Task<Result<PaginatedResult<AddressDTO>>> Handle(

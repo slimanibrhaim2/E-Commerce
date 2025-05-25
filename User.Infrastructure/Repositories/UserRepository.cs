@@ -16,12 +16,12 @@ using User = Users.Domain.Entities.User;
 
 namespace Users.Infrastructure.Repositories;
 
-public class UserRepository : BaseRepository<UserDAO>, IUserRepository
+public class UserRepository : BaseRepository<User, UserDAO>, IUserRepository
 {
     private readonly ECommerceContext _ctx;
     private readonly IMapper<UserDAO, User> _userMapper;
 
-    public UserRepository(ECommerceContext ctx, IMapper<UserDAO, User> userMapper) : base(ctx)
+    public UserRepository(ECommerceContext ctx, IMapper<UserDAO, User> userMapper) : base(ctx, userMapper)
     {
         _ctx = ctx;
         _userMapper = userMapper;
@@ -29,115 +29,64 @@ public class UserRepository : BaseRepository<UserDAO>, IUserRepository
 
     public async Task<IEnumerable<User>> GetAllAsync()
     {
-        var users = await _dbSet.ToListAsync();
-        return users.Select(u => _userMapper.Map(u));
+        var userDaos = await _dbSet.Where(u => u.DeletedAt == null).ToListAsync();
+        return userDaos.Select(u => _userMapper.Map(u));
     }
 
     public async Task<User?> GetByIdAsync(Guid id)
     {
-        var user = await _dbSet.FindAsync(id);
-        return user != null ? _userMapper.Map(user) : null;
+        var userDao = await _dbSet.FirstOrDefaultAsync(u => u.Id == id && u.DeletedAt == null);
+        return userDao != null ? _userMapper.Map(userDao) : null;
     }
 
     public async Task<IEnumerable<User>> FindAsync(Expression<Func<User, bool>> predicate)
     {
-        var users = await _dbSet.ToListAsync();
-        var domainUsers = users.Select(u => _userMapper.Map(u));
+        var userDaos = await _dbSet.Where(u => u.DeletedAt == null).ToListAsync();
+        var domainUsers = userDaos.Select(u => _userMapper.Map(u));
         return domainUsers.Where(predicate.Compile());
     }
 
     public async Task AddAsync(User entity)
     {
-        var infraUser = _userMapper.MapBack(entity);
-        await _dbSet.AddAsync(infraUser);
+        var userDao = _userMapper.MapBack(entity);
+        await _dbSet.AddAsync(userDao);
     }
 
     public void Update(User entity)
     {
-        var infraUser = _userMapper.MapBack(entity);
-        var existingUser = _dbSet.Local.FirstOrDefault(u => u.Id == infraUser.Id);
+        var userDao = _userMapper.MapBack(entity);
+        var existingUser = _dbSet.Local.FirstOrDefault(u => u.Id == userDao.Id);
         if (existingUser != null)
         {
-            _ctx.Entry(existingUser).CurrentValues.SetValues(infraUser);
+            _ctx.Entry(existingUser).CurrentValues.SetValues(userDao);
         }
         else
         {
-            _dbSet.Update(infraUser);
+            _dbSet.Update(userDao);
         }
     }
 
     public void Remove(User entity)
     {
-        var infraUser = _userMapper.MapBack(entity);
-        _dbSet.Remove(infraUser);
+        var userDao = _userMapper.MapBack(entity);
+        _dbSet.Remove(userDao);
     }
 
     public async Task<User?> GetByEmail(string email)
     {
-        var user = await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
-        return user != null ? _userMapper.Map(user) : null;
+        var userDao = await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+        return userDao != null ? _userMapper.Map(userDao) : null;
     }
 
     public async Task<User?> GetByIdWithDetails(Guid id)
     {
-        var user = await _dbSet
+        var userDao = await _dbSet
             .Include(u => u.Addresses)
             .Include(u => u.Followees)
-            .FirstOrDefaultAsync(u => u.Id == id);
-        return user != null ? _userMapper.Map(user) : null;
+            .FirstOrDefaultAsync(u => u.Id == id && u.DeletedAt == null);
+        return userDao != null ? _userMapper.Map(userDao) : null;
     }
 
-    public async Task<IEnumerable<Follower>> GetFollowersByUserId(Guid userId)
-    {
-        var followers = await _ctx.Set<FollowerDAO>()
-            .Where(f => f.FollowingId == userId)
-            .ToListAsync();
-        return followers.Select(f => new Follower
-        {
-            Id = f.Id,
-            FollowerId = f.FollowerId,
-            FollowingId = f.FollowingId
-        });
-    }
-
-    public async Task<IEnumerable<Address>> GetAddressesByUserId(Guid userId)
-    {
-        var addresses = await _ctx.Set<AddressDAO>()
-            .Where(a => a.UserId == userId)
-            .ToListAsync();
-        return addresses.Select(a => new Address
-        {
-            Id = a.Id,
-            UserId = a.UserId,
-            Name = a.Name,
-            Latitude = a.Latitude ?? 0,
-            Longitude = a.Longitude ?? 0
-        });
-    }
-
-    public async Task<User?> GetByAddressId(Guid addressId)
-    {
-        var address = await _ctx.Set<AddressDAO>()
-            .FirstOrDefaultAsync(a => a.Id == addressId);
-        if (address == null)
-            return null;
-
-        var user = await _dbSet
-            .Include(u => u.Addresses)
-            .FirstOrDefaultAsync(u => u.Id == address.UserId);
-        return user != null ? _userMapper.Map(user) : null;
-    }
-
-    public async Task<User?> GetByFollowerId(Guid followerId)
-    {
-        var follower = await _ctx.Set<FollowerDAO>()
-            .FirstOrDefaultAsync(f => f.Id == followerId);
-        if (follower == null)
-            return null;
-
-        var user = await _dbSet
-            .Include(u => u.Followees)
-            .FirstOrDefaultAsync(u => u.Id == follower.FollowingId);
-        return user != null ? _userMapper.Map(user) : null;
-    }
+    public Task<User?> GetByAddressId(Guid addressId) => Task.FromResult<User?>(null);
+    public Task<User?> GetByFollowerId(Guid followerId) => Task.FromResult<User?>(null);
 }

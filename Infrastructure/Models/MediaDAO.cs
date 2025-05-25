@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.Models;
 
-public partial class ProductMediaDAO
+public partial class MediaDAO
 {
     public Guid Id { get; set; }
 
@@ -11,7 +11,8 @@ public partial class ProductMediaDAO
 
     public string MediaUrl { get; set; } = null!;
 
-    public string MediaType { get; set; } = null!;
+    public Guid MediaTypeId { get; set; }
+    public virtual MediaTypeDAO MediaType { get; set; } = null!;
 
     public DateTime CreatedAt { get; set; }
 

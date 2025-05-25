@@ -37,7 +37,7 @@ public partial class BaseItemDAO
 
     public virtual ICollection<OrderItemDAO> OrderItems { get; set; } = new List<OrderItemDAO>();
 
-    public virtual ICollection<ProductMediaDAO> ProductMedia { get; set; } = new List<ProductMediaDAO>();
+    public virtual ICollection<MediaDAO> ProductMedia { get; set; } = new List<MediaDAO>();
 
     public virtual ICollection<ProductDAO> Products { get; set; } = new List<ProductDAO>();
 

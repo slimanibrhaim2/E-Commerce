@@ -60,8 +60,7 @@ namespace Users.Application.Commands.DeleteUser
                     user.Addresses.Clear();
                 }
 
-                // Soft delete by updating DeletedAt
-                user.UpdateDeletedAt();
+                
                 _repo.Update(user);
                 await _uow.SaveChangesAsync();
 

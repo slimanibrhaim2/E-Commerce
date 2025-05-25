@@ -5,6 +5,8 @@ using Users.Infrastructure.DI;
 using Users.Presentation.Controllers;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Users.Presentation.DI;
+using Catalogs.Presentation.DI;
+using Catalogs.Infrastructure.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
 builder.Services.AddUserInfrastructure();
 builder.Services.AddUserPresentation();
+builder.Services.AddCatalogsInfrastructure(); 
+builder.Services.AddCatalogPresentation(); 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,9 +28,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

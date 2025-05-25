@@ -19,10 +19,14 @@ public static class DependencyInjection
     public static IServiceCollection AddUserInfrastructure(this IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IAddressRepository, AddressRepository>();
+        services.AddScoped<IFollowerRepository, FollowerRepository>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
         // Register mappers
         services.AddScoped<IMapper<UserDAO, User>, UserMapper>();
         services.AddScoped<IMapper<AddressDAO, Address>, AddressMapper>();
         services.AddScoped<IMapper<FollowerDAO, Follower>, FollowerMapper>();
+        services.AddScoped<IMapper<NotificationDAO, Notification>, NotificationMapper>();
         
         return services;
     }

@@ -130,8 +130,7 @@ namespace Users.Application.Commands.UpdateUser
                 user.ProfilePhoto = request.User.ProfilePhoto;
                 user.Description = request.User.Description;
 
-                // Update audit field
-                user.UpdateUpdatedAt();
+               
 
                 _repo.Update(user);
                 await _uow.SaveChangesAsync();

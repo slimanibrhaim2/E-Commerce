@@ -8,6 +8,7 @@ using Users.Application.Commands.AddAddressByUserId;
 using Users.Application.Queries.GetAddressesByUserId;
 using Core.Result;
 using Users.Application.Commands.DeleteAddress;
+using Core.Pagination;
 
 namespace Users.Presentation.Controllers
 {
@@ -33,7 +34,7 @@ namespace Users.Presentation.Controllers
         [HttpGet("{userId}/addresses")]
         public async Task<IActionResult> GetAddresses(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var pagination = new Core.Models.PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var pagination = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAddressesByUserIdQuery(userId, pagination);
             var result = await _mediator.Send(query);
             if (!result.Success)
@@ -41,7 +42,7 @@ namespace Users.Presentation.Controllers
                     message: "فشل في جلب العناوين",
                     errorType: "GetAddressesFailed",
                     resultStatus: ResultStatus.Failed));
-            return Ok(Result<Core.Models.PaginatedResult<AddressDTO>>.Ok(
+            return Ok(Result<PaginatedResult<AddressDTO>>.Ok(
                 data: result.Data,
                 message: "تم جلب العناوين بنجاح",
                 resultStatus: ResultStatus.Success));

@@ -8,6 +8,7 @@ using Users.Application.Queries.GetAllUsers;
 using Users.Application.Queries.GetUserById;
 using Core.Result;
 using Users.Application.Command.UpdateUser;
+using Core.Pagination;
 namespace Users.Presentation.Controllers
 {
     [ApiController]
@@ -34,7 +35,7 @@ namespace Users.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var pagination = new Core.Models.PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var pagination = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAllUsersQuery(pagination);
             var result = await _mediator.Send(query);
             if (!result.Success)
@@ -42,7 +43,7 @@ namespace Users.Presentation.Controllers
                     message: "فشل في جلب المستخدمين",
                     errorType: "GetAllFailed",
                     resultStatus: ResultStatus.Failed));
-            return Ok(Result<Core.Models.PaginatedResult<UserDTO>>.Ok(
+            return Ok(Result<PaginatedResult<UserDTO>>.Ok(
                 data: result.Data,
                 message: "تم جلب المستخدمين بنجاح",
                 resultStatus: ResultStatus.Success));

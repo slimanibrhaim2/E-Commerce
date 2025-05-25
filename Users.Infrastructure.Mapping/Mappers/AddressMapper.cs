@@ -14,7 +14,10 @@ public class AddressMapper : BaseMapper<AddressDAO, Address>
             UserId = s.UserId,
             Name = s.Name,
             Latitude = s.Latitude ?? 0,
-            Longitude = s.Longitude ?? 0
+            Longitude = s.Longitude ?? 0,
+            CreatedAt=s.CreatedAt,
+            DeletedAt=s.DeletedAt,
+            UpdatedAt=s.UpdatedAt
         });
     }
 
@@ -26,7 +29,10 @@ public class AddressMapper : BaseMapper<AddressDAO, Address>
             UserId = t.UserId,
             Name = t.Name,
             Latitude = t.Latitude,
-            Longitude = t.Longitude
+            Longitude = t.Longitude,
+            CreatedAt = t.CreatedAt,
+            DeletedAt = t.DeletedAt,
+            UpdatedAt = t.UpdatedAt
         });
     }
 }

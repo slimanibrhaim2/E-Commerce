@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Core.Result;
 using Users.Application.DTOs;
 using Users.Domain.Repositories;
-using Core.Models;
+using Core.Pagination;
 
 namespace Users.Application.Queries.GetAllUsers
 {
@@ -48,14 +48,12 @@ namespace Users.Application.Queries.GetAllUsers
                     })
                     .ToList();
 
-                var paginatedResult = new PaginatedResult<UserDTO>
-                {
-                    Data = pagedUsers,
-                    PageNumber = pageNumber,
-                    PageSize = pageSize,
-                    TotalPages = totalPages,
-                    TotalCount = totalCount
-                };
+                var paginatedResult = PaginatedResult<UserDTO>.Create(
+                    data: pagedUsers,
+                    pageNumber: pageNumber,
+                    pageSize: pageSize,
+                    totalCount: totalCount
+                );
 
                 return Result<PaginatedResult<UserDTO>>.Ok(
                     data: paginatedResult,

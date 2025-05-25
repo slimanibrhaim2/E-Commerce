@@ -11,6 +11,8 @@ public partial class ServiceDAO
 
     public string ServiceType { get; set; } = null!;
 
+    public int Duration { get; set; }
+
     public DateTime CreatedAt { get; set; }
 
     public DateTime UpdatedAt { get; set; }
@@ -18,4 +20,6 @@ public partial class ServiceDAO
     public DateTime? DeletedAt { get; set; }
 
     public virtual BaseItemDAO BaseItem { get; set; } = null!;
+    public virtual ICollection<ServiceFeatureDAO> ServiceFeatures { get; set; } = new List<ServiceFeatureDAO>();
+    public virtual ICollection<BrandDAO> Brands { get; set; } = new List<BrandDAO>();
 }

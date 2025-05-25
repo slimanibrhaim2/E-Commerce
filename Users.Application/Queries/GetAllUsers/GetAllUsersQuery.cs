@@ -3,7 +3,7 @@ using MediatR;
 using System.Collections.Generic;
 using Users.Application.DTOs;
 using Core.Result;
-using Core.Models;
+using Core.Pagination;
 
 namespace Users.Application.Queries.GetAllUsers
 {

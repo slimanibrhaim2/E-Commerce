@@ -12,7 +12,9 @@ public class FollowerMapper : BaseMapper<FollowerDAO, Follower>
         {
             Id = s.Id,
             FollowerId = s.FollowerId,
-            FollowingId = s.FollowingId
+            FollowingId = s.FollowingId,
+            CreatedAt = s.CreatedAt,
+            UpdatedAt = s.UpdatedAt
         });
     }
 
@@ -22,7 +24,9 @@ public class FollowerMapper : BaseMapper<FollowerDAO, Follower>
         {
             Id = t.Id,
             FollowerId = t.FollowerId,
-            FollowingId = t.FollowingId
+            FollowingId = t.FollowingId,
+            CreatedAt=t.CreatedAt,
+            UpdatedAt=t.UpdatedAt
         });
     }
 }

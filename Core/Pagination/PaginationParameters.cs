@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.Models
+namespace Core.Pagination
 {
     public class PaginationParameters
     {
@@ -20,4 +20,4 @@ namespace Core.Models
             set => _pageSize = value > MaxPageSize ? MaxPageSize : value < 1 ? 1 : value;
         }
     }
-} 
+}

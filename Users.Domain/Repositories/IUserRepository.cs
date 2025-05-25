@@ -13,13 +13,6 @@ namespace Users.Domain.Repositories
         // used by GetUserByIdQuery
         Task<User?> GetByIdWithDetails(Guid id);
 
-        // used by GetAllFollowersByUserIdQuery
-        Task<IEnumerable<Follower>> GetFollowersByUserId(Guid userId);
-
-        // used by GetAddressesByUserIdQuery
-        Task<IEnumerable<Address>> GetAddressesByUserId(Guid userId);
-
         Task<User?> GetByAddressId(Guid addressId);
-        Task<User?> GetByFollowerId(Guid followerId);
     }
 }

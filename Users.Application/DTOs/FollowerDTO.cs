@@ -8,6 +8,8 @@ namespace Users.Application.DTOs
         public Guid Id { get; set; }    // Follower record Id
         public Guid FollowerId { get; set; }    // The user who follows
         public Guid FollowingId { get; set; }    // The user being followed
-        public DateTime FollowedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public DateTime DeletedAt { get; set; }
     }
 }

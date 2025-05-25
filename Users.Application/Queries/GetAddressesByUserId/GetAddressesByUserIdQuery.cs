@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Core.Result;
 using Users.Application.DTOs;
-using Core.Models;
+using Core.Pagination;
 
 namespace Users.Application.Queries.GetAddressesByUserId
 {

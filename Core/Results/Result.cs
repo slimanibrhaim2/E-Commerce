@@ -63,5 +63,6 @@ public enum ResultStatus
     Success = 1,
     ValidationError = 2,
     InternalServerError = 3,
-    Failed = 4
+    Failed = 4,
+    NotFound = 5,
 }

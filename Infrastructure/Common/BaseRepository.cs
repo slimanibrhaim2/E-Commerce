@@ -1,5 +1,4 @@
 ﻿using Core;
-using Core.Abstraction;
 using Core.Interfaces;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
@@ -12,56 +11,56 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Common
 {
-    public class BaseRepository<T> : IRepository<T> where T : class
+    public class BaseRepository<TDomain, TDao> : IRepository<TDomain>
+        where TDomain : class
+        where TDao : class
     {
         protected readonly ECommerceContext _ctx;
-        protected readonly DbSet<T> _dbSet;
+        protected readonly DbSet<TDao> _dbSet;
+        protected readonly IMapper<TDao, TDomain> _mapper;
 
-        protected BaseRepository(ECommerceContext ctx)
+        protected BaseRepository(ECommerceContext ctx, IMapper<TDao, TDomain> mapper)
         {
             _ctx = ctx;
-            _dbSet = ctx.Set<T>();
+            _dbSet = ctx.Set<TDao>();
+            _mapper = mapper;
         }
 
-        public virtual async Task<IEnumerable<T>> GetAllAsync()
-            => await _dbSet.ToListAsync();
-
-        public virtual async Task<T?> GetByIdAsync(Guid id)
-            => await _dbSet.FindAsync(id);
-
-        public virtual async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
-            => await _dbSet.Where(predicate).ToListAsync();
-
-        public virtual async Task AddAsync(T entity)
+        public virtual async Task<IEnumerable<TDomain>> GetAllAsync()
         {
-            if (entity is BaseEntity baseEntity)
-            {
-                baseEntity.CreatedAt = DateTime.Now;
-                baseEntity.UpdatedAt = DateTime.Now;
-            }
-            await _dbSet.AddAsync(entity);
+            var daos = await _dbSet.ToListAsync();
+            return daos.Select(d => _mapper.Map(d));
         }
 
-        public virtual void Update(T entity)
+        public virtual async Task<TDomain?> GetByIdAsync(Guid id)
         {
-            if (entity is BaseEntity baseEntity)
-            {
-                baseEntity.UpdatedAt = DateTime.Now;
-            }
-            _dbSet.Update(entity);
+            var dao = await _dbSet.FindAsync(id);
+            return dao != null ? _mapper.Map(dao) : null;
         }
 
-        public virtual void Remove(T entity)
+        public virtual async Task<IEnumerable<TDomain>> FindAsync(Expression<Func<TDomain, bool>> predicate)
         {
-            if (entity is BaseEntity baseEntity)
-            {
-                baseEntity.DeletedAt = DateTime.Now;
-                _dbSet.Update(entity); // Soft delete
-            }
-            else
-            {
-                _dbSet.Remove(entity); // Hard delete
-            }
+            var daos = await _dbSet.ToListAsync();
+            var domain = daos.Select(d => _mapper.Map(d));
+            return domain.Where(predicate.Compile());
+        }
+
+        public virtual async Task AddAsync(TDomain entity)
+        {
+            var dao = _mapper.MapBack(entity);
+            await _dbSet.AddAsync(dao);
+        }
+
+        public virtual void Update(TDomain entity)
+        {
+            var dao = _mapper.MapBack(entity);
+            _dbSet.Update(dao);
+        }
+
+        public virtual void Remove(TDomain entity)
+        {
+            var dao = _mapper.MapBack(entity);
+            _dbSet.Remove(dao);
         }
     }
 }

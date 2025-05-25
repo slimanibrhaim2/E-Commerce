@@ -15,12 +15,13 @@ namespace Users.Application.Commands.AddAddressByUserId
     public class AddAddressByUserIdCommandHandler
         : IRequestHandler<AddAddressByUserIdCommand, Result>
     {
-        private readonly IUserRepository _repo;
+        private readonly IAddressRepository _addressRepo;
+        private readonly IUserRepository _userRepo;
         private readonly IUnitOfWork _uow;
         private readonly ILogger<AddAddressByUserIdCommandHandler> _logger;
 
-        public AddAddressByUserIdCommandHandler(IUserRepository repo, IUnitOfWork uow, ILogger<AddAddressByUserIdCommandHandler> logger)
-            => (_repo, _uow, _logger) = (repo, uow, logger);
+        public AddAddressByUserIdCommandHandler(IAddressRepository addressRepo, IUserRepository userRepo, IUnitOfWork uow, ILogger<AddAddressByUserIdCommandHandler> logger)
+            => (_addressRepo, _userRepo, _uow, _logger) = (addressRepo, userRepo, uow, logger);
 
         public async Task<Result> Handle(
             AddAddressByUserIdCommand request,
@@ -68,13 +69,8 @@ namespace Users.Application.Commands.AddAddressByUserId
                         resultStatus: ResultStatus.ValidationError);
                 }
 
-                // Load full user aggregate (with Addresses)
-                var user = await _repo.GetByIdWithDetails(request.UserId);
-                
-                _logger.LogInformation("User found: {UserFound}, Addresses count: {AddressCount}", 
-                    user != null, 
-                    user?.Addresses?.Count ?? 0);
-
+                // Check if user exists
+                var user = await _userRepo.GetByIdAsync(request.UserId);
                 if (user is null)
                 {
                     _logger.LogWarning("User not found with ID: {UserId}", request.UserId);
@@ -85,11 +81,12 @@ namespace Users.Application.Commands.AddAddressByUserId
                 }
 
                 // Check for duplicate address
-                if (user.Addresses?.Any(a => 
+                var existingAddresses = await _addressRepo.GetAddressesByUserId(request.UserId);
+                if (existingAddresses.Any(a =>
                     a.Name.Equals(request.addressDTO.Name, StringComparison.OrdinalIgnoreCase) &&
                     a.Latitude == request.addressDTO.Latitude &&
                     a.Longitude == request.addressDTO.Longitude &&
-                    a.DeletedAt == null) == true)
+                    a.DeletedAt == null))
                 {
                     _logger.LogWarning("Duplicate address found for user {UserId}", request.UserId);
                     return Result.Fail(
@@ -108,14 +105,7 @@ namespace Users.Application.Commands.AddAddressByUserId
                     UserId = request.UserId
                 };
 
-                // Add to user's Addresses
-                user.Addresses ??= new List<Address>();
-                user.Addresses.Add(address);
-
-                // Mark aggregate updated
-                _repo.Update(user);
-
-                // Commit
+                await _addressRepo.AddAsync(address);
                 await _uow.SaveChangesAsync();
 
                 _logger.LogInformation("Successfully added address for user {UserId}", request.UserId);
@@ -125,7 +115,7 @@ namespace Users.Application.Commands.AddAddressByUserId
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error adding address for user {UserId}: {Message}", 
+                _logger.LogError(ex, "Error adding address for user {UserId}: {Message}",
                     request.UserId, ex.Message);
                 return Result.Fail(
                     message: "حدث خطأ أثناء إضافة العنوان",

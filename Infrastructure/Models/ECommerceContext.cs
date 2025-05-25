@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Core.Abstraction;
 
 namespace Infrastructure.Models;
 
@@ -44,8 +43,9 @@ public partial class ECommerceContext : DbContext
     public virtual DbSet<PaymentStatusDAO> PaymentStatuses { get; set; }
     public virtual DbSet<ProductDAO> Products { get; set; }
     public virtual DbSet<ProductFeatureDAO> ProductFeatures { get; set; }
-    public virtual DbSet<ProductMediaDAO> ProductMedia { get; set; }
+    public virtual DbSet<MediaDAO> Media { get; set; }
     public virtual DbSet<ServiceDAO> Services { get; set; }
+    public virtual DbSet<ServiceFeatureDAO> ServiceFeatures { get; set; }
     public virtual DbSet<UserDAO> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -60,24 +60,6 @@ public partial class ECommerceContext : DbContext
     {
         modelBuilder.UseCollation("Arabic_CI_AS");
 
-        // Configure audit fields for all entities
-        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-        {
-            if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
-            {
-                modelBuilder.Entity(entityType.ClrType)
-                    .Property("CreatedAt")
-                    .IsRequired();
-
-                modelBuilder.Entity(entityType.ClrType)
-                    .Property("UpdatedAt")
-                    .IsRequired();
-
-                modelBuilder.Entity(entityType.ClrType)
-                    .Property("DeletedAt")
-                    .IsRequired(false);
-            }
-        }
 
         modelBuilder.Entity<AddressDAO>(entity =>
         {
@@ -398,12 +380,12 @@ public partial class ECommerceContext : DbContext
                 .HasConstraintName("FK_ProductFeature_Product");
         });
 
-        modelBuilder.Entity<ProductMediaDAO>(entity =>
+        modelBuilder.Entity<MediaDAO>(entity =>
         {
-            entity.ToTable("ProductMedia");
+            entity.ToTable("Media");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.MediaUrl).HasMaxLength(500).IsRequired();
-            entity.Property(e => e.MediaType).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.MediaTypeId).IsRequired();
 
             entity.HasOne(d => d.BaseItem)
                 .WithMany(p => p.ProductMedia)
@@ -423,6 +405,20 @@ public partial class ECommerceContext : DbContext
                 .HasForeignKey(d => d.BaseItemId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Service_BaseItem");
+        });
+
+        modelBuilder.Entity<ServiceFeatureDAO>(entity =>
+        {
+            entity.ToTable("ServiceFeature");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).HasMaxLength(100).IsRequired();
+            entity.Property(e => e.Value).HasMaxLength(500).IsRequired();
+
+            entity.HasOne(d => d.Service)
+                .WithMany(p => p.ServiceFeatures)
+                .HasForeignKey(d => d.ServiceId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ServiceFeatures_Services");
         });
 
         modelBuilder.Entity<UserDAO>(entity =>

@@ -6,17 +6,19 @@ using Core.Result;
 using Core.Interfaces;
 using Users.Domain.Repositories;
 using Microsoft.Extensions.Logging;
+using System.Linq;
+using Users.Domain.Entities;
 
 namespace Users.Application.Commands.DeleteAddress
 {
     public class DeleteAddressCommandHandler : IRequestHandler<DeleteAddressCommand, Result>
     {
-        private readonly IUserRepository _userRepo;
+        private readonly IAddressRepository _addressRepo;
         private readonly IUnitOfWork _uow;
         private readonly ILogger<DeleteAddressCommandHandler> _logger;
 
-        public DeleteAddressCommandHandler(IUserRepository userRepo, IUnitOfWork uow, ILogger<DeleteAddressCommandHandler> logger)
-            => (_userRepo, _uow, _logger) = (userRepo, uow, logger);
+        public DeleteAddressCommandHandler(IAddressRepository addressRepo, IUnitOfWork uow, ILogger<DeleteAddressCommandHandler> logger)
+            => (_addressRepo, _uow, _logger) = (addressRepo, uow, logger);
 
         public async Task<Result> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
         {
@@ -24,21 +26,12 @@ namespace Users.Application.Commands.DeleteAddress
             {
                 _logger.LogInformation("Attempting to soft delete address with ID: {AddressId}", request.AddressId);
 
-                // Find the user containing this address
-                var user = await _userRepo.GetByAddressId(request.AddressId);
-                if (user is null)
-                {
-                    _logger.LogWarning("Address not found with ID: {AddressId}", request.AddressId);
-                    return Result.Fail(
-                        message: "العنوان غير موجود",
-                        errorType: "NotFound",
-                        resultStatus: ResultStatus.ValidationError);
-                }
-
-                var address = user.Addresses?.Find(a => a.Id == request.AddressId);
+                // Find the address
+                IEnumerable<Address> addresses = await _addressRepo.FindAsync(a => a.Id == request.AddressId);
+                Address? address = addresses.FirstOrDefault();
                 if (address is null)
                 {
-                    _logger.LogWarning("Address not found in user aggregate. AddressId: {AddressId}", request.AddressId);
+                    _logger.LogWarning("Address not found with ID: {AddressId}", request.AddressId);
                     return Result.Fail(
                         message: "العنوان غير موجود",
                         errorType: "NotFound",
@@ -55,7 +48,7 @@ namespace Users.Application.Commands.DeleteAddress
                 }
 
                 address.DeletedAt = DateTime.UtcNow;
-                _userRepo.Update(user);
+                _addressRepo.Update(address);
                 await _uow.SaveChangesAsync();
 
                 _logger.LogInformation("Successfully soft deleted address with ID: {AddressId}", request.AddressId);

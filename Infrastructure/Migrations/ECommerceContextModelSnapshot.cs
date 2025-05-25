@@ -240,10 +240,15 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("ServiceDAOId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ServiceDAOId");
 
                     b.ToTable("Brands");
                 });
@@ -558,6 +563,41 @@ namespace Infrastructure.Migrations
                     b.HasIndex("FollowingId");
 
                     b.ToTable("Follower", (string)null);
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.MediaDAO", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BaseItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("MediaTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("MediaUrl")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BaseItemId");
+
+                    b.HasIndex("MediaTypeId");
+
+                    b.ToTable("Media", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.MediaTypeDAO", b =>
@@ -954,41 +994,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("ProductFeature", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Models.ProductMediaDAO", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BaseItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MediaType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("MediaUrl")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BaseItemId");
-
-                    b.ToTable("ProductMedia", (string)null);
-                });
-
             modelBuilder.Entity("Infrastructure.Models.ServiceDAO", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1004,6 +1009,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
                     b.Property<string>("ServiceType")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -1017,6 +1025,41 @@ namespace Infrastructure.Migrations
                     b.HasIndex("BaseItemId");
 
                     b.ToTable("Service", (string)null);
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.ServiceFeatureDAO", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ServiceFeature", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.UserDAO", b =>
@@ -1147,6 +1190,13 @@ namespace Infrastructure.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.BrandDAO", b =>
+                {
+                    b.HasOne("Infrastructure.Models.ServiceDAO", null)
+                        .WithMany("Brands")
+                        .HasForeignKey("ServiceDAOId");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.CartDAO", b =>
@@ -1301,6 +1351,26 @@ namespace Infrastructure.Migrations
                     b.Navigation("Following");
                 });
 
+            modelBuilder.Entity("Infrastructure.Models.MediaDAO", b =>
+                {
+                    b.HasOne("Infrastructure.Models.BaseItemDAO", "BaseItem")
+                        .WithMany("ProductMedia")
+                        .HasForeignKey("BaseItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ProductMedia_BaseItem");
+
+                    b.HasOne("Infrastructure.Models.MediaTypeDAO", "MediaType")
+                        .WithMany()
+                        .HasForeignKey("MediaTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BaseItem");
+
+                    b.Navigation("MediaType");
+                });
+
             modelBuilder.Entity("Infrastructure.Models.MessageDAO", b =>
                 {
                     b.HasOne("Infrastructure.Models.BaseContentDAO", "BaseContent")
@@ -1436,18 +1506,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Infrastructure.Models.ProductMediaDAO", b =>
-                {
-                    b.HasOne("Infrastructure.Models.BaseItemDAO", "BaseItem")
-                        .WithMany("ProductMedia")
-                        .HasForeignKey("BaseItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_ProductMedia_BaseItem");
-
-                    b.Navigation("BaseItem");
-                });
-
             modelBuilder.Entity("Infrastructure.Models.ServiceDAO", b =>
                 {
                     b.HasOne("Infrastructure.Models.BaseItemDAO", "BaseItem")
@@ -1458,6 +1516,18 @@ namespace Infrastructure.Migrations
                         .HasConstraintName("FK_Service_BaseItem");
 
                     b.Navigation("BaseItem");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.ServiceFeatureDAO", b =>
+                {
+                    b.HasOne("Infrastructure.Models.ServiceDAO", "Service")
+                        .WithMany("ServiceFeatures")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ServiceFeatures_Services");
+
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.AttachmentTypeDAO", b =>
@@ -1543,6 +1613,13 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Infrastructure.Models.ProductDAO", b =>
                 {
                     b.Navigation("ProductFeatures");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.ServiceDAO", b =>
+                {
+                    b.Navigation("Brands");
+
+                    b.Navigation("ServiceFeatures");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.UserDAO", b =>

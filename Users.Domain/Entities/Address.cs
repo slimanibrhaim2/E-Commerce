@@ -1,8 +1,6 @@
-﻿using Core.Abstraction;
+﻿namespace Users.Domain.Entities;
 
-namespace Users.Domain.Entities;
-
-public class Address : BaseEntity
+public class Address 
 {
     public Guid Id { get; set; }
 
@@ -15,4 +13,9 @@ public class Address : BaseEntity
     public string Name { get; set; }
 
     public User User { get; set; }
+    public DateTime CreatedAt { get; set; }
+
+    public DateTime UpdatedAt { get; set; }
+
+    public DateTime? DeletedAt { get; set; }
 }
