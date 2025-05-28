@@ -5,4 +5,5 @@ namespace Catalogs.Domain.Repositories;
 
 public interface IBaseItemRepository : IRepository<BaseItem>
 {
+    Task<IEnumerable<BaseItem>> GetAllByUserIdAsync(Guid userId);
 } 

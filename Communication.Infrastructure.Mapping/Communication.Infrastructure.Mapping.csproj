@@ -10,4 +10,9 @@
     <Folder Include="Mappers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Communication.Domain\Communication.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

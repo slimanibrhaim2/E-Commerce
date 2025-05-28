@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Catalogs.Infrastructure\Catalogs.Infrastructure.csproj" />
+    <ProjectReference Include="..\Communication.Infrastructure\Communication.Infrastructure.csproj" />
+    <ProjectReference Include="..\Communication.Presentation\Communication.Presentation.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\User.Infrastructure\Users.Infrastructure.csproj" />
     <ProjectReference Include="..\Users.Presentation\Users.Presentation.csproj" />

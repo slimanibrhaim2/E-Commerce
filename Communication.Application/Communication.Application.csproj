@@ -5,12 +5,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\Communication.Domain\Communication.Domain.csproj" />
+    </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Commands\" />
-    <Folder Include="DI\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.5" />
+  </ItemGroup>	
+	
+  
 
 </Project>

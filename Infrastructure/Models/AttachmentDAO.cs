@@ -9,9 +9,9 @@ public partial class AttachmentDAO
 
     public Guid BaseContentId { get; set; }
 
-    public string FileUrl { get; set; } = null!;
+    public string AttachmentUrl { get; set; } = null!;
 
-    public string FileType { get; set; } = null!;
+    public Guid AttachmentTypeId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 

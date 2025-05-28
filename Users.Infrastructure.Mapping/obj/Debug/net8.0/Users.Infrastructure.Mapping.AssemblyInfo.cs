@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Users.Infrastructure.Mapping")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3222be79beb5ef17b962c92a106e96d0d94c2d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72341b3142353f5a5a6fa95ad8632d3db92b433a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Users.Infrastructure.Mapping")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Users.Infrastructure.Mapping")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

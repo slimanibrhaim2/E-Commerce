@@ -8,7 +8,11 @@
 
   <ItemGroup>
     <Folder Include="DI\" />
-    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Communication.Application\Communication.Application.csproj" />
+    <ProjectReference Include="..\Communication.Infrastructure.Mapping\Communication.Infrastructure.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

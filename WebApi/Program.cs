@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Users.Presentation.DI;
 using Catalogs.Presentation.DI;
 using Catalogs.Infrastructure.DI;
+using Communication.Application.DI;
+using Communication.Infrastructure.DI;
+using Communication.Presentation.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,9 @@ builder.Services.AddUserInfrastructure();
 builder.Services.AddUserPresentation();
 builder.Services.AddCatalogsInfrastructure(); 
 builder.Services.AddCatalogPresentation(); 
+builder.Services.AddCommunicationApplicationServices();
+builder.Services.AddCommunicationInfrastructure();
+builder.Services.AddCommunicationPresentation();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
