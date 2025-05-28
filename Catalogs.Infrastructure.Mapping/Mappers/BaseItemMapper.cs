@@ -11,6 +11,7 @@ public class BaseItemMapper : IMapper<BaseItemDAO, BaseItem>
         if (source == null) return null;
         return new BaseItem
         {
+            Id = source.Id,
             Name = source.Name,
             Description = source.Description,
             Price = (decimal)source.Price,

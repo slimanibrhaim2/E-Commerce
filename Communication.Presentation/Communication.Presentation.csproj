@@ -5,10 +5,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+<ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+  </ItemGroup>
+	
+	
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="DI\" />
+    <ProjectReference Include="..\Communication.Application\Communication.Application.csproj" />
   </ItemGroup>
 
 </Project>

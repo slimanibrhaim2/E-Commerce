@@ -3,11 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using AutoMapper;
 
-namespace Catalogs.Application.DI;
+namespace Communication.Application.DI;
 
-public static class ApplicationServiceRegistration
+public static class DependencyInjection
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddCommunicationApplicationServices(this IServiceCollection services)
     {
         // Register MediatR
         services.AddMediatR(cfg => {

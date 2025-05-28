@@ -80,8 +80,8 @@ public partial class ECommerceContext : DbContext
         {
             entity.ToTable("Attachment");
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.FileUrl).HasMaxLength(500).IsRequired();
-            entity.Property(e => e.FileType).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.AttachmentUrl).HasMaxLength(500).IsRequired();
+            entity.Property(e => e.AttachmentTypeId).IsRequired();
 
             entity.HasOne(d => d.BaseContent)
                 .WithMany(p => p.Attachments)
@@ -314,6 +314,9 @@ public partial class ECommerceContext : DbContext
                 .HasForeignKey(d => d.OrderActivityId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Order_OrderActivity");
+
+            entity.Property(e => e.TotalAmount)
+                .HasPrecision(18, 2);
         });
 
         modelBuilder.Entity<OrderActivityDAO>(entity =>
@@ -351,6 +354,9 @@ public partial class ECommerceContext : DbContext
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Payment_Order");
+
+            entity.Property(e => e.Amount)
+                .HasPrecision(18, 2);
         });
 
         modelBuilder.Entity<ProductDAO>(entity =>

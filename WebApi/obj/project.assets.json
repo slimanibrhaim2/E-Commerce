@@ -1691,6 +1691,81 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "Communication.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "AutoMapper": "14.0.0",
+          "Communication.Domain": "1.0.0",
+          "MediatR": "12.5.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.5"
+        },
+        "compile": {
+          "bin/placeholder/Communication.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Communication.Application.dll": {}
+        }
+      },
+      "Communication.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Communication.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Communication.Domain.dll": {}
+        }
+      },
+      "Communication.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Communication.Application": "1.0.0",
+          "Communication.Infrastructure.Mapping": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Communication.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Communication.Infrastructure.dll": {}
+        }
+      },
+      "Communication.Infrastructure.Mapping/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Communication.Domain": "1.0.0",
+          "Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Communication.Infrastructure.Mapping.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Communication.Infrastructure.Mapping.dll": {}
+        }
+      },
+      "Communication.Presentation/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Communication.Application": "1.0.0",
+          "MediatR": "12.5.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Communication.Presentation.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Communication.Presentation.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -4684,6 +4759,31 @@
       "path": "../Catalogs.Presentation/Catalogs.Presentation.csproj",
       "msbuildProject": "../Catalogs.Presentation/Catalogs.Presentation.csproj"
     },
+    "Communication.Application/1.0.0": {
+      "type": "project",
+      "path": "../Communication.Application/Communication.Application.csproj",
+      "msbuildProject": "../Communication.Application/Communication.Application.csproj"
+    },
+    "Communication.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Communication.Domain/Communication.Domain.csproj",
+      "msbuildProject": "../Communication.Domain/Communication.Domain.csproj"
+    },
+    "Communication.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Communication.Infrastructure/Communication.Infrastructure.csproj",
+      "msbuildProject": "../Communication.Infrastructure/Communication.Infrastructure.csproj"
+    },
+    "Communication.Infrastructure.Mapping/1.0.0": {
+      "type": "project",
+      "path": "../Communication.Infrastructure.Mapping/Communication.Infrastructure.Mapping.csproj",
+      "msbuildProject": "../Communication.Infrastructure.Mapping/Communication.Infrastructure.Mapping.csproj"
+    },
+    "Communication.Presentation/1.0.0": {
+      "type": "project",
+      "path": "../Communication.Presentation/Communication.Presentation.csproj",
+      "msbuildProject": "../Communication.Presentation/Communication.Presentation.csproj"
+    },
     "Core/1.0.0": {
       "type": "project",
       "path": "../Core/Core.csproj",
@@ -4724,6 +4824,8 @@
     "net8.0": [
       "Catalogs.Infrastructure >= 1.0.0",
       "Catalogs.Presentation >= 1.0.0",
+      "Communication.Infrastructure >= 1.0.0",
+      "Communication.Presentation >= 1.0.0",
       "Infrastructure >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.14",
       "Microsoft.Extensions.DependencyInjection >= 9.0.5",
@@ -4769,6 +4871,12 @@
             },
             "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Catalogs.Presentation.csproj": {
               "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Catalogs.Presentation.csproj"
+            },
+            "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\Communication.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\Communication.Infrastructure.csproj"
+            },
+            "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Presentation\\Communication.Presentation.csproj": {
+              "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Presentation\\Communication.Presentation.csproj"
             },
             "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj": {
               "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Infrastructure.csproj"

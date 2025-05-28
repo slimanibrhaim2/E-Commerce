@@ -35,7 +35,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("BrandDAOProductDAO");
+                    b.ToTable("BrandDAOProductDAO", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.AddressDAO", b =>
@@ -85,6 +85,14 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("AttachmentTypeDAOId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("AttachmentTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AttachmentUrl")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<Guid>("BaseContentId")
                         .HasColumnType("uniqueidentifier");
 
@@ -93,16 +101,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("FileType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FileUrl")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -137,7 +135,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AttachmentTypes");
+                    b.ToTable("AttachmentTypes", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.BaseContentDAO", b =>
@@ -250,7 +248,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ServiceDAOId");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.CartDAO", b =>
@@ -497,7 +495,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DiscountTypes");
+                    b.ToTable("DiscountTypes", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.FavoriteDAO", b =>
@@ -621,7 +619,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MediaTypes");
+                    b.ToTable("MediaTypes", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.MessageDAO", b =>
@@ -746,6 +744,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("TotalAmount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -823,7 +822,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderStatuses");
+                    b.ToTable("OrderStatuses", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.PaymentDAO", b =>
@@ -833,6 +832,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -899,7 +899,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentMethods");
+                    b.ToTable("PaymentMethods", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.PaymentStatusDAO", b =>
@@ -923,7 +923,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentStatuses");
+                    b.ToTable("PaymentStatuses", (string)null);
                 });
 
             modelBuilder.Entity("Infrastructure.Models.ProductDAO", b =>

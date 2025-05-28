@@ -10,6 +10,8 @@
         "dependencies": {
           "Catalogs.Infrastructure": "1.0.0",
           "Catalogs.Presentation": "1.0.0",
+          "Communication.Infrastructure": "1.0.0",
+          "Communication.Presentation": "1.0.0",
           "Infrastructure": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "8.0.14",
           "Microsoft.Extensions.DependencyInjection": "9.0.5",
@@ -1044,6 +1046,68 @@
           }
         }
       },
+      "Communication.Application/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "14.0.0",
+          "Communication.Domain": "1.0.0",
+          "MediatR": "12.5.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.5"
+        },
+        "runtime": {
+          "Communication.Application.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Communication.Domain/1.0.0": {
+        "dependencies": {
+          "Core": "1.0.0"
+        },
+        "runtime": {
+          "Communication.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Communication.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Communication.Application": "1.0.0",
+          "Communication.Infrastructure.Mapping": "1.0.0"
+        },
+        "runtime": {
+          "Communication.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Communication.Infrastructure.Mapping/1.0.0": {
+        "dependencies": {
+          "Communication.Domain": "1.0.0",
+          "Infrastructure": "1.0.0"
+        },
+        "runtime": {
+          "Communication.Infrastructure.Mapping.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Communication.Presentation/1.0.0": {
+        "dependencies": {
+          "Communication.Application": "1.0.0",
+          "MediatR": "12.5.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
+        },
+        "runtime": {
+          "Communication.Presentation.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Core/1.0.0": {
         "runtime": {
           "Core.dll": {
@@ -1746,6 +1810,31 @@
       "sha512": ""
     },
     "Catalogs.Presentation/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Communication.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Communication.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Communication.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Communication.Infrastructure.Mapping/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Communication.Presentation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

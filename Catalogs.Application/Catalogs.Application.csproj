@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DI\" />
+	<Folder Include="DTOs\" />
+    <Folder Include="Commands\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 
