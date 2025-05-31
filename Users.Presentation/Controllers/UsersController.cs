@@ -9,6 +9,7 @@ using Users.Application.Queries.GetUserById;
 using Core.Result;
 using Users.Application.Command.UpdateUser;
 using Core.Pagination;
+using Users.Application.Queries.GetUsersByName;
 namespace Users.Presentation.Controllers
 {
     [ApiController]
@@ -66,15 +67,10 @@ namespace Users.Presentation.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] UserDTO dto)
+        public async Task<IActionResult> Update(Guid id, [FromBody] CreateUserDTO dto)
         {
-            if (id != dto.Id)
-                return StatusCode(500, Result.Fail(
-                    message: "معرف المستخدم غير متطابق",
-                    errorType: "MismatchedId",
-                    resultStatus: ResultStatus.ValidationError));
-
-            var result = await _mediator.Send(new UpdateUserCommand(dto));
+            
+            var result = await _mediator.Send(new UpdateUserCommand(id,dto));
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في تحديث المستخدم",
@@ -96,6 +92,23 @@ namespace Users.Presentation.Controllers
                     resultStatus: ResultStatus.Failed));
             return Ok(Result.Ok(
                 message: "تم حذف المستخدم بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchByName([FromQuery] string name, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetUsersByNameQuery(name, parameters);
+            var result = await _mediator.Send(query);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في البحث عن المستخدمين",
+                    errorType: "SearchByNameFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<UserDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب المستخدمين بنجاح",
                 resultStatus: ResultStatus.Success));
         }
     }

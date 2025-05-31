@@ -32,7 +32,6 @@ public class BrandRepository : BaseRepository<Brand, BrandDAO>, IBrandRepository
         dao.UpdatedAt = DateTime.UtcNow;
         dao.DeletedAt = null;
         _context.Brands.Add(dao);
-        await _context.SaveChangesAsync();
         return dao.Id;
     }
 
@@ -43,7 +42,6 @@ public class BrandRepository : BaseRepository<Brand, BrandDAO>, IBrandRepository
         dao.Name = brand.Name;
         dao.Description = brand.Description;
         dao.UpdatedAt = DateTime.UtcNow;
-        await _context.SaveChangesAsync();
         return true;
     }
 
@@ -52,7 +50,6 @@ public class BrandRepository : BaseRepository<Brand, BrandDAO>, IBrandRepository
         var dao = await _context.Brands.FirstOrDefaultAsync(b => b.Id == id && b.DeletedAt == null);
         if (dao == null) return false;
         dao.DeletedAt = DateTime.UtcNow;
-        await _context.SaveChangesAsync();
         return true;
     }
 

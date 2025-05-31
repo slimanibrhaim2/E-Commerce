@@ -8,6 +8,7 @@ using Communication.Application.Commands.UpdateBaseContent;
 using Communication.Application.Commands.DeleteBaseContent;
 using Communication.Application.Queries.GetBaseContentById;
 using Communication.Application.Queries.GetAllBaseContents;
+using Core.Pagination;
 
 namespace Communication.Presentation.Controllers
 {
@@ -45,9 +46,10 @@ namespace Communication.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Result<List<BaseContentDTO>>>> GetAll()
+        public async Task<ActionResult<Result<PaginatedResult<BaseContentDTO>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllBaseContentsQuery();
+            var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllBaseContentsQuery(parameters);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

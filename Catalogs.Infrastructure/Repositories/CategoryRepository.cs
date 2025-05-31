@@ -32,7 +32,6 @@ public class CategoryRepository : BaseRepository<Category, CategoryDAO>, ICatego
         dao.UpdatedAt = DateTime.UtcNow;
         dao.DeletedAt = null;
         _context.Categories.Add(dao);
-        await _context.SaveChangesAsync();
         return dao.Id;
     }
 
@@ -44,7 +43,6 @@ public class CategoryRepository : BaseRepository<Category, CategoryDAO>, ICatego
         dao.Description = category.Description;
         dao.UpdatedAt = DateTime.UtcNow;
         dao.ParentId = category.ParentCategoryId;
-        await _context.SaveChangesAsync();
         return true;
     }
 
@@ -53,7 +51,6 @@ public class CategoryRepository : BaseRepository<Category, CategoryDAO>, ICatego
         var dao = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id && c.DeletedAt == null);
         if (dao == null) return false;
         dao.DeletedAt = DateTime.UtcNow;
-        await _context.SaveChangesAsync();
         return true;
     }
 

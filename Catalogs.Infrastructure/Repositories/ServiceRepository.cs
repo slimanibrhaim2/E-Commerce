@@ -7,6 +7,7 @@ using Infrastructure.Common;
 using Catalogs.Application.DTOs;
 using System.Linq.Expressions;
 using Catalogs.Infrastructure.Mapping.Mappers;
+using FuzzySharp;
 
 namespace Catalogs.Infrastructure.Repositories;
 
@@ -154,5 +155,27 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
         service.Brands.Remove(brand);
         await _context.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<IEnumerable<Service>> GetServicesByUserIdAsync(Guid userId)
+    {
+        var services = await _context.Services
+            .Include(s => s.BaseItem)
+            .Where(s => s.BaseItem.UserId == userId)
+            .ToListAsync();
+        return services.Select(s => _mapper.Map(s));
+    }
+
+    public async Task<IEnumerable<Service>> GetServicesByNameAsync(string name)
+    {
+        var services = await _context.Services
+            .Include(s => s.BaseItem)
+            .ToListAsync();
+        var results = services
+            .Select(s => new { Service = s, Score = Fuzz.Ratio(s.BaseItem.Name, name) })
+            .OrderByDescending(x => x.Score)
+            .Where(x => x.Score > 60)
+            .Select(x => x.Service);
+        return results.Select(s => _mapper.Map(s));
     }
 } 

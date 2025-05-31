@@ -8,6 +8,7 @@ using Communication.Application.Commands.UpdateMessage;
 using Communication.Application.Commands.DeleteMessage;
 using Communication.Application.Queries.GetMessageById;
 using Communication.Application.Queries.GetAllMessages;
+using Core.Pagination;
 
 namespace Communication.Presentation.Controllers
 {
@@ -45,9 +46,10 @@ namespace Communication.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Result<List<MessageDTO>>>> GetAll()
+        public async Task<ActionResult<Result<PaginatedResult<MessageDTO>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllMessagesQuery();
+            var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllMessagesQuery(parameters);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.Pagination;
 
 namespace Communication.Application.Queries.GetAllComments;
 
-public class GetAllCommentsQueryHandler : IRequestHandler<GetAllCommentsQuery, Result<List<CommentDTO>>>
+public class GetAllCommentsQueryHandler : IRequestHandler<GetAllCommentsQuery, Result<PaginatedResult<CommentDTO>>>
 {
     private readonly ICommentRepository _commentRepository;
     private readonly IBaseContentRepository _baseContentRepository;
@@ -20,29 +21,34 @@ public class GetAllCommentsQueryHandler : IRequestHandler<GetAllCommentsQuery, R
         _baseContentRepository = baseContentRepository;
     }
 
-    public async Task<Result<List<CommentDTO>>> Handle(GetAllCommentsQuery request, CancellationToken cancellationToken)
+    public async Task<Result<PaginatedResult<CommentDTO>>> Handle(GetAllCommentsQuery request, CancellationToken cancellationToken)
     {
         try
         {
             var comments = await _commentRepository.GetAllAsync();
-            var dtos = comments.Select(c => new CommentDTO
-            {
-                Id = c.Id,
-                BaseContentId = c.BaseContentId,
-                BaseItemId = c.BaseItemId,
-                CreatedAt = c.CreatedAt,
-                UpdatedAt = c.UpdatedAt,
-                DeletedAt = c.DeletedAt,
-                // BaseContent = c.BaseContent != null ? new BaseContentDTO { ... } : null
-            }).ToList();
-            return Result<List<CommentDTO>>.Ok(
-                data: dtos,
+            var totalCount = comments.Count();
+            var data = comments
+                .Skip((request.Parameters.PageNumber - 1) * request.Parameters.PageSize)
+                .Take(request.Parameters.PageSize)
+                .Select(c => new CommentDTO
+                {
+                    Id = c.Id,
+                    BaseContentId = c.BaseContentId,
+                    BaseItemId = c.BaseItemId,
+                    CreatedAt = c.CreatedAt,
+                    UpdatedAt = c.UpdatedAt,
+                    DeletedAt = c.DeletedAt,
+                })
+                .ToList();
+            var paginated = Core.Pagination.PaginatedResult<CommentDTO>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
+            return Result<PaginatedResult<CommentDTO>>.Ok(
+                paginated,
                 message: "Comments retrieved successfully",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
-            return Result<List<CommentDTO>>.Fail(
+            return Result<PaginatedResult<CommentDTO>>.Fail(
                 message: $"Failed to get comments: {ex.Message}",
                 errorType: "GetAllCommentsFailed",
                 resultStatus: ResultStatus.Failed,

@@ -3,6 +3,8 @@ using MediatR;
 using Catalogs.Application.DTOs;
 using Microsoft.Extensions.Logging;
 using Catalogs.Application.Queries.GetAllBaseItemsByUserId;
+using Core.Pagination;
+using Core.Result;
 
 namespace Catalogs.Presentation.Controllers
 {
@@ -20,13 +22,14 @@ namespace Catalogs.Presentation.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public async Task<ActionResult<List<BaseItemDTO>>> GetAllByUserId(Guid userId)
+        public async Task<ActionResult<Result<PaginatedResult<BaseItemDTO>>>> GetAllByUserId(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllBaseItemsByUserIdQuery(userId);
+            var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllBaseItemsByUserIdQuery(userId, parameters);
             var result = await _mediator.Send(query);
             if (!result.Success)
                 return BadRequest(result);
-            return Ok(result.Data);
+            return Ok(result);
         }
     }
 } 

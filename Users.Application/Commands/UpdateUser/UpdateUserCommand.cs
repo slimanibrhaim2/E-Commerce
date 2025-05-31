@@ -10,7 +10,8 @@ using Users.Application.DTOs;
 namespace Users.Application.Command.UpdateUser
 {
     public record UpdateUserCommand(
-        UserDTO User
+        Guid Id,
+        CreateUserDTO User
         ) : IRequest<Result>;
 
 }

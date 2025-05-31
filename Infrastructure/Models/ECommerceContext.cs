@@ -323,7 +323,7 @@ public partial class ECommerceContext : DbContext
         {
             entity.ToTable("OrderActivity");
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.Status).HasMaxLength(50).IsRequired();
+            entity.Property(e => e.StatusId).IsRequired();
         });
 
         modelBuilder.Entity<OrderItemDAO>(entity =>

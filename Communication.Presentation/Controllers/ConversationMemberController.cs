@@ -8,6 +8,7 @@ using Communication.Application.Commands.UpdateConversationMember;
 using Communication.Application.Commands.DeleteConversationMember;
 using Communication.Application.Queries.GetConversationMemberById;
 using Communication.Application.Queries.GetAllConversationMembers;
+using Core.Pagination;
 
 namespace Communication.Presentation.Controllers
 {
@@ -45,9 +46,10 @@ namespace Communication.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Result<List<ConversationMemberDTO>>>> GetAll()
+        public async Task<ActionResult<Result<PaginatedResult<ConversationMemberDTO>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllConversationMembersQuery();
+            var parameters = new Core.Pagination.PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllConversationMembersQuery(parameters);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

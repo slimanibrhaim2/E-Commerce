@@ -18,4 +18,8 @@ public interface IProductRepository : IRepository<Product>
     // Brand operations
     Task<bool> AddBrandToProductAsync(Guid productId, Guid brandId);
     Task<bool> RemoveBrandFromProductAsync(Guid productId, Guid brandId);
+
+    Task<IEnumerable<Product>> GetProductsByUserIdAsync(Guid userId);
+
+    Task<IEnumerable<Product>> GetProductsByNameAsync(string name);
 } 

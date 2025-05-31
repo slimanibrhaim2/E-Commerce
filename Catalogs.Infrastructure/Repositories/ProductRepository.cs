@@ -6,6 +6,7 @@ using Infrastructure.Models;
 using AutoMapper;
 using Core.Pagination;
 using Catalogs.Infrastructure.Mapping.Mappers;
+using FuzzySharp;
 
 namespace Catalogs.Infrastructure.Repositories;
 
@@ -185,5 +186,27 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         product.Brands.Remove(brand);
         await _context.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<IEnumerable<Product>> GetProductsByUserIdAsync(Guid userId)
+    {
+        var products = await _context.Products
+            .Include(p => p.BaseItem)
+            .Where(p => p.BaseItem.UserId == userId)
+            .ToListAsync();
+        return products.Select(p => _mapper.Map(p));
+    }
+
+    public async Task<IEnumerable<Product>> GetProductsByNameAsync(string name)
+    {
+        var products = await _context.Products
+            .Include(p => p.BaseItem)
+            .ToListAsync();
+        var results = products
+            .Select(p => new { Product = p, Score = Fuzz.Ratio(p.BaseItem.Name, name) })
+            .OrderByDescending(x => x.Score)
+            .Where(x => x.Score > 60)
+            .Select(x => x.Product);
+        return results.Select(p => _mapper.Map(p));
     }
 } 
