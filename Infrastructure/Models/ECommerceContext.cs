@@ -50,10 +50,7 @@ public partial class ECommerceContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-0JE77H7\\SQLEXPRESS;Database=E-Commerce;Trusted_Connection=True;TrustServerCertificate=True;");
-        }
+        // Removed hardcoded connection string. Configuration is now handled via DI.
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
