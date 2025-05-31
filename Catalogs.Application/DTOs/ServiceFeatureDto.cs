@@ -1,6 +1,6 @@
 namespace Catalogs.Application.DTOs;
 
-public class ServiceFeatureDto : FeatureDTO
+public class ServiceFeatureDTO : FeatureDTO
 {
     public Guid ServiceId { get; set; }
 } 

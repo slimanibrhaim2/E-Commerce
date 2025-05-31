@@ -2,16 +2,19 @@ using MediatR;
 using Core.Result;
 using Catalogs.Application.DTOs;
 using Catalogs.Domain.Repositories;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.UpdateMedia;
 
 public class UpdateMediaCommandHandler : IRequestHandler<UpdateMediaCommand, Result<bool>>
 {
     private readonly IMediaRepository _mediaRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateMediaCommandHandler(IMediaRepository mediaRepository)
+    public UpdateMediaCommandHandler(IMediaRepository mediaRepository, IUnitOfWork unitOfWork)
     {
         _mediaRepository = mediaRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(UpdateMediaCommand request, CancellationToken cancellationToken)
@@ -38,6 +41,7 @@ public class UpdateMediaCommandHandler : IRequestHandler<UpdateMediaCommand, Res
                 request.Id,
                 request.Media.Url,
                 request.Media.MediaTypeId);
+            await _unitOfWork.SaveChangesAsync();
 
             if (!updated)
             {

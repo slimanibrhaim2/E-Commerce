@@ -5,6 +5,7 @@ using Catalogs.Domain.Repositories;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using Catalogs.Domain.Entities;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.UpdateService.Simple;
 
@@ -12,11 +13,13 @@ public class UpdateServiceSimpleCommandHandler : IRequestHandler<UpdateServiceSi
 {
     private readonly IServiceRepository _repo;
     private readonly ILogger<UpdateServiceSimpleCommandHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateServiceSimpleCommandHandler(IServiceRepository repo, ILogger<UpdateServiceSimpleCommandHandler> logger)
+    public UpdateServiceSimpleCommandHandler(IServiceRepository repo, ILogger<UpdateServiceSimpleCommandHandler> logger, IUnitOfWork unitOfWork)
     {
         _repo = repo;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(UpdateServiceSimpleCommand request, CancellationToken cancellationToken)
@@ -60,6 +63,7 @@ public class UpdateServiceSimpleCommandHandler : IRequestHandler<UpdateServiceSi
             };
 
             var result = await _repo.UpdateAsync(request.Id, service);
+            await _unitOfWork.SaveChangesAsync();
             if (!result)
             {
                 return Result<bool>.Fail(

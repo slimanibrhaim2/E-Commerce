@@ -14,5 +14,5 @@ public class ProductDTO
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public List<MediaDTO> Media { get; set; }
-    public List<ProductFeatureDto> Features { get; set; }
+    public List<ProductFeatureDTO> Features { get; set; }
 } 

@@ -1,6 +1,7 @@
 using MediatR;
 using Core.Result;
 using Catalogs.Domain.Repositories;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.DeleteBrand;
 
@@ -9,15 +10,18 @@ public class DeleteBrandCommandHandler : IRequestHandler<DeleteBrandCommand, Res
     private readonly IProductRepository _productRepository;
     private readonly IServiceRepository _serviceRepository;
     private readonly IBrandRepository _brandRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
     public DeleteBrandCommandHandler(
         IProductRepository productRepository,
         IServiceRepository serviceRepository,
-        IBrandRepository brandRepository)
+        IBrandRepository brandRepository,
+        IUnitOfWork unitOfWork)
     {
         _productRepository = productRepository;
         _serviceRepository = serviceRepository;
         _brandRepository = brandRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(DeleteBrandCommand request, CancellationToken cancellationToken)
@@ -51,6 +55,7 @@ public class DeleteBrandCommandHandler : IRequestHandler<DeleteBrandCommand, Res
 
             // Delete the brand using Brand repository
             var result = await _brandRepository.DeleteBrandAsync(request.Id);
+            await _unitOfWork.SaveChangesAsync();
 
             if (!result)
             {

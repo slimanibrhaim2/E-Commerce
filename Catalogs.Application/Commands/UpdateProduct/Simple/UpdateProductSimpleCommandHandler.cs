@@ -5,6 +5,7 @@ using Catalogs.Domain.Repositories;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using Catalogs.Domain.Entities;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.UpdateProduct.Simple;
 
@@ -12,11 +13,13 @@ public class UpdateProductSimpleCommandHandler : IRequestHandler<UpdateProductSi
 {
     private readonly IProductRepository _repo;
     private readonly ILogger<UpdateProductSimpleCommandHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateProductSimpleCommandHandler(IProductRepository repo, ILogger<UpdateProductSimpleCommandHandler> logger)
+    public UpdateProductSimpleCommandHandler(IProductRepository repo, ILogger<UpdateProductSimpleCommandHandler> logger, IUnitOfWork unitOfWork)
     {
         _repo = repo;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(UpdateProductSimpleCommand request, CancellationToken cancellationToken)
@@ -60,6 +63,7 @@ public class UpdateProductSimpleCommandHandler : IRequestHandler<UpdateProductSi
             };
 
             var result = await _repo.UpdateAsync(request.Id, product);
+            await _unitOfWork.SaveChangesAsync();
             if (!result)
             {
                 return Result<bool>.Fail(

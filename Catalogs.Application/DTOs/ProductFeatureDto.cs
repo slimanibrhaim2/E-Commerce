@@ -1,6 +1,6 @@
 namespace Catalogs.Application.DTOs;
 
-public class ProductFeatureDto
+public class ProductFeatureDTO
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

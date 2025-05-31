@@ -2,16 +2,19 @@ using MediatR;
 using Core.Result;
 using Catalogs.Application.DTOs;
 using Catalogs.Domain.Repositories;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.AddFeature;
 
 public class AddFeatureCommandHandler : IRequestHandler<AddFeatureCommand, Result<Guid>>
 {
     private readonly IFeatureRepository _featureRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AddFeatureCommandHandler(IFeatureRepository featureRepository)
+    public AddFeatureCommandHandler(IFeatureRepository featureRepository, IUnitOfWork unitOfWork)
     {
         _featureRepository = featureRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<Guid>> Handle(AddFeatureCommand request, CancellationToken cancellationToken)
@@ -51,6 +54,8 @@ public class AddFeatureCommandHandler : IRequestHandler<AddFeatureCommand, Resul
             {
                 return Result<Guid>.Fail(message: "Entity not found", errorType: "FeatureNotFound", resultStatus: ResultStatus.NotFound);
             }
+
+            await _unitOfWork.SaveChangesAsync();
 
             return Result<Guid>.Ok(data: featureId.Value,
                 message: "تم إضافة الميزة بنجاح",

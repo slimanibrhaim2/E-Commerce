@@ -4,6 +4,7 @@ using Catalogs.Application.DTOs;
 using Catalogs.Domain.Entities;
 using Catalogs.Domain.Repositories;
 using Microsoft.Extensions.Logging;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.CreateProduct.Simple;
 
@@ -12,12 +13,14 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
     private readonly IProductRepository _repo;
     private readonly ILogger<CreateProductCommandHandler> _logger;
     private readonly IBaseItemRepository _baseItemRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateProductCommandHandler(IProductRepository repo, ILogger<CreateProductCommandHandler> logger, IBaseItemRepository baseItemRepository)
+    public CreateProductCommandHandler(IProductRepository repo, ILogger<CreateProductCommandHandler> logger, IBaseItemRepository baseItemRepository, IUnitOfWork unitOfWork)
     {
         _repo = repo;
         _logger = logger;
         _baseItemRepository = baseItemRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<Guid>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
@@ -59,7 +62,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
                 IsAvailable = request.ProductDto.IsAvailable
             };
             await _baseItemRepository.AddAsync(baseItem);
-            // If you use a unit of work, call SaveChangesAsync here
+            await _unitOfWork.SaveChangesAsync();
 
             // 2. Create product with BaseItemId as FK (if applicable)
             var product = new Product
@@ -79,6 +82,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
             // If Product has a BaseItemId property, set it here. If not, ensure mapping is correct in the repo/mapper.
             // product.BaseItemId = baseItem.Id; // Uncomment if such property exists
             await _repo.AddAsync(product);
+            await _unitOfWork.SaveChangesAsync();
 
             if (product.Id == Guid.Empty)
                 return Result<Guid>.Fail(

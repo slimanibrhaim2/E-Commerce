@@ -8,7 +8,7 @@ using Core.Pagination;
 
 namespace Catalogs.Application.Queries.GetServicesByPriceRange;
 
-public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesByPriceRangeQuery, Result<PaginatedResult<ServiceDto>>>
+public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesByPriceRangeQuery, Result<PaginatedResult<ServiceDTO>>>
 {
     private readonly IServiceRepository _repo;
     private readonly ILogger<GetServicesByPriceRangeQueryHandler> _logger;
@@ -19,18 +19,18 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
         _logger = logger;
     }
 
-    public async Task<Result<PaginatedResult<ServiceDto>>> Handle(GetServicesByPriceRangeQuery request, CancellationToken cancellationToken)
+    public async Task<Result<PaginatedResult<ServiceDTO>>> Handle(GetServicesByPriceRangeQuery request, CancellationToken cancellationToken)
     {
         try
         {
             if (request.MinPrice > request.MaxPrice)
-                return Result<PaginatedResult<ServiceDto>>.Fail(
+                return Result<PaginatedResult<ServiceDTO>>.Fail(
                     message: "السعر الأدنى يجب أن يكون أقل من السعر الأقصى",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
 
             var services = await _repo.GetByPriceRange(request.MinPrice, request.MaxPrice);
-            var serviceDtos = services.Select(s => new ServiceDto
+            var serviceDtos = services.Select(s => new ServiceDTO
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -44,13 +44,13 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
             }).ToList();
             var totalCount = serviceDtos.Count;
 
-            var paginatedServices = PaginatedResult<ServiceDto>.Create(
+            var paginatedServices = PaginatedResult<ServiceDTO>.Create(
                 data: serviceDtos,
                 pageNumber: request.PageNumber,
                 pageSize: request.PageSize,
                 totalCount: totalCount);
 
-            return Result<PaginatedResult<ServiceDto>>.Ok(
+            return Result<PaginatedResult<ServiceDTO>>.Ok(
                 data: paginatedServices,
                 message: "تم جلب الخدمات بنجاح",
                 resultStatus: ResultStatus.Success);
@@ -58,7 +58,7 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error retrieving services in price range {MinPrice} - {MaxPrice}", request.MinPrice, request.MaxPrice);
-            return Result<PaginatedResult<ServiceDto>>.Fail(
+            return Result<PaginatedResult<ServiceDTO>>.Fail(
                 message: "حدث خطأ أثناء جلب الخدمات",
                 errorType: "GetServicesByPriceRangeFailed",
                 resultStatus: ResultStatus.Failed,

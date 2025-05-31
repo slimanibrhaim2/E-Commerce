@@ -3,16 +3,19 @@ using Core.Result;
 using Catalogs.Application.DTOs;
 using Catalogs.Domain.Entities;
 using Catalogs.Domain.Repositories;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.CreateMediaType;
 
 public class CreateMediaTypeCommandHandler : IRequestHandler<CreateMediaTypeCommand, Result<Guid>>
 {
     private readonly IMediaTypeRepository _mediaTypeRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateMediaTypeCommandHandler(IMediaTypeRepository mediaTypeRepository)
+    public CreateMediaTypeCommandHandler(IMediaTypeRepository mediaTypeRepository, IUnitOfWork unitOfWork)
     {
         _mediaTypeRepository = mediaTypeRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<Guid>> Handle(CreateMediaTypeCommand request, CancellationToken cancellationToken)
@@ -41,6 +44,7 @@ public class CreateMediaTypeCommandHandler : IRequestHandler<CreateMediaTypeComm
         };
 
         var id = await _mediaTypeRepository.AddAsync(mediaType);
+        await _unitOfWork.SaveChangesAsync();
         return Result<Guid>.Ok(
             data: id,
             message: "تم إنشاء نوع الوسائط بنجاح",
