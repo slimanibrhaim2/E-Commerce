@@ -3,16 +3,19 @@ using Core.Result;
 using Catalogs.Application.DTOs;
 using Catalogs.Domain.Entities;
 using Catalogs.Domain.Repositories;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.CreateCategory;
 
 public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, Result<Guid>>
 {
     private readonly ICategoryRepository _categoryRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateCategoryCommandHandler(ICategoryRepository categoryRepository)
+    public CreateCategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
     {
         _categoryRepository = categoryRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<Guid>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
@@ -37,6 +40,7 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
             };
 
             var categoryId = await _categoryRepository.AddCategoryAsync(category);
+            await _unitOfWork.SaveChangesAsync();
 
             return Result<Guid>.Ok(
                 data: categoryId,

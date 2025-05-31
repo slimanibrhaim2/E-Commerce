@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.Pagination;
 
 namespace Catalogs.Application.Queries.GetAllBaseItemsByUserId;
 
-public class GetAllBaseItemsByUserIdQueryHandler : IRequestHandler<GetAllBaseItemsByUserIdQuery, Result<List<BaseItemDTO>>>
+public class GetAllBaseItemsByUserIdQueryHandler : IRequestHandler<GetAllBaseItemsByUserIdQuery, Result<PaginatedResult<BaseItemDTO>>>
 {
     private readonly IBaseItemRepository _repository;
 
@@ -18,12 +19,16 @@ public class GetAllBaseItemsByUserIdQueryHandler : IRequestHandler<GetAllBaseIte
         _repository = repository;
     }
 
-    public async Task<Result<List<BaseItemDTO>>> Handle(GetAllBaseItemsByUserIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<PaginatedResult<BaseItemDTO>>> Handle(GetAllBaseItemsByUserIdQuery request, CancellationToken cancellationToken)
     {
         try
         {
-            var entities = await _repository.GetAllByUserIdAsync(request.UserId);
-            var dtos = entities.Select(entity => new BaseItemDTO
+            var entities = (await _repository.GetAllByUserIdAsync(request.UserId)).ToList();
+            var totalCount = entities.Count;
+            var pageNumber = request.Parameters.PageNumber;
+            var pageSize = request.Parameters.PageSize;
+            var pagedEntities = entities.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            var dtos = pagedEntities.Select(entity => new BaseItemDTO
             {
                 Id = entity.Id,
                 Name = entity.Name,
@@ -33,14 +38,15 @@ public class GetAllBaseItemsByUserIdQueryHandler : IRequestHandler<GetAllBaseIte
                 CategoryId = entity.CategoryId,
                 UserId = entity.UserId
             }).ToList();
-            return Result<List<BaseItemDTO>>.Ok(
-                data: dtos,
+            var paginated = PaginatedResult<BaseItemDTO>.Create(dtos, pageNumber, pageSize, totalCount);
+            return Result<PaginatedResult<BaseItemDTO>>.Ok(
+                data: paginated,
                 message: "Base items retrieved successfully",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
-            return Result<List<BaseItemDTO>>.Fail(
+            return Result<PaginatedResult<BaseItemDTO>>.Fail(
                 message: $"Failed to get base items: {ex.Message}",
                 errorType: "GetAllBaseItemsByUserIdFailed",
                 resultStatus: ResultStatus.Failed,

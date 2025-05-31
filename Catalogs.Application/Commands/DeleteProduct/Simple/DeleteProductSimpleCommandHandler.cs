@@ -2,6 +2,7 @@ using MediatR;
 using Core.Result;
 using Catalogs.Domain.Repositories;
 using Microsoft.Extensions.Logging;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.DeleteProduct.Simple;
 
@@ -9,11 +10,13 @@ public class DeleteProductSimpleCommandHandler : IRequestHandler<DeleteProductSi
 {
     private readonly IProductRepository _repo;
     private readonly ILogger<DeleteProductSimpleCommandHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteProductSimpleCommandHandler(IProductRepository repo, ILogger<DeleteProductSimpleCommandHandler> logger)
+    public DeleteProductSimpleCommandHandler(IProductRepository repo, ILogger<DeleteProductSimpleCommandHandler> logger, IUnitOfWork unitOfWork)
     {
         _repo = repo;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(DeleteProductSimpleCommand request, CancellationToken cancellationToken)
@@ -37,6 +40,7 @@ public class DeleteProductSimpleCommandHandler : IRequestHandler<DeleteProductSi
                     resultStatus: ResultStatus.NotFound);
 
             _repo.Remove(product);
+            await _unitOfWork.SaveChangesAsync();
 
             return Result<bool>.Ok(
                 data: true,

@@ -155,6 +155,13 @@ C:\Users\ASUS\source\repos\E-Commerce\WebApi\bin\Debug\net8.0\tr\Microsoft.CodeA
 C:\Users\ASUS\source\repos\E-Commerce\WebApi\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\ASUS\source\repos\E-Commerce\WebApi\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\ASUS\source\repos\E-Commerce\WebApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.csproj.AssemblyReference.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.AssemblyInfoInputs.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.AssemblyInfo.cs
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.csproj.CoreCompileInputs.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.sourcelink.json
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\appsettings.json
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\WebApi.staticwebassets.endpoints.json
@@ -169,6 +176,12 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Humanizer.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\MediatR.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\System.Web.Mvc.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\System.Web.Razor.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\System.Web.Helpers.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\System.Web.WebPages.Deployment.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\System.Web.WebPages.Razor.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\System.Web.WebPages.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
@@ -197,6 +210,7 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Microsoft.OpenApi.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Microsoft.Web.Infrastructure.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
@@ -294,6 +308,11 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Communication.Presentation.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Core.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Infrastructure.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Application.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Domain.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Infrastructure.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Infrastructure.Mapping.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Presentation.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Application.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Domain.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Infrastructure.dll
@@ -303,6 +322,8 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Communication.Infrastructure.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Communication.Presentation.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Infrastructure.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Infrastructure.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Presentation.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Infrastructure.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Presentation.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Catalogs.Presentation.pdb
@@ -313,17 +334,12 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Communication.Domain.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Communication.Infrastructure.Mapping.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Core.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Application.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Domain.pdb
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Shoppings.Infrastructure.Mapping.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Application.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Domain.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Users.Infrastructure.Mapping.pdb
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.csproj.AssemblyReference.cache
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.AssemblyInfoInputs.cache
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.AssemblyInfo.cs
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.csproj.CoreCompileInputs.cache
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.sourcelink.json
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\scopedcss\bundle\WebApi.styles.css
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\staticwebassets.development.json
@@ -341,3 +357,5 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.genruntimeconfig.cache
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\ref\WebApi.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\FuzzySharp.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\WebApi.MvcApplicationPartsAssemblyInfo.cs

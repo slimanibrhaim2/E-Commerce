@@ -13,6 +13,7 @@ using Users.Infrastructure.Mapping;
 using Address = Users.Domain.Entities.Address;
 using Follower = Users.Domain.Entities.Follower;
 using User = Users.Domain.Entities.User;
+using FuzzySharp;
 
 namespace Users.Infrastructure.Repositories;
 
@@ -89,4 +90,22 @@ public class UserRepository : BaseRepository<User, UserDAO>, IUserRepository
 
     public Task<User?> GetByAddressId(Guid addressId) => Task.FromResult<User?>(null);
     public Task<User?> GetByFollowerId(Guid followerId) => Task.FromResult<User?>(null);
+
+    public async Task<IEnumerable<User>> GetUsersByNameAsync(string name)
+    {
+        var userDaos = await _dbSet.Where(u => u.DeletedAt == null).ToListAsync();
+        var results = userDaos
+            .Select(u => new {
+                User = _userMapper.Map(u),
+                Score = new[] {
+                    Fuzz.Ratio(u.FirstName, name),
+                    Fuzz.Ratio(u.LastName, name),
+                    Fuzz.Ratio((u.FirstName + " " + u.LastName).Trim(), name)
+                }.Max()
+            })
+            .OrderByDescending(x => x.Score)
+            .Where(x => x.Score > 60)
+            .Select(x => x.User);
+        return results;
+    }
 }

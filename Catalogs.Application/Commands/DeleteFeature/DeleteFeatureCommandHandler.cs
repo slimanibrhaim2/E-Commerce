@@ -1,16 +1,19 @@
 using MediatR;
 using Core.Result;
 using Catalogs.Domain.Repositories;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.DeleteFeature;
 
 public class DeleteFeatureCommandHandler : IRequestHandler<DeleteFeatureCommand, Result<bool>>
 {
     private readonly IFeatureRepository _featureRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteFeatureCommandHandler(IFeatureRepository featureRepository)
+    public DeleteFeatureCommandHandler(IFeatureRepository featureRepository, IUnitOfWork unitOfWork)
     {
         _featureRepository = featureRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(DeleteFeatureCommand request, CancellationToken cancellationToken)
@@ -36,6 +39,7 @@ public class DeleteFeatureCommandHandler : IRequestHandler<DeleteFeatureCommand,
             }
 
             var success = await _featureRepository.DeleteFeatureAsync(request.Id);
+            await _unitOfWork.SaveChangesAsync();
             if (!success)
             {
                 return Result<bool>.Fail(message: "Failed to delete feature", 

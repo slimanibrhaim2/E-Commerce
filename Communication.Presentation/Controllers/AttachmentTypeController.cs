@@ -8,6 +8,7 @@ using Communication.Application.Commands.UpdateAttachmentType;
 using Communication.Application.Commands.DeleteAttachmentType;
 using Communication.Application.Queries.GetAttachmentTypeById;
 using Communication.Application.Queries.GetAllAttachmentTypes;
+using Core.Pagination;
 
 namespace Communication.Presentation.Controllers
 {
@@ -45,9 +46,10 @@ namespace Communication.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Result<List<AttachmentTypeDTO>>>> GetAll()
+        public async Task<ActionResult<Result<PaginatedResult<AttachmentTypeDTO>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllAttachmentTypesQuery();
+            var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllAttachmentTypesQuery(parameters);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

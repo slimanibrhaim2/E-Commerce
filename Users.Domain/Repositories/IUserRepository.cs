@@ -14,5 +14,7 @@ namespace Users.Domain.Repositories
         Task<User?> GetByIdWithDetails(Guid id);
 
         Task<User?> GetByAddressId(Guid addressId);
+
+        Task<IEnumerable<User>> GetUsersByNameAsync(string name);
     }
 }

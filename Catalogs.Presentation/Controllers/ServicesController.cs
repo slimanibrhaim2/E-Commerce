@@ -25,7 +25,7 @@ public class ServicesController : ControllerBase
         => _mediator = mediator;
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] ServiceDto dto)
+    public async Task<IActionResult> Create([FromBody] ServiceDTO dto)
     {
         var result = await _mediator.Send(new CreateServiceCommand(dto));
         if (!result.Success || result.Data == Guid.Empty)
@@ -63,7 +63,7 @@ public class ServicesController : ControllerBase
                 message: "فشل في جلب الخدمات",
                 errorType: "GetAllFailed",
                 resultStatus: ResultStatus.Failed));
-        return Ok(Result<PaginatedResult<ServiceDto>>.Ok(
+        return Ok(Result<PaginatedResult<ServiceDTO>>.Ok(
             data: result.Data,
             message: "تم جلب الخدمات بنجاح",
             resultStatus: ResultStatus.Success));
@@ -111,7 +111,7 @@ public class ServicesController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] ServiceDto dto)
+    public async Task<IActionResult> Update(Guid id, [FromBody] ServiceDTO dto)
     {
         var result = await _mediator.Send(new UpdateServiceSimpleCommand(id, dto));
         if (!result.Success)

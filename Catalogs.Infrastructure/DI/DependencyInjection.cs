@@ -6,6 +6,7 @@ using Infrastructure.Common;
 using Catalogs.Infrastructure.Mapping.Mappers;
 using Infrastructure.Models;
 using Catalogs.Domain.Entities;
+using Core.Interfaces;
 
 namespace Catalogs.Infrastructure.DI
 {
@@ -39,6 +40,9 @@ namespace Catalogs.Infrastructure.DI
             services.AddScoped<IMapper<FavoriteDAO, Favorite>, FavoriteMapper>();
             services.AddScoped<IMapper<CouponDAO, Coupon>, CouponMapper>();
             services.AddScoped<IMapper<MediaTypeDAO, MediaType>, MediaTypeMapper>();
+
+            // Register UnitOfWork
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

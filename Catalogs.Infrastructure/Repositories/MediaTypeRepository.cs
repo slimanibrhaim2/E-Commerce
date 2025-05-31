@@ -23,7 +23,6 @@ namespace Catalogs.Infrastructure.Repositories
             if (dao == null) return false;
             dao.Name = mediaType.Name;
             dao.UpdatedAt = DateTime.UtcNow;
-            await _ctx.SaveChangesAsync();
             return true;
         }
 
@@ -32,7 +31,6 @@ namespace Catalogs.Infrastructure.Repositories
             var dao = _ctx.MediaTypes.FirstOrDefault(mt => mt.Id == id && mt.DeletedAt == null);
             if (dao == null) return false;
             dao.DeletedAt = DateTime.UtcNow;
-            await _ctx.SaveChangesAsync();
             return true;
         }
 
@@ -46,7 +44,6 @@ namespace Catalogs.Infrastructure.Repositories
                 UpdatedAt = DateTime.UtcNow
             };
             _ctx.MediaTypes.Add(dao);
-            await _ctx.SaveChangesAsync();
             return dao.Id;
         }
     }

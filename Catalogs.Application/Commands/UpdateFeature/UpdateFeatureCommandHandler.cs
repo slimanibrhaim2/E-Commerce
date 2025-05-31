@@ -2,16 +2,19 @@ using MediatR;
 using Core.Result;
 using Catalogs.Application.DTOs;
 using Catalogs.Domain.Repositories;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.UpdateFeature;
 
 public class UpdateFeatureCommandHandler : IRequestHandler<UpdateFeatureCommand, Result<bool>>
 {
     private readonly IFeatureRepository _featureRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateFeatureCommandHandler(IFeatureRepository featureRepository)
+    public UpdateFeatureCommandHandler(IFeatureRepository featureRepository, IUnitOfWork unitOfWork)
     {
         _featureRepository = featureRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(UpdateFeatureCommand request, CancellationToken cancellationToken)
@@ -38,6 +41,7 @@ public class UpdateFeatureCommandHandler : IRequestHandler<UpdateFeatureCommand,
                 request.Id,
                 request.Feature.Name,
                 request.Feature.Value);
+            await _unitOfWork.SaveChangesAsync();
 
             if (!updated)
             {

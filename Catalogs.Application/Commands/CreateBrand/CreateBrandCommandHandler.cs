@@ -3,6 +3,7 @@ using Core.Result;
 using Catalogs.Application.DTOs;
 using Catalogs.Domain.Entities;
 using Catalogs.Domain.Repositories;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.CreateBrand;
 
@@ -11,15 +12,18 @@ public class CreateBrandCommandHandler : IRequestHandler<CreateBrandCommand, Res
     private readonly IBrandRepository _brandRepository;
     private readonly IProductRepository _productRepository;
     private readonly IServiceRepository _serviceRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
     public CreateBrandCommandHandler(
         IBrandRepository brandRepository,
         IProductRepository productRepository,
-        IServiceRepository serviceRepository)
+        IServiceRepository serviceRepository,
+        IUnitOfWork unitOfWork)
     {
         _brandRepository = brandRepository;
         _productRepository = productRepository;
         _serviceRepository = serviceRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<Guid>> Handle(CreateBrandCommand request, CancellationToken cancellationToken)
@@ -45,9 +49,8 @@ public class CreateBrandCommandHandler : IRequestHandler<CreateBrandCommand, Res
 
             // Add the brand through Brand repository
             var brandId = await _brandRepository.AddBrandAsync(brand);
+            await _unitOfWork.SaveChangesAsync();
 
-            
-            
             return Result<Guid>.Ok(
                 data: brandId,
                 message: "تم إنشاء العلامة التجارية بنجاح",

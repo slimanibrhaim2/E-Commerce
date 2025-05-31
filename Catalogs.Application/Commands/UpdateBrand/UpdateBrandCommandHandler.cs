@@ -2,17 +2,21 @@ using Catalogs.Domain.Repositories;
 using Core.Result;
 using MediatR;
 using Catalogs.Domain.Entities;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.UpdateBrand;
 
 public class UpdateBrandCommandHandler : IRequestHandler<UpdateBrandCommand, Result<bool>>
 {
     private readonly IBrandRepository _brandRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
     public UpdateBrandCommandHandler(
-        IBrandRepository brandRepository)
+        IBrandRepository brandRepository,
+        IUnitOfWork unitOfWork)
     {
         _brandRepository = brandRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(UpdateBrandCommand request, CancellationToken cancellationToken)
@@ -45,6 +49,7 @@ public class UpdateBrandCommandHandler : IRequestHandler<UpdateBrandCommand, Res
 
             // Update the brand using Brand repository
             var result = await _brandRepository.UpdateBrandAsync(request.Id, brand);
+            await _unitOfWork.SaveChangesAsync();
 
             if (!result)
             {

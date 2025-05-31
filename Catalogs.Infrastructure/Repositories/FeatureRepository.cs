@@ -24,7 +24,6 @@ namespace Catalogs.Infrastructure.Repositories
             {
                 var feature = new ProductFeatureDAO { Id = Guid.NewGuid(), ProductId = entityId, Name = name, Value = value };
                 _context.ProductFeatures.Add(feature);
-                await _context.SaveChangesAsync();
                 return feature.Id;
             }
             // Try to add as ServiceFeature
@@ -33,7 +32,6 @@ namespace Catalogs.Infrastructure.Repositories
             {
                 var feature = new ServiceFeatureDAO { Id = Guid.NewGuid(), ServiceId = entityId, Name = name, Value = value };
                 _context.ServiceFeatures.Add(feature);
-                await _context.SaveChangesAsync();
                 return feature.Id;
             }
             return null;
@@ -46,7 +44,6 @@ namespace Catalogs.Infrastructure.Repositories
             {
                 productFeature.Name = name;
                 productFeature.Value = value;
-                await _context.SaveChangesAsync();
                 return true;
             }
             var serviceFeature = await _context.ServiceFeatures.FindAsync(featureId);
@@ -54,7 +51,6 @@ namespace Catalogs.Infrastructure.Repositories
             {
                 serviceFeature.Name = name;
                 serviceFeature.Value = value;
-                await _context.SaveChangesAsync();
                 return true;
             }
             return false;
@@ -66,14 +62,12 @@ namespace Catalogs.Infrastructure.Repositories
             if (productFeature != null)
             {
                 _context.ProductFeatures.Remove(productFeature);
-                await _context.SaveChangesAsync();
                 return true;
             }
             var serviceFeature = await _context.ServiceFeatures.FindAsync(featureId);
             if (serviceFeature != null)
             {
                 _context.ServiceFeatures.Remove(serviceFeature);
-                await _context.SaveChangesAsync();
                 return true;
             }
             return false;

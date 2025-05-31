@@ -4,6 +4,7 @@ using Catalogs.Application.DTOs;
 using Catalogs.Domain.Entities;
 using Catalogs.Domain.Repositories;
 using Microsoft.Extensions.Logging;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.CreateService.Simple;
 
@@ -12,12 +13,14 @@ public class CreateServiceCommandHandler : IRequestHandler<CreateServiceCommand,
     private readonly IServiceRepository _repo;
     private readonly ILogger<CreateServiceCommandHandler> _logger;
     private readonly IBaseItemRepository _baseItemRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CreateServiceCommandHandler(IServiceRepository repo, ILogger<CreateServiceCommandHandler> logger, IBaseItemRepository baseItemRepository)
+    public CreateServiceCommandHandler(IServiceRepository repo, ILogger<CreateServiceCommandHandler> logger, IBaseItemRepository baseItemRepository, IUnitOfWork unitOfWork)
     {
         _repo = repo;
         _logger = logger;
         _baseItemRepository = baseItemRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<Guid>> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
@@ -65,7 +68,7 @@ public class CreateServiceCommandHandler : IRequestHandler<CreateServiceCommand,
                 IsAvailable = request.ServiceDto.IsAvailable
             };
             await _baseItemRepository.AddAsync(baseItem);
-            // If you use a unit of work, call SaveChangesAsync here
+            await _unitOfWork.SaveChangesAsync();
 
             // 2. Create service with BaseItemId as FK (if applicable)
             Service service = new Service
@@ -85,6 +88,7 @@ public class CreateServiceCommandHandler : IRequestHandler<CreateServiceCommand,
             // If Service has a BaseItemId property, set it here. If not, ensure mapping is correct in the repo/mapper.
             // service.BaseItemId = baseItem.Id; // Uncomment if such property exists
             await _repo.AddAsync(service);
+            await _unitOfWork.SaveChangesAsync();
 
             return Result<Guid>.Ok(
                 data: service.Id,

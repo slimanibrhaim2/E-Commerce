@@ -9,6 +9,7 @@ using Communication.Application.Commands.DeleteComment;
 using Communication.Application.Queries.GetCommentById;
 using Communication.Application.Queries.GetAllComments;
 using Communication.Application.Queries.GetAllCommentsByBaseItemId;
+using Core.Pagination;
 
 namespace Communication.Presentation.Controllers
 {
@@ -46,9 +47,10 @@ namespace Communication.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Result<List<CommentDTO>>>> GetAll()
+        public async Task<ActionResult<Result<PaginatedResult<CommentDTO>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllCommentsQuery();
+            var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllCommentsQuery(parameters);
             var result = await _mediator.Send(query);
             return Ok(result);
         }

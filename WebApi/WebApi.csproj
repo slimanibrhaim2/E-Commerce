@@ -20,6 +20,8 @@
     <ProjectReference Include="..\Communication.Infrastructure\Communication.Infrastructure.csproj" />
     <ProjectReference Include="..\Communication.Presentation\Communication.Presentation.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Shoppings.Infrastructure\Shoppings.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shoppings.Presentation\Shoppings.Presentation.csproj" />
     <ProjectReference Include="..\User.Infrastructure\Users.Infrastructure.csproj" />
     <ProjectReference Include="..\Users.Presentation\Users.Presentation.csproj" />
     <ProjectReference Include="..\Catalogs.Presentation\Catalogs.Presentation.csproj" />

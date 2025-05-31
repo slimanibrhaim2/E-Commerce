@@ -7,7 +7,7 @@ public partial class OrderActivityDAO
 {
     public Guid Id { get; set; }
 
-    public string Status { get; set; } = null!;
+    public Guid StatusId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 

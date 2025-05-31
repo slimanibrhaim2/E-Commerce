@@ -28,10 +28,10 @@ namespace Users.Application.Commands.UpdateUser
         {
             try
             {
-                _logger.LogInformation("Attempting to update user with ID: {UserId}", request.User.Id);
+                _logger.LogInformation("Attempting to update user with ID: {UserId}", request.Id);
 
                 // Validation
-                if (request.User.Id == Guid.Empty)
+                if (request.Id == Guid.Empty)
                 {
                     _logger.LogWarning("Invalid UserId");
                     return Result.Fail(
@@ -97,10 +97,10 @@ namespace Users.Application.Commands.UpdateUser
                 }
 
                 // Load user
-                var user = await _repo.GetByIdWithDetails(request.User.Id);
+                var user = await _repo.GetByIdWithDetails(request.Id);
                 if (user is null)
                 {
-                    _logger.LogWarning("User not found with ID: {UserId}", request.User.Id);
+                    _logger.LogWarning("User not found with ID: {UserId}", request.Id);
                     return Result.Fail(
                         message: "المستخدم غير موجود",
                         errorType: "NotFound",
@@ -142,7 +142,7 @@ namespace Users.Application.Commands.UpdateUser
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating user with ID: {UserId}", request.User.Id);
+                _logger.LogError(ex, "Error updating user with ID: {UserId}", request.Id);
                 return Result.Fail(
                     message: "فشل في تحديث بيانات المستخدم",
                     errorType: "UpdateFailed",
@@ -166,7 +166,7 @@ namespace Users.Application.Commands.UpdateUser
 
         private bool IsValidPhoneNumber(string phoneNumber)
         {
-            // Basic validation - can be enhanced based on your requirements
+            
             return !string.IsNullOrWhiteSpace(phoneNumber) && phoneNumber.Length >= 10;
         }
     }

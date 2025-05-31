@@ -31,7 +31,6 @@ public class ProductFeatureRepository : BaseRepository<ProductFeature, ProductFe
             DeletedAt = null
         };
         _context.ProductFeatures.Add(feature);
-        await _context.SaveChangesAsync();
         return feature.Id;
     }
 
@@ -42,7 +41,6 @@ public class ProductFeatureRepository : BaseRepository<ProductFeature, ProductFe
         feature.Name = name;
         feature.Value = value;
         feature.UpdatedAt = DateTime.UtcNow;
-        await _context.SaveChangesAsync();
         return true;
     }
 
@@ -51,7 +49,6 @@ public class ProductFeatureRepository : BaseRepository<ProductFeature, ProductFe
         var feature = await _context.ProductFeatures.FirstOrDefaultAsync(f => f.Id == featureId && f.DeletedAt == null);
         if (feature == null) return false;
         feature.DeletedAt = DateTime.UtcNow;
-        await _context.SaveChangesAsync();
         return true;
     }
 

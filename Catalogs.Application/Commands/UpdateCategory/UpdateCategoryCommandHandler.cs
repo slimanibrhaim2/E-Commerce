@@ -3,16 +3,19 @@ using Core.Result;
 using MediatR;
 using Catalogs.Domain.Entities;
 using Catalogs.Application.DTOs;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.UpdateCategory;
 
 public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, Result<bool>>
 {
     private readonly ICategoryRepository _categoryRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateCategoryCommandHandler(ICategoryRepository categoryRepository)
+    public UpdateCategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
     {
         _categoryRepository = categoryRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
@@ -47,17 +50,10 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
 
             // Update the category using Category repository
             var result = await _categoryRepository.UpdateCategoryAsync(request.Id, category);
-
-            if (!result)
-            {
-                return Result<bool>.Fail(
-                    message: "فشل في تحديث التصنيف",
-                    errorType: "UpdateCategoryFailed",
-                    resultStatus: ResultStatus.Failed);
-            }
+            await _unitOfWork.SaveChangesAsync();
 
             return Result<bool>.Ok(
-                data: true,
+                data: result,
                 message: "تم تحديث التصنيف بنجاح",
                 resultStatus: ResultStatus.Success);
         }

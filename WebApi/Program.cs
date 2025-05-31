@@ -10,18 +10,27 @@ using Catalogs.Infrastructure.DI;
 using Communication.Application.DI;
 using Communication.Infrastructure.DI;
 using Communication.Presentation.DI;
+using Shoppings.Application.DI;
+using Shoppings.Infrastructure.DI;
+using Shoppings.Presentation.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add logging
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 builder.Services.AddInfrastructure();
-builder.Services.AddApplication();
+builder.Services.AddUsersApplication();
 builder.Services.AddUserInfrastructure();
 builder.Services.AddUserPresentation();
 builder.Services.AddCatalogsInfrastructure(); 
 builder.Services.AddCatalogPresentation(); 
 builder.Services.AddCommunicationApplicationServices();
 builder.Services.AddCommunicationInfrastructure();
-builder.Services.AddCommunicationPresentation();
+builder.Services.AddShoppingsPresentation();
+builder.Services.AddShoppingsApplication();
+builder.Services.AddShoppingsInfrastructure();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

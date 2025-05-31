@@ -15,4 +15,6 @@ public interface IServiceRepository : IRepository<Service>
     Task<IEnumerable<Service>> GetByBrand(Guid brandId);
     Task<bool> AddBrandToServiceAsync(Guid serviceId, Guid brandId);
     Task<bool> RemoveBrandFromServiceAsync(Guid serviceId, Guid brandId);
+    Task<IEnumerable<Service>> GetServicesByUserIdAsync(Guid userId);
+    Task<IEnumerable<Service>> GetServicesByNameAsync(string name);
 } 

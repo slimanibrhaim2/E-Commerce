@@ -7,7 +7,7 @@ namespace Catalogs.Application.DI;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddCatalogsApplication(this IServiceCollection services)
     {
         // Register MediatR
         services.AddMediatR(cfg => {

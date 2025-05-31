@@ -2,6 +2,7 @@ using MediatR;
 using Core.Result;
 using Catalogs.Domain.Repositories;
 using Microsoft.Extensions.Logging;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.DeleteService.Simple;
 
@@ -9,11 +10,13 @@ public class DeleteServiceSimpleCommandHandler : IRequestHandler<DeleteServiceSi
 {
     private readonly IServiceRepository _repo;
     private readonly ILogger<DeleteServiceSimpleCommandHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteServiceSimpleCommandHandler(IServiceRepository repo, ILogger<DeleteServiceSimpleCommandHandler> logger)
+    public DeleteServiceSimpleCommandHandler(IServiceRepository repo, ILogger<DeleteServiceSimpleCommandHandler> logger, IUnitOfWork unitOfWork)
     {
         _repo = repo;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(DeleteServiceSimpleCommand request, CancellationToken cancellationToken)
@@ -37,6 +40,7 @@ public class DeleteServiceSimpleCommandHandler : IRequestHandler<DeleteServiceSi
                     resultStatus: ResultStatus.NotFound);
 
             _repo.Remove(service);
+            await _unitOfWork.SaveChangesAsync();
 
             return Result<bool>.Ok(
                 data: true,

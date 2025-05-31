@@ -3,16 +3,19 @@ using Core.Result;
 using Catalogs.Application.DTOs;
 using Catalogs.Domain.Entities;
 using Catalogs.Domain.Repositories;
+using Core.Interfaces;
 
 namespace Catalogs.Application.Commands.UpdateMediaType;
 
 public class UpdateMediaTypeCommandHandler : IRequestHandler<UpdateMediaTypeCommand, Result<bool>>
 {
     private readonly IMediaTypeRepository _mediaTypeRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateMediaTypeCommandHandler(IMediaTypeRepository mediaTypeRepository)
+    public UpdateMediaTypeCommandHandler(IMediaTypeRepository mediaTypeRepository, IUnitOfWork unitOfWork)
     {
         _mediaTypeRepository = mediaTypeRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(UpdateMediaTypeCommand request, CancellationToken cancellationToken)
@@ -48,6 +51,7 @@ public class UpdateMediaTypeCommandHandler : IRequestHandler<UpdateMediaTypeComm
         };
 
         var updated = await _mediaTypeRepository.UpdateAsync(mediaType);
+        await _unitOfWork.SaveChangesAsync();
         if (!updated)
         {
             return Result<bool>.Fail(

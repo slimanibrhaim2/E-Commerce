@@ -8,6 +8,7 @@ using Communication.Application.Queries.GetAllConversations;
 using Communication.Application.DTOs;
 using Microsoft.Extensions.Logging;
 using Core.Result;
+using Core.Pagination;
 
 namespace Communication.Presentation.Controllers
 {
@@ -25,9 +26,10 @@ namespace Communication.Presentation.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public async Task<ActionResult<Result<List<ConversationDTO>>>> GetAllByUser(Guid userId)
+        public async Task<ActionResult<Result<PaginatedResult<ConversationDTO>>>> GetAllByUser(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var query = new GetAllConversationsQuery(userId);
+            var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllConversationsQuery(userId, parameters);
             var result = await _mediator.Send(query);
             return Ok(result);
         }
