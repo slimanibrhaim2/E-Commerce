@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddUsersApplication();
 builder.Services.AddUserInfrastructure();
 builder.Services.AddUserPresentation();
