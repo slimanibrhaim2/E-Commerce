@@ -3,6 +3,7 @@ using Infrastructure.Common;
 using Infrastructure.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Infrastructure
