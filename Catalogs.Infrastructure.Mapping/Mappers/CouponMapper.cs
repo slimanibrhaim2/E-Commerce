@@ -11,12 +11,14 @@ public class CouponMapper : IMapper<CouponDAO, Coupon>
         if (source == null) return null;
         return new Coupon
         {
+            Id = source.Id,
+            UserId = source.UserId,
             Code = source.Code,
-            DiscountAmount = (decimal)source.DiscountAmount,
-            StartDate = source.CreatedAt,
-            EndDate = source.ExpiryDate,
-            IsActive = source.DeletedAt == null,
-            // Map other properties as needed
+            DiscountAmount = source.DiscountAmount,
+            ExpiryDate = source.ExpiryDate,
+            CreatedAt = source.CreatedAt,
+            UpdatedAt = source.UpdatedAt,
+            DeletedAt = source.DeletedAt
         };
     }
 
@@ -25,11 +27,14 @@ public class CouponMapper : IMapper<CouponDAO, Coupon>
         if (target == null) return null;
         return new CouponDAO
         {
+            Id = target.Id,
+            UserId = target.UserId,
             Code = target.Code,
-            DiscountAmount = (double)target.DiscountAmount,
-            CreatedAt = target.StartDate,
-            ExpiryDate = target.EndDate,
-            // Set IsActive/DeletedAt as needed
+            DiscountAmount = target.DiscountAmount,
+            ExpiryDate = target.ExpiryDate,
+            CreatedAt = target.CreatedAt,
+            UpdatedAt = target.UpdatedAt,
+            DeletedAt = target.DeletedAt
         };
     }
 } 

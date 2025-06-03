@@ -59,5 +59,13 @@ namespace Shoppings.Presentation.Controllers
             // Placeholder: Map to GetCartByIdQuery and send
             return Ok();
         }
+
+        [HttpPost("{id}/transact-to-order")]
+        public async Task<ActionResult<Result<Guid>>> TransactToOrder(Guid id)
+        {
+            var command = new Shoppings.Application.Commands.TransactCartToOrder.TransactCartToOrderCommand(id);
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 } 
