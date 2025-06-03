@@ -352,6 +352,18 @@ public partial class ECommerceContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Payment_Order");
 
+            entity.HasOne(d => d.PaymentMethod)
+                .WithMany(p => p.Payments)
+                .HasForeignKey(d => d.PaymentMethodId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Payment_PaymentMethod");
+
+            entity.HasOne(d => d.Status)
+                .WithMany(p => p.Payments)
+                .HasForeignKey(d => d.StatusId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Payment_PaymentStatus");
+
             entity.Property(e => e.Amount)
                 .HasPrecision(18, 2);
         });

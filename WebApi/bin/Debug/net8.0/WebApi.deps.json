@@ -15,6 +15,8 @@
           "Infrastructure": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "8.0.14",
           "Microsoft.Extensions.DependencyInjection": "9.0.5",
+          "Payments.Infrastructure": "1.0.0",
+          "Payments.Presentation": "1.0.0",
           "Shoppings.Infrastructure": "1.0.0",
           "Shoppings.Presentation": "1.0.0",
           "Swashbuckle.AspNetCore": "6.6.2",
@@ -1194,6 +1196,67 @@
           }
         }
       },
+      "Payments.Application/1.0.0": {
+        "dependencies": {
+          "MediatR": "12.5.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.5",
+          "Payments.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Payments.Application.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Payments.Domain/1.0.0": {
+        "dependencies": {
+          "Core": "1.0.0"
+        },
+        "runtime": {
+          "Payments.Domain.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Payments.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Payments.Application": "1.0.0",
+          "Payments.Infrastructure.Mapping": "1.0.0"
+        },
+        "runtime": {
+          "Payments.Infrastructure.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Payments.Infrastructure.Mapping/1.0.0": {
+        "dependencies": {
+          "Infrastructure": "1.0.0",
+          "Payments.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Payments.Infrastructure.Mapping.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Payments.Presentation/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNet.Mvc": "5.3.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
+          "Payments.Application": "1.0.0"
+        },
+        "runtime": {
+          "Payments.Presentation.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "Shoppings.Application/1.0.0": {
         "dependencies": {
           "MediatR": "12.5.0",
@@ -2007,6 +2070,31 @@
       "sha512": ""
     },
     "Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Payments.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Payments.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Payments.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Payments.Infrastructure.Mapping/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Payments.Presentation/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -35,7 +35,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("BrandDAOProductDAO", (string)null);
+                    b.ToTable("BrandDAOProductDAO");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.AddressDAO", b =>
@@ -135,7 +135,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AttachmentTypes", (string)null);
+                    b.ToTable("AttachmentTypes");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.BaseContentDAO", b =>
@@ -248,7 +248,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ServiceDAOId");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.CartDAO", b =>
@@ -495,7 +495,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DiscountTypes", (string)null);
+                    b.ToTable("DiscountTypes");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.FavoriteDAO", b =>
@@ -619,7 +619,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MediaTypes", (string)null);
+                    b.ToTable("MediaTypes");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.MessageDAO", b =>
@@ -713,10 +713,8 @@ namespace Infrastructure.Migrations
                     b.Property<Guid?>("OrderStatusDAOId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<Guid>("StatusId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -822,7 +820,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderStatuses", (string)null);
+                    b.ToTable("OrderStatuses");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.PaymentDAO", b =>
@@ -844,19 +842,11 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("PaymentMethodDAOId")
+                    b.Property<Guid>("PaymentMethodId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("PaymentStatusDAOId")
+                    b.Property<Guid>("StatusId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -865,9 +855,9 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("PaymentMethodDAOId");
+                    b.HasIndex("PaymentMethodId");
 
-                    b.HasIndex("PaymentStatusDAOId");
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Payment", (string)null);
                 });
@@ -899,7 +889,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentMethods", (string)null);
+                    b.ToTable("PaymentMethods");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.PaymentStatusDAO", b =>
@@ -923,7 +913,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentStatuses", (string)null);
+                    b.ToTable("PaymentStatuses");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.ProductDAO", b =>
@@ -1471,15 +1461,25 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Payment_Order");
 
-                    b.HasOne("Infrastructure.Models.PaymentMethodDAO", null)
+                    b.HasOne("Infrastructure.Models.PaymentMethodDAO", "PaymentMethod")
                         .WithMany("Payments")
-                        .HasForeignKey("PaymentMethodDAOId");
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_Payment_PaymentMethod");
 
-                    b.HasOne("Infrastructure.Models.PaymentStatusDAO", null)
+                    b.HasOne("Infrastructure.Models.PaymentStatusDAO", "Status")
                         .WithMany("Payments")
-                        .HasForeignKey("PaymentStatusDAOId");
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_Payment_PaymentStatus");
 
                     b.Navigation("Order");
+
+                    b.Navigation("PaymentMethod");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.ProductDAO", b =>

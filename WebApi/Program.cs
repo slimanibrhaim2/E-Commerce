@@ -13,6 +13,9 @@ using Communication.Presentation.DI;
 using Shoppings.Application.DI;
 using Shoppings.Infrastructure.DI;
 using Shoppings.Presentation.DI;
+using Payments.Presentation.DI;
+using Payments.Application.DI;
+using Payments.Infrastructure.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +34,9 @@ builder.Services.AddCommunicationInfrastructure();
 builder.Services.AddShoppingsPresentation();
 builder.Services.AddShoppingsApplication();
 builder.Services.AddShoppingsInfrastructure();
+builder.Services.AddPaymentsPresentation();
+builder.Services.AddPaymentsApplicationServices();
+builder.Services.AddPaymentInfrastructure();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

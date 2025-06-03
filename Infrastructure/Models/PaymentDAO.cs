@@ -11,9 +11,9 @@ public partial class PaymentDAO
 
     public decimal Amount { get; set; }
 
-    public string PaymentMethod { get; set; } = null!;
+    public Guid PaymentMethodId { get; set; }
 
-    public string Status { get; set; } = null!;
+    public Guid StatusId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
@@ -22,4 +22,8 @@ public partial class PaymentDAO
     public DateTime? DeletedAt { get; set; }
 
     public virtual OrderDAO Order { get; set; } = null!;
+
+    public virtual PaymentMethodDAO PaymentMethod { get; set; } = null!;
+
+    public virtual PaymentStatusDAO Status { get; set; } = null!;
 }
