@@ -86,17 +86,6 @@ public class AddFollowerByUserIdCommandHandler : IRequestHandler<AddFollowerByUs
             // Initialize Followees collection if null
             followingUser.Followees ??= new List<Follower>();
 
-            // Check if already following
-            if (followingUser.Followees.Exists(f => f.FollowerId == request.FollowerId))
-            {
-                _logger.LogWarning("User already following. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
-                    request.FollowerId, request.FollowingId);
-                return Result<Guid>.Fail(
-                    message: "المستخدم يتابع هذا المستخدم بالفعل",
-                    errorType: "ValidationError",
-                    resultStatus: ResultStatus.ValidationError);
-            }
-
             Follower follower = new Follower
             {
                 Id = Guid.NewGuid(),
