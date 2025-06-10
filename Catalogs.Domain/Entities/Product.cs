@@ -15,5 +15,7 @@ namespace Catalogs.Domain.Entities
         public decimal? DiscountPrice { get; set; }
         public bool HasDiscount => DiscountPrice.HasValue;
         public List<Coupon>? ApplicableCoupons { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

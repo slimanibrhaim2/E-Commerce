@@ -15,5 +15,7 @@ namespace Catalogs.Domain.Entities
         public new bool IsAvailable { get; set; } = true;
         public List<Coupon>? ApplicableCoupons { get; set; }
         public List<ServiceFeature>? Features { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

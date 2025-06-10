@@ -17,8 +17,8 @@ namespace Catalogs.Domain.Entities
         public Guid CategoryId { get;  set; }
         public Category Category { get;  set; }
         public Guid UserId { get;  set; }
-        public ICollection<Favorite> Favorites { get; private set; }
-        public ICollection<Media> Media { get; private set; }
+        public ICollection<Favorite> Favorites { get;  set; }
+        public ICollection<Media> Media { get;  set; }
 
         public BaseItem()
         {

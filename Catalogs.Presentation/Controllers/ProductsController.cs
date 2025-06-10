@@ -11,6 +11,8 @@ using Catalogs.Application.Commands.DeleteProduct.Aggregate;
 using Catalogs.Application.Commands.DeleteProduct.Simple;
 using Catalogs.Application.Commands.UpdateProduct.Aggregate;
 using Catalogs.Application.Commands.UpdateProduct.Simple;
+using Shared.Contracts.Queries;
+using Shared.Contracts.DTOs;
 
 namespace Catalogs.Presentation.Controllers;
 
@@ -135,5 +137,14 @@ public class ProductsController : ControllerBase
         return Ok(Result.Ok(
             message: "تم حذف المنتج بنجاح",
             resultStatus: ResultStatus.Success));
+    }
+
+    [HttpPost("by-ids")]
+    public async Task<IActionResult> GetByIds([FromBody] IEnumerable<Guid> ids)
+    {
+        if (ids == null || !ids.Any())
+            return BadRequest("قائمة المعرفات مطلوبة.");
+        var result = await _mediator.Send(new GetProductsByIdsQuery(ids));
+        return Ok(result);
     }
 } 

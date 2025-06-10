@@ -20,5 +20,7 @@ namespace Catalogs.Domain.Entities
         public MediaType MediaType { get; set; } = null!;
         public Guid BaseItemId { get; set; }
         public BaseItem BaseItem { get; set; } = null!;
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

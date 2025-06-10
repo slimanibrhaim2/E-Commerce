@@ -178,4 +178,14 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
             .Select(x => x.Service);
         return results.Select(s => _mapper.Map(s));
     }
+
+    public async Task<IEnumerable<Service>> GetByIdsAsync(IEnumerable<Guid> ids)
+    {
+        var services = await _context.Services
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+            .Where(s => ids.Contains(s.Id))
+            .ToListAsync();
+        return services.Select(s => _mapper.Map(s));
+    }
 } 

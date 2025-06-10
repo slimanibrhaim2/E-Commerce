@@ -12,6 +12,8 @@ using Catalogs.Application.Commands.DeleteService.Aggregate;
 using Catalogs.Application.Commands.DeleteService.Simple;
 using Catalogs.Application.Commands.UpdateService.Aggregate;
 using Catalogs.Application.Commands.UpdateService.Simple;
+using Shared.Contracts.Queries;
+using Shared.Contracts.DTOs;
 
 namespace Catalogs.Presentation.Controllers;
 
@@ -136,5 +138,14 @@ public class ServicesController : ControllerBase
         return Ok(Result.Ok(
             message: "تم حذف الخدمة بنجاح",
             resultStatus: ResultStatus.Success));
+    }
+
+    [HttpPost("by-ids")]
+    public async Task<IActionResult> GetByIds([FromBody] IEnumerable<Guid> ids)
+    {
+        if (ids == null || !ids.Any())
+            return BadRequest("قائمة المعرفات مطلوبة.");
+        var result = await _mediator.Send(new GetServicesByIdsQuery(ids));
+        return Ok(result);
     }
 } 

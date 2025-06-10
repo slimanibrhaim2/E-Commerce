@@ -4,4 +4,4 @@ using Catalogs.Application.DTOs;
 
 namespace Catalogs.Application.Commands.CreateCategory;
 
-public record CreateCategoryCommand(CreatCategoryDTO Category) : IRequest<Result<Guid>>; 
+public record CreateCategoryCommand(CreateCategoryDTO Category) : IRequest<Result<Guid>>; 

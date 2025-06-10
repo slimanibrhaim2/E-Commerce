@@ -4,4 +4,4 @@ using Catalogs.Application.DTOs;
 
 namespace Catalogs.Application.Commands.UpdateCategory;
 
-public record UpdateCategoryCommand(Guid Id, CreatCategoryDTO Category) : IRequest<Result<bool>>; 
+public record UpdateCategoryCommand(Guid Id, CreateCategoryDTO Category) : IRequest<Result<bool>>; 

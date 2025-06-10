@@ -209,4 +209,15 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
             .Select(x => x.Product);
         return results.Select(p => _mapper.Map(p));
     }
+
+    public async Task<IEnumerable<Product>> GetByIdsAsync(IEnumerable<Guid> ids)
+    {
+        var products = await _context.Products
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+            .Include(p => p.ProductFeatures)
+            .Where(p => ids.Contains(p.Id))
+            .ToListAsync();
+        return products.Select(p => _mapper.Map(p));
+    }
 } 

@@ -10,5 +10,6 @@ public interface ICategoryRepository : IRepository<Category>
     Task<bool> UpdateCategoryAsync(Guid id, Category category);
     Task<bool> DeleteCategoryAsync(Guid id);
     Task<Category?> GetCategoryByIdAsync(Guid id);
+    Task<Category?> GetCategoryByNameAsync(string name);
     Task<IEnumerable<Category>> GetSubCategoriesAsync(Guid parentId);
 } 

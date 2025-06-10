@@ -162,7 +162,8 @@
           "AutoMapper": "14.0.0",
           "Catalogs.Domain": "1.0.0",
           "MediatR": "12.5.0",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.5"
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.5",
+          "Shared.Contracts": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Catalogs.Application.dll": {}
@@ -192,6 +193,19 @@
         },
         "runtime": {
           "bin/placeholder/Core.dll": {}
+        }
+      },
+      "Shared.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "MediatR": "12.5.0"
+        },
+        "compile": {
+          "bin/placeholder/Shared.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shared.Contracts.dll": {}
         }
       }
     }
@@ -492,6 +506,11 @@
       "type": "project",
       "path": "../Core/Core.csproj",
       "msbuildProject": "../Core/Core.csproj"
+    },
+    "Shared.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../Shared.Contracts/Shared.Contracts.csproj",
+      "msbuildProject": "../Shared.Contracts/Shared.Contracts.csproj"
     }
   },
   "projectFileDependencyGroups": {

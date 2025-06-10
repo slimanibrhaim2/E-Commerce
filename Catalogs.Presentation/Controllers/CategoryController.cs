@@ -33,7 +33,7 @@ namespace Catalogs.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Create([FromBody]CreatCategoryDTO dto)
+        public async Task<ActionResult<Guid>> Create([FromBody]CreateCategoryDTO dto)
         {
             var command = new CreateCategoryCommand(dto);
             var result = await _mediator.Send(command);
@@ -57,7 +57,7 @@ namespace Catalogs.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<bool>> Update(Guid id, CreatCategoryDTO dto)
+        public async Task<ActionResult<bool>> Update(Guid id, CreateCategoryDTO dto)
         {
             var command = new UpdateCategoryCommand(id, dto);
             var result = await _mediator.Send(command);

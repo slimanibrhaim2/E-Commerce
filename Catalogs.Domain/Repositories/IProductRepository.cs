@@ -22,4 +22,6 @@ public interface IProductRepository : IRepository<Product>
     Task<IEnumerable<Product>> GetProductsByUserIdAsync(Guid userId);
 
     Task<IEnumerable<Product>> GetProductsByNameAsync(string name);
+
+    Task<IEnumerable<Product>> GetByIdsAsync(IEnumerable<Guid> ids);
 } 

@@ -59,6 +59,11 @@ public class CategoryRepository : BaseRepository<Category, CategoryDAO>, ICatego
         var dao = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id && c.DeletedAt == null);
         return dao == null ? null : _mapper.Map(dao);
     }
+    public async Task<Category?> GetCategoryByNameAsync(string name)
+    {
+        var dao = await _context.Categories.FirstOrDefaultAsync(c => c.Name == name && c.DeletedAt == null);
+        return dao == null ? null : _mapper.Map(dao);
+    }
 
     public async Task<IEnumerable<Category>> GetSubCategoriesAsync(Guid parentId)
     {

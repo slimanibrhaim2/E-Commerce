@@ -15,5 +15,7 @@ namespace Catalogs.Domain.Entities
         public bool IsActive { get; set; } = true;
         public Guid BaseItemId { get; set; }
         public BaseItem BaseItem { get; set; } = null!;
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }
