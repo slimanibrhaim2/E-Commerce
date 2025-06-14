@@ -13,5 +13,6 @@ namespace Users.Domain.Repositories
         Task<IEnumerable<Follower>> GetFollowersByUserId(Guid userId);
         Task<User?> GetByFollowerId(Guid followerId);
         Task AddAsync(Follower entity);
+        Task<Follower?> GetByFollowerAndFollowingId(Guid followerId, Guid followingId);
     }
 }

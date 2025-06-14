@@ -13,11 +13,17 @@ using Catalogs.Application.Commands.UpdateProduct.Aggregate;
 using Catalogs.Application.Commands.UpdateProduct.Simple;
 using Shared.Contracts.Queries;
 using Shared.Contracts.DTOs;
+using Catalogs.Application.Queries.GetProductsByUserId;
+using Catalogs.Application.Queries.GetProductsByCategory;
+using Catalogs.Application.Queries.GetProductsByName;
+using Microsoft.AspNetCore.Authorization;
+using Core.Authentication;
 
 namespace Catalogs.Presentation.Controllers;
 
 [ApiController]
 [Route("api/products")]
+[Authorize]
 public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -28,6 +34,8 @@ public class ProductsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateProductDTO dto)
     {
+        var userId = User.GetId();
+        dto.UserId = userId;
         var result = await _mediator.Send(new CreateProductCommand(dto));
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -42,6 +50,8 @@ public class ProductsController : ControllerBase
     [HttpPost("aggregate")]
     public async Task<IActionResult> CreateAggregate([FromBody] CreateProductAggregateDTO dto)
     {
+        var userId = User.GetId();
+        dto.UserId = userId;
         var result = await _mediator.Send(new CreateProductAggregateCommand(dto));
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -54,6 +64,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
         var pagination = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
@@ -71,6 +82,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetById(Guid id)
     {
         var query = new GetProductByIdQuery(id);
@@ -86,6 +98,8 @@ public class ProductsController : ControllerBase
     [HttpPut("aggregate/{id}")]
     public async Task<IActionResult> UpdateAggregate(Guid id, [FromBody] CreateProductAggregateDTO dto)
     {
+        var userId = User.GetId();
+        dto.UserId = userId;
         var result = await _mediator.Send(new UpdateProductAggregateCommand(id, dto));
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -114,6 +128,8 @@ public class ProductsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] ProductDTO dto)
     {
+        var userId = User.GetId();
+        dto.UserId = userId;
         var result = await _mediator.Send(new UpdateProductSimpleCommand(id, dto));
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -140,11 +156,63 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost("by-ids")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetByIds([FromBody] IEnumerable<Guid> ids)
     {
         if (ids == null || !ids.Any())
             return BadRequest("قائمة المعرفات مطلوبة.");
         var result = await _mediator.Send(new GetProductsByIdsQuery(ids));
         return Ok(result);
+    }
+
+    [HttpGet("my-products")]
+    public async Task<IActionResult> GetMyProducts([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        var userId = User.GetId();
+        var query = new GetProductsByUserIdQuery(userId, new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize });
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب منتجات المستخدم",
+                errorType: "GetProductsByUserIdFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<PaginatedResult<ProductDTO>>.Ok(
+            data: result.Data,
+            message: "تم جلب منتجات المستخدم بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("search")]
+    [AllowAnonymous]
+    public async Task<IActionResult> SearchProducts([FromQuery] string name)
+    {
+        var query = new GetProductsByNameQuery(name, new PaginationParameters { PageNumber = 1, PageSize = 10 });
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في البحث عن المنتجات",
+                errorType: "GetProductsByNameFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<IEnumerable<ProductDTO>>.Ok(
+            data: result.Data.Data,
+            message: "تم البحث عن المنتجات بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("category/{categoryId}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetProductsByCategory(Guid categoryId)
+    {
+        var query = new GetProductsByCategoryQuery(categoryId, 1, 10);
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب منتجات الفئة",
+                errorType: "GetProductsByCategoryFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<IEnumerable<ProductDTO>>.Ok(
+            data: result.Data.Data,
+            message: "تم جلب منتجات الفئة بنجاح",
+            resultStatus: ResultStatus.Success));
     }
 } 

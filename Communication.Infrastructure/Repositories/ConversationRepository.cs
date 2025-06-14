@@ -24,5 +24,17 @@ namespace Communication.Infrastructure.Repositories
                 .ToListAsync();
             return daos.Select(d => _mapper.Map(d));
         }
+
+        public async Task<Conversation?> GetConversationByMembersAsync(Guid userId1, Guid userId2)
+        {
+            var dao = await _dbSet
+                .Include(c => c.ConversationMembers)
+                .Where(c => c.ConversationMembers.Count == 2 && // Only direct conversations
+                           c.ConversationMembers.Any(m => m.UserId == userId1) &&
+                           c.ConversationMembers.Any(m => m.UserId == userId2))
+                .FirstOrDefaultAsync();
+
+            return dao != null ? _mapper.Map(dao) : null;
+        }
     }
 }

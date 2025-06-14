@@ -9,11 +9,14 @@ using Users.Application.Queries.GetAddressesByUserId;
 using Core.Result;
 using Users.Application.Commands.DeleteAddress;
 using Core.Pagination;
+using Microsoft.AspNetCore.Authorization;
+using Core.Authentication;
 
 namespace Users.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class AddressesController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -23,17 +26,26 @@ namespace Users.Presentation.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("{userId}")]
-        public async Task<IActionResult> AddAddress(Guid userId, [FromBody] AddAddressDTO addressDTO)
+        [HttpPost]
+        public async Task<IActionResult> AddAddress([FromBody] AddAddressDTO addressDTO)
         {
+            var userId = User.GetId();
             var command = new AddAddressByUserIdCommand(userId, addressDTO);
             var result = await _mediator.Send(command);
-            return result.Success ? Ok(result) : BadRequest(result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إضافة العنوان",
+                    errorType: "AddAddressFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم إضافة العنوان بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
-        [HttpGet("{userId}/addresses")]
-        public async Task<IActionResult> GetAddresses(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        [HttpGet]
+        public async Task<IActionResult> GetAddresses([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
+            var userId = User.GetId();
             var pagination = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAddressesByUserIdQuery(userId, pagination);
             var result = await _mediator.Send(query);
@@ -53,7 +65,14 @@ namespace Users.Presentation.Controllers
         {
             var command = new DeleteAddressCommand(addressId);
             var result = await _mediator.Send(command);
-            return result.Success ? Ok(result) : BadRequest(result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف العنوان",
+                    errorType: "DeleteAddressFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم حذف العنوان بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 }

@@ -10,16 +10,22 @@ using Core.Result;
 using Users.Application.Command.UpdateUser;
 using Core.Pagination;
 using Users.Application.Queries.GetUsersByName;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Core.Authentication;
+
 namespace Users.Presentation.Controllers
 {
     [ApiController]
     [Route("api/users")]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
         public UsersController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Create([FromBody] CreateUserDTO dto)
         {
             var result = await _mediator.Send(new CreateUserCommand(dto));
@@ -28,7 +34,8 @@ namespace Users.Presentation.Controllers
                     message: "فشل في إنشاء المستخدم",
                     errorType: "CreateUserFailed",
                     resultStatus: ResultStatus.Failed));
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result.Ok(
+            return Ok(Result<Guid>.Ok(
+                data: result.Data,
                 message: "تم إنشاء المستخدم بنجاح",
                 resultStatus: ResultStatus.Success));
         }
@@ -50,10 +57,12 @@ namespace Users.Presentation.Controllers
                 resultStatus: ResultStatus.Success));
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        [HttpGet("me")]
+        public async Task<IActionResult> GetCurrentUser()
         {
-            var query = new GetUserByIdQuery(id);
+            var userId = User.GetId();
+            
+            var query = new GetUserByIdQuery(userId);
             var result = await _mediator.Send(query);
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
@@ -66,11 +75,13 @@ namespace Users.Presentation.Controllers
                 resultStatus: ResultStatus.Success));
         }
 
-        [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] CreateUserDTO dto)
+        [HttpPut("me")]
+        public async Task<IActionResult> UpdateCurrentUser([FromBody] CreateUserDTO dto)
         {
-            
-            var result = await _mediator.Send(new UpdateUserCommand(id,dto));
+            var userId = User.GetId();
+
+
+            var result = await _mediator.Send(new UpdateUserCommand(userId, dto));
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في تحديث المستخدم",
@@ -81,10 +92,13 @@ namespace Users.Presentation.Controllers
                 resultStatus: ResultStatus.Success));
         }
 
-        [HttpDelete("{id:guid}")]
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete("me")]
+        public async Task<IActionResult> DeleteCurrentUser()
         {
-            var result = await _mediator.Send(new DeleteUserCommand(id));
+            var userId = User.GetId();
+
+
+            var result = await _mediator.Send(new DeleteUserCommand(userId));
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في حذف المستخدم",

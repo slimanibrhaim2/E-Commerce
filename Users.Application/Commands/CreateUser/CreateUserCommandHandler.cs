@@ -145,8 +145,8 @@ namespace Users.Application.Commands.CreateUser
 
         private bool IsValidPhoneNumber(string phoneNumber)
         {
-            // Basic validation - can be enhanced based on your requirements
-            return !string.IsNullOrWhiteSpace(phoneNumber) && phoneNumber.Length >= 10;
+            
+            return !string.IsNullOrWhiteSpace(phoneNumber) && phoneNumber.Length == 10 && phoneNumber.StartsWith("09");
         }
     }
 }

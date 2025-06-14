@@ -9,6 +9,9 @@ using Communication.Application.Commands.DeleteMessage;
 using Communication.Application.Queries.GetMessageById;
 using Communication.Application.Queries.GetAllMessages;
 using Core.Pagination;
+using Communication.Application.Commands.AddMessageAggregate;
+using Communication.Application.Commands.UpdateMessageAggregate;
+using Communication.Application.Commands.DeleteMessageAggregate;
 
 namespace Communication.Presentation.Controllers
 {
@@ -72,6 +75,35 @@ namespace Communication.Presentation.Controllers
             if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
+        }
+
+        [HttpPost("aggregate")]
+        public async Task<IActionResult> AddMessageAggregate([FromBody] AddMessageAggregateDTO dto)
+        {
+            var result = await _mediator.Send(new AddMessageAggregateCommand(dto));
+            if (!result.Success)
+                return StatusCode(500, result);
+            return Ok(result);
+        }
+
+        [HttpPut("aggregate/{id}")]
+        public async Task<IActionResult> UpdateMessageAggregate(Guid id, [FromBody] AddMessageAggregateDTO dto)
+        {
+            var result = await _mediator.Send(new UpdateMessageAggregateCommand(id, dto));
+            if (!result.Success)
+                return BadRequest(result.ErrorType);
+
+            return Ok(result.Data);
+        }
+
+        [HttpDelete("aggregate/{id}")]
+        public async Task<IActionResult> DeleteMessageAggregate(Guid id)
+        {
+            var result = await _mediator.Send(new DeleteMessageAggregateCommand(id));
+            if (!result.Success)
+                return BadRequest(result.ErrorType);
+
+            return Ok(result.Data);
         }
     }
 } 

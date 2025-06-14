@@ -3,52 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{08CE268A-C5E7-4DD1-9984-310E3FB7B7CA}|Catalogs.Application.Tests\\Catalogs.Application.Tests.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application.tests\\getproductsbyidsqueryhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08CE268A-C5E7-4DD1-9984-310E3FB7B7CA}|Catalogs.Application.Tests\\Catalogs.Application.Tests.csproj|solutionrelative:catalogs.application.tests\\getproductsbyidsqueryhandlertests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.domain\\entities\\baseitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|solutionrelative:catalogs.domain\\entities\\baseitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|solutionrelative:catalogs.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getproductsbyids\\getproductsbyidsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getproductsbyids\\getproductsbyidsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\productdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\productdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbyids\\getservicesbyidsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbyids\\getservicesbyidsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.domain\\entities\\media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|solutionrelative:catalogs.domain\\entities\\media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\queries\\getproductsbyidsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\queries\\getproductsbyidsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\servicedetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\servicedetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\queries\\getservicesbyidsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\queries\\getservicesbyidsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\shared.contracts.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\shared.contracts.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08CE268A-C5E7-4DD1-9984-310E3FB7B7CA}|Catalogs.Application.Tests\\Catalogs.Application.Tests.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application.tests\\catalogs.application.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{08CE268A-C5E7-4DD1-9984-310E3FB7B7CA}|Catalogs.Application.Tests\\Catalogs.Application.Tests.csproj|solutionrelative:catalogs.application.tests\\catalogs.application.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{893C2AA4-C5F6-478D-91A1-07CAFCD2D181}|Users.Presentation\\Users.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.presentation\\controllers\\followerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{893C2AA4-C5F6-478D-91A1-07CAFCD2D181}|Users.Presentation\\Users.Presentation.csproj|solutionrelative:users.presentation\\controllers\\followerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -63,147 +19,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GetProductsByIdsQueryHandlerTests.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application.Tests\\GetProductsByIdsQueryHandlerTests.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application.Tests\\GetProductsByIdsQueryHandlerTests.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application.Tests\\GetProductsByIdsQueryHandlerTests.cs",
-              "RelativeToolTip": "Catalogs.Application.Tests\\GetProductsByIdsQueryHandlerTests.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAABDAAAAAAAAAA==",
+              "Title": "FollowersController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\FollowersController.cs",
+              "RelativeDocumentMoniker": "Users.Presentation\\Controllers\\FollowersController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\FollowersController.cs*",
+              "RelativeToolTip": "Users.Presentation\\Controllers\\FollowersController.cs*",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAIwEcAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T11:34:08.513Z",
+              "WhenOpened": "2025-06-14T22:08:06.982Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BaseItem.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\BaseItem.cs",
-              "RelativeDocumentMoniker": "Catalogs.Domain\\Entities\\BaseItem.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\BaseItem.cs",
-              "RelativeToolTip": "Catalogs.Domain\\Entities\\BaseItem.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAMwBMAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T11:23:05.511Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Catalogs.Application.Tests.csproj",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application.Tests\\Catalogs.Application.Tests.csproj",
-              "RelativeDocumentMoniker": "Catalogs.Application.Tests\\Catalogs.Application.Tests.csproj",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application.Tests\\Catalogs.Application.Tests.csproj",
-              "RelativeToolTip": "Catalogs.Application.Tests\\Catalogs.Application.Tests.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-10T11:13:33.968Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\Product.cs",
-              "RelativeDocumentMoniker": "Catalogs.Domain\\Entities\\Product.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\Product.cs",
-              "RelativeToolTip": "Catalogs.Domain\\Entities\\Product.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAEwAgAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T10:23:02.571Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Media.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\Media.cs",
-              "RelativeDocumentMoniker": "Catalogs.Domain\\Entities\\Media.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\Media.cs",
-              "RelativeToolTip": "Catalogs.Domain\\Entities\\Media.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAADgvxQAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T10:20:33.689Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GetServicesByIdsQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByIds\\GetServicesByIdsQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByIds\\GetServicesByIdsQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByIds\\GetServicesByIdsQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByIds\\GetServicesByIdsQueryHandler.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAawCoAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T10:19:40.542Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GetProductsByIdsQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByIds\\GetProductsByIdsQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByIds\\GetProductsByIdsQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByIds\\GetProductsByIdsQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByIds\\GetProductsByIdsQueryHandler.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAuwDoAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T10:19:30.659Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ProductDetailsDTO.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
-              "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
-              "RelativeToolTip": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAcwAIAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T12:09:51.496Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ServiceDetailsDTO.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
-              "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
-              "RelativeToolTip": "Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T12:10:15.306Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "GetServicesByIdsQuery.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetServicesByIdsQuery.cs",
-              "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetServicesByIdsQuery.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetServicesByIdsQuery.cs",
-              "RelativeToolTip": "Shared.Contracts\\Queries\\GetServicesByIdsQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T12:08:41.311Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "GetProductsByIdsQuery.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetProductsByIdsQuery.cs",
-              "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetProductsByIdsQuery.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetProductsByIdsQuery.cs",
-              "RelativeToolTip": "Shared.Contracts\\Queries\\GetProductsByIdsQuery.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T12:07:00.942Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Shared.Contracts.csproj",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Shared.Contracts.csproj",
-              "RelativeDocumentMoniker": "Shared.Contracts\\Shared.Contracts.csproj",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Shared.Contracts.csproj",
-              "RelativeToolTip": "Shared.Contracts\\Shared.Contracts.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-09T12:04:19.358Z"
             }
           ]
         }

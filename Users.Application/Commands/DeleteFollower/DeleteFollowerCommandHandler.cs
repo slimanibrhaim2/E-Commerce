@@ -22,24 +22,27 @@ namespace Users.Application.Commands.DeleteFollower
         {
             try
             {
-                _logger.LogInformation("Attempting to soft delete follower with ID: {FollowerId}", request.FollowerId);
+                _logger.LogInformation("Attempting to soft delete follower relationship. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                    request.FollowerId, request.FollowingId);
 
-                // Find the follower entity directly
-                var follower = await _followerRepo.GetByIdAsync(request.FollowerId);
+                // Find the follower relationship using both IDs
+                var follower = await _followerRepo.GetByFollowerAndFollowingId(request.FollowerId, request.FollowingId);
                 if (follower is null)
                 {
-                    _logger.LogWarning("Follower not found with ID: {FollowerId}", request.FollowerId);
+                    _logger.LogWarning("Follower relationship not found. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                        request.FollowerId, request.FollowingId);
                     return Result.Fail(
-                        message: "المتابع غير موجود",
+                        message: "علاقة المتابعة غير موجودة",
                         errorType: "NotFound",
                         resultStatus: ResultStatus.ValidationError);
                 }
 
                 if (follower.DeletedAt != null)
                 {
-                    _logger.LogWarning("Follower already deleted. FollowerId: {FollowerId}", request.FollowerId);
+                    _logger.LogWarning("Follower relationship already deleted. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                        request.FollowerId, request.FollowingId);
                     return Result.Fail(
-                        message: "المتابع محذوف بالفعل",
+                        message: "تم حذف علاقة المتابعة مسبقاً",
                         errorType: "AlreadyDeleted",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -48,14 +51,16 @@ namespace Users.Application.Commands.DeleteFollower
                 _followerRepo.Update(follower);
                 await _uow.SaveChangesAsync();
 
-                _logger.LogInformation("Successfully soft deleted follower with ID: {FollowerId}", request.FollowerId);
+                _logger.LogInformation("Successfully soft deleted follower relationship. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                    request.FollowerId, request.FollowingId);
                 return Result.Ok(
                     message: "تم حذف المتابع بنجاح",
                     resultStatus: ResultStatus.Success);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error soft deleting follower with ID: {FollowerId}", request.FollowerId);
+                _logger.LogError(ex, "Error soft deleting follower relationship. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
+                    request.FollowerId, request.FollowingId);
                 return Result.Fail(
                     message: "فشل في حذف المتابع",
                     errorType: "DeleteFollowerFailed",

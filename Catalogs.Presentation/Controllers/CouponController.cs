@@ -8,11 +8,15 @@ using Catalogs.Application.Queries.GetCouponById;
 using Catalogs.Application.DTOs;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Core.Authentication;
+using Core.Result;
 
 namespace Catalogs.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CouponController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -22,42 +26,91 @@ namespace Catalogs.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateCouponCommand command)
+        public async Task<IActionResult> Create([FromBody] CreateCouponDTO dto)
         {
+            var userId = User.GetId();
+            dto.UserId = userId;
+            var command = new CreateCouponCommand(
+                dto.UserId,
+                dto.Code,
+                dto.DiscountAmount,
+                dto.ExpiryDate
+            );
             var result = await _mediator.Send(command);
-            if (!result.Success) return BadRequest(result);
-            return Ok(result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إنشاء الكوبون",
+                    errorType: "CreateCouponFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم إنشاء الكوبون بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateCouponCommand command)
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult<Result<List<CouponDTO>>>> GetAll()
         {
+            var query = new GetAllCouponsQuery();
+            var result = await _mediator.Send(query);
+            return Ok(Result<List<CouponDTO>>.Ok(
+                data: result,
+                message: "تم جلب الكوبونات بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Result<CouponDTO>>> GetById(Guid id)
+        {
+            var query = new GetCouponByIdQuery(id);
+            var result = await _mediator.Send(query);
+            if (result == null)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب الكوبون",
+                    errorType: "GetCouponByIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<CouponDTO>.Ok(
+                data: result,
+                message: "تم جلب الكوبون بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] CreateCouponDTO dto)
+        {
+            var userId = User.GetId();
+            var command = new UpdateCouponCommand(
+                id,
+                userId,
+                dto.Code,
+                dto.DiscountAmount,
+                dto.ExpiryDate
+            );
             var result = await _mediator.Send(command);
-            if (!result.Success) return BadRequest(result);
-            return Ok(result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث الكوبون",
+                    errorType: "UpdateCouponFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم تحديث الكوبون بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var result = await _mediator.Send(new DeleteCouponCommand(id));
-            if (!result.Success) return NotFound(result);
-            return Ok(result);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var result = await _mediator.Send(new GetAllCouponsQuery());
-            return Ok(result);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
-        {
-            var result = await _mediator.Send(new GetCouponByIdQuery(id));
-            if (result == null) return NotFound();
-            return Ok(result);
+            var command = new DeleteCouponCommand(id);
+            var result = await _mediator.Send(command);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف الكوبون",
+                    errorType: "DeleteCouponFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم حذف الكوبون بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 } 

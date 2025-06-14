@@ -41,6 +41,15 @@ namespace Users.Infrastructure.Repositories
             return userMapper.Map(followerDao.Follower);
         }
 
+        public async Task<Follower?> GetByFollowerAndFollowingId(Guid followerId, Guid followingId)
+        {
+            var dao = await _dbSet.FirstOrDefaultAsync(f => 
+                f.FollowerId == followerId && 
+                f.FollowingId == followingId && 
+                f.DeletedAt == null);
+            return dao == null ? null : _followerMapper.Map(dao);
+        }
+
         public async Task AddAsync(Follower entity)
         {
             FollowerDAO dao = _followerMapper.MapBack(entity);

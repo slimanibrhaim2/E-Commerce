@@ -11,5 +11,6 @@ namespace Communication.Domain.Repositories
     public interface IConversationRepository : IRepository<Conversation>
     {
         Task<IEnumerable<Conversation>> GetByUserIdAsync(Guid userId);
+        Task<Conversation?> GetConversationByMembersAsync(Guid userId1, Guid userId2);
     }
 }

@@ -5,11 +5,14 @@ using Microsoft.Extensions.Logging;
 using Catalogs.Application.Queries.GetAllBaseItemsByUserId;
 using Core.Pagination;
 using Core.Result;
+using Microsoft.AspNetCore.Authorization;
+using Core.Authentication;
 
 namespace Catalogs.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class BaseItemController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,15 +24,22 @@ namespace Catalogs.Presentation.Controllers
             _logger = logger;
         }
 
-        [HttpGet("user/{userId}")]
-        public async Task<ActionResult<Result<PaginatedResult<BaseItemDTO>>>> GetAllByUserId(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        [HttpGet("my-items")]
+        public async Task<ActionResult<Result<PaginatedResult<BaseItemDTO>>>> GetMyItems([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
+            var userId = User.GetId();
             var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAllBaseItemsByUserIdQuery(userId, parameters);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب العناصر",
+                    errorType: "GetAllBaseItemsFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<BaseItemDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب العناصر بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 } 

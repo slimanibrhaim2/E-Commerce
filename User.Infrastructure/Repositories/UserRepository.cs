@@ -79,6 +79,12 @@ public class UserRepository : BaseRepository<User, UserDAO>, IUserRepository
         return userDao != null ? _userMapper.Map(userDao) : null;
     }
 
+    public async Task<User?> GetByPhoneNumber(string phoneNumber)
+    {
+        var userDao = await _dbSet.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber && u.DeletedAt == null);
+        return userDao != null ? _userMapper.Map(userDao) : null;
+    }
+
     public async Task<User?> GetByIdWithDetails(Guid id)
     {
         var userDao = await _dbSet

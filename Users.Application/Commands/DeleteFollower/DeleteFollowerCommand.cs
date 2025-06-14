@@ -4,5 +4,5 @@ using Core.Result;
 
 namespace Users.Application.Commands.DeleteFollower
 {
-    public record DeleteFollowerCommand(Guid FollowerId) : IRequest<Result>;
+    public record DeleteFollowerCommand(Guid FollowerId, Guid FollowingId) : IRequest<Result>;
 }

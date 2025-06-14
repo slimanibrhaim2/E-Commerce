@@ -2,7 +2,10 @@ using MediatR;
 using Core.Result;
 using Catalogs.Application.DTOs;
 using Catalogs.Domain.Repositories;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using System.Data;
 
 namespace Catalogs.Application.Queries.GetServiceById;
 
@@ -11,7 +14,9 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
     private readonly IServiceRepository _repo;
     private readonly ILogger<GetServiceByIdQueryHandler> _logger;
 
-    public GetServiceByIdQueryHandler(IServiceRepository repo, ILogger<GetServiceByIdQueryHandler> logger)
+    public GetServiceByIdQueryHandler(
+        IServiceRepository repo,
+        ILogger<GetServiceByIdQueryHandler> logger)
     {
         _repo = repo;
         _logger = logger;
@@ -21,14 +26,25 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
     {
         try
         {
-            var service = await _repo.GetById(request.Id);
-            if (service == null)
+            if (request.Id == Guid.Empty)
+            {
                 return Result<ServiceDTO>.Fail(
-                    message: "الخدمة غير موجودة",
+                    message: "Service ID is required",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            }
+
+            var service = await _repo.GetByIdAsync(request.Id);
+            
+            if (service == null)
+            {
+                return Result<ServiceDTO>.Fail(
+                    message: $"Service with ID {request.Id} not found",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
+            }
 
-            var serviceDto = new ServiceDTO
+            var dto = new ServiceDTO
             {
                 Id = service.Id,
                 Name = service.Name,
@@ -38,22 +54,56 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
                 ServiceType = service.ServiceType,
                 Duration = service.Duration,
                 IsAvailable = service.IsAvailable,
-                // Add other properties as needed
+                UserId = service.UserId,
+                CreatedAt = service.CreatedAt,
+                UpdatedAt = service.UpdatedAt,
+                Media = service.Media?.Select(m => new MediaDTO
+                {
+                    Id = m.Id,
+                    Url = m.MediaUrl,
+                    MediaTypeId = m.MediaTypeId,
+                    ItemId = m.BaseItemId,
+                    MediaType = m.MediaType != null ? new MediaTypeDTO
+                    {
+                        Id = m.MediaType.Id,
+                        Name = m.MediaType.Name,
+                        CreatedAt = m.MediaType.CreatedAt,
+                        UpdatedAt = m.MediaType.UpdatedAt
+                    } : null,
+                    CreatedAt = m.CreatedAt,
+                    UpdatedAt = m.UpdatedAt
+                }).ToList() ?? new List<MediaDTO>(),
+                Features = service.Features?.Select(f => new ServiceFeatureDTO
+                {
+                    Id = f.Id,
+                    Name = f.Name,
+                    Value = f.Value,
+                    ServiceId = service.Id,
+                    CreatedAt = f.CreatedAt,
+                    UpdatedAt = f.UpdatedAt
+                }).ToList() ?? new List<ServiceFeatureDTO>()
             };
 
             return Result<ServiceDTO>.Ok(
-                data: serviceDto,
-                message: "تم جلب الخدمة بنجاح",
+                data: dto,
+                message: $"Successfully retrieved service '{service.Name}'",
                 resultStatus: ResultStatus.Success);
+        }
+        catch (DBConcurrencyException ex)
+        {
+            _logger.LogError(ex, "Database error while retrieving service with ID {ServiceId}", request.Id);
+            return Result<ServiceDTO>.Fail(
+                message: "Failed to retrieve service due to a database error. Please try again later.",
+                errorType: "DatabaseError",
+                resultStatus: ResultStatus.InternalServerError);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error getting service by ID");
+            _logger.LogError(ex, "Unexpected error while retrieving service with ID {ServiceId}: {Message}", request.Id, ex.Message);
             return Result<ServiceDTO>.Fail(
-                message: "حدث خطأ أثناء جلب الخدمة",
-                errorType: "GetServiceByIdFailed",
-                resultStatus: ResultStatus.Failed,
-                exception: ex);
+                message: "An unexpected error occurred while retrieving the service. Please try again later.",
+                errorType: "UnexpectedError",
+                resultStatus: ResultStatus.Failed);
         }
     }
 } 

@@ -1,33 +1,12 @@
 [
   {
     "ContainingType": "Users.Presentation.Controllers.AddressesController",
-    "Method": "DeleteAddress",
-    "RelativePath": "api/Addresses/{addressId}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "addressId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Users.Presentation.Controllers.AddressesController",
     "Method": "AddAddress",
-    "RelativePath": "api/Addresses/{userId}",
+    "RelativePath": "api/Addresses",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
       {
         "Name": "addressDTO",
         "Type": "Users.Application.DTOs.AddAddressDTO",
@@ -39,16 +18,11 @@
   {
     "ContainingType": "Users.Presentation.Controllers.AddressesController",
     "Method": "GetAddresses",
-    "RelativePath": "api/Addresses/{userId}/addresses",
+    "RelativePath": "api/Addresses",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
       {
         "Name": "pageNumber",
         "Type": "System.Int32",
@@ -58,6 +32,22 @@
         "Name": "pageSize",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Users.Presentation.Controllers.AddressesController",
+    "Method": "DeleteAddress",
+    "RelativePath": "api/Addresses/{addressId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addressId",
+        "Type": "System.Guid",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -343,6 +333,54 @@
     ]
   },
   {
+    "ContainingType": "WebApi.Authentication.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Authentication.DTOs.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Authentication.Controllers.AuthController",
+    "Method": "Register",
+    "RelativePath": "api/Auth/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Users.Application.Commands.CreateUser.CreateUserCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Authentication.Controllers.AuthController",
+    "Method": "VerifyOtp",
+    "RelativePath": "api/Auth/verify-otp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Authentication.DTOs.VerifyOtpRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Communication.Presentation.Controllers.BaseContentController",
     "Method": "Create",
     "RelativePath": "api/BaseContent",
@@ -484,17 +522,12 @@
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.BaseItemController",
-    "Method": "GetAllByUserId",
-    "RelativePath": "api/BaseItem/user/{userId}",
+    "Method": "GetMyItems",
+    "RelativePath": "api/BaseItem/my-items",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
       {
         "Name": "pageNumber",
         "Type": "System.Int32",
@@ -539,7 +572,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.BrandDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.BrandDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -565,7 +598,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Guid",
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -591,7 +624,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Catalogs.Application.DTOs.BrandDTO",
+        "Type": "Core.Result.Result\u00601[[Catalogs.Application.DTOs.BrandDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -622,7 +655,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -648,7 +681,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -985,7 +1018,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.CategoryDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.CategoryDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1011,7 +1044,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Guid",
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1037,7 +1070,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Catalogs.Application.DTOs.CategoryDTO",
+        "Type": "Core.Result.Result\u00601[[Catalogs.Application.DTOs.CategoryDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1068,7 +1101,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1094,7 +1127,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1243,6 +1276,59 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Communication.Presentation.Controllers.CommentController",
+    "Method": "AddCommentAggregate",
+    "RelativePath": "api/Comment/aggregate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Communication.Application.DTOs.AddCommentAggregateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Communication.Presentation.Controllers.CommentController",
+    "Method": "UpdateCommentAggregate",
+    "RelativePath": "api/Comment/aggregate/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Communication.Application.DTOs.AddCommentAggregateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Communication.Presentation.Controllers.CommentController",
+    "Method": "DeleteCommentAggregate",
+    "RelativePath": "api/Comment/aggregate/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Communication.Presentation.Controllers.CommentController",
@@ -1564,24 +1650,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "command",
-        "Type": "Catalogs.Application.Commands.CreateCoupon.CreateCouponCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Catalogs.Presentation.Controllers.CouponController",
-    "Method": "Update",
-    "RelativePath": "api/Coupon",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "command",
-        "Type": "Catalogs.Application.Commands.UpdateCoupon.UpdateCouponCommand",
+        "Name": "dto",
+        "Type": "Catalogs.Application.DTOs.CreateCouponDTO",
         "IsRequired": true
       }
     ],
@@ -1595,13 +1665,23 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[System.Collections.Generic.List\u00601[[Catalogs.Application.DTOs.CouponDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.CouponController",
-    "Method": "Delete",
+    "Method": "GetById",
     "RelativePath": "api/Coupon/{id}",
-    "HttpMethod": "DELETE",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -1611,13 +1691,44 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Catalogs.Application.DTOs.CouponDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.CouponController",
+    "Method": "Update",
+    "RelativePath": "api/Coupon/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Catalogs.Application.DTOs.CreateCouponDTO",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.CouponController",
-    "Method": "GetById",
+    "Method": "Delete",
     "RelativePath": "api/Coupon/{id}",
-    "HttpMethod": "GET",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -1650,7 +1761,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Guid",
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1681,7 +1792,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1707,7 +1818,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1733,7 +1844,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Catalogs.Application.DTOs.FeatureDTO",
+        "Type": "Core.Result.Result\u00601[[Catalogs.Application.DTOs.FeatureDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1764,7 +1875,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1790,7 +1901,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1816,7 +1927,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Catalogs.Application.DTOs.MediaDTO",
+        "Type": "Core.Result.Result\u00601[[Catalogs.Application.DTOs.MediaDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1847,7 +1958,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Guid",
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1864,10 +1975,21 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[Catalogs.Application.DTOs.MediaTypeDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.MediaTypeDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1879,7 +2001,7 @@
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.MediaTypeController",
-    "Method": "Create",
+    "Method": "CreateMediaType",
     "RelativePath": "api/MediaType",
     "HttpMethod": "POST",
     "IsController": true,
@@ -1893,7 +2015,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Guid",
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1919,7 +2041,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Catalogs.Application.DTOs.MediaTypeDTO",
+        "Type": "Core.Result.Result\u00601[[Catalogs.Application.DTOs.MediaTypeDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1931,7 +2053,7 @@
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.MediaTypeController",
-    "Method": "Update",
+    "Method": "UpdateMediaType",
     "RelativePath": "api/MediaType/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -1950,7 +2072,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -1962,7 +2084,7 @@
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.MediaTypeController",
-    "Method": "Delete",
+    "Method": "DeleteMediaType",
     "RelativePath": "api/MediaType/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -1976,7 +2098,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2125,6 +2247,59 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Communication.Presentation.Controllers.MessageController",
+    "Method": "AddMessageAggregate",
+    "RelativePath": "api/Message/aggregate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Communication.Application.DTOs.AddMessageAggregateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Communication.Presentation.Controllers.MessageController",
+    "Method": "UpdateMessageAggregate",
+    "RelativePath": "api/Message/aggregate/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Communication.Application.DTOs.AddMessageAggregateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Communication.Presentation.Controllers.MessageController",
+    "Method": "DeleteMessageAggregate",
+    "RelativePath": "api/Message/aggregate/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.OrderController",
@@ -2967,114 +3142,6 @@
     ]
   },
   {
-    "ContainingType": "Catalogs.Presentation.Controllers.ProductController",
-    "Method": "GetByCategory",
-    "RelativePath": "api/Product/category/{categoryId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "categoryId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "pageNumber",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.ProductDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Catalogs.Presentation.Controllers.ProductController",
-    "Method": "GetByName",
-    "RelativePath": "api/Product/search",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "name",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageNumber",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.ProductDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Catalogs.Presentation.Controllers.ProductController",
-    "Method": "GetByUserId",
-    "RelativePath": "api/Product/user/{userId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "pageNumber",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.ProductDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
     "ContainingType": "Catalogs.Presentation.Controllers.ProductsController",
     "Method": "Create",
     "RelativePath": "api/products",
@@ -3234,9 +3301,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Catalogs.Presentation.Controllers.ServiceController",
-    "Method": "GetByCategory",
-    "RelativePath": "api/Service/category/{categoryId}",
+    "ContainingType": "Catalogs.Presentation.Controllers.ProductsController",
+    "Method": "GetProductsByCategory",
+    "RelativePath": "api/products/category/{categoryId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -3245,7 +3312,18 @@
         "Name": "categoryId",
         "Type": "System.Guid",
         "IsRequired": true
-      },
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.ProductsController",
+    "Method": "GetMyProducts",
+    "RelativePath": "api/products/my-products",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
         "Name": "pageNumber",
         "Type": "System.Int32",
@@ -3257,22 +3335,12 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.ServiceDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
-    "ContainingType": "Catalogs.Presentation.Controllers.ServiceController",
-    "Method": "GetByName",
-    "RelativePath": "api/Service/search",
+    "ContainingType": "Catalogs.Presentation.Controllers.ProductsController",
+    "Method": "SearchProducts",
+    "RelativePath": "api/products/search",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -3281,65 +3349,9 @@
         "Name": "name",
         "Type": "System.String",
         "IsRequired": false
-      },
-      {
-        "Name": "pageNumber",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.ServiceDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Catalogs.Presentation.Controllers.ServiceController",
-    "Method": "GetByUserId",
-    "RelativePath": "api/Service/user/{userId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "pageNumber",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.ServiceDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.ServicesController",
@@ -3501,6 +3513,59 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Catalogs.Presentation.Controllers.ServicesController",
+    "Method": "GetServicesByCategory",
+    "RelativePath": "api/services/category/{categoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.ServicesController",
+    "Method": "GetMyServices",
+    "RelativePath": "api/services/my-services",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.ServicesController",
+    "Method": "SearchServices",
+    "RelativePath": "api/services/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Users.Presentation.Controllers.UsersController",
     "Method": "Create",
     "RelativePath": "api/users",
@@ -3538,71 +3603,13 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Users.Presentation.Controllers.UsersController",
-    "Method": "GetById",
-    "RelativePath": "api/users/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Users.Presentation.Controllers.UsersController",
-    "Method": "Update",
-    "RelativePath": "api/users/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "Users.Application.DTOs.CreateUserDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Users.Presentation.Controllers.UsersController",
-    "Method": "Delete",
-    "RelativePath": "api/users/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "Users.Presentation.Controllers.FollowersController",
     "Method": "Add",
-    "RelativePath": "api/users/{userId}/followers",
+    "RelativePath": "api/users/followers",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
       {
         "Name": "followerId",
         "Type": "System.Guid",
@@ -3614,16 +3621,11 @@
   {
     "ContainingType": "Users.Presentation.Controllers.FollowersController",
     "Method": "GetAll",
-    "RelativePath": "api/users/{userId}/followers",
+    "RelativePath": "api/users/followers",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
       {
         "Name": "pageNumber",
         "Type": "System.Int32",
@@ -3640,22 +3642,58 @@
   {
     "ContainingType": "Users.Presentation.Controllers.FollowersController",
     "Method": "DeleteFollower",
-    "RelativePath": "api/users/{userId}/followers/{followerId}",
+    "RelativePath": "api/users/followers/{followerId}/{followingId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "followerId",
+        "Name": "followingId",
         "Type": "System.Guid",
         "IsRequired": true
       },
       {
-        "Name": "userId",
+        "Name": "followerId",
         "Type": "",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Users.Presentation.Controllers.UsersController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "api/users/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Users.Presentation.Controllers.UsersController",
+    "Method": "UpdateCurrentUser",
+    "RelativePath": "api/users/me",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Users.Application.DTOs.CreateUserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Users.Presentation.Controllers.UsersController",
+    "Method": "DeleteCurrentUser",
+    "RelativePath": "api/users/me",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

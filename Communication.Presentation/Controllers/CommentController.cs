@@ -10,6 +10,9 @@ using Communication.Application.Queries.GetCommentById;
 using Communication.Application.Queries.GetAllComments;
 using Communication.Application.Queries.GetAllCommentsByBaseItemId;
 using Core.Pagination;
+using Communication.Application.Commands.AddCommentAggregate;
+using Communication.Application.Commands.UpdateCommentAggregate;
+using Communication.Application.Commands.DeleteCommentAggregate;
 
 namespace Communication.Presentation.Controllers
 {
@@ -80,6 +83,33 @@ namespace Communication.Presentation.Controllers
         {
             var query = new GetAllCommentsByBaseItemIdQuery(baseItemId);
             var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpPost("aggregate")]
+        public async Task<IActionResult> AddCommentAggregate([FromBody] AddCommentAggregateDTO dto)
+        {
+            var result = await _mediator.Send(new AddCommentAggregateCommand(dto));
+            if (!result.Success)
+                return StatusCode(500, result);
+            return Ok(result);
+        }
+
+        [HttpPut("aggregate/{id}")]
+        public async Task<IActionResult> UpdateCommentAggregate(Guid id, [FromBody] AddCommentAggregateDTO dto)
+        {
+            var result = await _mediator.Send(new UpdateCommentAggregateCommand(id, dto));
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
+        }
+
+        [HttpDelete("aggregate/{id}")]
+        public async Task<IActionResult> DeleteCommentAggregate(Guid id)
+        {
+            var result = await _mediator.Send(new DeleteCommentAggregateCommand(id));
+            if (!result.Success)
+                return BadRequest(result);
             return Ok(result);
         }
     }

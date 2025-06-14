@@ -7,11 +7,16 @@ using Catalogs.Application.Commands.DeleteMediaType;
 using Microsoft.Extensions.Logging;
 using Catalogs.Application.Queries.GetAllMediaTypes;
 using Catalogs.Application.Queries.GetMediaTypeById;
+using Core.Pagination;
+using Microsoft.AspNetCore.Authorization;
+using Core.Authentication;
+using Core.Result;
 
 namespace Catalogs.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class MediaTypeController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -24,54 +29,88 @@ namespace Catalogs.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<MediaTypeDTO>>> GetAll()
+        [AllowAnonymous]
+        public async Task<ActionResult<Result<PaginatedResult<MediaTypeDTO>>>> GetAll([FromQuery] PaginationParameters parameters)
         {
-            var query = new GetAllMediaTypesQuery();
+            var query = new GetAllMediaTypesQuery(parameters);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result.Data);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب أنواع الوسائط",
+                    errorType: "GetAllMediaTypesFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<MediaTypeDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب أنواع الوسائط بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<MediaTypeDTO>> GetById(Guid id)
+        [AllowAnonymous]
+        public async Task<ActionResult<Result<MediaTypeDTO>>> GetById(Guid id)
         {
             var query = new GetMediaTypeByIdQuery(id);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return NotFound(result);
-            return Ok(result.Data);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب نوع الوسائط",
+                    errorType: "GetMediaTypeByIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<MediaTypeDTO>.Ok(
+                data: result.Data,
+                message: "تم جلب نوع الوسائط بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Create(CreateMediaTypeDTO dto)
+        [Authorize]
+        public async Task<ActionResult<Result<Guid>>> CreateMediaType([FromBody] CreateMediaTypeDTO dto)
         {
             var command = new CreateMediaTypeCommand(dto);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            // return CreatedAtAction(nameof(GetById), new { id = result.Data }, result.Data);
-            return Ok(result.Data);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إنشاء نوع الوسائط",
+                    errorType: "CreateMediaTypeFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<Guid>.Ok(
+                data: result.Data,
+                message: "تم إنشاء نوع الوسائط بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<bool>> Update(Guid id, CreateMediaTypeDTO dto)
+        [Authorize]
+        public async Task<ActionResult<Result<bool>>> UpdateMediaType(Guid id, [FromBody] CreateMediaTypeDTO dto)
         {
             var command = new UpdateMediaTypeCommand(id, dto);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result.Data);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث نوع الوسائط",
+                    errorType: "UpdateMediaTypeFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<bool>.Ok(
+                data: result.Data,
+                message: "تم تحديث نوع الوسائط بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> Delete(Guid id)
+        [Authorize]
+        public async Task<ActionResult<Result<bool>>> DeleteMediaType(Guid id)
         {
             var command = new DeleteMediaTypeCommand(id);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result.Data);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف نوع الوسائط",
+                    errorType: "DeleteMediaTypeFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<bool>.Ok(
+                data: result.Data,
+                message: "تم حذف نوع الوسائط بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 } 

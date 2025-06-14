@@ -20,7 +20,17 @@ public class ProductMapper : IMapper<ProductDAO, Product>
             CategoryId = source.BaseItem?.CategoryId ?? Guid.Empty,
             IsAvailable = source.BaseItem?.IsAvailable ?? false,
             UserId = source.BaseItem?.UserId ?? Guid.Empty,
-            // Media, Favorites, and other collections can be mapped if needed
+            Features = source.ProductFeatures?.Select(f => new ProductFeature
+            {
+                Id = f.Id,
+                Name = f.Name,
+                Value = f.Value,
+                BaseItemId = source.Id,
+                CreatedAt = f.CreatedAt,
+                UpdatedAt = f.UpdatedAt
+            }).ToList() ?? new List<ProductFeature>(),
+            CreatedAt = source.CreatedAt,
+            UpdatedAt = source.UpdatedAt
         };
     }
 
@@ -40,7 +50,18 @@ public class ProductMapper : IMapper<ProductDAO, Product>
                 CategoryId = target.CategoryId,
                 IsAvailable = target.IsAvailable,
                 UserId = target.UserId
-            }
+            },
+            ProductFeatures = target.Features?.Select(f => new ProductFeatureDAO
+            {
+                Id = f.Id,
+                Name = f.Name,
+                Value = f.Value,
+                ProductId = target.Id,
+                CreatedAt = f.CreatedAt,
+                UpdatedAt = f.UpdatedAt
+            }).ToList() ?? new List<ProductFeatureDAO>(),
+            CreatedAt = target.CreatedAt,
+            UpdatedAt = target.UpdatedAt
         };
     }
 } 

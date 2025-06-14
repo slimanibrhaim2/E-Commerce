@@ -20,6 +20,7 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
     private readonly IFeatureRepository _featureRepository;
     private readonly ICategoryRepository _categoryRepository;
     private readonly IBaseItemRepository _baseItemRepository;
+    private readonly ICouponRepository _couponRepository;
 
     public CreateServiceAggregateCommandHandler(
         IUnitOfWork unitOfWork,
@@ -27,7 +28,8 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
         IMediaRepository mediaRepository,
         IFeatureRepository featureRepository,
         ICategoryRepository categoryRepository,
-        IBaseItemRepository baseItemRepository)
+        IBaseItemRepository baseItemRepository,
+        ICouponRepository couponRepository)
     {
         _unitOfWork = unitOfWork;
         _serviceRepository = serviceRepository;
@@ -35,6 +37,7 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
         _featureRepository = featureRepository;
         _categoryRepository = categoryRepository;
         _baseItemRepository = baseItemRepository;
+        _couponRepository = couponRepository;
     }
 
     public async Task<Result<Guid>> Handle(CreateServiceAggregateCommand request, CancellationToken cancellationToken)
@@ -76,7 +79,7 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
             if (baseItem == null || baseItem.CategoryId == Guid.Empty)
                 throw new Exception("فشل في إنشاء العنصر الأساسي");
 
-            // 4. Create service with BaseItemId as FK (if applicable)
+            // 4. Create service with BaseItemId as FK
             var service = new Service
             {
                 Id = Guid.NewGuid(),
@@ -88,10 +91,8 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
                 Duration = dto.Duration,
                 IsAvailable = dto.IsAvailable,
                 UserId = dto.UserId,
-                BaseItemId=baseItem.Id
+                BaseItemId = baseItem.Id
             };
-            // If Service has a BaseItemId property, set it here. If not, ensure mapping is correct in the repo/mapper.
-            // service.BaseItemId = baseItem.Id; // Uncomment if such property exists
             await _serviceRepository.AddAsync(service);
             await _unitOfWork.SaveChangesAsync();
             if (service.Id == Guid.Empty)
@@ -102,14 +103,34 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
             {
                 await _mediaRepository.AddMediaAsync(service.Id, media.Url, media.MediaTypeId);
             }
+
             // 6. Add features
             foreach (var feature in dto.Features ?? Enumerable.Empty<CreateFeatureDTO>())
             {
                 await _featureRepository.AddFeatureAsync(service.Id, feature.Name, feature.Value);
             }
+
+            // 7. Add coupons
+            foreach (var coupon in dto.Coupons ?? Enumerable.Empty<CreateCouponDTO>())
+            {
+                var couponEntity = new Coupon
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = dto.UserId,
+                    Code = coupon.Code,
+                    DiscountAmount = coupon.DiscountAmount,
+                    ExpiryDate = coupon.ExpiryDate,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+                await _couponRepository.AddAsync(couponEntity);
+                service.ApplicableCoupons ??= new List<Coupon>();
+                service.ApplicableCoupons.Add(couponEntity);
+            }
+
             await _unitOfWork.SaveChangesAsync();
             await _unitOfWork.CommitTransaction();
-            return Result<Guid>.Ok(service.Id, "تم إنشاء الخدمة مع الوسائط والميزات بنجاح", ResultStatus.Success);
+            return Result<Guid>.Ok(service.Id, "تم إنشاء الخدمة مع الوسائط والميزات والكوبونات بنجاح", ResultStatus.Success);
         }
         catch (Exception ex)
         {

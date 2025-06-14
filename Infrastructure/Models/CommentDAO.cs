@@ -12,7 +12,7 @@ public partial class CommentDAO
     public Guid BaseItemId { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
     public DateTime? DeletedAt { get; set; }
     public virtual BaseContentDAO BaseContent { get; set; } = null!;

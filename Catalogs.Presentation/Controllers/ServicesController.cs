@@ -14,11 +14,17 @@ using Catalogs.Application.Commands.UpdateService.Aggregate;
 using Catalogs.Application.Commands.UpdateService.Simple;
 using Shared.Contracts.Queries;
 using Shared.Contracts.DTOs;
+using Catalogs.Application.Queries.GetServicesByUserId;
+using Catalogs.Application.Queries.GetServicesByName;
+using Catalogs.Application.Queries.GetServicesByCategory;
+using Microsoft.AspNetCore.Authorization;
+using Core.Authentication;
 
 namespace Catalogs.Presentation.Controllers;
 
 [ApiController]
 [Route("api/services")]
+[Authorize]
 public class ServicesController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -29,6 +35,8 @@ public class ServicesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] ServiceDTO dto)
     {
+        var userId = User.GetId();
+        dto.UserId = userId;
         var result = await _mediator.Send(new CreateServiceCommand(dto));
         if (!result.Success || result.Data == Guid.Empty)
             return StatusCode(500, Result.Fail(
@@ -43,6 +51,8 @@ public class ServicesController : ControllerBase
     [HttpPost("aggregate")]
     public async Task<IActionResult> CreateAggregate([FromBody] CreateServiceAggregateDTO dto)
     {
+        var userId = User.GetId();
+        dto.UserId = userId;
         var result = await _mediator.Send(new CreateServiceAggregateCommand(dto));
         if (!result.Success || result.Data == Guid.Empty)
             return StatusCode(500, Result.Fail(
@@ -55,6 +65,7 @@ public class ServicesController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
         var pagination = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
@@ -72,6 +83,7 @@ public class ServicesController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetById(Guid id)
     {
         var query = new GetServiceByIdQuery(id);
@@ -87,6 +99,8 @@ public class ServicesController : ControllerBase
     [HttpPut("aggregate/{id}")]
     public async Task<IActionResult> UpdateAggregate(Guid id, [FromBody] CreateServiceAggregateDTO dto)
     {
+        var userId = User.GetId();
+        dto.UserId = userId;
         var result = await _mediator.Send(new UpdateServiceAggregateCommand(id, dto));
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -115,6 +129,8 @@ public class ServicesController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(Guid id, [FromBody] ServiceDTO dto)
     {
+        var userId = User.GetId();
+        dto.UserId = userId;
         var result = await _mediator.Send(new UpdateServiceSimpleCommand(id, dto));
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -141,11 +157,63 @@ public class ServicesController : ControllerBase
     }
 
     [HttpPost("by-ids")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetByIds([FromBody] IEnumerable<Guid> ids)
     {
         if (ids == null || !ids.Any())
             return BadRequest("قائمة المعرفات مطلوبة.");
         var result = await _mediator.Send(new GetServicesByIdsQuery(ids));
         return Ok(result);
+    }
+
+    [HttpGet("my-services")]
+    public async Task<IActionResult> GetMyServices([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        var userId = User.GetId();
+        var query = new GetServicesByUserIdQuery(userId, new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize });
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب خدمات المستخدم",
+                errorType: "GetServicesByUserIdFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<PaginatedResult<ServiceDTO>>.Ok(
+            data: result.Data,
+            message: "تم جلب خدمات المستخدم بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("search")]
+    [AllowAnonymous]
+    public async Task<IActionResult> SearchServices([FromQuery] string name)
+    {
+        var query = new GetServicesByNameQuery(name, new PaginationParameters { PageNumber = 1, PageSize = 10 });
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في البحث عن الخدمات",
+                errorType: "GetServicesByNameFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<IEnumerable<ServiceDTO>>.Ok(
+            data: result.Data.Data,
+            message: "تم البحث عن الخدمات بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("category/{categoryId}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetServicesByCategory(Guid categoryId)
+    {
+        var query = new GetServicesByCategoryQuery(categoryId, 1, 10);
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب خدمات الفئة",
+                errorType: "GetServicesByCategoryFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<IEnumerable<ServiceDTO>>.Ok(
+            data: result.Data.Data,
+            message: "تم جلب خدمات الفئة بنجاح",
+            resultStatus: ResultStatus.Success));
     }
 } 

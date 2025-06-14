@@ -1,26 +1,85 @@
 using MediatR;
-using Shared.Contracts.Queries;
-using Shared.Contracts.DTOs;
+using Core.Result;
+using Catalogs.Application.DTOs;
 using Catalogs.Domain.Repositories;
-using System.Collections.Generic;
+using Core.Pagination;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
+using Microsoft.Extensions.Logging;
+using System.Data;
 
-namespace Catalogs.Application.Queries.GetServicesByIds
+namespace Catalogs.Application.Queries.GetServicesByIds;
+
+public class GetServicesByIdsQueryHandler : IRequestHandler<GetServicesByIdsQuery, Result<PaginatedResult<ServiceDTO>>>
 {
-    public class GetServicesByIdsQueryHandler : IRequestHandler<GetServicesByIdsQuery, IEnumerable<ServiceDetailsDTO>>
-    {
-        private readonly IServiceRepository _serviceRepo;
-        public GetServicesByIdsQueryHandler(IServiceRepository serviceRepo)
-        {
-            _serviceRepo = serviceRepo;
-        }
+    private readonly IServiceRepository _repo;
+    private readonly ILogger<GetServicesByIdsQueryHandler> _logger;
 
-        public async Task<IEnumerable<ServiceDetailsDTO>> Handle(GetServicesByIdsQuery request, CancellationToken cancellationToken)
+    public GetServicesByIdsQueryHandler(
+        IServiceRepository repo,
+        ILogger<GetServicesByIdsQueryHandler> logger)
+    {
+        _repo = repo;
+        _logger = logger;
+    }
+
+    public async Task<Result<PaginatedResult<ServiceDTO>>> Handle(GetServicesByIdsQuery request, CancellationToken cancellationToken)
+    {
+        try
         {
-            var services = await _serviceRepo.GetByIdsAsync(request.ServiceIds);
-            return services.Select(s => new ServiceDetailsDTO
+            if (request.Ids == null || !request.Ids.Any())
+            {
+                return Result<PaginatedResult<ServiceDTO>>.Fail(
+                    message: "Service IDs list cannot be empty",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            }
+
+            if (request.Ids.Any(id => id == Guid.Empty))
+            {
+                return Result<PaginatedResult<ServiceDTO>>.Fail(
+                    message: "All service IDs must be valid GUIDs",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            }
+
+            if (request.Parameters.PageNumber < 1)
+            {
+                return Result<PaginatedResult<ServiceDTO>>.Fail(
+                    message: "Page number must be greater than or equal to 1",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            }
+
+            if (request.Parameters.PageSize < 1)
+            {
+                return Result<PaginatedResult<ServiceDTO>>.Fail(
+                    message: "Page size must be greater than or equal to 1",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            }
+
+            var services = (await _repo.GetByIdsAsync(request.Ids)).ToList();
+            
+            if (!services.Any())
+            {
+                return Result<PaginatedResult<ServiceDTO>>.Ok(
+                    data: PaginatedResult<ServiceDTO>.Create(
+                        data: new List<ServiceDTO>(),
+                        pageNumber: request.Parameters.PageNumber,
+                        pageSize: request.Parameters.PageSize,
+                        totalCount: 0),
+                    message: $"No services found for the provided IDs: {string.Join(", ", request.Ids)}",
+                    resultStatus: ResultStatus.Success);
+            }
+
+            var totalCount = services.Count;
+            var pageNumber = request.Parameters.PageNumber;
+            var pageSize = request.Parameters.PageSize;
+            var paged = services.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            
+            var dtos = paged.Select(s => new ServiceDTO
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -39,10 +98,54 @@ namespace Catalogs.Application.Queries.GetServicesByIds
                     Url = m.MediaUrl,
                     MediaTypeId = m.MediaTypeId,
                     ItemId = m.BaseItemId,
+                    MediaType = m.MediaType != null ? new MediaTypeDTO
+                    {
+                        Id = m.MediaType.Id,
+                        Name = m.MediaType.Name,
+                        CreatedAt = m.MediaType.CreatedAt,
+                        UpdatedAt = m.MediaType.UpdatedAt
+                    } : null,
                     CreatedAt = m.CreatedAt,
                     UpdatedAt = m.UpdatedAt
-                }).ToList() ?? new List<MediaDTO>()
-            });
+                }).ToList() ?? new List<MediaDTO>(),
+                Features = s.Features?.Select(f => new ServiceFeatureDTO
+                {
+                    Id = f.Id,
+                    Name = f.Name,
+                    Value = f.Value,
+                    ServiceId = s.Id,
+                    CreatedAt = f.CreatedAt,
+                    UpdatedAt = f.UpdatedAt
+                }).ToList() ?? new List<ServiceFeatureDTO>()
+            }).ToList();
+
+            var paginated = PaginatedResult<ServiceDTO>.Create(
+                data: dtos.ToList(),
+                pageNumber: pageNumber,
+                pageSize: pageSize,
+                totalCount: totalCount);
+
+            return Result<PaginatedResult<ServiceDTO>>.Ok(
+                data: paginated,
+                message: $"Successfully retrieved {dtos.Count} services out of {request.Ids.ToList().Count} requested IDs",
+                resultStatus: ResultStatus.Success);
+        }
+        catch (DBConcurrencyException ex)
+        {
+            _logger.LogError(ex, "Database error while retrieving services for IDs: {ServiceIds}", string.Join(", ", request.Ids));
+            return Result<PaginatedResult<ServiceDTO>>.Fail(
+                message: "Failed to retrieve services due to a database error. Please try again later.",
+                errorType: "DatabaseError",
+                resultStatus: ResultStatus.InternalServerError);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error while retrieving services for IDs: {ServiceIds}: {Message}", 
+                string.Join(", ", request.Ids), ex.Message);
+            return Result<PaginatedResult<ServiceDTO>>.Fail(
+                message: "An unexpected error occurred while retrieving services. Please try again later.",
+                errorType: "UnexpectedError",
+                resultStatus: ResultStatus.Failed);
         }
     }
 } 

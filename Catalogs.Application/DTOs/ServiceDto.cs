@@ -14,4 +14,5 @@ public class ServiceDTO
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public List<MediaDTO> Media { get; set; }
+    public List<ServiceFeatureDTO> Features { get; set; }
 } 
