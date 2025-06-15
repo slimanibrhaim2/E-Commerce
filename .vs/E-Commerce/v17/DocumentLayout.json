@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{893C2AA4-C5F6-478D-91A1-07CAFCD2D181}|Users.Presentation\\Users.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.presentation\\controllers\\followerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{893C2AA4-C5F6-478D-91A1-07CAFCD2D181}|Users.Presentation\\Users.Presentation.csproj|solutionrelative:users.presentation\\controllers\\followerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AE81434E-7605-4257-B7E2-4502D39AC5B6}|User.Infrastructure\\Users.Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\user.infrastructure\\repositories\\followerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AE81434E-7605-4257-B7E2-4502D39AC5B6}|User.Infrastructure\\Users.Infrastructure.csproj|solutionrelative:user.infrastructure\\repositories\\followerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\commands\\deletefollower\\deletefollowercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|solutionrelative:users.application\\commands\\deletefollower\\deletefollowercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\webapi\\authentication\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|solutionrelative:webapi\\authentication\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FollowerRepository.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\Repositories\\FollowerRepository.cs",
-              "RelativeDocumentMoniker": "User.Infrastructure\\Repositories\\FollowerRepository.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\Repositories\\FollowerRepository.cs",
-              "RelativeToolTip": "User.Infrastructure\\Repositories\\FollowerRepository.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAADgvw8AAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T22:09:52.799Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DeleteFollowerCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Commands\\DeleteFollower\\DeleteFollowerCommandHandler.cs",
-              "RelativeDocumentMoniker": "Users.Application\\Commands\\DeleteFollower\\DeleteFollowerCommandHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Commands\\DeleteFollower\\DeleteFollowerCommandHandler.cs*",
-              "RelativeToolTip": "Users.Application\\Commands\\DeleteFollower\\DeleteFollowerCommandHandler.cs*",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T22:09:25.221Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FollowersController.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\FollowersController.cs",
-              "RelativeDocumentMoniker": "Users.Presentation\\Controllers\\FollowersController.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\FollowersController.cs*",
-              "RelativeToolTip": "Users.Presentation\\Controllers\\FollowersController.cs*",
-              "ViewState": "AgIAABcAAAAAAAAAAAAQwCwAAAAmAAAAAAAAAA==",
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Authentication\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "WebApi\\Authentication\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Authentication\\Controllers\\AuthController.cs*",
+              "RelativeToolTip": "WebApi\\Authentication\\Controllers\\AuthController.cs*",
+              "ViewState": "AgIAAE4AAAAAAAAAAAA4wFwAAABxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T22:08:06.982Z",
+              "WhenOpened": "2025-06-15T11:45:56.268Z",
               "EditorCaption": ""
             }
           ]

@@ -29,7 +29,7 @@ public class CreateUserCommandHandlerTests
             FirstName = "أحمد",
             LastName = "علي",
             Email = "ahmed@example.com",
-            PhoneNumber = "0123456789"
+            PhoneNumber = "0923456789"
         };
         _userRepoMock.Setup(r => r.GetByEmail(dto.Email)).ReturnsAsync((User)null);
         _userRepoMock.Setup(r => r.AddAsync(It.IsAny<User>())).Returns(Task.CompletedTask);
@@ -142,7 +142,7 @@ public class CreateUserCommandHandlerTests
             FirstName = "أحمد",
             LastName = "علي",
             Email = "ahmed@example.com",
-            PhoneNumber = "0123456789"
+            PhoneNumber = "0923456789"
         };
         _userRepoMock.Setup(r => r.GetByEmail(dto.Email)).ReturnsAsync(new User());
         var handler = CreateHandler();
@@ -209,7 +209,7 @@ public class CreateUserCommandHandlerTests
             FirstName = "أحمد",
             LastName = "علي",
             Email = "ahmed@example.com",
-            PhoneNumber = "0123456789"
+            PhoneNumber = "0923456789"
         };
         _userRepoMock.Setup(r => r.GetByEmail(dto.Email)).ThrowsAsync(new Exception("DB error"));
         var handler = CreateHandler();

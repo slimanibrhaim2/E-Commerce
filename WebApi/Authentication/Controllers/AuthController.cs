@@ -86,7 +86,24 @@ namespace WebApi.Authentication.Controllers
                     return BadRequest(result);
                 }
 
-                return Ok(result);
+                // Send OTP after successful registration
+                var otpResult = await _otpService.SendOtpAsync(command.userDTO.PhoneNumber);
+                if (!otpResult)
+                {
+                    _logger.LogWarning("Failed to send OTP after registration for {PhoneNumber}", command.userDTO.PhoneNumber);
+                    // Still return success for registration, but with a warning about OTP
+                    return Ok(new { 
+                        message = "User registered successfully, but failed to send verification OTP. Please try logging in.",
+                        registrationSuccess = true,
+                        otpSent = false
+                    });
+                }
+
+                return Ok(new { 
+                    message = "User registered successfully. Please verify your phone number with the OTP sent.",
+                    registrationSuccess = true,
+                    otpSent = true
+                });
             }
             catch (Exception ex)
             {
