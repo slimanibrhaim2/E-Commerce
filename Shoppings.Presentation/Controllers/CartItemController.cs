@@ -6,43 +6,83 @@ using Shoppings.Application.DTOs;
 using Shoppings.Domain.Entities;
 using Core.Pagination;
 using Core.Result;
-using Shoppings.Application.Queries.GetAllCartItem;
+using Microsoft.AspNetCore.Authorization;
+using Core.Authentication;
+using Microsoft.Extensions.Logging;
 using Shoppings.Application.Commands;
+using Shoppings.Application.Queries.GetAllCartItem;
 
 namespace Shoppings.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CartItemController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public CartItemController(IMediator mediator)
+        private readonly ILogger<CartItemController> _logger;
+
+        public CartItemController(IMediator mediator, ILogger<CartItemController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost]
         public async Task<ActionResult<Result<Guid>>> CreateCartItem([FromBody] CreateCartItemDTO dto)
         {
-            var command = new CreateCartItemCommand(dto.CartId, dto.BaseItemId, dto.Quantity);
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            try
+            {
+                var command = new CreateCartItemCommand(dto.CartId, dto.BaseItemId, dto.Quantity);
+                var result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating cart item for user {UserId}", User.GetId());
+                return StatusCode(500, Result<Guid>.Fail(
+                    message: "فشل في إضافة عنصر إلى سلة التسوق",
+                    errorType: "CreateCartItemFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Result<bool>>> UpdateCartItem(Guid id, [FromBody] CreateCartItemDTO dto)
         {
-            var command = new UpdateCartItemCommand(id, dto.Quantity);
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            try
+            {
+                var command = new UpdateCartItemCommand(id, dto.Quantity);
+                var result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating cart item {CartItemId} for user {UserId}", id, User.GetId());
+                return StatusCode(500, Result<bool>.Fail(
+                    message: "فشل في تحديث عنصر سلة التسوق",
+                    errorType: "UpdateCartItemFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Result<bool>>> DeleteCartItem(Guid id)
         {
-            var command = new DeleteCartItemCommand(id);
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            try
+            {
+                var command = new DeleteCartItemCommand(id);
+                var result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting cart item {CartItemId} for user {UserId}", id, User.GetId());
+                return StatusCode(500, Result<bool>.Fail(
+                    message: "فشل في حذف عنصر من سلة التسوق",
+                    errorType: "DeleteCartItemFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
         }
 
         [HttpGet]

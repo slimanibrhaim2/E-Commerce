@@ -41,9 +41,9 @@ namespace Users.Application.Commands.DeleteUser
                 {
                     _logger.LogWarning("User not found with ID: {UserId}", request.Id);
                     return Result.Fail(
-                        message: "المستخدم غير موجود",
+                        message: "لم يتم العثور على المستخدم",
                         errorType: "NotFound",
-                        resultStatus: ResultStatus.ValidationError);
+                        resultStatus: ResultStatus.NotFound);
                 }
 
                 // Remove all followers
@@ -60,20 +60,19 @@ namespace Users.Application.Commands.DeleteUser
                     user.Addresses.Clear();
                 }
 
-                
-                _repo.Update(user);
+                _repo.Remove(user);
                 await _uow.SaveChangesAsync();
 
-                _logger.LogInformation("Successfully soft deleted user with ID: {UserId}", request.Id);
+                _logger.LogInformation("Successfully deleted user with ID: {UserId}", user.Id);
                 return Result.Ok(
-                    message: "تم حذف المستخدم بنجاح",
+                    message: "تم حذف الحساب بنجاح",
                     resultStatus: ResultStatus.Success);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error deleting user with ID: {UserId}", request.Id);
                 return Result.Fail(
-                    message: "فشل في حذف المستخدم",
+                    message: "حدث خطأ أثناء حذف الحساب",
                     errorType: "DeleteFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);

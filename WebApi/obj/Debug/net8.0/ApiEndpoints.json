@@ -698,13 +698,7 @@
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "Shoppings.Application.DTOs.CreateCartDTO",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": [
       {
         "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
@@ -759,11 +753,6 @@
       {
         "Name": "id",
         "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "Shoppings.Application.DTOs.CreateCartDTO",
         "IsRequired": true
       }
     ],
@@ -2372,8 +2361,8 @@
         "IsRequired": true
       },
       {
-        "Name": "dto",
-        "Type": "Shoppings.Application.DTOs.CreateOrderDTO",
+        "Name": "orderActivity",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
@@ -2443,7 +2432,7 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.OrderActivityController",
-    "Method": "Create",
+    "Method": "CreateOrderActivity",
     "RelativePath": "api/OrderActivity",
     "HttpMethod": "POST",
     "IsController": true,
@@ -2457,7 +2446,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Shoppings.Domain.Entities.OrderActivity",
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2500,7 +2489,7 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.OrderActivityController",
-    "Method": "Update",
+    "Method": "UpdateOrderActivity",
     "RelativePath": "api/OrderActivity/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -2531,7 +2520,7 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.OrderActivityController",
-    "Method": "Delete",
+    "Method": "DeleteOrderActivity",
     "RelativePath": "api/OrderActivity/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -2654,7 +2643,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Shoppings.Domain.Entities.OrderItem",
+        "Type": "Core.Result.Result\u00601[[Shoppings.Domain.Entities.OrderItem, Shoppings.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2723,7 +2712,7 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.OrderStatusController",
-    "Method": "Create",
+    "Method": "CreateOrderStatus",
     "RelativePath": "api/OrderStatus",
     "HttpMethod": "POST",
     "IsController": true,
@@ -2737,7 +2726,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Shoppings.Domain.Entities.OrderStatus",
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2780,7 +2769,7 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.OrderStatusController",
-    "Method": "Update",
+    "Method": "UpdateOrderStatus",
     "RelativePath": "api/OrderStatus/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -2811,7 +2800,7 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.OrderStatusController",
-    "Method": "Delete",
+    "Method": "DeleteOrderStatus",
     "RelativePath": "api/OrderStatus/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,

@@ -44,7 +44,7 @@ namespace Users.Application.Commands.UpdateUser
                 {
                     _logger.LogWarning("Invalid FirstName");
                     return Result.Fail(
-                        message: "الاسم الأول مطلوب",
+                        message: "يرجى إدخال الاسم الأول",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -53,16 +53,7 @@ namespace Users.Application.Commands.UpdateUser
                 {
                     _logger.LogWarning("Invalid LastName");
                     return Result.Fail(
-                        message: "الاسم الأخير مطلوب",
-                        errorType: "ValidationError",
-                        resultStatus: ResultStatus.ValidationError);
-                }
-
-                if (string.IsNullOrWhiteSpace(request.User.Email))
-                {
-                    _logger.LogWarning("Invalid Email");
-                    return Result.Fail(
-                        message: "البريد الإلكتروني مطلوب",
+                        message: "يرجى إدخال الاسم الأخير",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -71,40 +62,47 @@ namespace Users.Application.Commands.UpdateUser
                 {
                     _logger.LogWarning("Invalid PhoneNumber");
                     return Result.Fail(
-                        message: "رقم الهاتف مطلوب",
+                        message: "يرجى إدخال رقم الهاتف",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
 
-                // Email format validation
-                if (!IsValidEmail(request.User.Email))
-                {
-                    _logger.LogWarning("Invalid email format: {Email}", request.User.Email);
-                    return Result.Fail(
-                        message: "صيغة البريد الإلكتروني غير صحيحة",
-                        errorType: "ValidationError",
-                        resultStatus: ResultStatus.ValidationError);
-                }
-
-                // Phone number format validation
                 if (!IsValidPhoneNumber(request.User.PhoneNumber))
                 {
-                    _logger.LogWarning("Invalid phone number format: {PhoneNumber}", request.User.PhoneNumber);
+                    _logger.LogWarning("Invalid PhoneNumber format");
                     return Result.Fail(
-                        message: "صيغة رقم الهاتف غير صحيحة",
+                        message: "يرجى إدخال رقم هاتف صحيح (يبدأ بـ 09 ويتكون من 10 أرقام)",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
 
-                // Load user
+                if (string.IsNullOrWhiteSpace(request.User.Email))
+                {
+                    _logger.LogWarning("Invalid Email");
+                    return Result.Fail(
+                        message: "يرجى إدخال البريد الإلكتروني",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
+                if (!IsValidEmail(request.User.Email))
+                {
+                    _logger.LogWarning("Invalid Email format");
+                    return Result.Fail(
+                        message: "يرجى إدخال بريد إلكتروني صحيح",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
+                // Load user with details
                 var user = await _repo.GetByIdWithDetails(request.Id);
                 if (user is null)
                 {
                     _logger.LogWarning("User not found with ID: {UserId}", request.Id);
                     return Result.Fail(
-                        message: "المستخدم غير موجود",
+                        message: "لم يتم العثور على المستخدم",
                         errorType: "NotFound",
-                        resultStatus: ResultStatus.ValidationError);
+                        resultStatus: ResultStatus.NotFound);
                 }
 
                 // Check email uniqueness if changed
@@ -130,21 +128,19 @@ namespace Users.Application.Commands.UpdateUser
                 user.ProfilePhoto = request.User.ProfilePhoto;
                 user.Description = request.User.Description;
 
-               
-
                 _repo.Update(user);
                 await _uow.SaveChangesAsync();
 
                 _logger.LogInformation("Successfully updated user with ID: {UserId}", user.Id);
                 return Result.Ok(
-                    message: "تم تحديث بيانات المستخدم بنجاح",
+                    message: "تم تحديث بيانات الحساب بنجاح",
                     resultStatus: ResultStatus.Success);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error updating user with ID: {UserId}", request.Id);
                 return Result.Fail(
-                    message: "فشل في تحديث بيانات المستخدم",
+                    message: "حدث خطأ أثناء تحديث بيانات الحساب",
                     errorType: "UpdateFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);

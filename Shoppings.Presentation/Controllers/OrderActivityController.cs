@@ -7,41 +7,80 @@ using Shoppings.Domain.Entities;
 using Shoppings.Application.Commands;
 using Shoppings.Application.Queries.GetAllOrderActivity;
 using Shoppings.Application.Queries.GetOrderActivityById;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 
 namespace Shoppings.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class OrderActivityController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public OrderActivityController(IMediator mediator)
+        private readonly ILogger<OrderActivityController> _logger;
+
+        public OrderActivityController(IMediator mediator, ILogger<OrderActivityController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost]
-        public async Task<ActionResult<OrderActivity>> Create([FromBody] CreateOrderActivityDTO dto)
+        public async Task<ActionResult<Result<Guid>>> CreateOrderActivity([FromBody] CreateOrderActivityDTO dto)
         {
-            var command = new CreateOrderActivityCommand(dto.StatusId);
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            try
+            {
+                var command = new CreateOrderActivityCommand( dto.StatusId);
+                var result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating order activity");
+                return StatusCode(500, Result<Guid>.Fail(
+                    message: "فشل في إنشاء نشاط الطلب",
+                    errorType: "CreateOrderActivityFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Result<bool>>> Update(Guid id, [FromBody] CreateOrderActivityDTO dto)
+        public async Task<ActionResult<Result<bool>>> UpdateOrderActivity(Guid id, [FromBody] CreateOrderActivityDTO dto)
         {
-            var command = new UpdateOrderActivityCommand (id, dto.StatusId );
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            try
+            {
+                var command = new UpdateOrderActivityCommand(id, dto.StatusId);
+                var result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating order activity {OrderActivityId}", id);
+                return StatusCode(500, Result<bool>.Fail(
+                    message: "فشل في تحديث نشاط الطلب",
+                    errorType: "UpdateOrderActivityFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Result<bool>>> Delete(Guid id)
+        public async Task<ActionResult<Result<bool>>> DeleteOrderActivity(Guid id)
         {
-            var command = new DeleteOrderActivityCommand ( id );
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            try
+            {
+                var command = new DeleteOrderActivityCommand(id);
+                var result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting order activity {OrderActivityId}", id);
+                return StatusCode(500, Result<bool>.Fail(
+                    message: "فشل في حذف نشاط الطلب",
+                    errorType: "DeleteOrderActivityFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
         }
 
         [HttpGet]

@@ -32,7 +32,7 @@ namespace Users.Application.Commands.CreateUser
                 {
                     _logger.LogWarning("Invalid FirstName");
                     return Result<Guid>.Fail(
-                        message: "الاسم الأول مطلوب",
+                        message: "يرجى إدخال الاسم الأول",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -41,16 +41,7 @@ namespace Users.Application.Commands.CreateUser
                 {
                     _logger.LogWarning("Invalid LastName");
                     return Result<Guid>.Fail(
-                        message: "الاسم الأخير مطلوب",
-                        errorType: "ValidationError",
-                        resultStatus: ResultStatus.ValidationError);
-                }
-
-                if (string.IsNullOrWhiteSpace(request.userDTO.Email))
-                {
-                    _logger.LogWarning("Invalid Email");
-                    return Result<Guid>.Fail(
-                        message: "البريد الإلكتروني مطلوب",
+                        message: "يرجى إدخال الاسم الأخير",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -59,27 +50,34 @@ namespace Users.Application.Commands.CreateUser
                 {
                     _logger.LogWarning("Invalid PhoneNumber");
                     return Result<Guid>.Fail(
-                        message: "رقم الهاتف مطلوب",
+                        message: "يرجى إدخال رقم الهاتف",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
 
-                // Email format validation
-                if (!IsValidEmail(request.userDTO.Email))
-                {
-                    _logger.LogWarning("Invalid email format: {Email}", request.userDTO.Email);
-                    return Result<Guid>.Fail(
-                        message: "صيغة البريد الإلكتروني غير صحيحة",
-                        errorType: "ValidationError",
-                        resultStatus: ResultStatus.ValidationError);
-                }
-
-                // Phone number format validation (basic check)
                 if (!IsValidPhoneNumber(request.userDTO.PhoneNumber))
                 {
-                    _logger.LogWarning("Invalid phone number format: {PhoneNumber}", request.userDTO.PhoneNumber);
+                    _logger.LogWarning("Invalid PhoneNumber format");
                     return Result<Guid>.Fail(
-                        message: "صيغة رقم الهاتف غير صحيحة",
+                        message: "يرجى إدخال رقم هاتف صحيح (يبدأ بـ 09 ويتكون من 10 أرقام)",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
+                if (string.IsNullOrWhiteSpace(request.userDTO.Email))
+                {
+                    _logger.LogWarning("Invalid Email");
+                    return Result<Guid>.Fail(
+                        message: "يرجى إدخال البريد الإلكتروني",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
+                if (!IsValidEmail(request.userDTO.Email))
+                {
+                    _logger.LogWarning("Invalid Email format");
+                    return Result<Guid>.Fail(
+                        message: "يرجى إدخال بريد إلكتروني صحيح",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -90,7 +88,7 @@ namespace Users.Application.Commands.CreateUser
                 {
                     _logger.LogWarning("Email already exists: {Email}", request.userDTO.Email);
                     return Result<Guid>.Fail(
-                        message: $"البريد الإلكتروني '{request.userDTO.Email}' مستخدم بالفعل",
+                        message: "البريد الإلكتروني مسجل مسبقاً في النظام",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -108,22 +106,20 @@ namespace Users.Application.Commands.CreateUser
                     Description = request.userDTO.Description,
                 };
 
-                
-
                 await _repo.AddAsync(user);
                 await _uow.SaveChangesAsync();
 
                 _logger.LogInformation("Successfully created user with ID: {UserId}", user.Id);
                 return Result<Guid>.Ok(
                     data: user.Id,
-                    message: "تم إنشاء المستخدم بنجاح",
+                    message: "تم إنشاء الحساب بنجاح",
                     resultStatus: ResultStatus.Success);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error creating user");
                 return Result<Guid>.Fail(
-                    message: "فشل في إنشاء المستخدم",
+                    message: "حدث خطأ أثناء إنشاء الحساب",
                     errorType: "CreateUserFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);

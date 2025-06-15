@@ -41,13 +41,13 @@ public class GetUsersByNameQueryHandler : IRequestHandler<GetUsersByNameQuery, R
             var paginated = PaginatedResult<UserDTO>.Create(dtos, pageNumber, pageSize, totalCount);
             return Result<PaginatedResult<UserDTO>>.Ok(
                 data: paginated,
-                message: "Users retrieved successfully",
+                message: "تم العثور على المستخدمين بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<PaginatedResult<UserDTO>>.Fail(
-                message: $"Failed to get users: {ex.Message}",
+                message: "حدث خطأ أثناء البحث عن المستخدمين",
                 errorType: "GetUsersByNameFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

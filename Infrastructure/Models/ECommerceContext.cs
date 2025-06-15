@@ -447,6 +447,9 @@ public partial class ECommerceContext : DbContext
             entity.Property(e => e.Email).HasMaxLength(100).IsRequired();
             entity.Property(e => e.ProfilePhoto).HasMaxLength(500);
             entity.Property(e => e.Description).HasMaxLength(1000);
+
+            // Add unique index for PhoneNumber
+            entity.HasIndex(e => e.PhoneNumber).IsUnique();
         });
 
         modelBuilder.Entity<UserDAO>()

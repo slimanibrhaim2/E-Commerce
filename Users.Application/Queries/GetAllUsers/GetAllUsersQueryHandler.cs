@@ -63,7 +63,7 @@ namespace Users.Application.Queries.GetAllUsers
             catch (Exception ex)
             {
                 return Result<PaginatedResult<UserDTO>>.Fail(
-                    message: ex.Message,
+                    message: "حدث خطأ أثناء استرجاع قائمة المستخدمين",
                     errorType: "GetAllFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);
