@@ -1,6 +1,7 @@
 using Catalogs.Domain.Entities;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Catalogs.Infrastructure.Data
 {
