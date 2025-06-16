@@ -26,21 +26,21 @@ public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand,
             if (entity == null)
             {
                 return Result<bool>.Fail(
-                    message: "Comment not found",
+                    message: "التعليق غير موجود",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
             if (request.Comment.BaseContentId == Guid.Empty)
             {
                 return Result<bool>.Fail(
-                    message: "BaseContentId is required",
+                    message: "معرف المحتوى الأساسي مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
             if (request.Comment.BaseItemId == Guid.Empty)
             {
                 return Result<bool>.Fail(
-                    message: "BaseItemId is required",
+                    message: "معرف العنصر الأساسي مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -51,13 +51,13 @@ public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand,
             await _unitOfWork.SaveChangesAsync();
             return Result<bool>.Ok(
                 data: true,
-                message: "Comment updated successfully",
+                message: "تم تحديث التعليق بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<bool>.Fail(
-                message: $"Failed to update comment: {ex.Message}",
+                message: $"فشل في تحديث التعليق: {ex.Message}",
                 errorType: "UpdateCommentFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

@@ -22,7 +22,7 @@ public class GetConversationByIdQueryHandler : IRequestHandler<GetConversationBy
             if (conversation == null)
             {
                 return Result<ConversationDTO>.Fail(
-                    message: "Conversation not found",
+                    message: "المحادثة غير موجودة",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
@@ -38,13 +38,13 @@ public class GetConversationByIdQueryHandler : IRequestHandler<GetConversationBy
 
             return Result<ConversationDTO>.Ok(
                 data: dto,
-                message: "Conversation found successfully",
+                message: "تم العثور على المحادثة بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<ConversationDTO>.Fail(
-                message: $"Failed to get conversation: {ex.Message}",
+                message: $"فشل في جلب المحادثة: {ex.Message}",
                 errorType: "GetConversationFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

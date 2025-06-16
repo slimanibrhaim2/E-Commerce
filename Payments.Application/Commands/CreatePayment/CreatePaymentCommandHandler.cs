@@ -20,13 +20,13 @@ namespace Payments.Application.Commands.Handlers
         public async Task<Result<Guid>> Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
         {
             if (request.OrderId == Guid.Empty)
-                return Result<Guid>.Fail("OrderId is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("معرف الطلب مطلوب.", "ValidationError", ResultStatus.ValidationError);
             if (request.PaymentMethodId == Guid.Empty)
-                return Result<Guid>.Fail("PaymentMethodId is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("طريقة الدفع مطلوبة.", "ValidationError", ResultStatus.ValidationError);
             if (request.StatusId == Guid.Empty)
-                return Result<Guid>.Fail("StatusId is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("حالة الدفع مطلوبة.", "ValidationError", ResultStatus.ValidationError);
             if (request.Amount <= 0)
-                return Result<Guid>.Fail("Amount must be greater than 0.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("يجب أن يكون المبلغ أكبر من صفر.", "ValidationError", ResultStatus.ValidationError);
             var payment = new Payment
             {
                 Id = Guid.NewGuid(),
@@ -39,7 +39,7 @@ namespace Payments.Application.Commands.Handlers
             };
             await _paymentRepository.AddAsync(payment);
             await _unitOfWork.SaveChangesAsync();
-            return Result<Guid>.Ok(payment.Id, "added", ResultStatus.Success);
+            return Result<Guid>.Ok(payment.Id, "تم إضافة الدفع بنجاح", ResultStatus.Success);
         }
     }
 } 

@@ -43,13 +43,13 @@ public class GetAllCommentsQueryHandler : IRequestHandler<GetAllCommentsQuery, R
             var paginated = Core.Pagination.PaginatedResult<CommentDTO>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
             return Result<PaginatedResult<CommentDTO>>.Ok(
                 paginated,
-                message: "Comments retrieved successfully",
+                message: "تم جلب التعليقات بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<PaginatedResult<CommentDTO>>.Fail(
-                message: $"Failed to get comments: {ex.Message}",
+                message: $"فشل في جلب التعليقات: {ex.Message}",
                 errorType: "GetAllCommentsFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

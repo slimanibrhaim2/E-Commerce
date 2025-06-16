@@ -22,7 +22,7 @@ namespace Payments.Application.Queries.GetAllPaymentMethods
                           .Take(request.Parameters.PageSize)
                           .ToList();
             var paginated = PaginatedResult<PaymentMethod>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
-            return Result<PaginatedResult<PaymentMethod>>.Ok(paginated, "success", ResultStatus.Success);
+            return Result<PaginatedResult<PaymentMethod>>.Ok(paginated, "تم جلب طرق الدفع بنجاح", ResultStatus.Success);
         }
     }
 } 

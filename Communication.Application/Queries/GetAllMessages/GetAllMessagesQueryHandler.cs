@@ -42,13 +42,13 @@ public class GetAllMessagesQueryHandler : IRequestHandler<GetAllMessagesQuery, R
             var paginated = Core.Pagination.PaginatedResult<MessageDTO>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
             return Result<PaginatedResult<MessageDTO>>.Ok(
                 paginated,
-                message: "Messages retrieved successfully",
+                message: "تم جلب الرسائل بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<PaginatedResult<MessageDTO>>.Fail(
-                message: $"Failed to get messages: {ex.Message}",
+                message: $"فشل في جلب الرسائل: {ex.Message}",
                 errorType: "GetAllMessagesFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

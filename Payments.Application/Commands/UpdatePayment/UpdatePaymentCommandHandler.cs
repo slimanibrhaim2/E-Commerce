@@ -20,18 +20,18 @@ namespace Payments.Application.Commands.Handlers
         public async Task<Result<bool>> Handle(UpdatePaymentCommand request, CancellationToken cancellationToken)
         {
             if (request.Id == Guid.Empty)
-                return Result<bool>.Fail("Id is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<bool>.Fail("المعرف مطلوب.", "ValidationError", ResultStatus.ValidationError);
             if (request.OrderId == Guid.Empty)
-                return Result<bool>.Fail("OrderId is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<bool>.Fail("معرف الطلب مطلوب.", "ValidationError", ResultStatus.ValidationError);
             if (request.PaymentMethodId == Guid.Empty)
-                return Result<bool>.Fail("PaymentMethodId is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<bool>.Fail("طريقة الدفع مطلوبة.", "ValidationError", ResultStatus.ValidationError);
             if (request.StatusId == Guid.Empty)
-                return Result<bool>.Fail("StatusId is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<bool>.Fail("حالة الدفع مطلوبة.", "ValidationError", ResultStatus.ValidationError);
             if (request.Amount <= 0)
-                return Result<bool>.Fail("Amount must be greater than 0.", "ValidationError", ResultStatus.ValidationError);
+                return Result<bool>.Fail("يجب أن يكون المبلغ أكبر من صفر.", "ValidationError", ResultStatus.ValidationError);
             var payment = await _paymentRepository.GetByIdAsync(request.Id);
             if (payment == null)
-                return Result<bool>.Fail("Payment not found.", "NotFound", ResultStatus.NotFound);
+                return Result<bool>.Fail("الدفع غير موجود.", "NotFound", ResultStatus.NotFound);
             payment.OrderId = request.OrderId;
             payment.Amount = request.Amount;
             payment.PaymentMethodId = request.PaymentMethodId;
@@ -39,7 +39,7 @@ namespace Payments.Application.Commands.Handlers
             payment.UpdatedAt = DateTime.UtcNow;
             _paymentRepository.Update(payment);
             await _unitOfWork.SaveChangesAsync();
-            return Result<bool>.Ok(true, "updated", ResultStatus.Success);
+            return Result<bool>.Ok(true, "تم تحديث الدفع بنجاح", ResultStatus.Success);
         }
     }
 } 

@@ -24,7 +24,7 @@ public class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand,
             if (comment == null)
             {
                 return Result<bool>.Fail(
-                    message: "Comment not found",
+                    message: "التعليق غير موجود",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
@@ -32,13 +32,13 @@ public class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand,
             await _unitOfWork.SaveChangesAsync();
             return Result<bool>.Ok(
                 data: true,
-                message: "Comment deleted successfully",
+                message: "تم حذف التعليق بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<bool>.Fail(
-                message: $"Failed to delete comment: {ex.Message}",
+                message: $"فشل في حذف التعليق: {ex.Message}",
                 errorType: "DeleteCommentFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

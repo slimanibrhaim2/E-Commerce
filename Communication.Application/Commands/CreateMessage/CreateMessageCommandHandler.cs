@@ -25,21 +25,21 @@ public class CreateMessageCommandHandler : IRequestHandler<CreateMessageCommand,
             if (request.Message.ConversationId == Guid.Empty)
             {
                 return Result<Guid>.Fail(
-                    message: "ConversationId is required",
+                    message: "معرف المحادثة مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
             if (request.Message.SenderId == Guid.Empty)
             {
                 return Result<Guid>.Fail(
-                    message: "SenderId is required",
+                    message: "معرف المرسل مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
             if (request.Message.BaseContentId == Guid.Empty)
             {
                 return Result<Guid>.Fail(
-                    message: "BaseContentId is required",
+                    message: "معرف المحتوى الأساسي مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -59,13 +59,13 @@ public class CreateMessageCommandHandler : IRequestHandler<CreateMessageCommand,
 
             return Result<Guid>.Ok(
                 data: message.Id,
-                message: "Message created successfully",
+                message: "تم إنشاء الرسالة بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<Guid>.Fail(
-                message: $"Failed to create message: {ex.Message}",
+                message: $"فشل في إنشاء الرسالة: {ex.Message}",
                 errorType: "CreateMessageFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

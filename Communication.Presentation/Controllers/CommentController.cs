@@ -13,11 +13,13 @@ using Core.Pagination;
 using Communication.Application.Commands.AddCommentAggregate;
 using Communication.Application.Commands.UpdateCommentAggregate;
 using Communication.Application.Commands.DeleteCommentAggregate;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Communication.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CommentController : ControllerBase
     {
         private readonly IMediator _mediator;

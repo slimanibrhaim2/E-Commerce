@@ -20,17 +20,17 @@ namespace Payments.Application.Commands.Handlers
         public async Task<Result<bool>> Handle(UpdatePaymentStatusCommand request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(request.Name))
-                return Result<bool>.Fail("Name is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<bool>.Fail("الاسم مطلوب.", "ValidationError", ResultStatus.ValidationError);
             if (request.Name.Length > 100)
-                return Result<bool>.Fail("Name cannot exceed 100 characters.", "ValidationError", ResultStatus.ValidationError);
+                return Result<bool>.Fail("لا يمكن أن يتجاوز الاسم 100 حرف.", "ValidationError", ResultStatus.ValidationError);
             var status = await _paymentStatusRepository.GetByIdAsync(request.Id);
             if (status == null)
-                return Result<bool>.Fail("Payment status not found.", "NotFound", ResultStatus.NotFound);
+                return Result<bool>.Fail("حالة الدفع غير موجودة.", "NotFound", ResultStatus.NotFound);
             status.Name = request.Name;
             status.UpdatedAt = DateTime.UtcNow;
             _paymentStatusRepository.Update(status);
             await _unitOfWork.SaveChangesAsync();
-            return Result<bool>.Ok(true, "updated", ResultStatus.Success);
+            return Result<bool>.Ok(true, "تم تحديث حالة الدفع بنجاح", ResultStatus.Success);
         }
     }
 } 

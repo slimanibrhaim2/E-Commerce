@@ -23,6 +23,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using WebApi.Authentication.Controllers;
 using WebApi.Authentication.Services;
 using Microsoft.OpenApi.Models;
+using Payments.Infrastructure.Data;
+using Shoppings.Infrastructure.Data;
+using Communication.Infrastructure.Data;
+using Catalogs.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,7 +39,6 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 
 // Add Authentication Services
 builder.Services.AddAuthenticationServices(builder.Configuration);
-
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddUsersApplication();
@@ -80,7 +83,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -96,5 +98,25 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Seed Data
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        await Payments.Infrastructure.Data.SeedData.SeedPaymentData(services);
+        await Shoppings.Infrastructure.Data.SeedData.SeedShoppingData(services);
+        await Communication.Infrastructure.Data.SeedData.SeedCommunicationData(services);
+        await Catalogs.Infrastructure.Data.SeedData.SeedMediaTypes(services);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database. Error details: {Message}", ex.Message);
+        // Re-throw the exception to see it in the console
+        throw;
+    }
+}
 
 app.Run();

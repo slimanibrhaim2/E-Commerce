@@ -9,11 +9,13 @@ using Communication.Application.Commands.DeleteBaseContent;
 using Communication.Application.Queries.GetBaseContentById;
 using Communication.Application.Queries.GetAllBaseContents;
 using Core.Pagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Communication.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class BaseContentController : ControllerBase
     {
         private readonly IMediator _mediator;

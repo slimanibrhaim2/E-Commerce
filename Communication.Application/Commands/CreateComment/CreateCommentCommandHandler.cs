@@ -25,14 +25,14 @@ public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand,
             if (request.Comment.BaseContentId == Guid.Empty)
             {
                 return Result<Guid>.Fail(
-                    message: "BaseContentId is required",
+                    message: "معرف المحتوى الأساسي مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
             if (request.Comment.BaseItemId == Guid.Empty)
             {
                 return Result<Guid>.Fail(
-                    message: "BaseItemId is required",
+                    message: "معرف العنصر الأساسي مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -50,13 +50,13 @@ public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand,
 
             return Result<Guid>.Ok(
                 data: comment.Id,
-                message: "Comment created successfully",
+                message: "تم إنشاء التعليق بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<Guid>.Fail(
-                message: $"Failed to create comment: {ex.Message}",
+                message: $"فشل في إنشاء التعليق: {ex.Message}",
                 errorType: "CreateCommentFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

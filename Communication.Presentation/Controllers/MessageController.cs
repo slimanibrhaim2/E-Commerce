@@ -12,11 +12,13 @@ using Core.Pagination;
 using Communication.Application.Commands.AddMessageAggregate;
 using Communication.Application.Commands.UpdateMessageAggregate;
 using Communication.Application.Commands.DeleteMessageAggregate;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Communication.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class MessageController : ControllerBase
     {
         private readonly IMediator _mediator;

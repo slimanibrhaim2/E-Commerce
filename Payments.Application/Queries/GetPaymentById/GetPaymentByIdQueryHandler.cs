@@ -16,11 +16,11 @@ namespace Payments.Application.Queries.GetPaymentById
         public async Task<Result<Payment>> Handle(GetPaymentByIdQuery request, CancellationToken cancellationToken)
         {
             if (request.Id == Guid.Empty)
-                return Result<Payment>.Fail("Id is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Payment>.Fail("المعرف مطلوب.", "ValidationError", ResultStatus.ValidationError);
             var payment = await _paymentRepository.GetByIdAsync(request.Id);
             if (payment == null)
-                return Result<Payment>.Fail("Payment not found.", "NotFound", ResultStatus.NotFound);
-            return Result<Payment>.Ok(payment, "success", ResultStatus.Success);
+                return Result<Payment>.Fail("الدفع غير موجود.", "NotFound", ResultStatus.NotFound);
+            return Result<Payment>.Ok(payment, "تم جلب الدفع بنجاح", ResultStatus.Success);
         }
     }
 } 

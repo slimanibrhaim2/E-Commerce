@@ -23,7 +23,7 @@ public class CreateConversationCommandHandler : IRequestHandler<CreateConversati
         if (string.IsNullOrWhiteSpace(request.Conversation.Title))
         {
             return Result<Guid>.Fail(
-                message: "Title is required",
+                message: "العنوان مطلوب",
                 errorType: "ValidationError",
                 resultStatus: ResultStatus.ValidationError);
         }
@@ -43,13 +43,13 @@ public class CreateConversationCommandHandler : IRequestHandler<CreateConversati
 
             return Result<Guid>.Ok(
                 data: conversation.Id,
-                message: "Conversation created successfully",
+                message: "تم إنشاء المحادثة بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<Guid>.Fail(
-                message: $"Failed to create conversation: {ex.Message}",
+                message: $"فشل في إنشاء المحادثة: {ex.Message}",
                 errorType: "CreateConversationFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

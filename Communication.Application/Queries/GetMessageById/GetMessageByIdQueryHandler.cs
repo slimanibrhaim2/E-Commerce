@@ -22,7 +22,7 @@ public class GetMessageByIdQueryHandler : IRequestHandler<GetMessageByIdQuery, R
             if (entity == null)
             {
                 return Result<MessageDTO>.Fail(
-                    message: "Message not found",
+                    message: "الرسالة غير موجودة",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
@@ -40,13 +40,13 @@ public class GetMessageByIdQueryHandler : IRequestHandler<GetMessageByIdQuery, R
             };
             return Result<MessageDTO>.Ok(
                 data: dto,
-                message: "Message retrieved successfully",
+                message: "تم جلب الرسالة بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<MessageDTO>.Fail(
-                message: $"Failed to get message: {ex.Message}",
+                message: $"فشل في جلب الرسالة: {ex.Message}",
                 errorType: "GetMessageFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

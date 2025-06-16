@@ -22,7 +22,7 @@ namespace Payments.Application.Queries.GetAllPayments
                           .Take(request.Parameters.PageSize)
                           .ToList();
             var paginated = PaginatedResult<Payment>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
-            return Result<PaginatedResult<Payment>>.Ok(paginated, "success", ResultStatus.Success);
+            return Result<PaginatedResult<Payment>>.Ok(paginated, "تم جلب المدفوعات بنجاح", ResultStatus.Success);
         }
     }
 } 

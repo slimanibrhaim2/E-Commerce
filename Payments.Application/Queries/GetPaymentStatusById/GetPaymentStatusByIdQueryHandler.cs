@@ -16,11 +16,11 @@ namespace Payments.Application.Queries.GetPaymentStatusById
         public async Task<Result<PaymentStatus>> Handle(GetPaymentStatusByIdQuery request, CancellationToken cancellationToken)
         {
             if (request.Id == Guid.Empty)
-                return Result<PaymentStatus>.Fail("Id is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<PaymentStatus>.Fail("المعرف مطلوب.", "ValidationError", ResultStatus.ValidationError);
             var status = await _paymentStatusRepository.GetByIdAsync(request.Id);
             if (status == null)
-                return Result<PaymentStatus>.Fail("Payment status not found.", "NotFound", ResultStatus.NotFound);
-            return Result<PaymentStatus>.Ok(status, "success", ResultStatus.Success);
+                return Result<PaymentStatus>.Fail("حالة الدفع غير موجودة.", "NotFound", ResultStatus.NotFound);
+            return Result<PaymentStatus>.Ok(status, "تم جلب حالة الدفع بنجاح", ResultStatus.Success);
         }
     }
 } 

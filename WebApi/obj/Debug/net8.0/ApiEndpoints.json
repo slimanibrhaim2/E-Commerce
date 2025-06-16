@@ -2885,19 +2885,45 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "PageNumber",
+        "Name": "pageNumber",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "PageSize",
+        "Name": "pageSize",
         "Type": "System.Int32",
         "IsRequired": false
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Payments.Domain.Entities.Payment, Payments.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Payments.Application.DTOs.PaymentDTO, Payments.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Payments.Presentation.Controllers.PaymentController",
+    "Method": "GetById",
+    "RelativePath": "api/Payment/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Payments.Application.DTOs.PaymentDTO, Payments.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2965,9 +2991,66 @@
     ]
   },
   {
-    "ContainingType": "Payments.Presentation.Controllers.PaymentController",
+    "ContainingType": "Payments.Presentation.Controllers.PaymentMethodController",
+    "Method": "Create",
+    "RelativePath": "api/PaymentMethod",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Payments.Application.DTOs.CreatePaymentMethodDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Payments.Presentation.Controllers.PaymentMethodController",
+    "Method": "GetAll",
+    "RelativePath": "api/PaymentMethod",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Payments.Application.DTOs.PaymentMethodDTO, Payments.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Payments.Presentation.Controllers.PaymentMethodController",
     "Method": "GetById",
-    "RelativePath": "api/Payment/{id}",
+    "RelativePath": "api/PaymentMethod/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2980,7 +3063,64 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Payments.Domain.Entities.Payment, Payments.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Payments.Application.DTOs.PaymentMethodDTO, Payments.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Payments.Presentation.Controllers.PaymentMethodController",
+    "Method": "Update",
+    "RelativePath": "api/PaymentMethod/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Payments.Application.DTOs.CreatePaymentMethodDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Payments.Presentation.Controllers.PaymentMethodController",
+    "Method": "Delete",
+    "RelativePath": "api/PaymentMethod/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3025,19 +3165,45 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "PageNumber",
+        "Name": "pageNumber",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "PageSize",
+        "Name": "pageSize",
         "Type": "System.Int32",
         "IsRequired": false
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Payments.Domain.Entities.PaymentStatus, Payments.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Payments.Application.DTOs.PaymentStatusDTO, Payments.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Payments.Presentation.Controllers.PaymentStatusController",
+    "Method": "GetById",
+    "RelativePath": "api/PaymentStatus/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Payments.Application.DTOs.PaymentStatusDTO, Payments.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3095,32 +3261,6 @@
     "ReturnTypes": [
       {
         "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Payments.Presentation.Controllers.PaymentStatusController",
-    "Method": "GetById",
-    "RelativePath": "api/PaymentStatus/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[Payments.Domain.Entities.PaymentStatus, Payments.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

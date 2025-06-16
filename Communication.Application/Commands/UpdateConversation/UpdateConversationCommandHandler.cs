@@ -26,7 +26,7 @@ public class UpdateConversationCommandHandler : IRequestHandler<UpdateConversati
             if (conversation == null)
             {
                 return Result<bool>.Fail(
-                    message: "Conversation not found",
+                    message: "المحادثة غير موجودة",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
@@ -34,7 +34,7 @@ public class UpdateConversationCommandHandler : IRequestHandler<UpdateConversati
             if (string.IsNullOrWhiteSpace(request.Conversation.Title))
             {
                 return Result<bool>.Fail(
-                    message: "Title is required",
+                    message: "العنوان مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -47,13 +47,13 @@ public class UpdateConversationCommandHandler : IRequestHandler<UpdateConversati
 
             return Result<bool>.Ok(
                 data: true,
-                message: "Conversation updated successfully",
+                message: "تم تحديث المحادثة بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<bool>.Fail(
-                message: $"Failed to update conversation: {ex.Message}",
+                message: $"فشل في تحديث المحادثة: {ex.Message}",
                 errorType: "UpdateConversationFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

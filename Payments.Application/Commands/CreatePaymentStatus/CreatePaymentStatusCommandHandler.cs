@@ -20,9 +20,9 @@ namespace Payments.Application.Commands.Handlers
         public async Task<Result<Guid>> Handle(CreatePaymentStatusCommand request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(request.Name))
-                return Result<Guid>.Fail("Name is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("الاسم مطلوب.", "ValidationError", ResultStatus.ValidationError);
             if (request.Name.Length > 100)
-                return Result<Guid>.Fail("Name cannot exceed 100 characters.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("لا يمكن أن يتجاوز الاسم 100 حرف.", "ValidationError", ResultStatus.ValidationError);
             var status = new PaymentStatus
             {
                 Id = Guid.NewGuid(),
@@ -32,7 +32,7 @@ namespace Payments.Application.Commands.Handlers
             };
             await _paymentStatusRepository.AddAsync(status);
             await _unitOfWork.SaveChangesAsync();
-            return Result<Guid>.Ok(status.Id, "added", ResultStatus.Success);
+            return Result<Guid>.Ok(status.Id, "تم إضافة حالة الدفع بنجاح", ResultStatus.Success);
         }
     }
 } 

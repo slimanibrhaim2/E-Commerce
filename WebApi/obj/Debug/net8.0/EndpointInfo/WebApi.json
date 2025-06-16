@@ -4834,19 +4834,21 @@
         ],
         "parameters": [
           {
-            "name": "PageNumber",
+            "name": "pageNumber",
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 1
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 10
             }
           }
         ],
@@ -4856,17 +4858,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentPaginatedResultResult"
+                  "$ref": "#/components/schemas/PaymentDTOPaginatedResultResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentPaginatedResultResult"
+                  "$ref": "#/components/schemas/PaymentDTOPaginatedResultResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentPaginatedResultResult"
+                  "$ref": "#/components/schemas/PaymentDTOPaginatedResultResult"
                 }
               }
             }
@@ -4875,6 +4877,44 @@
       }
     },
     "/api/Payment/{id}": {
+      "get": {
+        "tags": [
+          "Payment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDTOResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDTOResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDTOResult"
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Payment"
@@ -4969,10 +5009,107 @@
             }
           }
         }
+      }
+    },
+    "/api/PaymentMethod": {
+      "post": {
+        "tags": [
+          "PaymentMethod"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentMethodDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentMethodDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentMethodDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              }
+            }
+          }
+        }
       },
       "get": {
         "tags": [
-          "Payment"
+          "PaymentMethod"
+        ],
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodDTOPaginatedResultResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodDTOPaginatedResultResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodDTOPaginatedResultResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/PaymentMethod/{id}": {
+      "get": {
+        "tags": [
+          "PaymentMethod"
         ],
         "parameters": [
           {
@@ -4991,17 +5128,112 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentResult"
+                  "$ref": "#/components/schemas/PaymentMethodDTOResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentResult"
+                  "$ref": "#/components/schemas/PaymentMethodDTOResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentResult"
+                  "$ref": "#/components/schemas/PaymentMethodDTOResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PaymentMethod"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentMethodDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentMethodDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePaymentMethodDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PaymentMethod"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanResult"
                 }
               }
             }
@@ -5062,19 +5294,21 @@
         ],
         "parameters": [
           {
-            "name": "PageNumber",
+            "name": "pageNumber",
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 1
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 10
             }
           }
         ],
@@ -5084,17 +5318,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentStatusPaginatedResultResult"
+                  "$ref": "#/components/schemas/PaymentStatusDTOPaginatedResultResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentStatusPaginatedResultResult"
+                  "$ref": "#/components/schemas/PaymentStatusDTOPaginatedResultResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentStatusPaginatedResultResult"
+                  "$ref": "#/components/schemas/PaymentStatusDTOPaginatedResultResult"
                 }
               }
             }
@@ -5103,6 +5337,44 @@
       }
     },
     "/api/PaymentStatus/{id}": {
+      "get": {
+        "tags": [
+          "PaymentStatus"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentStatusDTOResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentStatusDTOResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentStatusDTOResult"
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "PaymentStatus"
@@ -5192,44 +5464,6 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BooleanResult"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "PaymentStatus"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentStatusResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentStatusResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentStatusResult"
                 }
               }
             }
@@ -8068,6 +8302,23 @@
         },
         "additionalProperties": false
       },
+      "CreatePaymentMethodDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "CreatePaymentStatusDTO": {
         "type": "object",
         "properties": {
@@ -9209,7 +9460,7 @@
         },
         "additionalProperties": false
       },
-      "Payment": {
+      "PaymentDTO": {
         "type": "object",
         "properties": {
           "id": {
@@ -9248,13 +9499,13 @@
         },
         "additionalProperties": false
       },
-      "PaymentPaginatedResult": {
+      "PaymentDTOPaginatedResult": {
         "type": "object",
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Payment"
+              "$ref": "#/components/schemas/PaymentDTO"
             },
             "nullable": true
           },
@@ -9285,7 +9536,7 @@
         },
         "additionalProperties": false
       },
-      "PaymentPaginatedResultResult": {
+      "PaymentDTOPaginatedResultResult": {
         "type": "object",
         "properties": {
           "resultStatus": {
@@ -9303,12 +9554,12 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/PaymentPaginatedResult"
+            "$ref": "#/components/schemas/PaymentDTOPaginatedResult"
           }
         },
         "additionalProperties": false
       },
-      "PaymentResult": {
+      "PaymentDTOResult": {
         "type": "object",
         "properties": {
           "resultStatus": {
@@ -9326,12 +9577,129 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/Payment"
+            "$ref": "#/components/schemas/PaymentDTO"
           }
         },
         "additionalProperties": false
       },
-      "PaymentStatus": {
+      "PaymentMethodDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentMethodDTOPaginatedResult": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentMethodDTO"
+            },
+            "nullable": true
+          },
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasPreviousPage": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasNextPage": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentMethodDTOPaginatedResultResult": {
+        "type": "object",
+        "properties": {
+          "resultStatus": {
+            "$ref": "#/components/schemas/ResultStatus"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorType": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/PaymentMethodDTOPaginatedResult"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentMethodDTOResult": {
+        "type": "object",
+        "properties": {
+          "resultStatus": {
+            "$ref": "#/components/schemas/ResultStatus"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorType": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/PaymentMethodDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PaymentStatusDTO": {
         "type": "object",
         "properties": {
           "id": {
@@ -9354,24 +9722,17 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
-          },
-          "payments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Payment"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "PaymentStatusPaginatedResult": {
+      "PaymentStatusDTOPaginatedResult": {
         "type": "object",
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/PaymentStatus"
+              "$ref": "#/components/schemas/PaymentStatusDTO"
             },
             "nullable": true
           },
@@ -9402,7 +9763,7 @@
         },
         "additionalProperties": false
       },
-      "PaymentStatusPaginatedResultResult": {
+      "PaymentStatusDTOPaginatedResultResult": {
         "type": "object",
         "properties": {
           "resultStatus": {
@@ -9420,12 +9781,12 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/PaymentStatusPaginatedResult"
+            "$ref": "#/components/schemas/PaymentStatusDTOPaginatedResult"
           }
         },
         "additionalProperties": false
       },
-      "PaymentStatusResult": {
+      "PaymentStatusDTOResult": {
         "type": "object",
         "properties": {
           "resultStatus": {
@@ -9443,7 +9804,7 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/PaymentStatus"
+            "$ref": "#/components/schemas/PaymentStatusDTO"
           }
         },
         "additionalProperties": false

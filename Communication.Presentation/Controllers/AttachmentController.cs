@@ -9,11 +9,13 @@ using Communication.Application.Commands.DeleteAttachment;
 using Communication.Application.Queries.GetAttachmentById;
 using Communication.Application.Queries.GetAllAttachments;
 using Core.Pagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Communication.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class AttachmentController : ControllerBase
     {
         private readonly IMediator _mediator;

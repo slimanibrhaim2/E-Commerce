@@ -23,7 +23,7 @@ namespace Communication.Application.Queries.GetCommentById
             if (entity == null)
             {
                 return Result<CommentDTO>.Fail(
-                    message: "Comment not found",
+                    message: "التعليق غير موجود",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
@@ -39,7 +39,7 @@ namespace Communication.Application.Queries.GetCommentById
             };
             return Result<CommentDTO>.Ok(
                 data: dto,
-                message: "Comment retrieved successfully",
+                message: "تم جلب التعليق بنجاح",
                 resultStatus: ResultStatus.Success);
         }
     }

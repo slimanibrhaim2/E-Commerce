@@ -25,21 +25,21 @@ public class CreateAttachmentCommandHandler : IRequestHandler<CreateAttachmentCo
             if (request.Attachment.BaseContentId == Guid.Empty)
             {
                 return Result<Guid>.Fail(
-                    message: "BaseContentId is required",
+                    message: "معرف المحتوى الأساسي مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
             if (string.IsNullOrWhiteSpace(request.Attachment.AttachmentUrl))
             {
                 return Result<Guid>.Fail(
-                    message: "AttachmentUrl is required",
+                    message: "رابط المرفق مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
             if (request.Attachment.AttachmentTypeId == Guid.Empty)
             {
                 return Result<Guid>.Fail(
-                    message: "AttachmentTypeId is required",
+                    message: "معرف نوع المرفق مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -56,13 +56,13 @@ public class CreateAttachmentCommandHandler : IRequestHandler<CreateAttachmentCo
             await _unitOfWork.SaveChangesAsync();
             return Result<Guid>.Ok(
                 data: entity.Id,
-                message: "Attachment created successfully",
+                message: "تم إنشاء المرفق بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<Guid>.Fail(
-                message: $"Failed to create attachment: {ex.Message}",
+                message: $"فشل في إنشاء المرفق: {ex.Message}",
                 errorType: "CreateAttachmentFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

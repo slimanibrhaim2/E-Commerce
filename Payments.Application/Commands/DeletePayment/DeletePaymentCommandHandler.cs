@@ -19,13 +19,13 @@ namespace Payments.Application.Commands.Handlers
         public async Task<Result<bool>> Handle(DeletePaymentCommand request, CancellationToken cancellationToken)
         {
             if (request.Id == Guid.Empty)
-                return Result<bool>.Fail("Id is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<bool>.Fail("المعرف مطلوب.", "ValidationError", ResultStatus.ValidationError);
             var payment = await _paymentRepository.GetByIdAsync(request.Id);
             if (payment == null)
-                return Result<bool>.Fail("Payment not found.", "NotFound", ResultStatus.NotFound);
+                return Result<bool>.Fail("الدفع غير موجود.", "NotFound", ResultStatus.NotFound);
             _paymentRepository.Remove(payment);
             await _unitOfWork.SaveChangesAsync();
-            return Result<bool>.Ok(true, "deleted", ResultStatus.Success);
+            return Result<bool>.Ok(true, "تم حذف الدفع بنجاح", ResultStatus.Success);
         }
     }
 } 

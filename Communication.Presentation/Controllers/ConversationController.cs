@@ -9,11 +9,13 @@ using Communication.Application.DTOs;
 using Microsoft.Extensions.Logging;
 using Core.Result;
 using Core.Pagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Communication.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class ConversationController : ControllerBase
     {
         private readonly IMediator _mediator;

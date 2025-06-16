@@ -38,13 +38,13 @@ public class GetAllConversationsQueryHandler : IRequestHandler<GetAllConversatio
             var paginated = Core.Pagination.PaginatedResult<ConversationDTO>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
             return Result<PaginatedResult<ConversationDTO>>.Ok(
                 paginated,
-                message: "Conversations retrieved successfully",
+                message: "تم جلب المحادثات بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<PaginatedResult<ConversationDTO>>.Fail(
-                message: $"Failed to get conversations: {ex.Message}",
+                message: $"فشل في جلب المحادثات: {ex.Message}",
                 errorType: "GetAllConversationsFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

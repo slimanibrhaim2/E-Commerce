@@ -26,7 +26,7 @@ public class UpdateMessageCommandHandler : IRequestHandler<UpdateMessageCommand,
             if (message == null)
             {
                 return Result<bool>.Fail(
-                    message: "Message not found",
+                    message: "الرسالة غير موجودة",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
@@ -34,21 +34,21 @@ public class UpdateMessageCommandHandler : IRequestHandler<UpdateMessageCommand,
             if (request.Message.ConversationId == Guid.Empty)
             {
                 return Result<bool>.Fail(
-                    message: "ConversationId is required",
+                    message: "معرف المحادثة مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
             if (request.Message.SenderId == Guid.Empty)
             {
                 return Result<bool>.Fail(
-                    message: "SenderId is required",
+                    message: "معرف المرسل مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
             if (request.Message.BaseContentId == Guid.Empty)
             {
                 return Result<bool>.Fail(
-                    message: "BaseContentId is required",
+                    message: "معرف المحتوى الأساسي مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -63,13 +63,13 @@ public class UpdateMessageCommandHandler : IRequestHandler<UpdateMessageCommand,
 
             return Result<bool>.Ok(
                 data: true,
-                message: "Message updated successfully",
+                message: "تم تحديث الرسالة بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<bool>.Fail(
-                message: $"Failed to update message: {ex.Message}",
+                message: $"فشل في تحديث الرسالة: {ex.Message}",
                 errorType: "UpdateMessageFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

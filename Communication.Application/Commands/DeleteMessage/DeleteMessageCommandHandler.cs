@@ -24,7 +24,7 @@ public class DeleteMessageCommandHandler : IRequestHandler<DeleteMessageCommand,
             if (message == null)
             {
                 return Result<bool>.Fail(
-                    message: "Message not found",
+                    message: "الرسالة غير موجودة",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
@@ -34,13 +34,13 @@ public class DeleteMessageCommandHandler : IRequestHandler<DeleteMessageCommand,
 
             return Result<bool>.Ok(
                 data: true,
-                message: "Message deleted successfully",
+                message: "تم حذف الرسالة بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<bool>.Fail(
-                message: $"Failed to delete message: {ex.Message}",
+                message: $"فشل في حذف الرسالة: {ex.Message}",
                 errorType: "DeleteMessageFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

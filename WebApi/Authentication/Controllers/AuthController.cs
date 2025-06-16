@@ -4,6 +4,7 @@ using WebApi.Authentication.DTOs;
 using MediatR;
 using Users.Application.Commands.CreateUser;
 using Users.Domain.Repositories;
+using Core.Result;
 
 namespace WebApi.Authentication.Controllers
 {
@@ -36,15 +37,23 @@ namespace WebApi.Authentication.Controllers
                 var result = await _otpService.SendOtpAsync(request.PhoneNumber);
                 if (!result)
                 {
-                    return BadRequest(new { message = "Failed to send OTP" });
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في إرسال رمز التحقق",
+                        errorType: "SendOtpFailed",
+                        resultStatus: ResultStatus.Failed));
                 }
 
-                return Ok(new { message = "OTP sent successfully" });
+                return Ok(Result.Ok(
+                    message: "تم إرسال رمز التحقق بنجاح",
+                    resultStatus: ResultStatus.Success));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error sending OTP to {PhoneNumber}", request.PhoneNumber);
-                return StatusCode(500, new { message = "An error occurred while sending OTP" });
+                return StatusCode(500, Result.Fail(
+                    message: "حدث خطأ أثناء إرسال رمز التحقق",
+                    errorType: "SendOtpError",
+                    resultStatus: ResultStatus.Failed));
             }
         }
 
@@ -53,25 +62,45 @@ namespace WebApi.Authentication.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "صيغة رمز التحقق غير صحيحة",
+                        errorType: "InvalidOtpFormat",
+                        resultStatus: ResultStatus.Failed));
+                }
+
                 var user = await _userRepository.GetByPhoneNumber(request.PhoneNumber);
                 if (user == null)
                 {
-                    return BadRequest(new { message = "User not found" });
+                    return BadRequest(Result.Fail(
+                        message: "المستخدم غير موجود",
+                        errorType: "UserNotFound",
+                        resultStatus: ResultStatus.Failed));
                 }
 
                 var isValid = await _otpService.VerifyOtpAsync(request.PhoneNumber, request.Otp);
                 if (!isValid)
                 {
-                    return BadRequest(new { message = "Invalid OTP" });
+                    return BadRequest(Result.Fail(
+                        message: "رمز التحقق غير صحيح",
+                        errorType: "InvalidOtp",
+                        resultStatus: ResultStatus.Failed));
                 }
 
                 var token = await _otpService.GenerateJwtTokenAsync(user.Id, request.PhoneNumber);
-                return Ok(new { token });
+                return Ok(Result<string>.Ok(
+                    data: token,
+                    message: "تم التحقق من رمز التحقق بنجاح",
+                    resultStatus: ResultStatus.Success));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error verifying OTP for {PhoneNumber}", request.PhoneNumber);
-                return StatusCode(500, new { message = "An error occurred while verifying OTP" });
+                return StatusCode(500, Result.Fail(
+                    message: "حدث خطأ أثناء التحقق من رمز التحقق",
+                    errorType: "VerifyOtpError",
+                    resultStatus: ResultStatus.Failed));
             }
         }
 
@@ -91,24 +120,22 @@ namespace WebApi.Authentication.Controllers
                 if (!otpResult)
                 {
                     _logger.LogWarning("Failed to send OTP after registration for {PhoneNumber}", command.userDTO.PhoneNumber);
-                    // Still return success for registration, but with a warning about OTP
-                    return Ok(new { 
-                        message = "User registered successfully, but failed to send verification OTP. Please try logging in.",
-                        registrationSuccess = true,
-                        otpSent = false
-                    });
+                    return Ok(Result.Ok(
+                        message: "تم تسجيل المستخدم بنجاح، ولكن فشل إرسال رمز التحقق. يرجى محاولة تسجيل الدخول",
+                        resultStatus: ResultStatus.Success));
                 }
 
-                return Ok(new { 
-                    message = "User registered successfully. Please verify your phone number with the OTP sent.",
-                    registrationSuccess = true,
-                    otpSent = true
-                });
+                return Ok(Result.Ok(
+                    message: "تم تسجيل المستخدم بنجاح. يرجى التحقق من رقم هاتفك باستخدام رمز التحقق المرسل",
+                    resultStatus: ResultStatus.Success));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error registering user");
-                return StatusCode(500, new { message = "An error occurred while registering user" });
+                return StatusCode(500, Result.Fail(
+                    message: "حدث خطأ أثناء تسجيل المستخدم",
+                    errorType: "RegisterUserError",
+                    resultStatus: ResultStatus.Failed));
             }
         }
     }

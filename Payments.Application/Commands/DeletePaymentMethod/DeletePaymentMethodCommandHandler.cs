@@ -19,13 +19,13 @@ namespace Payments.Application.Commands.Handlers
         public async Task<Result<bool>> Handle(DeletePaymentMethodCommand request, CancellationToken cancellationToken)
         {
             if (request.Id == Guid.Empty)
-                return Result<bool>.Fail("Id is required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<bool>.Fail("المعرف مطلوب.", "ValidationError", ResultStatus.ValidationError);
             var method = await _paymentMethodRepository.GetByIdAsync(request.Id);
             if (method == null)
-                return Result<bool>.Fail("Payment method not found.", "NotFound", ResultStatus.NotFound);
+                return Result<bool>.Fail("طريقة الدفع غير موجودة.", "NotFound", ResultStatus.NotFound);
             _paymentMethodRepository.Remove(method);
             await _unitOfWork.SaveChangesAsync();
-            return Result<bool>.Ok(true, "deleted", ResultStatus.Success);
+            return Result<bool>.Ok(true, "تم حذف طريقة الدفع بنجاح", ResultStatus.Success);
         }
     }
 } 

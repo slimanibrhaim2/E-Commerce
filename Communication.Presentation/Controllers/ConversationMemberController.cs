@@ -9,11 +9,13 @@ using Communication.Application.Commands.DeleteConversationMember;
 using Communication.Application.Queries.GetConversationMemberById;
 using Communication.Application.Queries.GetAllConversationMembers;
 using Core.Pagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Communication.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class ConversationMemberController : ControllerBase
     {
         private readonly IMediator _mediator;
