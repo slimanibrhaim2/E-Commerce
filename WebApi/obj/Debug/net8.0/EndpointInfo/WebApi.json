@@ -10275,15 +10275,20 @@
         "additionalProperties": false
       },
       "VerifyOtpRequest": {
+        "required": [
+          "otp",
+          "phoneNumber"
+        ],
         "type": "object",
         "properties": {
           "phoneNumber": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "otp": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "pattern": "^\\d{4}$",
+            "type": "string"
           }
         },
         "additionalProperties": false
