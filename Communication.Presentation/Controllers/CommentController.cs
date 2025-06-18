@@ -37,8 +37,14 @@ namespace Communication.Presentation.Controllers
             var command = new CreateCommentCommand(dto);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إنشاء التعليق",
+                    errorType: "CreateCommentFailed",
+                    resultStatus: ResultStatus.Failed));
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
+                data: result.Data,
+                message: "تم إنشاء التعليق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet("{id}")]
@@ -47,8 +53,14 @@ namespace Communication.Presentation.Controllers
             var query = new GetCommentByIdQuery(id);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return NotFound(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب التعليق",
+                    errorType: "GetCommentByIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<CommentDTO>.Ok(
+                data: result.Data,
+                message: "تم جلب التعليق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet]
@@ -57,7 +69,15 @@ namespace Communication.Presentation.Controllers
             var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAllCommentsQuery(parameters);
             var result = await _mediator.Send(query);
-            return Ok(result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب التعليقات",
+                    errorType: "GetAllCommentsFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<CommentDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب التعليقات بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPut("{id}")]
@@ -66,8 +86,14 @@ namespace Communication.Presentation.Controllers
             var command = new UpdateCommentCommand(id, dto);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث التعليق",
+                    errorType: "UpdateCommentFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<bool>.Ok(
+                data: result.Data,
+                message: "تم تحديث التعليق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("{id}")]
@@ -76,8 +102,14 @@ namespace Communication.Presentation.Controllers
             var command = new DeleteCommentCommand(id);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف التعليق",
+                    errorType: "DeleteCommentFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<bool>.Ok(
+                data: result.Data,
+                message: "تم حذف التعليق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet("baseitem/{baseItemId}")]
@@ -85,7 +117,15 @@ namespace Communication.Presentation.Controllers
         {
             var query = new GetAllCommentsByBaseItemIdQuery(baseItemId);
             var result = await _mediator.Send(query);
-            return Ok(result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب التعليقات",
+                    errorType: "GetAllCommentsByBaseItemIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<List<CommentDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب التعليقات بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPost("aggregate")]
@@ -93,8 +133,13 @@ namespace Communication.Presentation.Controllers
         {
             var result = await _mediator.Send(new AddCommentAggregateCommand(dto));
             if (!result.Success)
-                return StatusCode(500, result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إضافة التعليق",
+                    errorType: "AddCommentAggregateFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم إضافة التعليق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPut("aggregate/{id}")]
@@ -102,8 +147,13 @@ namespace Communication.Presentation.Controllers
         {
             var result = await _mediator.Send(new UpdateCommentAggregateCommand(id, dto));
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث التعليق",
+                    errorType: "UpdateCommentAggregateFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم تحديث التعليق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("aggregate/{id}")]
@@ -111,8 +161,13 @@ namespace Communication.Presentation.Controllers
         {
             var result = await _mediator.Send(new DeleteCommentAggregateCommand(id));
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف التعليق",
+                    errorType: "DeleteCommentAggregateFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم حذف التعليق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 } 

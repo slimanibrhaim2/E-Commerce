@@ -36,8 +36,14 @@ namespace Communication.Presentation.Controllers
             var command = new CreateMessageCommand(dto);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إنشاء الرسالة",
+                    errorType: "CreateMessageFailed",
+                    resultStatus: ResultStatus.Failed));
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
+                data: result.Data,
+                message: "تم إنشاء الرسالة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet("{id}")]
@@ -46,8 +52,14 @@ namespace Communication.Presentation.Controllers
             var query = new GetMessageByIdQuery(id);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return NotFound(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب الرسالة",
+                    errorType: "GetMessageByIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<MessageDTO>.Ok(
+                data: result.Data,
+                message: "تم جلب الرسالة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet]
@@ -56,7 +68,15 @@ namespace Communication.Presentation.Controllers
             var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAllMessagesQuery(parameters);
             var result = await _mediator.Send(query);
-            return Ok(result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب الرسائل",
+                    errorType: "GetAllMessagesFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<MessageDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب الرسائل بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPut("{id}")]
@@ -65,8 +85,14 @@ namespace Communication.Presentation.Controllers
             var command = new UpdateMessageCommand(id, dto);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث الرسالة",
+                    errorType: "UpdateMessageFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<bool>.Ok(
+                data: result.Data,
+                message: "تم تحديث الرسالة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("{id}")]
@@ -75,8 +101,14 @@ namespace Communication.Presentation.Controllers
             var command = new DeleteMessageCommand(id);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف الرسالة",
+                    errorType: "DeleteMessageFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<bool>.Ok(
+                data: result.Data,
+                message: "تم حذف الرسالة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPost("aggregate")]
@@ -84,8 +116,13 @@ namespace Communication.Presentation.Controllers
         {
             var result = await _mediator.Send(new AddMessageAggregateCommand(dto));
             if (!result.Success)
-                return StatusCode(500, result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إضافة الرسالة",
+                    errorType: "AddMessageAggregateFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم إضافة الرسالة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPut("aggregate/{id}")]
@@ -93,9 +130,13 @@ namespace Communication.Presentation.Controllers
         {
             var result = await _mediator.Send(new UpdateMessageAggregateCommand(id, dto));
             if (!result.Success)
-                return BadRequest(result.ErrorType);
-
-            return Ok(result.Data);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث الرسالة",
+                    errorType: "UpdateMessageAggregateFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم تحديث الرسالة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("aggregate/{id}")]
@@ -103,9 +144,13 @@ namespace Communication.Presentation.Controllers
         {
             var result = await _mediator.Send(new DeleteMessageAggregateCommand(id));
             if (!result.Success)
-                return BadRequest(result.ErrorType);
-
-            return Ok(result.Data);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف الرسالة",
+                    errorType: "DeleteMessageAggregateFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم حذف الرسالة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 } 

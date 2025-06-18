@@ -39,13 +39,21 @@ public class ServicesController : ControllerBase
         dto.UserId = userId;
         var result = await _mediator.Send(new CreateServiceCommand(dto));
         if (!result.Success || result.Data == Guid.Empty)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في إنشاء الخدمة",
-                errorType: "CreateServiceFailed",
-                resultStatus: ResultStatus.Failed));
-        return CreatedAtAction("GetById", new { id = result.Data }, Result.Ok(
-            message: "تم إنشاء الخدمة بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في إنشاء الخدمة",
+                errorType = "CreateServiceFailed"
+            });
+        return CreatedAtAction("GetById", new { id = result.Data }, new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم إنشاء الخدمة بنجاح",
+            errorType = (string)null,
+            data = result.Data
+        });
     }
 
     [HttpPost("aggregate")]
@@ -55,13 +63,21 @@ public class ServicesController : ControllerBase
         dto.UserId = userId;
         var result = await _mediator.Send(new CreateServiceAggregateCommand(dto));
         if (!result.Success || result.Data == Guid.Empty)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في إنشاء الخدمة مع الوسائط والميزات",
-                errorType: "CreateServiceAggregateFailed",
-                resultStatus: ResultStatus.Failed));
-        return CreatedAtAction("GetById", new { id = result.Data }, Result.Ok(
-            message: "تم إنشاء الخدمة مع الوسائط والميزات بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في إنشاء الخدمة مع الوسائط والميزات",
+                errorType = "CreateServiceAggregateFailed"
+            });
+        return CreatedAtAction("GetById", new { id = result.Data }, new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم إنشاء الخدمة مع الوسائط والميزات بنجاح",
+            errorType = (string)null,
+            data = result.Data
+        });
     }
 
     [HttpGet]
@@ -72,14 +88,30 @@ public class ServicesController : ControllerBase
         var query = new GetAllServicesQuery(pagination);
         var result = await _mediator.Send(query);
         if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في جلب الخدمات",
-                errorType: "GetAllFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result<PaginatedResult<ServiceDTO>>.Ok(
-            data: result.Data,
-            message: "تم جلب الخدمات بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في جلب الخدمات",
+                errorType = "GetAllFailed"
+            });
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم جلب الخدمات بنجاح",
+            errorType = (string)null,
+            data = result.Data.Data,
+            pagination = new
+            {
+                pageNumber = result.Data.PageNumber,
+                pageSize = result.Data.PageSize,
+                totalPages = result.Data.TotalPages,
+                totalCount = result.Data.TotalCount,
+                hasPreviousPage = result.Data.HasPreviousPage,
+                hasNextPage = result.Data.HasNextPage
+            }
+        });
     }
 
     [HttpGet("{id}")]
@@ -89,11 +121,21 @@ public class ServicesController : ControllerBase
         var query = new GetServiceByIdQuery(id);
         var result = await _mediator.Send(query);
         if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في جلب الخدمة",
-                errorType: "GetByIdFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(result);
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في جلب الخدمة",
+                errorType = "GetByIdFailed"
+            });
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم جلب الخدمة بنجاح",
+            errorType = (string)null,
+            data = result.Data
+        });
     }
 
     [HttpPut("aggregate/{id}")]
@@ -103,13 +145,20 @@ public class ServicesController : ControllerBase
         dto.UserId = userId;
         var result = await _mediator.Send(new UpdateServiceAggregateCommand(id, dto));
         if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في تحديث الخدمة مع الوسائط والميزات",
-                errorType: "UpdateServiceAggregateFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم تحديث الخدمة مع الوسائط والميزات بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في تحديث الخدمة مع الوسائط والميزات",
+                errorType = "UpdateServiceAggregateFailed"
+            });
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم تحديث الخدمة مع الوسائط والميزات بنجاح",
+            errorType = (string)null
+        });
     }
 
     [HttpDelete("aggregate/{id}")]
@@ -117,13 +166,20 @@ public class ServicesController : ControllerBase
     {
         var result = await _mediator.Send(new DeleteServiceAggregateCommand(id));
         if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في حذف الخدمة مع الوسائط والميزات",
-                errorType: "DeleteServiceAggregateFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم حذف الخدمة مع الوسائط والميزات بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في حذف الخدمة مع الوسائط والميزات",
+                errorType = "DeleteServiceAggregateFailed"
+            });
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم حذف الخدمة مع الوسائط والميزات بنجاح",
+            errorType = (string)null
+        });
     }
 
     [HttpPut("{id}")]
@@ -133,13 +189,20 @@ public class ServicesController : ControllerBase
         dto.UserId = userId;
         var result = await _mediator.Send(new UpdateServiceSimpleCommand(id, dto));
         if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في تحديث الخدمة",
-                errorType: "UpdateServiceFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم تحديث الخدمة بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في تحديث الخدمة",
+                errorType = "UpdateServiceFailed"
+            });
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم تحديث الخدمة بنجاح",
+            errorType = (string)null
+        });
     }
 
     [HttpDelete("{id}")]
@@ -147,13 +210,19 @@ public class ServicesController : ControllerBase
     {
         var result = await _mediator.Send(new DeleteServiceSimpleCommand(id));
         if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في حذف الخدمة",
-                errorType: "DeleteServiceFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم حذف الخدمة بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في حذف الخدمة",
+                errorType = "DeleteServiceFailed"
+            });
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم حذف الخدمة بنجاح"
+        });
     }
 
     [HttpPost("by-ids")]
@@ -161,9 +230,21 @@ public class ServicesController : ControllerBase
     public async Task<IActionResult> GetByIds([FromBody] IEnumerable<Guid> ids)
     {
         if (ids == null || !ids.Any())
-            return BadRequest("قائمة المعرفات مطلوبة.");
+            return BadRequest(new
+            {
+                resultStatus = (int)ResultStatus.ValidationError,
+                success = false,
+                message = "قائمة المعرفات مطلوبة.",
+                errorType = "BadRequest"
+            });
         var result = await _mediator.Send(new GetServicesByIdsQuery(ids));
-        return Ok(result);
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم جلب الخدمات بنجاح",
+            data = result
+        });
     }
 
     [HttpGet("my-services")]
@@ -173,14 +254,29 @@ public class ServicesController : ControllerBase
         var query = new GetServicesByUserIdQuery(userId, new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize });
         var result = await _mediator.Send(query);
         if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في جلب خدمات المستخدم",
-                errorType: "GetServicesByUserIdFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result<PaginatedResult<ServiceDTO>>.Ok(
-            data: result.Data,
-            message: "تم جلب خدمات المستخدم بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في جلب خدمات المستخدم",
+                errorType = "GetServicesByUserIdFailed"
+            });
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم جلب خدمات المستخدم بنجاح",
+            data = result.Data.Data,
+            pagination = new
+            {
+                pageNumber = result.Data.PageNumber,
+                pageSize = result.Data.PageSize,
+                totalPages = result.Data.TotalPages,
+                totalCount = result.Data.TotalCount,
+                hasPreviousPage = result.Data.HasPreviousPage,
+                hasNextPage = result.Data.HasNextPage
+            }
+        });
     }
 
     [HttpGet("search")]
@@ -190,14 +286,30 @@ public class ServicesController : ControllerBase
         var query = new GetServicesByNameQuery(name, new PaginationParameters { PageNumber = 1, PageSize = 10 });
         var result = await _mediator.Send(query);
         if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في البحث عن الخدمات",
-                errorType: "GetServicesByNameFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result<IEnumerable<ServiceDTO>>.Ok(
-            data: result.Data.Data,
-            message: "تم البحث عن الخدمات بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في البحث عن الخدمات",
+                errorType = "GetServicesByNameFailed"
+            });
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم البحث عن الخدمات بنجاح",
+            errorType = (string)null,
+            data = result.Data.Data,
+            pagination = new
+            {
+                pageNumber = result.Data.PageNumber,
+                pageSize = result.Data.PageSize,
+                totalPages = result.Data.TotalPages,
+                totalCount = result.Data.TotalCount,
+                hasPreviousPage = result.Data.HasPreviousPage,
+                hasNextPage = result.Data.HasNextPage
+            }
+        });
     }
 
     [HttpGet("category/{categoryId}")]
@@ -207,13 +319,29 @@ public class ServicesController : ControllerBase
         var query = new GetServicesByCategoryQuery(categoryId, 1, 10);
         var result = await _mediator.Send(query);
         if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في جلب خدمات الفئة",
-                errorType: "GetServicesByCategoryFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result<IEnumerable<ServiceDTO>>.Ok(
-            data: result.Data.Data,
-            message: "تم جلب خدمات الفئة بنجاح",
-            resultStatus: ResultStatus.Success));
+            return StatusCode(500, new
+            {
+                resultStatus = (int)ResultStatus.Failed,
+                success = false,
+                message = "فشل في جلب خدمات الفئة",
+                errorType = "GetServicesByCategoryFailed"
+            });
+        return Ok(new
+        {
+            resultStatus = (int)ResultStatus.Success,
+            success = true,
+            message = "تم جلب خدمات الفئة بنجاح",
+            errorType = (string)null,
+            data = result.Data.Data,
+            pagination = new
+            {
+                pageNumber = result.Data.PageNumber,
+                pageSize = result.Data.PageSize,
+                totalPages = result.Data.TotalPages,
+                totalCount = result.Data.TotalCount,
+                hasPreviousPage = result.Data.HasPreviousPage,
+                hasNextPage = result.Data.HasNextPage
+            }
+        });
     }
 } 

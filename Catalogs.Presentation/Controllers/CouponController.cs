@@ -54,7 +54,7 @@ namespace Catalogs.Presentation.Controllers
             var query = new GetAllCouponsQuery();
             var result = await _mediator.Send(query);
             return Ok(Result<List<CouponDTO>>.Ok(
-                data: result,
+                data: result.Data,
                 message: "تم جلب الكوبونات بنجاح",
                 resultStatus: ResultStatus.Success));
         }
@@ -71,7 +71,7 @@ namespace Catalogs.Presentation.Controllers
                     errorType: "GetCouponByIdFailed",
                     resultStatus: ResultStatus.Failed));
             return Ok(Result<CouponDTO>.Ok(
-                data: result,
+                data: result.Data,
                 message: "تم جلب الكوبون بنجاح",
                 resultStatus: ResultStatus.Success));
         }

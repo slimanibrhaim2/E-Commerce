@@ -93,7 +93,10 @@ namespace Catalogs.Presentation.Controllers
                     errorType: "GetMediaFailed",
                     resultStatus: ResultStatus.Failed));
 
-            return Ok(result);
+            return Ok(Result<MediaDTO>.Ok(
+                data: result.Data,
+                message: "تم جلب الوسائط بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 } 

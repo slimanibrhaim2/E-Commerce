@@ -30,90 +30,134 @@ namespace Catalogs.Presentation.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<Result<PaginatedResult<CategoryDTO>>>> GetAll([FromQuery] PaginationParameters parameters)
+        public async Task<IActionResult> GetAll([FromQuery] PaginationParameters parameters)
         {
             var query = new GetAllCategoriesQuery(parameters);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في جلب الفئات",
-                    errorType: "GetAllCategoriesFailed",
-                    resultStatus: ResultStatus.Failed));
-            return Ok(Result<PaginatedResult<CategoryDTO>>.Ok(
-                data: result.Data,
-                message: "تم جلب الفئات بنجاح",
-                resultStatus: ResultStatus.Success));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في جلب الفئات",
+                    errorType = "GetAllCategoriesFailed"
+                });
+            return Ok(new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم جلب الفئات بنجاح",
+                errorType = (string)null,
+                data = result.Data.Data,
+                pagination = new
+                {
+                    pageNumber = result.Data.PageNumber,
+                    pageSize = result.Data.PageSize,
+                    totalPages = result.Data.TotalPages,
+                    totalCount = result.Data.TotalCount,
+                    hasPreviousPage = result.Data.HasPreviousPage,
+                    hasNextPage = result.Data.HasNextPage
+                }
+            });
         }
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Result<CategoryDTO>>> GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var query = new GetCategoryByIdQuery(id);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في جلب الفئة",
-                    errorType: "GetCategoryByIdFailed",
-                    resultStatus: ResultStatus.Failed));
-            return Ok(Result<CategoryDTO>.Ok(
-                data: result.Data,
-                message: "تم جلب الفئة بنجاح",
-                resultStatus: ResultStatus.Success));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في جلب الفئة",
+                    errorType = "GetCategoryByIdFailed"
+                });
+            return Ok(new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم جلب الفئة بنجاح",
+                errorType = (string)null,
+                data = result.Data
+            });
         }
 
         [HttpPost]
-        public async Task<ActionResult<Result<Guid>>> Create([FromBody]CreateCategoryDTO dto)
+        public async Task<IActionResult> Create([FromBody]CreateCategoryDTO dto)
         {
             var command = new CreateCategoryCommand(dto);
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في إنشاء الفئة",
-                    errorType: "CreateCategoryFailed",
-                    resultStatus: ResultStatus.Failed));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في إنشاء الفئة",
+                    errorType = "CreateCategoryFailed"
+                });
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
-                data: result.Data,
-                message: "تم إنشاء الفئة بنجاح",
-                resultStatus: ResultStatus.Success));
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم إنشاء الفئة بنجاح",
+                errorType = (string)null,
+                data = result.Data
+            });
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Result<bool>>> Update(Guid id, CreateCategoryDTO dto)
+        public async Task<IActionResult> Update(Guid id, CreateCategoryDTO dto)
         {
             var command = new UpdateCategoryCommand(id, dto);
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في تحديث الفئة",
-                    errorType: "UpdateCategoryFailed",
-                    resultStatus: ResultStatus.Failed));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في تحديث الفئة",
+                    errorType = "UpdateCategoryFailed"
+                });
 
-            return Ok(Result<bool>.Ok(
-                data: result.Data,
-                message: "تم تحديث الفئة بنجاح",
-                resultStatus: ResultStatus.Success));
+            return Ok(new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم تحديث الفئة بنجاح",
+                errorType = (string)null,
+                data = result.Data
+            });
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Result<bool>>> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteCategoryCommand(id);
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في حذف الفئة",
-                    errorType: "DeleteCategoryFailed",
-                    resultStatus: ResultStatus.Failed));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في حذف الفئة",
+                    errorType = "DeleteCategoryFailed"
+                });
 
-            return Ok(Result<bool>.Ok(
-                data: result.Data,
-                message: "تم حذف الفئة بنجاح",
-                resultStatus: ResultStatus.Success));
+            return Ok(new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم حذف الفئة بنجاح",
+                errorType = (string)null,
+                data = result.Data
+            });
         }
     }
 } 

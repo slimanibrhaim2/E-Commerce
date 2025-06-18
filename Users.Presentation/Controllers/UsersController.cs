@@ -80,7 +80,6 @@ namespace Users.Presentation.Controllers
         {
             var userId = User.GetId();
 
-
             var result = await _mediator.Send(new UpdateUserCommand(userId, dto));
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
@@ -96,7 +95,6 @@ namespace Users.Presentation.Controllers
         public async Task<IActionResult> DeleteCurrentUser()
         {
             var userId = User.GetId();
-
 
             var result = await _mediator.Send(new DeleteUserCommand(userId));
             if (!result.Success)

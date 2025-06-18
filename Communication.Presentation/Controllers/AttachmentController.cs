@@ -33,8 +33,14 @@ namespace Communication.Presentation.Controllers
             var command = new CreateAttachmentCommand(dto);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إنشاء المرفق",
+                    errorType: "CreateAttachmentFailed",
+                    resultStatus: ResultStatus.Failed));
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
+                data: result.Data,
+                message: "تم إنشاء المرفق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet("{id}")]
@@ -43,8 +49,14 @@ namespace Communication.Presentation.Controllers
             var query = new GetAttachmentByIdQuery(id);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return NotFound(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب المرفق",
+                    errorType: "GetAttachmentByIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<AttachmentDTO>.Ok(
+                data: result.Data,
+                message: "تم جلب المرفق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet]
@@ -53,7 +65,15 @@ namespace Communication.Presentation.Controllers
             var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAllAttachmentsQuery(parameters);
             var result = await _mediator.Send(query);
-            return Ok(result);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب المرفقات",
+                    errorType: "GetAllAttachmentsFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<AttachmentDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب المرفقات بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPut("{id}")]
@@ -62,8 +82,14 @@ namespace Communication.Presentation.Controllers
             var command = new UpdateAttachmentCommand(id, dto);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث المرفق",
+                    errorType: "UpdateAttachmentFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<bool>.Ok(
+                data: result.Data,
+                message: "تم تحديث المرفق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("{id}")]
@@ -72,8 +98,14 @@ namespace Communication.Presentation.Controllers
             var command = new DeleteAttachmentCommand(id);
             var result = await _mediator.Send(command);
             if (!result.Success)
-                return BadRequest(result);
-            return Ok(result);
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف المرفق",
+                    errorType: "DeleteAttachmentFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<bool>.Ok(
+                data: result.Data,
+                message: "تم حذف المرفق بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 } 

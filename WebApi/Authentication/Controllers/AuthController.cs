@@ -112,7 +112,10 @@ namespace WebApi.Authentication.Controllers
                 var result = await _mediator.Send(command);
                 if (!result.Success)
                 {
-                    return BadRequest(result);
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في تسجيل المستخدم",
+                        errorType: "RegisterUserFailed",
+                        resultStatus: ResultStatus.Failed));
                 }
 
                 // Send OTP after successful registration

@@ -30,92 +30,136 @@ namespace Catalogs.Presentation.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<Result<PaginatedResult<BrandDTO>>>> GetAll([FromQuery] PaginationParameters parameters)
+        public async Task<IActionResult> GetAll([FromQuery] PaginationParameters parameters)
         {
             GetAllBrandsQuery query = new GetAllBrandsQuery(parameters);
             Result<PaginatedResult<BrandDTO>> result = await _mediator.Send(query);
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في جلب العلامات التجارية",
-                    errorType: "GetAllBrandsFailed",
-                    resultStatus: ResultStatus.Failed));
-            return Ok(Result<PaginatedResult<BrandDTO>>.Ok(
-                data: result.Data,
-                message: "تم جلب العلامات التجارية بنجاح",
-                resultStatus: ResultStatus.Success));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في جلب العلامات التجارية",
+                    errorType = "GetAllBrandsFailed"
+                });
+            return Ok(new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم جلب العلامات التجارية بنجاح",
+                errorType = (string)null,
+                data = result.Data.Data,
+                pagination = new
+                {
+                    pageNumber = result.Data.PageNumber,
+                    pageSize = result.Data.PageSize,
+                    totalPages = result.Data.TotalPages,
+                    totalCount = result.Data.TotalCount,
+                    hasPreviousPage = result.Data.HasPreviousPage,
+                    hasNextPage = result.Data.HasNextPage
+                }
+            });
         }
 
         [HttpPost]
-        public async Task<ActionResult<Result<Guid>>> Create(CreateBrandDTO dto)
+        public async Task<IActionResult> Create(CreateBrandDTO dto)
         {
             var command = new CreateBrandCommand(dto);
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في إنشاء العلامة التجارية",
-                    errorType: "CreateBrandFailed",
-                    resultStatus: ResultStatus.Failed));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في إنشاء العلامة التجارية",
+                    errorType = "CreateBrandFailed"
+                });
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
-                data: result.Data,
-                message: "تم إنشاء العلامة التجارية بنجاح",
-                resultStatus: ResultStatus.Success));
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم إنشاء العلامة التجارية بنجاح",
+                errorType = (string)null,
+                data = result.Data
+            });
         }
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<Result<BrandDTO>>> GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var query = new GetBrandByIdQuery(id);
             var result = await _mediator.Send(query);
             
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في جلب العلامة التجارية",
-                    errorType: "GetBrandByIdFailed",
-                    resultStatus: ResultStatus.Failed));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في جلب العلامة التجارية",
+                    errorType = "GetBrandByIdFailed"
+                });
 
-            return Ok(Result<BrandDTO>.Ok(
-                data: result.Data,
-                message: "تم جلب العلامة التجارية بنجاح",
-                resultStatus: ResultStatus.Success));
+            return Ok(new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم جلب العلامة التجارية بنجاح",
+                errorType = (string)null,
+                data = result.Data
+            });
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Result<bool>>> Update(Guid id, CreateBrandDTO dto)
+        public async Task<IActionResult> Update(Guid id, CreateBrandDTO dto)
         {
             var command = new UpdateBrandCommand(id, dto);
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في تحديث العلامة التجارية",
-                    errorType: "UpdateBrandFailed",
-                    resultStatus: ResultStatus.Failed));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في تحديث العلامة التجارية",
+                    errorType = "UpdateBrandFailed"
+                });
 
-            return Ok(Result<bool>.Ok(
-                data: result.Data,
-                message: "تم تحديث العلامة التجارية بنجاح",
-                resultStatus: ResultStatus.Success));
+            return Ok(new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم تحديث العلامة التجارية بنجاح",
+                errorType = (string)null,
+                data = result.Data
+            });
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Result<bool>>> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteBrandCommand(id);
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في حذف العلامة التجارية",
-                    errorType: "DeleteBrandFailed",
-                    resultStatus: ResultStatus.Failed));
+                return StatusCode(500, new
+                {
+                    resultStatus = (int)ResultStatus.Failed,
+                    success = false,
+                    message = "فشل في حذف العلامة التجارية",
+                    errorType = "DeleteBrandFailed"
+                });
 
-            return Ok(Result<bool>.Ok(
-                data: result.Data,
-                message: "تم حذف العلامة التجارية بنجاح",
-                resultStatus: ResultStatus.Success));
+            return Ok(new
+            {
+                resultStatus = (int)ResultStatus.Success,
+                success = true,
+                message = "تم حذف العلامة التجارية بنجاح",
+                errorType = (string)null,
+                data = result.Data
+            });
         }
     }
 } 
