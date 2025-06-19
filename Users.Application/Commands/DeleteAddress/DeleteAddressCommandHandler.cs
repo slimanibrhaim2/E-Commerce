@@ -26,9 +26,8 @@ namespace Users.Application.Commands.DeleteAddress
             {
                 _logger.LogInformation("Attempting to soft delete address with ID: {AddressId}", request.AddressId);
 
-                // Find the address
-                IEnumerable<Address> addresses = await _addressRepo.FindAsync(a => a.Id == request.AddressId);
-                Address? address = addresses.FirstOrDefault();
+                // Find the address directly by ID
+                Address? address = await _addressRepo.GetByIdAsync(request.AddressId);
                 if (address is null)
                 {
                     _logger.LogWarning("Address not found with ID: {AddressId}", request.AddressId);
@@ -47,8 +46,8 @@ namespace Users.Application.Commands.DeleteAddress
                         resultStatus: ResultStatus.ValidationError);
                 }
 
-                address.DeletedAt = DateTime.UtcNow;
-                _addressRepo.Update(address);
+                // Use the new soft delete Remove method
+                _addressRepo.Remove(address);
                 await _uow.SaveChangesAsync();
 
                 _logger.LogInformation("Successfully soft deleted address with ID: {AddressId}", request.AddressId);

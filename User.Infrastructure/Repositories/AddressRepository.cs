@@ -38,7 +38,7 @@ namespace Users.Infrastructure.Repositories
 
         public async Task<Address?> GetByIdAsync(Guid id)
         {
-            var dao = await _dbSet.FindAsync(id);
+            var dao = await _dbSet.FirstOrDefaultAsync(a => a.Id == id && a.DeletedAt == null);
             return dao != null ? _addressMapper.Map(dao) : null;
         }
 
@@ -58,13 +58,22 @@ namespace Users.Infrastructure.Repositories
         public void Update(Address entity)
         {
             var dao = _addressMapper.MapBack(entity);
-            _dbSet.Update(dao);
-        }
-
-        public void Remove(Address entity)
-        {
-            var dao = _addressMapper.MapBack(entity);
-            _dbSet.Remove(dao);
+            
+            // Check if the entity is already being tracked
+            var existingEntry = _ctx.ChangeTracker.Entries<AddressDAO>()
+                .FirstOrDefault(e => e.Entity.Id == dao.Id);
+            
+            if (existingEntry != null)
+            {
+                // Update the existing tracked entity
+                existingEntry.CurrentValues.SetValues(dao);
+            }
+            else
+            {
+                // Use Attach and set state to Modified to avoid tracking conflicts
+                _ctx.Attach(dao);
+                _ctx.Entry(dao).State = EntityState.Modified;
+            }
         }
     }
 }
