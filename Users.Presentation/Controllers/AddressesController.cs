@@ -8,6 +8,7 @@ using Users.Application.Commands.AddAddressByUserId;
 using Users.Application.Queries.GetAddressesByUserId;
 using Core.Result;
 using Users.Application.Commands.DeleteAddress;
+using Users.Application.Commands.UpdateAddress;
 using Core.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Core.Authentication;
@@ -57,6 +58,21 @@ namespace Users.Presentation.Controllers
             return Ok(Result<PaginatedResult<AddressDTO>>.Ok(
                 data: result.Data,
                 message: "تم جلب العناوين بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+
+        [HttpPut("{addressId}")]
+        public async Task<IActionResult> UpdateAddress(Guid addressId, [FromBody] AddAddressDTO addressDTO)
+        {
+            var command = new UpdateAddressCommand(addressId, addressDTO);
+            var result = await _mediator.Send(command);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث العنوان",
+                    errorType: "UpdateAddressFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result.Ok(
+                message: "تم تحديث العنوان بنجاح",
                 resultStatus: ResultStatus.Success));
         }
 
