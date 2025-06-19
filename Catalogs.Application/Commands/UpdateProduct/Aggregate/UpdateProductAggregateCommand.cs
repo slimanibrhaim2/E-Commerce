@@ -4,4 +4,4 @@ using Catalogs.Application.DTOs;
 
 namespace Catalogs.Application.Commands.UpdateProduct.Aggregate;
 
-public record UpdateProductAggregateCommand(Guid Id, CreateProductAggregateDTO Product) : IRequest<Result<bool>>;
+public record UpdateProductAggregateCommand(Guid Id, CreateProductAggregateDTO Product, Guid UserId) : IRequest<Result<bool>>;

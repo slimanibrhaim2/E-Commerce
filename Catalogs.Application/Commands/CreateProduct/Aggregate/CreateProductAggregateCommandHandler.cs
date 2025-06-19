@@ -67,7 +67,7 @@ public class CreateProductAggregateCommandHandler : IRequestHandler<CreateProduc
                 Description = dto.Description,
                 Price = dto.Price,
                 CategoryId = dto.CategoryId,
-                UserId = dto.UserId,
+                UserId = request.UserId,
                 IsAvailable = dto.IsAvailable
             };
             await _baseItemRepository.AddAsync(baseItem);
@@ -87,7 +87,7 @@ public class CreateProductAggregateCommandHandler : IRequestHandler<CreateProduc
                 SKU = dto.SKU,
                 StockQuantity = dto.StockQuantity,
                 IsAvailable = dto.IsAvailable,
-                UserId = dto.UserId,
+                UserId = request.UserId,
             };
             await _productRepository.AddAsync(product);
             await _unitOfWork.SaveChangesAsync();
@@ -112,7 +112,7 @@ public class CreateProductAggregateCommandHandler : IRequestHandler<CreateProduc
                 var couponEntity = new Coupon
                 {
                     Id = Guid.NewGuid(),
-                    UserId = dto.UserId,
+                    UserId = request.UserId,
                     Code = coupon.Code,
                     DiscountAmount = coupon.DiscountAmount,
                     ExpiryDate = coupon.ExpiryDate,

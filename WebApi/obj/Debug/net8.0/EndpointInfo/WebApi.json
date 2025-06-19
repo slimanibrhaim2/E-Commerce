@@ -67,6 +67,46 @@
       }
     },
     "/api/Addresses/{addressId}": {
+      "put": {
+        "tags": [
+          "Addresses"
+        ],
+        "parameters": [
+          {
+            "name": "addressId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAddressDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAddressDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAddressDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Addresses"
@@ -5434,17 +5474,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductDTO"
+                "$ref": "#/components/schemas/CreateProductDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductDTO"
+                "$ref": "#/components/schemas/CreateProductDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ProductDTO"
+                "$ref": "#/components/schemas/CreateProductDTO"
               }
             }
           }
@@ -5668,17 +5708,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ServiceDTO"
+                "$ref": "#/components/schemas/CreateServiceDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ServiceDTO"
+                "$ref": "#/components/schemas/CreateServiceDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ServiceDTO"
+                "$ref": "#/components/schemas/CreateServiceDTO"
               }
             }
           }
@@ -5792,17 +5832,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ServiceDTO"
+                "$ref": "#/components/schemas/CreateServiceDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ServiceDTO"
+                "$ref": "#/components/schemas/CreateServiceDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ServiceDTO"
+                "$ref": "#/components/schemas/CreateServiceDTO"
               }
             }
           }
@@ -7916,10 +7956,6 @@
           "isAvailable": {
             "type": "boolean"
           },
-          "userId": {
-            "type": "string",
-            "format": "uuid"
-          },
           "media": {
             "type": "array",
             "items": {
@@ -7973,10 +8009,6 @@
           },
           "isAvailable": {
             "type": "boolean"
-          },
-          "userId": {
-            "type": "string",
-            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -8011,10 +8043,6 @@
           "isAvailable": {
             "type": "boolean"
           },
-          "userId": {
-            "type": "string",
-            "format": "uuid"
-          },
           "media": {
             "type": "array",
             "items": {
@@ -8035,6 +8063,39 @@
               "$ref": "#/components/schemas/CreateCouponDTO"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateServiceDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "categoryId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "serviceType": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isAvailable": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -9460,70 +9521,6 @@
         },
         "additionalProperties": false
       },
-      "ProductDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "categoryId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "sku": {
-            "type": "string",
-            "nullable": true
-          },
-          "stockQuantity": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isAvailable": {
-            "type": "boolean"
-          },
-          "userId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "media": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MediaDTO"
-            },
-            "nullable": true
-          },
-          "features": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ProductFeatureDTO"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ProductFeature": {
         "type": "object",
         "properties": {
@@ -9552,37 +9549,6 @@
           },
           "baseItem": {
             "$ref": "#/components/schemas/BaseItem"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ProductFeatureDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "value": {
-            "type": "string",
-            "nullable": true
-          },
-          "productId": {
-            "type": "string",
-            "format": "uuid"
           },
           "createdAt": {
             "type": "string",
@@ -9692,70 +9658,6 @@
         },
         "additionalProperties": false
       },
-      "ServiceDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "categoryId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "serviceType": {
-            "type": "string",
-            "nullable": true
-          },
-          "duration": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isAvailable": {
-            "type": "boolean"
-          },
-          "userId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "media": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MediaDTO"
-            },
-            "nullable": true
-          },
-          "features": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ServiceFeatureDTO"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ServiceFeature": {
         "type": "object",
         "properties": {
@@ -9783,44 +9685,6 @@
             "format": "date-time"
           },
           "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "deletedAt": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ServiceFeatureDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "value": {
-            "type": "string",
-            "nullable": true
-          },
-          "entityId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "serviceId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
             "type": "string",
             "format": "date-time"
           },

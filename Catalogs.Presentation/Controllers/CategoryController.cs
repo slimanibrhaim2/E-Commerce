@@ -35,30 +35,14 @@ namespace Catalogs.Presentation.Controllers
             var query = new GetAllCategoriesQuery(parameters);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في جلب الفئات",
-                    errorType = "GetAllCategoriesFailed"
-                });
-            return Ok(new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم جلب الفئات بنجاح",
-                errorType = (string)null,
-                data = result.Data.Data,
-                pagination = new
-                {
-                    pageNumber = result.Data.PageNumber,
-                    pageSize = result.Data.PageSize,
-                    totalPages = result.Data.TotalPages,
-                    totalCount = result.Data.TotalCount,
-                    hasPreviousPage = result.Data.HasPreviousPage,
-                    hasNextPage = result.Data.HasNextPage
-                }
-            });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب الفئات",
+                    errorType: "GetAllCategoriesFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<CategoryDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب الفئات بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet("{id}")]
@@ -68,21 +52,14 @@ namespace Catalogs.Presentation.Controllers
             var query = new GetCategoryByIdQuery(id);
             var result = await _mediator.Send(query);
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في جلب الفئة",
-                    errorType = "GetCategoryByIdFailed"
-                });
-            return Ok(new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم جلب الفئة بنجاح",
-                errorType = (string)null,
-                data = result.Data
-            });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب الفئة",
+                    errorType: "GetCategoryByIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<CategoryDTO>.Ok(
+                data: result.Data,
+                message: "تم جلب الفئة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPost]
@@ -92,22 +69,15 @@ namespace Catalogs.Presentation.Controllers
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في إنشاء الفئة",
-                    errorType = "CreateCategoryFailed"
-                });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إنشاء الفئة",
+                    errorType: "CreateCategoryFailed",
+                    resultStatus: ResultStatus.Failed));
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم إنشاء الفئة بنجاح",
-                errorType = (string)null,
-                data = result.Data
-            });
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
+                data: result.Data,
+                message: "تم إنشاء الفئة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPut("{id}")]
@@ -117,22 +87,14 @@ namespace Catalogs.Presentation.Controllers
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في تحديث الفئة",
-                    errorType = "UpdateCategoryFailed"
-                });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث الفئة",
+                    errorType: "UpdateCategoryFailed",
+                    resultStatus: ResultStatus.Failed));
 
-            return Ok(new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم تحديث الفئة بنجاح",
-                errorType = (string)null,
-                data = result.Data
-            });
+            return Ok(Result.Ok(
+                message: "تم تحديث الفئة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("{id}")]
@@ -142,22 +104,14 @@ namespace Catalogs.Presentation.Controllers
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في حذف الفئة",
-                    errorType = "DeleteCategoryFailed"
-                });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف الفئة",
+                    errorType: "DeleteCategoryFailed",
+                    resultStatus: ResultStatus.Failed));
 
-            return Ok(new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم حذف الفئة بنجاح",
-                errorType = (string)null,
-                data = result.Data
-            });
+            return Ok(Result.Ok(
+                message: "تم حذف الفئة بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 } 

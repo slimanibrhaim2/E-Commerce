@@ -66,7 +66,7 @@ public class UpdateProductAggregateCommandHandler : IRequestHandler<UpdateProduc
             product.Price = dto.Price;
             product.CategoryId = dto.CategoryId;
             product.IsAvailable = dto.IsAvailable;
-            product.UserId = dto.UserId;
+            product.UserId = request.UserId;
 
             // Update Product fields
             product.SKU = dto.SKU;

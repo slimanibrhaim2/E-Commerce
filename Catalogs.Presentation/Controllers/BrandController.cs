@@ -35,30 +35,14 @@ namespace Catalogs.Presentation.Controllers
             GetAllBrandsQuery query = new GetAllBrandsQuery(parameters);
             Result<PaginatedResult<BrandDTO>> result = await _mediator.Send(query);
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في جلب العلامات التجارية",
-                    errorType = "GetAllBrandsFailed"
-                });
-            return Ok(new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم جلب العلامات التجارية بنجاح",
-                errorType = (string)null,
-                data = result.Data.Data,
-                pagination = new
-                {
-                    pageNumber = result.Data.PageNumber,
-                    pageSize = result.Data.PageSize,
-                    totalPages = result.Data.TotalPages,
-                    totalCount = result.Data.TotalCount,
-                    hasPreviousPage = result.Data.HasPreviousPage,
-                    hasNextPage = result.Data.HasNextPage
-                }
-            });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب العلامات التجارية",
+                    errorType: "GetAllBrandsFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<BrandDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب العلامات التجارية بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPost]
@@ -68,22 +52,15 @@ namespace Catalogs.Presentation.Controllers
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في إنشاء العلامة التجارية",
-                    errorType = "CreateBrandFailed"
-                });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في إنشاء العلامة التجارية",
+                    errorType: "CreateBrandFailed",
+                    resultStatus: ResultStatus.Failed));
 
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم إنشاء العلامة التجارية بنجاح",
-                errorType = (string)null,
-                data = result.Data
-            });
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
+                data: result.Data,
+                message: "تم إنشاء العلامة التجارية بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet("{id}")]
@@ -94,22 +71,15 @@ namespace Catalogs.Presentation.Controllers
             var result = await _mediator.Send(query);
             
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في جلب العلامة التجارية",
-                    errorType = "GetBrandByIdFailed"
-                });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب العلامة التجارية",
+                    errorType: "GetBrandByIdFailed",
+                    resultStatus: ResultStatus.Failed));
 
-            return Ok(new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم جلب العلامة التجارية بنجاح",
-                errorType = (string)null,
-                data = result.Data
-            });
+            return Ok(Result<BrandDTO>.Ok(
+                data: result.Data,
+                message: "تم جلب العلامة التجارية بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpPut("{id}")]
@@ -119,22 +89,14 @@ namespace Catalogs.Presentation.Controllers
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في تحديث العلامة التجارية",
-                    errorType = "UpdateBrandFailed"
-                });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث العلامة التجارية",
+                    errorType: "UpdateBrandFailed",
+                    resultStatus: ResultStatus.Failed));
 
-            return Ok(new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم تحديث العلامة التجارية بنجاح",
-                errorType = (string)null,
-                data = result.Data
-            });
+            return Ok(Result.Ok(
+                message: "تم تحديث العلامة التجارية بنجاح",
+                resultStatus: ResultStatus.Success));
         }
 
         [HttpDelete("{id}")]
@@ -144,22 +106,14 @@ namespace Catalogs.Presentation.Controllers
             var result = await _mediator.Send(command);
             
             if (!result.Success)
-                return StatusCode(500, new
-                {
-                    resultStatus = (int)ResultStatus.Failed,
-                    success = false,
-                    message = "فشل في حذف العلامة التجارية",
-                    errorType = "DeleteBrandFailed"
-                });
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف العلامة التجارية",
+                    errorType: "DeleteBrandFailed",
+                    resultStatus: ResultStatus.Failed));
 
-            return Ok(new
-            {
-                resultStatus = (int)ResultStatus.Success,
-                success = true,
-                message = "تم حذف العلامة التجارية بنجاح",
-                errorType = (string)null,
-                data = result.Data
-            });
+            return Ok(Result.Ok(
+                message: "تم حذف العلامة التجارية بنجاح",
+                resultStatus: ResultStatus.Success));
         }
     }
 } 

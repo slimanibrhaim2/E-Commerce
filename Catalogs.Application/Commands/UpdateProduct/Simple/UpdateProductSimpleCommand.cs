@@ -4,4 +4,4 @@ using Catalogs.Application.DTOs;
 
 namespace Catalogs.Application.Commands.UpdateProduct.Simple;
 
-public record UpdateProductSimpleCommand(Guid Id, ProductDTO ProductDto) : IRequest<Result<bool>>;
+public record UpdateProductSimpleCommand(Guid Id, CreateProductDTO ProductDto, Guid UserId) : IRequest<Result<bool>>;

@@ -58,7 +58,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
                 Description = request.ProductDto.Description,
                 Price = request.ProductDto.Price,
                 CategoryId = request.ProductDto.CategoryId,
-                UserId = request.ProductDto.UserId,
+                UserId = request.UserId,
                 IsAvailable = request.ProductDto.IsAvailable
             };
             await _baseItemRepository.AddAsync(baseItem);
@@ -76,7 +76,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
                 SKU = request.ProductDto.SKU,
                 StockQuantity = request.ProductDto.StockQuantity,
                 IsAvailable = request.ProductDto.IsAvailable,
-                UserId = request.ProductDto.UserId,
+                UserId = request.UserId,
                 // Set the BaseItemId or link to the baseItem as needed
             };
             // If Product has a BaseItemId property, set it here. If not, ensure mapping is correct in the repo/mapper.

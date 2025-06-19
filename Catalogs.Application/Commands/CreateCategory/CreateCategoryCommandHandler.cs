@@ -29,6 +29,19 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
                 resultStatus: ResultStatus.ValidationError);
         }
 
+        // Validate parent category exists if ParentId is provided
+        if (request.Category.ParentId.HasValue && request.Category.ParentId.Value != Guid.Empty)
+        {
+            var parentCategory = await _categoryRepository.GetCategoryByIdAsync(request.Category.ParentId.Value);
+            if (parentCategory == null)
+            {
+                return Result<Guid>.Fail(
+                    message: "الفئة الأب غير موجودة",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            }
+        }
+
         try
         {
             var category = new Category
@@ -36,7 +49,8 @@ public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryComman
                 Name = request.Category.Name,
                 Description = request.Category.Description,
                 ParentCategoryId = request.Category.ParentId,
-                IsActive = true
+                IsActive = request.Category.IsActive,
+                ImageUrl = request.Category.ImageUrl
             };
 
             var categoryId = await _categoryRepository.AddCategoryAsync(category);

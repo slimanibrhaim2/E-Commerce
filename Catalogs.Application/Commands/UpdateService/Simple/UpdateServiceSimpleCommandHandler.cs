@@ -25,21 +25,21 @@ public class UpdateServiceSimpleCommandHandler : IRequestHandler<UpdateServiceSi
     public async Task<Result<bool>> Handle(UpdateServiceSimpleCommand request, CancellationToken cancellationToken)
     {
         // Validation
-        if (string.IsNullOrWhiteSpace(request.ServiceDto.Name))
+        if (string.IsNullOrWhiteSpace(request.Service.Name))
         {
             return Result<bool>.Fail(
                 message: "اسم الخدمة مطلوب",
                 errorType: "ValidationError",
                 resultStatus: ResultStatus.ValidationError);
         }
-        if (request.ServiceDto.Price <= 0)
+        if (request.Service.Price <= 0)
         {
             return Result<bool>.Fail(
                 message: "سعر الخدمة يجب أن يكون أكبر من الصفر",
                 errorType: "ValidationError",
                 resultStatus: ResultStatus.ValidationError);
         }
-        if (request.ServiceDto.CategoryId == Guid.Empty)
+        if (request.Service.CategoryId == Guid.Empty)
         {
             return Result<bool>.Fail(
                 message: "معرف التصنيف مطلوب",
@@ -52,13 +52,14 @@ public class UpdateServiceSimpleCommandHandler : IRequestHandler<UpdateServiceSi
             var service = new Service
             {
                 Id = request.Id,
-                Name = request.ServiceDto.Name,
-                Description = request.ServiceDto.Description,
-                Price = request.ServiceDto.Price,
-                CategoryId = request.ServiceDto.CategoryId,
-                ServiceType = request.ServiceDto.ServiceType,
-                Duration = request.ServiceDto.Duration,
-                IsAvailable = request.ServiceDto.IsAvailable,
+                Name = request.Service.Name,
+                Description = request.Service.Description,
+                Price = request.Service.Price,
+                CategoryId = request.Service.CategoryId,
+                ServiceType = request.Service.ServiceType,
+                Duration = request.Service.Duration,
+                IsAvailable = request.Service.IsAvailable,
+                UserId = request.UserId,
                 // Add other properties as needed
             };
 

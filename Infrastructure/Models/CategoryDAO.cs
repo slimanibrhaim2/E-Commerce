@@ -19,6 +19,10 @@ public partial class CategoryDAO
 
     public Guid? ParentId { get; set; }
 
+    public bool IsActive { get; set; } = true;
+
+    public string? ImageUrl { get; set; }
+
     public virtual ICollection<BaseItemDAO> BaseItems { get; set; } = new List<BaseItemDAO>();
 
     public virtual ICollection<CategoryDAO> InverseParent { get; set; } = new List<CategoryDAO>();

@@ -70,7 +70,7 @@ public class UpdateServiceAggregateCommandHandler : IRequestHandler<UpdateServic
             service.Price = dto.Price;
             service.CategoryId = dto.CategoryId;
             service.IsAvailable = dto.IsAvailable;
-            service.UserId = dto.UserId;
+            service.UserId = request.UserId;
 
             // Update Service fields
             service.ServiceType = dto.ServiceType;

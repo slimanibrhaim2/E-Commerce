@@ -15,6 +15,8 @@ public class CategoryMapper : IMapper<CategoryDAO, Category>
             Name = source.Name,
             Description = source.Description,
             ParentCategoryId = source.ParentId,
+            IsActive = source.IsActive,
+            ImageUrl = source.ImageUrl,
             CreatedAt = source.CreatedAt,
             UpdatedAt = source.UpdatedAt,
             DeletedAt = source.DeletedAt
@@ -30,6 +32,8 @@ public class CategoryMapper : IMapper<CategoryDAO, Category>
             Name = target.Name,
             Description = target.Description,
             ParentId = target.ParentCategoryId,
+            IsActive = target.IsActive,
+            ImageUrl = target.ImageUrl,
             CreatedAt = target.CreatedAt,
             UpdatedAt = target.UpdatedAt,
             DeletedAt = target.DeletedAt

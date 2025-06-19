@@ -1335,7 +1335,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

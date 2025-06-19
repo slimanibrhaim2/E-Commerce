@@ -15,6 +15,5 @@ namespace Catalogs.Application.DTOs
         public string SKU { get; set; }
         public int StockQuantity { get; set; }
         public bool IsAvailable { get; set; }
-        public Guid UserId { get; set; }
     }
 }

@@ -27,28 +27,28 @@ public class CreateServiceCommandHandler : IRequestHandler<CreateServiceCommand,
     {
         try
         {
-            if (request.ServiceDto == null)
+            if (request.Service == null)
                 return Result<Guid>.Fail(
                     message: "Service data is required",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
 
             // Validation
-            if (string.IsNullOrWhiteSpace(request.ServiceDto.Name))
+            if (string.IsNullOrWhiteSpace(request.Service.Name))
             {
                 return Result<Guid>.Fail(
                     message: "اسم الخدمة مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
-            if (request.ServiceDto.Price <= 0)
+            if (request.Service.Price <= 0)
             {
                 return Result<Guid>.Fail(
                     message: "سعر الخدمة يجب أن يكون أكبر من الصفر",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
-            if (request.ServiceDto.CategoryId == Guid.Empty)
+            if (request.Service.CategoryId == Guid.Empty)
             {
                 return Result<Guid>.Fail(
                     message: "معرف التصنيف مطلوب",
@@ -60,12 +60,12 @@ public class CreateServiceCommandHandler : IRequestHandler<CreateServiceCommand,
             var baseItem = new BaseItem
             {
                 Id = Guid.NewGuid(),
-                Name = request.ServiceDto.Name,
-                Description = request.ServiceDto.Description,
-                Price = request.ServiceDto.Price,
-                CategoryId = request.ServiceDto.CategoryId,
-                UserId = request.ServiceDto.UserId,
-                IsAvailable = request.ServiceDto.IsAvailable
+                Name = request.Service.Name,
+                Description = request.Service.Description,
+                Price = request.Service.Price,
+                CategoryId = request.Service.CategoryId,
+                UserId = request.UserId,
+                IsAvailable = request.Service.IsAvailable
             };
             await _baseItemRepository.AddAsync(baseItem);
             await _unitOfWork.SaveChangesAsync();
@@ -75,14 +75,14 @@ public class CreateServiceCommandHandler : IRequestHandler<CreateServiceCommand,
             {
                 Id = Guid.NewGuid(),
                 BaseItemId=baseItem.Id,
-                Name = request.ServiceDto.Name,
-                Description = request.ServiceDto.Description,
-                Price = request.ServiceDto.Price,
-                CategoryId = request.ServiceDto.CategoryId,
-                ServiceType = request.ServiceDto.ServiceType,
-                Duration = request.ServiceDto.Duration,
-                IsAvailable = request.ServiceDto.IsAvailable,
-                UserId = request.ServiceDto.UserId,
+                Name = request.Service.Name,
+                Description = request.Service.Description,
+                Price = request.Service.Price,
+                CategoryId = request.Service.CategoryId,
+                ServiceType = request.Service.ServiceType,
+                Duration = request.Service.Duration,
+                IsAvailable = request.Service.IsAvailable,
+                UserId = request.UserId,
                 // Set the BaseItemId or link to the baseItem as needed
             };
             // If Service has a BaseItemId property, set it here. If not, ensure mapping is correct in the repo/mapper.

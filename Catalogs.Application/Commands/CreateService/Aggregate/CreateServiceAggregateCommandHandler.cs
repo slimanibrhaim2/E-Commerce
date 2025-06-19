@@ -71,7 +71,7 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
                 Description = dto.Description,
                 Price = dto.Price,
                 CategoryId = dto.CategoryId,
-                UserId = dto.UserId,
+                UserId = request.UserId,
                 IsAvailable = dto.IsAvailable
             };
             await _baseItemRepository.AddAsync(baseItem);
@@ -90,7 +90,7 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
                 ServiceType = dto.ServiceType,
                 Duration = dto.Duration,
                 IsAvailable = dto.IsAvailable,
-                UserId = dto.UserId,
+                UserId = request.UserId,
                 BaseItemId = baseItem.Id
             };
             await _serviceRepository.AddAsync(service);
@@ -116,7 +116,7 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
                 var couponEntity = new Coupon
                 {
                     Id = Guid.NewGuid(),
-                    UserId = dto.UserId,
+                    UserId = request.UserId,
                     Code = coupon.Code,
                     DiscountAmount = coupon.DiscountAmount,
                     ExpiryDate = coupon.ExpiryDate,

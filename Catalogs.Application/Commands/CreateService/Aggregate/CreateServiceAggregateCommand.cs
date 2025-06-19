@@ -4,4 +4,4 @@ using Catalogs.Application.DTOs;
 
 namespace Catalogs.Application.Commands.CreateService.Aggregate;
 
-public record CreateServiceAggregateCommand(CreateServiceAggregateDTO Service) : IRequest<Result<Guid>>; 
+public record CreateServiceAggregateCommand(CreateServiceAggregateDTO Service, Guid UserId) : IRequest<Result<Guid>>; 

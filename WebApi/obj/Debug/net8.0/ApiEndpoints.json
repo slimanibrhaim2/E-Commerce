@@ -38,6 +38,27 @@
   },
   {
     "ContainingType": "Users.Presentation.Controllers.AddressesController",
+    "Method": "UpdateAddress",
+    "RelativePath": "api/Addresses/{addressId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addressId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "addressDTO",
+        "Type": "Users.Application.DTOs.AddAddressDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Users.Presentation.Controllers.AddressesController",
     "Method": "DeleteAddress",
     "RelativePath": "api/Addresses/{addressId}",
     "HttpMethod": "DELETE",
@@ -3238,7 +3259,7 @@
       },
       {
         "Name": "dto",
-        "Type": "Catalogs.Application.DTOs.ProductDTO",
+        "Type": "Catalogs.Application.DTOs.CreateProductDTO",
         "IsRequired": true
       }
     ],
@@ -3392,7 +3413,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Catalogs.Application.DTOs.ServiceDTO",
+        "Type": "Catalogs.Application.DTOs.CreateServiceDTO",
         "IsRequired": true
       }
     ],
@@ -3450,7 +3471,7 @@
       },
       {
         "Name": "dto",
-        "Type": "Catalogs.Application.DTOs.ServiceDTO",
+        "Type": "Catalogs.Application.DTOs.CreateServiceDTO",
         "IsRequired": true
       }
     ],

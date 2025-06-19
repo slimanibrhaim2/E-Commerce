@@ -12,7 +12,6 @@ namespace Catalogs.Application.DTOs
         public string SKU { get; set; }
         public int StockQuantity { get; set; }
         public bool IsAvailable { get; set; }
-        public Guid UserId { get; set; }
         public List<CreateMediaDTO> Media { get; set; } = new();
         public List<CreateFeatureDTO> Features { get; set; } = new();
         public List<CreateCouponDTO> Coupons { get; set; } = new();

@@ -1,6 +1,5 @@
 using MediatR;
 using Core.Result;
-using Catalogs.Application.DTOs;
 using Catalogs.Domain.Repositories;
 using Core.Pagination;
 using System.Linq;
@@ -8,10 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Data;
+using Shared.Contracts.Queries;
+using Shared.Contracts.DTOs;
 
 namespace Catalogs.Application.Queries.GetProductsByIds;
 
-public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuery, Result<PaginatedResult<ProductDTO>>>
+public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuery, Result<PaginatedResult<ProductDetailsDTO>>>
 {
     private readonly IProductRepository _repo;
     private readonly ILogger<GetProductsByIdsQueryHandler> _logger;
@@ -24,21 +25,21 @@ public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuer
         _logger = logger;
     }
 
-    public async Task<Result<PaginatedResult<ProductDTO>>> Handle(GetProductsByIdsQuery request, CancellationToken cancellationToken)
+    public async Task<Result<PaginatedResult<ProductDetailsDTO>>> Handle(GetProductsByIdsQuery request, CancellationToken cancellationToken)
     {
         try
         {
-            if (request.Ids == null || !request.Ids.Any())
+            if (request.ProductIds == null || !request.ProductIds.Any())
             {
-                return Result<PaginatedResult<ProductDTO>>.Fail(
+                return Result<PaginatedResult<ProductDetailsDTO>>.Fail(
                     message: "Product IDs list cannot be empty",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            if (request.Ids.Any(id => id == Guid.Empty))
+            if (request.ProductIds.Any(id => id == Guid.Empty))
             {
-                return Result<PaginatedResult<ProductDTO>>.Fail(
+                return Result<PaginatedResult<ProductDetailsDTO>>.Fail(
                     message: "All product IDs must be valid GUIDs",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
@@ -46,7 +47,7 @@ public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuer
 
             if (request.Parameters.PageNumber < 1)
             {
-                return Result<PaginatedResult<ProductDTO>>.Fail(
+                return Result<PaginatedResult<ProductDetailsDTO>>.Fail(
                     message: "Page number must be greater than or equal to 1",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
@@ -54,23 +55,23 @@ public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuer
 
             if (request.Parameters.PageSize < 1)
             {
-                return Result<PaginatedResult<ProductDTO>>.Fail(
+                return Result<PaginatedResult<ProductDetailsDTO>>.Fail(
                     message: "Page size must be greater than or equal to 1",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var products = (await _repo.GetByIdsAsync(request.Ids)).ToList();
+            var products = (await _repo.GetByIdsAsync(request.ProductIds)).ToList();
             
             if (!products.Any())
             {
-                return Result<PaginatedResult<ProductDTO>>.Ok(
-                    data: PaginatedResult<ProductDTO>.Create(
-                        data: new List<ProductDTO>(),
+                return Result<PaginatedResult<ProductDetailsDTO>>.Ok(
+                    data: PaginatedResult<ProductDetailsDTO>.Create(
+                        data: new List<ProductDetailsDTO>(),
                         pageNumber: request.Parameters.PageNumber,
                         pageSize: request.Parameters.PageSize,
                         totalCount: 0),
-                    message: $"No products found for the provided IDs: {string.Join(", ", request.Ids)}",
+                    message: $"No products found for the provided IDs: {string.Join(", ", request.ProductIds)}",
                     resultStatus: ResultStatus.Success);
             }
 
@@ -79,7 +80,7 @@ public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuer
             var pageSize = request.Parameters.PageSize;
             var paged = products.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             
-            var dtos = paged.Select(p => new ProductDTO
+            var dtos = paged.Select(p => new ProductDetailsDTO
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -92,23 +93,16 @@ public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuer
                 UserId = p.UserId,
                 CreatedAt = p.CreatedAt,
                 UpdatedAt = p.UpdatedAt,
-                Media = p.Media?.Select(m => new MediaDTO
+                Media = p.Media?.Select(m => new Shared.Contracts.DTOs.MediaDTO
                 {
                     Id = m.Id,
                     Url = m.MediaUrl,
                     MediaTypeId = m.MediaTypeId,
                     ItemId = m.BaseItemId,
-                    MediaType = m.MediaType != null ? new MediaTypeDTO
-                    {
-                        Id = m.MediaType.Id,
-                        Name = m.MediaType.Name,
-                        CreatedAt = m.MediaType.CreatedAt,
-                        UpdatedAt = m.MediaType.UpdatedAt
-                    } : null,
                     CreatedAt = m.CreatedAt,
                     UpdatedAt = m.UpdatedAt
-                }).ToList() ?? new List<MediaDTO>(),
-                Features = p.Features?.Select(f => new ProductFeatureDTO
+                }).ToList() ?? new List<Shared.Contracts.DTOs.MediaDTO>(),
+                Features = p.Features?.Select(f => new Shared.Contracts.DTOs.ProductFeatureDTO
                 {
                     Id = f.Id,
                     Name = f.Name,
@@ -116,19 +110,19 @@ public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuer
                     ProductId = p.Id,
                     CreatedAt = f.CreatedAt,
                     UpdatedAt = f.UpdatedAt
-                }).ToList() ?? new List<ProductFeatureDTO>()
+                }).ToList() ?? new List<Shared.Contracts.DTOs.ProductFeatureDTO>()
             }).ToList();
 
-            var paginated = PaginatedResult<ProductDTO>.Create(dtos, pageNumber, pageSize, totalCount);
-            return Result<PaginatedResult<ProductDTO>>.Ok(
+            var paginated = PaginatedResult<ProductDetailsDTO>.Create(dtos, pageNumber, pageSize, totalCount);
+            return Result<PaginatedResult<ProductDetailsDTO>>.Ok(
                 data: paginated,
-                message: $"Successfully retrieved {dtos.Count} products out of {request.Ids.Count()} requested IDs",
+                message: $"Successfully retrieved {dtos.Count} products out of {request.ProductIds.Count()} requested IDs",
                 resultStatus: ResultStatus.Success);
         }
         catch (DBConcurrencyException ex)
         {
-            _logger.LogError(ex, "Database error while retrieving products for IDs: {ProductIds}", string.Join(", ", request.Ids));
-            return Result<PaginatedResult<ProductDTO>>.Fail(
+            _logger.LogError(ex, "Database error while retrieving products for IDs: {ProductIds}", string.Join(", ", request.ProductIds));
+            return Result<PaginatedResult<ProductDetailsDTO>>.Fail(
                 message: "Failed to retrieve products due to a database error. Please try again later.",
                 errorType: "DatabaseError",
                 resultStatus: ResultStatus.InternalServerError);
@@ -136,8 +130,8 @@ public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuer
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unexpected error while retrieving products for IDs: {ProductIds}: {Message}", 
-                string.Join(", ", request.Ids), ex.Message);
-            return Result<PaginatedResult<ProductDTO>>.Fail(
+                string.Join(", ", request.ProductIds), ex.Message);
+            return Result<PaginatedResult<ProductDetailsDTO>>.Fail(
                 message: "An unexpected error occurred while retrieving products. Please try again later.",
                 errorType: "UnexpectedError",
                 resultStatus: ResultStatus.Failed);
