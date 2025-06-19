@@ -47,8 +47,8 @@ namespace Users.Application.Commands.DeleteFollower
                         resultStatus: ResultStatus.ValidationError);
                 }
 
-                follower.DeletedAt = DateTime.UtcNow;
-                _followerRepo.Update(follower);
+                // Use the new soft delete Remove method
+                _followerRepo.Remove(follower);
                 await _uow.SaveChangesAsync();
 
                 _logger.LogInformation("Successfully soft deleted follower relationship. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 

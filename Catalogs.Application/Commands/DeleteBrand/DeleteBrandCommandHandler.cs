@@ -37,6 +37,25 @@ public class DeleteBrandCommandHandler : IRequestHandler<DeleteBrandCommand, Res
 
         try
         {
+            // Get the brand first
+            var brand = await _brandRepository.GetByIdAsync(request.Id);
+            if (brand == null)
+            {
+                return Result<bool>.Fail(
+                    message: "لم يتم العثور على العلامة التجارية",
+                    errorType: "BrandNotFound",
+                    resultStatus: ResultStatus.NotFound);
+            }
+
+            // Check if already deleted
+            if (brand.DeletedAt != null)
+            {
+                return Result<bool>.Fail(
+                    message: "العلامة التجارية محذوفة بالفعل",
+                    errorType: "AlreadyDeleted",
+                    resultStatus: ResultStatus.ValidationError);
+            }
+
             // Get all products and services associated with this brand
             var products = await _productRepository.GetByBrand(request.Id);
             var services = await _serviceRepository.GetByBrand(request.Id);
@@ -53,17 +72,9 @@ public class DeleteBrandCommandHandler : IRequestHandler<DeleteBrandCommand, Res
                 await _serviceRepository.RemoveBrandFromServiceAsync(service.Id, request.Id);
             }
 
-            // Delete the brand using Brand repository
-            var result = await _brandRepository.DeleteBrandAsync(request.Id);
+            // Use the standard Remove method for soft delete
+            _brandRepository.Remove(brand);
             await _unitOfWork.SaveChangesAsync();
-
-            if (!result)
-            {
-                return Result<bool>.Fail(
-                    message: "لم يتم العثور على العلامة التجارية",
-                    errorType: "BrandNotFound",
-                    resultStatus: ResultStatus.NotFound);
-            }
 
             return Result<bool>.Ok(
                 data: true,

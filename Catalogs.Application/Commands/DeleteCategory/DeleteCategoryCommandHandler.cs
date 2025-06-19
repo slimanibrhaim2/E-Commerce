@@ -29,7 +29,7 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
         try
         {
-            var category = await _categoryRepository.GetCategoryByIdAsync(request.Id);
+            var category = await _categoryRepository.GetByIdAsync(request.Id);
             if (category == null)
             {
                 return Result<bool>.Fail(
@@ -38,10 +38,21 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
                     resultStatus: ResultStatus.NotFound);
             }
 
-            var result = await _categoryRepository.DeleteCategoryAsync(request.Id);
+            // Check if already deleted
+            if (category.DeletedAt != null)
+            {
+                return Result<bool>.Fail(
+                    message: "الفئة محذوفة بالفعل",
+                    errorType: "AlreadyDeleted",
+                    resultStatus: ResultStatus.ValidationError);
+            }
+
+            // Use the standard Remove method for soft delete
+            _categoryRepository.Remove(category);
             await _unitOfWork.SaveChangesAsync();
+            
             return Result<bool>.Ok(
-                data: result,
+                data: true,
                 message: "تم حذف الفئة بنجاح",
                 resultStatus: ResultStatus.Success);
         }
