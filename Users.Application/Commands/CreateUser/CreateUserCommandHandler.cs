@@ -93,6 +93,17 @@ namespace Users.Application.Commands.CreateUser
                         resultStatus: ResultStatus.ValidationError);
                 }
 
+                // Check phone number duplication
+                var existingPhone = await _repo.GetByPhoneNumber(request.userDTO.PhoneNumber);
+                if (existingPhone is not null)
+                {
+                    _logger.LogWarning("Phone number already exists: {PhoneNumber}", request.userDTO.PhoneNumber);
+                    return Result<Guid>.Fail(
+                        message: "رقم الهاتف مسجل مسبقاً في النظام",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
                 // Create user
                 var user = new User
                 {

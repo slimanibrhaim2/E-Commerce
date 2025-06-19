@@ -105,15 +105,39 @@ namespace Users.Application.Commands.UpdateUser
                         resultStatus: ResultStatus.NotFound);
                 }
 
+                // Check if user is deleted
+                if (user.DeletedAt != null)
+                {
+                    _logger.LogWarning("User is deleted. UserId: {UserId}", request.Id);
+                    return Result.Fail(
+                        message: "لا يمكن تحديث حساب محذوف",
+                        errorType: "UserDeleted",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
                 // Check email uniqueness if changed
                 if (user.Email != request.User.Email)
                 {
-                    var existing = await _repo.GetByEmail(request.User.Email);
-                    if (existing is not null)
+                    var existingEmail = await _repo.GetByEmail(request.User.Email);
+                    if (existingEmail is not null)
                     {
                         _logger.LogWarning("Email already exists: {Email}", request.User.Email);
                         return Result.Fail(
-                            message: $"البريد الإلكتروني '{request.User.Email}' مستخدم بالفعل",
+                            message: "البريد الإلكتروني مسجل مسبقاً في النظام",
+                            errorType: "ValidationError",
+                            resultStatus: ResultStatus.ValidationError);
+                    }
+                }
+
+                // Check phone number uniqueness if changed
+                if (user.PhoneNumber != request.User.PhoneNumber)
+                {
+                    var existingPhone = await _repo.GetByPhoneNumber(request.User.PhoneNumber);
+                    if (existingPhone is not null)
+                    {
+                        _logger.LogWarning("Phone number already exists: {PhoneNumber}", request.User.PhoneNumber);
+                        return Result.Fail(
+                            message: "رقم الهاتف مسجل مسبقاً في النظام",
                             errorType: "ValidationError",
                             resultStatus: ResultStatus.ValidationError);
                     }
@@ -162,8 +186,7 @@ namespace Users.Application.Commands.UpdateUser
 
         private bool IsValidPhoneNumber(string phoneNumber)
         {
-            
-            return !string.IsNullOrWhiteSpace(phoneNumber) && phoneNumber.Length >= 10;
+            return !string.IsNullOrWhiteSpace(phoneNumber) && phoneNumber.Length == 10 && phoneNumber.StartsWith("09");
         }
     }
 }
