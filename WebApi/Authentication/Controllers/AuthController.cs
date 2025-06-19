@@ -34,6 +34,42 @@ namespace WebApi.Authentication.Controllers
         {
             try
             {
+                // Validate phone number format
+                if (string.IsNullOrWhiteSpace(request.PhoneNumber))
+                {
+                    return BadRequest(Result.Fail(
+                        message: "يرجى إدخال رقم الهاتف",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                if (!IsValidPhoneNumber(request.PhoneNumber))
+                {
+                    return BadRequest(Result.Fail(
+                        message: "يرجى إدخال رقم هاتف صحيح (يبدأ بـ 09 ويتكون من 10 أرقام)",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Check if user exists
+                var user = await _userRepository.GetByPhoneNumber(request.PhoneNumber);
+                if (user == null)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "رقم الهاتف غير مسجل في النظام. يرجى التسجيل أولاً",
+                        errorType: "UserNotFound",
+                        resultStatus: ResultStatus.NotFound));
+                }
+
+                // Check if user is deleted
+                if (user.DeletedAt != null)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "الحساب محذوف. يرجى التواصل مع الدعم الفني",
+                        errorType: "UserDeleted",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
                 var result = await _otpService.SendOtpAsync(request.PhoneNumber);
                 if (!result)
                 {
@@ -62,6 +98,23 @@ namespace WebApi.Authentication.Controllers
         {
             try
             {
+                // Validate phone number format
+                if (string.IsNullOrWhiteSpace(request.PhoneNumber))
+                {
+                    return BadRequest(Result.Fail(
+                        message: "يرجى إدخال رقم الهاتف",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                if (!IsValidPhoneNumber(request.PhoneNumber))
+                {
+                    return BadRequest(Result.Fail(
+                        message: "يرجى إدخال رقم هاتف صحيح (يبدأ بـ 09 ويتكون من 10 أرقام)",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(Result.Fail(
@@ -77,6 +130,15 @@ namespace WebApi.Authentication.Controllers
                         message: "المستخدم غير موجود",
                         errorType: "UserNotFound",
                         resultStatus: ResultStatus.Failed));
+                }
+
+                // Check if user is deleted
+                if (user.DeletedAt != null)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "الحساب محذوف. يرجى التواصل مع الدعم الفني",
+                        errorType: "UserDeleted",
+                        resultStatus: ResultStatus.ValidationError));
                 }
 
                 var isValid = await _otpService.VerifyOtpAsync(request.PhoneNumber, request.Otp);
@@ -140,6 +202,11 @@ namespace WebApi.Authentication.Controllers
                     errorType: "RegisterUserError",
                     resultStatus: ResultStatus.Failed));
             }
+        }
+
+        private bool IsValidPhoneNumber(string phoneNumber)
+        {
+            return !string.IsNullOrWhiteSpace(phoneNumber) && phoneNumber.Length == 10 && phoneNumber.StartsWith("09");
         }
     }
 }
