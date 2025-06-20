@@ -27,7 +27,6 @@ public partial class ECommerceContext : DbContext
     public virtual DbSet<CommentDAO> Comments { get; set; }
     public virtual DbSet<ConversationDAO> Conversations { get; set; }
     public virtual DbSet<ConversationMemberDAO> ConversationMembers { get; set; }
-    public virtual DbSet<CouponDAO> Coupons { get; set; }
     public virtual DbSet<DiscountTypeDAO> DiscountTypes { get; set; }
     public virtual DbSet<FavoriteDAO> Favorites { get; set; }
     public virtual DbSet<FollowerDAO> Followers { get; set; }
@@ -208,19 +207,7 @@ public partial class ECommerceContext : DbContext
                 .HasConstraintName("FK_ConversationMember_User");
         });
 
-        modelBuilder.Entity<CouponDAO>(entity =>
-        {
-            entity.ToTable("Coupon");
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.Code).HasMaxLength(50).IsRequired();
-
-            entity.HasOne(d => d.User)
-                .WithMany(p => p.Coupons)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_Coupon_User");
-        });
-
+       
         modelBuilder.Entity<FavoriteDAO>(entity =>
         {
             entity.ToTable("Favorite");

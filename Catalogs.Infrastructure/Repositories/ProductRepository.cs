@@ -91,15 +91,7 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
 
-    public async Task<IEnumerable<Product>> GetDiscountedProducts()
-    {
-        var products = await _context.Products
-            .Include(p => p.BaseItem)
-            .Where(p => p.BaseItem.Coupons.Any())
-            .ToListAsync();
-
-        return products.Select(p => _mapper.Map(p));
-    }
+    
 
     public async Task<IEnumerable<Product>> GetLowStockProducts(int threshold)
     {

@@ -24,7 +24,6 @@ namespace Catalogs.Infrastructure.DI
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IBaseItemRepository, BaseItemRepository>();
             services.AddScoped<IFavoriteRepository, FavoriteRepository>();
-            services.AddScoped<ICouponRepository, CouponRepository>();
             services.AddScoped<IMediaTypeRepository, MediaTypeRepository>();
             services.AddScoped<IFeatureRepository, FeatureRepository>();
 
@@ -38,7 +37,6 @@ namespace Catalogs.Infrastructure.DI
             services.AddScoped<IMapper<MediaDAO, Media>, MediaMapper>();
             services.AddScoped<IMapper<BaseItemDAO, BaseItem>, BaseItemMapper>();
             services.AddScoped<IMapper<FavoriteDAO, Favorite>, FavoriteMapper>();
-            services.AddScoped<IMapper<CouponDAO, Coupon>, CouponMapper>();
             services.AddScoped<IMapper<MediaTypeDAO, MediaType>, MediaTypeMapper>();
 
             // Register UnitOfWork

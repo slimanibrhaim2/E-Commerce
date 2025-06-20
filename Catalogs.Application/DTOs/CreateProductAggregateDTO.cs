@@ -14,6 +14,5 @@ namespace Catalogs.Application.DTOs
         public bool IsAvailable { get; set; }
         public List<CreateMediaDTO> Media { get; set; } = new();
         public List<CreateFeatureDTO> Features { get; set; } = new();
-        public List<CreateCouponDTO> Coupons { get; set; } = new();
     }
 } 

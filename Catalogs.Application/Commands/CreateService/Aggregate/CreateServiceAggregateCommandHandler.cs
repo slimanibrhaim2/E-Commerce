@@ -20,7 +20,6 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
     private readonly IFeatureRepository _featureRepository;
     private readonly ICategoryRepository _categoryRepository;
     private readonly IBaseItemRepository _baseItemRepository;
-    private readonly ICouponRepository _couponRepository;
 
     public CreateServiceAggregateCommandHandler(
         IUnitOfWork unitOfWork,
@@ -28,8 +27,7 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
         IMediaRepository mediaRepository,
         IFeatureRepository featureRepository,
         ICategoryRepository categoryRepository,
-        IBaseItemRepository baseItemRepository,
-        ICouponRepository couponRepository)
+        IBaseItemRepository baseItemRepository)
     {
         _unitOfWork = unitOfWork;
         _serviceRepository = serviceRepository;
@@ -37,7 +35,6 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
         _featureRepository = featureRepository;
         _categoryRepository = categoryRepository;
         _baseItemRepository = baseItemRepository;
-        _couponRepository = couponRepository;
     }
 
     public async Task<Result<Guid>> Handle(CreateServiceAggregateCommand request, CancellationToken cancellationToken)
@@ -110,23 +107,6 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
                 await _featureRepository.AddFeatureAsync(service.Id, feature.Name, feature.Value);
             }
 
-            // 7. Add coupons
-            foreach (var coupon in dto.Coupons ?? Enumerable.Empty<CreateCouponDTO>())
-            {
-                var couponEntity = new Coupon
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = request.UserId,
-                    Code = coupon.Code,
-                    DiscountAmount = coupon.DiscountAmount,
-                    ExpiryDate = coupon.ExpiryDate,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                };
-                await _couponRepository.AddAsync(couponEntity);
-                service.ApplicableCoupons ??= new List<Coupon>();
-                service.ApplicableCoupons.Add(couponEntity);
-            }
 
             await _unitOfWork.SaveChangesAsync();
             await _unitOfWork.CommitTransaction();

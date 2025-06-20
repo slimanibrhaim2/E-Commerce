@@ -41,7 +41,6 @@ public partial class UserDAO
 
     public virtual ICollection<CartDAO> Carts { get; set; } = new List<CartDAO>();
 
-    public virtual ICollection<CouponDAO> Coupons { get; set; } = new List<CouponDAO>();
 
     public virtual ICollection<FavoriteDAO> Favorites { get; set; } = new List<FavoriteDAO>();
 

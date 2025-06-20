@@ -13,5 +13,4 @@ public partial class DiscountTypeDAO
     public DateTime UpdatedAt { get; set; }
 
     public DateTime? DeletedAt { get; set; }
-    public virtual ICollection<CouponDAO> Coupons { get; set; } = new List<CouponDAO>();
 }

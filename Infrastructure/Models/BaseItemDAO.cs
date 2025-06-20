@@ -31,7 +31,6 @@ public partial class BaseItemDAO
 
     public virtual ICollection<CommentDAO> Comments { get; set; } = new List<CommentDAO>();
 
-    public virtual ICollection<CouponDAO> Coupons { get; set; } = new List<CouponDAO>();
 
     public virtual ICollection<FavoriteDAO> Favorites { get; set; } = new List<FavoriteDAO>();
 

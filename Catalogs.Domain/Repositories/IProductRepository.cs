@@ -10,7 +10,6 @@ public interface IProductRepository : IRepository<Product>
     Task<IEnumerable<Product>> GetByCategory(Guid categoryId);
     Task<IEnumerable<Product>> GetByBrand(Guid brandId);
     Task<PaginatedResult<Product>> GetByPriceRange(decimal minPrice, decimal maxPrice, int pageNumber, int pageSize);
-    Task<IEnumerable<Product>> GetDiscountedProducts();
     Task<IEnumerable<Product>> GetLowStockProducts(int threshold);
     Task<Product> GetByMediaId(Guid mediaId);
     Task<bool> UpdateAsync(Guid id, Product product);
