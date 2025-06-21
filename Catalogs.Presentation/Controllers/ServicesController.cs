@@ -17,6 +17,9 @@ using Catalogs.Application.Queries.GetServicesByUserId;
 using Catalogs.Application.Queries.GetServicesByName;
 using Catalogs.Application.Queries.GetServicesByCategory;
 using Catalogs.Application.Queries.GetServicesByIds;
+using Catalogs.Application.Queries.GetServicesByPriceRange;
+using Catalogs.Application.Queries.GetServicesByDuration;
+using Catalogs.Application.Queries.GetBaseItemIdByServiceId;
 using Microsoft.AspNetCore.Authorization;
 using Core.Authentication;
 using Shared.Contracts.Queries;
@@ -213,9 +216,9 @@ public class ServicesController : ControllerBase
 
     [HttpGet("category/{categoryId}")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetServicesByCategory(Guid categoryId)
+    public async Task<IActionResult> GetServicesByCategory(Guid categoryId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var query = new GetServicesByCategoryQuery(categoryId, 1, 10);
+        var query = new GetServicesByCategoryQuery(categoryId, pageNumber, pageSize);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -225,6 +228,57 @@ public class ServicesController : ControllerBase
         return Ok(Result<PaginatedResult<ServiceDTO>>.Ok(
             data: result.Data,
             message: "تم جلب خدمات الفئة بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("price-range")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetServicesByPriceRange([FromQuery] decimal minPrice, [FromQuery] decimal maxPrice, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        var query = new GetServicesByPriceRangeQuery(minPrice, maxPrice, pageNumber, pageSize);
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب الخدمات حسب نطاق السعر",
+                errorType: "GetServicesByPriceRangeFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<PaginatedResult<ServiceDTO>>.Ok(
+            data: result.Data,
+            message: "تم جلب الخدمات حسب نطاق السعر بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("duration-range")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetServicesByDuration([FromQuery] int minDuration, [FromQuery] int maxDuration, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        var query = new GetServicesByDurationQuery(minDuration, maxDuration, pageNumber, pageSize);
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب الخدمات حسب نطاق المدة",
+                errorType: "GetServicesByDurationFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<PaginatedResult<ServiceDTO>>.Ok(
+            data: result.Data,
+            message: "تم جلب الخدمات حسب نطاق المدة بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("{serviceId}/base-item-id")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetBaseItemIdByServiceId(Guid serviceId)
+    {
+        var query = new GetBaseItemIdByServiceIdQuery(serviceId);
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب معرف العنصر الأساسي",
+                errorType: "GetBaseItemIdByServiceIdFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<Guid>.Ok(
+            data: result.Data,
+            message: "تم جلب معرف العنصر الأساسي بنجاح",
             resultStatus: ResultStatus.Success));
     }
 } 

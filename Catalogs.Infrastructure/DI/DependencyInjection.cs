@@ -20,7 +20,6 @@ namespace Catalogs.Infrastructure.DI
             services.AddScoped<IProductFeatureRepository, ProductFeatureRepository>();
             services.AddScoped<IServiceFeatureRepository, ServiceFeatureRepository>();
             services.AddScoped<IMediaRepository, MediaRepository>();
-            services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IBaseItemRepository, BaseItemRepository>();
             services.AddScoped<IFavoriteRepository, FavoriteRepository>();
@@ -30,7 +29,6 @@ namespace Catalogs.Infrastructure.DI
             // Register Mappers
             services.AddScoped<IMapper<ProductDAO, Product>, ProductMapper>();
             services.AddScoped<IMapper<ServiceDAO, Service>, ServiceMapper>();
-            services.AddScoped<IMapper<BrandDAO, Brand>, BrandMapper>();
             services.AddScoped<IMapper<CategoryDAO, Category>, CategoryMapper>();
             services.AddScoped<IMapper<ProductFeatureDAO, ProductFeature>, ProductFeatureMapper>();
             services.AddScoped<IMapper<ServiceFeatureDAO, ServiceFeature>, ServiceFeatureMapper>();

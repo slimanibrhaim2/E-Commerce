@@ -4,6 +4,7 @@ using Communication.Application.DTOs;
 using Communication.Domain.Entities;
 using Communication.Domain.Repositories;
 using Core.Interfaces;
+using Shared.Contracts.Queries;
 
 namespace Communication.Application.Commands.UpdateComment;
 
@@ -11,11 +12,13 @@ public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand,
 {
     private readonly ICommentRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMediator _mediator;
 
-    public UpdateCommentCommandHandler(ICommentRepository repository, IUnitOfWork unitOfWork)
+    public UpdateCommentCommandHandler(ICommentRepository repository, IUnitOfWork unitOfWork, IMediator mediator)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
+        _mediator = mediator;
     }
 
     public async Task<Result<bool>> Handle(UpdateCommentCommand request, CancellationToken cancellationToken)
@@ -37,15 +40,44 @@ public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand,
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
-            if (request.Comment.BaseItemId == Guid.Empty)
+            if (request.Comment.ItemId == Guid.Empty)
             {
                 return Result<bool>.Fail(
-                    message: "معرف العنصر الأساسي مطلوب",
+                    message: "معرف العنصر مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
+
+            // Try to get BaseItemId from ProductId first
+            var productQuery = new GetBaseItemIdByProductIdQuery(request.Comment.ItemId);
+            var productResult = await _mediator.Send(productQuery, cancellationToken);
+            
+            Guid baseItemId;
+            if (productResult.Success)
+            {
+                baseItemId = productResult.Data;
+            }
+            else
+            {
+                // If not a product, try to get BaseItemId from ServiceId
+                var serviceQuery = new GetBaseItemIdByServiceIdQuery(request.Comment.ItemId);
+                var serviceResult = await _mediator.Send(serviceQuery, cancellationToken);
+                
+                if (serviceResult.Success)
+                {
+                    baseItemId = serviceResult.Data;
+                }
+                else
+                {
+                    return Result<bool>.Fail(
+                        message: "العنصر غير موجود",
+                        errorType: "ItemNotFound",
+                        resultStatus: ResultStatus.NotFound);
+                }
+            }
+
             entity.BaseContentId = request.Comment.BaseContentId;
-            entity.BaseItemId = request.Comment.BaseItemId;
+            entity.BaseItemId = baseItemId;
             entity.UpdatedAt = DateTime.UtcNow;
             _repository.Update(entity);
             await _unitOfWork.SaveChangesAsync();

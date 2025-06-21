@@ -14,14 +14,12 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
 {
     private readonly ECommerceContext _context;
     private readonly IMapper<ProductDAO, Product> _mapper;
-    private readonly IMapper<BrandDAO, Brand> _brandMapper;
     private readonly IMapper<CategoryDAO, Category> _categoryMapper;
 
-    public ProductRepository(ECommerceContext context, IMapper<ProductDAO, Product> mapper, IMapper<BrandDAO, Brand> brandMapper, IMapper<CategoryDAO, Category> categoryMapper) : base(context, mapper)
+    public ProductRepository(ECommerceContext context, IMapper<ProductDAO, Product> mapper, IMapper<CategoryDAO, Category> categoryMapper) : base(context, mapper)
     {
         _context = context;
         _mapper = mapper;
-        _brandMapper = brandMapper;
         _categoryMapper = categoryMapper;
     }
 
@@ -211,5 +209,15 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
             .Where(p => ids.Contains(p.Id))
             .ToListAsync();
         return products.Select(p => _mapper.Map(p));
+    }
+
+    public async Task<Guid?> GetBaseItemIdByProductIdAsync(Guid productId)
+    {
+        var product = await _context.Products
+            .Where(p => p.Id == productId && p.DeletedAt == null)
+            .Select(p => p.BaseItemId)
+            .FirstOrDefaultAsync();
+
+        return product == Guid.Empty ? null : product;
     }
 } 

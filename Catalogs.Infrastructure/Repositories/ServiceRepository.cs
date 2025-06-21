@@ -188,4 +188,14 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
             .ToListAsync();
         return services.Select(s => _mapper.Map(s));
     }
+
+    public async Task<Guid?> GetBaseItemIdByServiceIdAsync(Guid serviceId)
+    {
+        var service = await _context.Services
+            .Where(s => s.Id == serviceId && s.DeletedAt == null)
+            .Select(s => s.BaseItemId)
+            .FirstOrDefaultAsync();
+
+        return service == Guid.Empty ? null : service;
+    }
 } 

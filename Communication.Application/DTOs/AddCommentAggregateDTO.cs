@@ -7,7 +7,7 @@ namespace Communication.Application.DTOs
     {
         public string Content { get; set; } = null!;
         public Guid UserId { get; set; }
-        public Guid BaseItemId { get; set; }
+        public Guid ItemId { get; set; }
         public List<AttachmentDTO> Attachments { get; set; } = new List<AttachmentDTO>();
     }
 } 

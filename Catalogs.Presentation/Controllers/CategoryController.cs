@@ -7,6 +7,7 @@ using Catalogs.Application.Commands.DeleteCategory;
 using Catalogs.Application.DTOs;
 using Microsoft.Extensions.Logging;
 using Catalogs.Application.Queries.GetCategoryById;
+using Catalogs.Application.Queries.GetSubCategories;
 using Core.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Core.Authentication;
@@ -59,6 +60,23 @@ namespace Catalogs.Presentation.Controllers
             return Ok(Result<CategoryDTO>.Ok(
                 data: result.Data,
                 message: "تم جلب الفئة بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+
+        [HttpGet("{parentId}/subcategories")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetSubCategories(Guid parentId, [FromQuery] PaginationParameters parameters)
+        {
+            var query = new GetSubCategoriesQuery(parentId, parameters);
+            var result = await _mediator.Send(query);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب الفئات الفرعية",
+                    errorType: "GetSubCategoriesFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<CategoryDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب الفئات الفرعية بنجاح",
                 resultStatus: ResultStatus.Success));
         }
 

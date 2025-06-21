@@ -428,6 +428,9 @@
             "projectReferences": {
               "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Domain\\Communication.Domain.csproj": {
                 "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Domain\\Communication.Domain.csproj"
+              },
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Shared.Contracts.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Shared.Contracts.csproj"
               }
             }
           }

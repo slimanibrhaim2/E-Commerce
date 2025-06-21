@@ -1745,7 +1745,8 @@
           "AutoMapper": "14.0.0",
           "Communication.Domain": "1.0.0",
           "MediatR": "12.5.0",
-          "Microsoft.Extensions.Logging.Abstractions": "9.0.5"
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.5",
+          "Shared.Contracts": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Communication.Application.dll": {}

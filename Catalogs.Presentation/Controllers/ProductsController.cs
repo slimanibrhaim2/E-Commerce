@@ -16,6 +16,9 @@ using Catalogs.Application.Queries.GetProductsByUserId;
 using Catalogs.Application.Queries.GetProductsByCategory;
 using Catalogs.Application.Queries.GetProductsByName;
 using Catalogs.Application.Queries.GetProductsByIds;
+using Catalogs.Application.Queries.GetProductsByPriceRange;
+using Catalogs.Application.Queries.GetLowStockProducts;
+using Catalogs.Application.Queries.GetBaseItemIdByProductId;
 using Microsoft.AspNetCore.Authorization;
 using Core.Authentication;
 using Shared.Contracts.Queries;
@@ -212,9 +215,9 @@ public class ProductsController : ControllerBase
 
     [HttpGet("category/{categoryId}")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetProductsByCategory(Guid categoryId)
+    public async Task<IActionResult> GetProductsByCategory(Guid categoryId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var query = new GetProductsByCategoryQuery(categoryId, 1, 10);
+        var query = new GetProductsByCategoryQuery(categoryId, pageNumber, pageSize);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -224,6 +227,56 @@ public class ProductsController : ControllerBase
         return Ok(Result<PaginatedResult<ProductDTO>>.Ok(
             data: result.Data,
             message: "تم جلب منتجات الفئة بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("price-range")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetProductsByPriceRange([FromQuery] decimal minPrice, [FromQuery] decimal maxPrice, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        var query = new GetProductsByPriceRangeQuery(minPrice, maxPrice, pageNumber, pageSize);
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب المنتجات حسب نطاق السعر",
+                errorType: "GetProductsByPriceRangeFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<PaginatedResult<ProductDTO>>.Ok(
+            data: result.Data,
+            message: "تم جلب المنتجات حسب نطاق السعر بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("low-stock")]
+    public async Task<IActionResult> GetLowStockProducts([FromQuery] int threshold = 10, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        var query = new GetLowStockProductsQuery(threshold, pageNumber, pageSize);
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب المنتجات ذات المخزون المنخفض",
+                errorType: "GetLowStockProductsFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<PaginatedResult<ProductDTO>>.Ok(
+            data: result.Data,
+            message: "تم جلب المنتجات ذات المخزون المنخفض بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("{productId}/base-item-id")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetBaseItemIdByProductId(Guid productId)
+    {
+        var query = new GetBaseItemIdByProductIdQuery(productId);
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب معرف العنصر الأساسي",
+                errorType: "GetBaseItemIdByProductIdFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<Guid>.Ok(
+            data: result.Data,
+            message: "تم جلب معرف العنصر الأساسي بنجاح",
             resultStatus: ResultStatus.Success));
     }
 } 

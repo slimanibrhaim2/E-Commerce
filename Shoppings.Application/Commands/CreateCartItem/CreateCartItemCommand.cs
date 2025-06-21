@@ -4,5 +4,5 @@ using Core.Result;
 
 namespace Shoppings.Application.Commands.CreateCartItem
 {
-    public record CreateCartItemCommand(Guid CartId, Guid BaseItemId, int Quantity) : IRequest<Result<Guid>>;
+    public record CreateCartItemCommand(Guid CartId, Guid ItemId, int Quantity) : IRequest<Result<Guid>>;
 } 

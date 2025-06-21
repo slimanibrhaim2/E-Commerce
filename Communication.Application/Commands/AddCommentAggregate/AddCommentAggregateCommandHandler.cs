@@ -8,6 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using Shared.Contracts.Queries;
 
 namespace Communication.Application.Commands.AddCommentAggregate
 {
@@ -17,17 +18,20 @@ namespace Communication.Application.Commands.AddCommentAggregate
         private readonly ICommentRepository _commentRepo;
         private readonly IBaseContentRepository _baseContentRepo;
         private readonly IAttachmentRepository _attachmentRepo;
+        private readonly IMediator _mediator;
 
         public AddCommentAggregateCommandHandler(
             IUnitOfWork unitOfWork,
             ICommentRepository commentRepo,
             IBaseContentRepository baseContentRepo,
-            IAttachmentRepository attachmentRepo)
+            IAttachmentRepository attachmentRepo,
+            IMediator mediator)
         {
             _unitOfWork = unitOfWork;
             _commentRepo = commentRepo;
             _baseContentRepo = baseContentRepo;
             _attachmentRepo = attachmentRepo;
+            _mediator = mediator;
         }
 
         public async Task<Result<Guid>> Handle(AddCommentAggregateCommand request, CancellationToken cancellationToken)
@@ -41,8 +45,32 @@ namespace Communication.Application.Commands.AddCommentAggregate
                     return Result<Guid>.Fail("محتوى التعليق مطلوب", "ValidationError", ResultStatus.ValidationError);
                 if (dto.UserId == Guid.Empty)
                     return Result<Guid>.Fail("معرف المستخدم مطلوب", "ValidationError", ResultStatus.ValidationError);
-                if (dto.BaseItemId == Guid.Empty)
-                    return Result<Guid>.Fail("معرف العنصر الأساسي مطلوب", "ValidationError", ResultStatus.ValidationError);
+                if (dto.ItemId == Guid.Empty)
+                    return Result<Guid>.Fail("معرف العنصر مطلوب", "ValidationError", ResultStatus.ValidationError);
+
+                // 1.5. Resolve BaseItemId from ItemId
+                var productQuery = new GetBaseItemIdByProductIdQuery(dto.ItemId);
+                var productResult = await _mediator.Send(productQuery, cancellationToken);
+                
+                Guid baseItemId;
+                if (productResult.Success)
+                {
+                    baseItemId = productResult.Data;
+                }
+                else
+                {
+                    var serviceQuery = new GetBaseItemIdByServiceIdQuery(dto.ItemId);
+                    var serviceResult = await _mediator.Send(serviceQuery, cancellationToken);
+                    
+                    if (serviceResult.Success)
+                    {
+                        baseItemId = serviceResult.Data;
+                    }
+                    else
+                    {
+                        return Result<Guid>.Fail("العنصر غير موجود", "ItemNotFound", ResultStatus.NotFound);
+                    }
+                }
 
                 // 2. Create BaseContent
                 var baseContent = new BaseContent
@@ -63,7 +91,7 @@ namespace Communication.Application.Commands.AddCommentAggregate
                     Id = Guid.NewGuid(),
                     Content = dto.Content,
                     UserId = dto.UserId,
-                    BaseItemId = dto.BaseItemId,
+                    BaseItemId = baseItemId,
                     BaseContentId = baseContent.Id,
                     CreatedAt = DateTime.UtcNow
                 };

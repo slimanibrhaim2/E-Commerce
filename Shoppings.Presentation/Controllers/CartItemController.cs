@@ -33,7 +33,7 @@ namespace Shoppings.Presentation.Controllers
         {
             try
             {
-                var command = new CreateCartItemCommand(dto.CartId, dto.BaseItemId, dto.Quantity);
+                var command = new CreateCartItemCommand(dto.CartId, dto.ItemId, dto.Quantity);
                 var result = await _mediator.Send(command);
                 return Ok(result);
             }
