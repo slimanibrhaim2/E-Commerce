@@ -219,11 +219,11 @@ public partial class ECommerceContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Favorite_User");
 
-            entity.HasOne(d => d.Product)
-                .WithMany()
-                .HasForeignKey(d => d.ProductId)
+            entity.HasOne(d => d.BaseItem)
+                .WithMany(p => p.Favorites)
+                .HasForeignKey(d => d.BaseItemId)
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_Favorite_Product");
+                .HasConstraintName("FK_Favorite_BaseItem");
         });
 
         modelBuilder.Entity<FollowerDAO>(entity =>

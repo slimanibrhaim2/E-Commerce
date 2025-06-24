@@ -9,7 +9,7 @@ public partial class FavoriteDAO
 
     public Guid UserId { get; set; }
 
-    public Guid ProductId { get; set; }
+    public Guid BaseItemId { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
@@ -19,5 +19,5 @@ public partial class FavoriteDAO
 
     public virtual UserDAO User { get; set; } = null!;
 
-    public virtual ProductDAO Product { get; set; } = null!;
+    public virtual BaseItemDAO BaseItem { get; set; } = null!;
 }

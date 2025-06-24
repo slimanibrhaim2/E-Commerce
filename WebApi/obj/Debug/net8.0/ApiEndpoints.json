@@ -1488,6 +1488,91 @@
     ]
   },
   {
+    "ContainingType": "Catalogs.Presentation.Controllers.FavoriteController",
+    "Method": "AddToFavorite",
+    "RelativePath": "api/Favorite",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "favoriteDto",
+        "Type": "Catalogs.Application.DTOs.AddToFavoriteDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.FavoriteController",
+    "Method": "GetMyFavorites",
+    "RelativePath": "api/Favorite",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.FavoriteController",
+    "Method": "GetItemIdByFavoriteId",
+    "RelativePath": "api/Favorite/{favoriteId}/item-id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "favoriteId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.FavoriteController",
+    "Method": "DeleteFromFavorite",
+    "RelativePath": "api/Favorite/{itemId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.FavoriteController",
+    "Method": "CheckIsFavorite",
+    "RelativePath": "api/Favorite/check/{itemId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Catalogs.Presentation.Controllers.FeatureController",
     "Method": "AddFeature",
     "RelativePath": "api/Feature/{entityId}",

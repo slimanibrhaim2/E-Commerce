@@ -12,6 +12,8 @@ namespace Catalogs.Domain.Entities
         public Guid UserId { get; set; }
         public Guid BaseItemId { get; set; }
         public BaseItem BaseItem { get; set; } = null!;
-        public DateTime AddedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? DeletedAt { get; set; }
     }
 }

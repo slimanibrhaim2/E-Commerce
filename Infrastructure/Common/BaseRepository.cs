@@ -28,8 +28,20 @@ namespace Infrastructure.Common
 
         public virtual async Task<IEnumerable<TDomain>> GetAllAsync()
         {
-            var daos = await _dbSet.ToListAsync();
-            return daos.Select(d => _mapper.Map(d));
+            // Check if the entity has a DeletedAt property
+            var deletedAtProperty = typeof(TDao).GetProperty("DeletedAt");
+            if (deletedAtProperty != null && deletedAtProperty.PropertyType == typeof(DateTime?))
+            {
+                // Filter out deleted entities
+                var daos = await _dbSet.Where(e => EF.Property<DateTime?>(e, "DeletedAt") == null).ToListAsync();
+                return daos.Select(d => _mapper.Map(d));
+            }
+            else
+            {
+                // Fall back to all entities if no DeletedAt property
+                var daos = await _dbSet.ToListAsync();
+                return daos.Select(d => _mapper.Map(d));
+            }
         }
 
         public virtual async Task<TDomain?> GetByIdAsync(Guid id)
@@ -54,9 +66,22 @@ namespace Infrastructure.Common
 
         public virtual async Task<IEnumerable<TDomain>> FindAsync(Expression<Func<TDomain, bool>> predicate)
         {
-            var daos = await _dbSet.ToListAsync();
-            var domain = daos.Select(d => _mapper.Map(d));
-            return domain.Where(predicate.Compile());
+            // Check if the entity has a DeletedAt property
+            var deletedAtProperty = typeof(TDao).GetProperty("DeletedAt");
+            if (deletedAtProperty != null && deletedAtProperty.PropertyType == typeof(DateTime?))
+            {
+                // Filter out deleted entities
+                var daos = await _dbSet.Where(e => EF.Property<DateTime?>(e, "DeletedAt") == null).ToListAsync();
+                var domain = daos.Select(d => _mapper.Map(d));
+                return domain.Where(predicate.Compile());
+            }
+            else
+            {
+                // Fall back to all entities if no DeletedAt property
+                var daos = await _dbSet.ToListAsync();
+                var domain = daos.Select(d => _mapper.Map(d));
+                return domain.Where(predicate.Compile());
+            }
         }
 
         public virtual async Task AddAsync(TDomain entity)

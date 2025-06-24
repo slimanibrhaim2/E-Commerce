@@ -6,6 +6,13 @@ namespace Catalogs.Infrastructure.Mapping.Mappers;
 
 public class FavoriteMapper : IMapper<FavoriteDAO, Favorite>
 {
+    private readonly IMapper<BaseItemDAO, BaseItem> _baseItemMapper;
+
+    public FavoriteMapper(IMapper<BaseItemDAO, BaseItem> baseItemMapper)
+    {
+        _baseItemMapper = baseItemMapper;
+    }
+
     public Favorite Map(FavoriteDAO source)
     {
         if (source == null) return null;
@@ -13,9 +20,11 @@ public class FavoriteMapper : IMapper<FavoriteDAO, Favorite>
         {
             Id = source.Id,
             UserId = source.UserId,
-            BaseItemId = source.ProductId, // ProductId in DAO maps to BaseItemId in domain
-            AddedAt = source.CreatedAt
-            // BaseItem can be mapped if needed
+            BaseItemId = source.BaseItemId,
+            CreatedAt = source.CreatedAt,
+            UpdatedAt = source.UpdatedAt,
+            DeletedAt = source.DeletedAt,
+            BaseItem = source.BaseItem != null ? _baseItemMapper.Map(source.BaseItem) : null
         };
     }
 
@@ -26,10 +35,10 @@ public class FavoriteMapper : IMapper<FavoriteDAO, Favorite>
         {
             Id = target.Id,
             UserId = target.UserId,
-            ProductId = target.BaseItemId, // BaseItemId in domain maps to ProductId in DAO
-            CreatedAt = target.AddedAt,
-            UpdatedAt = target.AddedAt // Or set as needed
-            // Navigation properties can be mapped if needed
+            BaseItemId = target.BaseItemId,
+            CreatedAt = target.CreatedAt,
+            UpdatedAt = target.UpdatedAt,
+            DeletedAt = target.DeletedAt
         };
     }
-} 
+}
