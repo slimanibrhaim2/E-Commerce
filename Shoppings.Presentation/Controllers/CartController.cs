@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Shoppings.Application.Commands.CreateCart;
-using Shoppings.Application.Commands.UpdateCart;
-using Shoppings.Application.Commands.DeleteCart;
+using Shoppings.Application.Commands.AddToMyCart;
+using Shoppings.Application.Queries.GetMyCart;
 using Shoppings.Application.DTOs;
+using Core.Pagination;
 using Shoppings.Domain.Entities;
 using Core.Pagination;
 using Core.Result;
@@ -28,77 +28,131 @@ namespace Shoppings.Presentation.Controllers
             _logger = logger;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Result<Guid>>> CreateCart()
+        /// <summary>
+        /// Get the current user's cart (creates one if it doesn't exist)
+        /// </summary>
+        [HttpGet("my-cart")]
+        public async Task<ActionResult<Result<CartDTO>>> GetMyCart()
         {
             try
             {
                 var userId = User.GetId();
-                var command = new CreateCartCommand(userId);
-                var result = await _mediator.Send(command);
+                var query = new GetMyCartQuery(userId);
+                var result = await _mediator.Send(query);
+                
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في جلب سلة التسوق",
+                        errorType: "GetMyCartFailed",
+                        resultStatus: ResultStatus.Failed));
+
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error creating cart for user {UserId}", User.GetId());
+                _logger.LogError(ex, "Error getting cart for user {UserId}", User.GetId());
+                return StatusCode(500, Result<CartDTO>.Fail(
+                    message: "فشل في جلب سلة التسوق",
+                    errorType: "GetMyCartFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        /// <summary>
+        /// Add item to the current user's cart
+        /// </summary>
+        [HttpPost("add-item")]
+        public async Task<ActionResult<Result<Guid>>> AddToMyCart([FromBody] AddToCartDTO dto)
+        {
+            try
+            {
+                var userId = User.GetId();
+                var command = new AddToMyCartCommand(userId, dto.ItemId, dto.Quantity);
+                var result = await _mediator.Send(command);
+                
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في إضافة العنصر إلى سلة التسوق",
+                        errorType: "AddToMyCartFailed",
+                        resultStatus: ResultStatus.Failed));
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error adding item to cart for user {UserId}", User.GetId());
                 return StatusCode(500, Result<Guid>.Fail(
-                    message: "فشل في إنشاء سلة التسوق",
-                    errorType: "CreateCartFailed",
+                    message: "فشل في إضافة العنصر إلى سلة التسوق",
+                    errorType: "AddToMyCartFailed",
                     resultStatus: ResultStatus.Failed));
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Result<bool>>> UpdateCart(Guid id)
+        /// <summary>
+        /// Convert the current user's cart to an order
+        /// </summary>
+        [HttpPost("checkout")]
+        public async Task<ActionResult<Result<Guid>>> Checkout()
         {
             try
             {
                 var userId = User.GetId();
-                var command = new UpdateCartCommand(id, userId);
+                
+                // First get the user's cart
+                var cartQuery = new GetMyCartQuery(userId);
+                var cartResult = await _mediator.Send(cartQuery);
+                
+                if (!cartResult.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في العثور على سلة التسوق",
+                        errorType: "CartNotFound",
+                        resultStatus: ResultStatus.Failed));
+
+                // Then convert to order
+                var command = new Shoppings.Application.Commands.TransactCartToOrder.TransactCartToOrderCommand(cartResult.Data.Id);
                 var result = await _mediator.Send(command);
+                
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في تحويل سلة التسوق إلى طلب",
+                        errorType: "CheckoutFailed",
+                        resultStatus: ResultStatus.Failed));
+
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating cart {CartId} for user {UserId}", id, User.GetId());
-                return StatusCode(500, Result<bool>.Fail(
-                    message: "فشل في تحديث سلة التسوق",
-                    errorType: "UpdateCartFailed",
+                _logger.LogError(ex, "Error during checkout for user {UserId}", User.GetId());
+                return StatusCode(500, Result<Guid>.Fail(
+                    message: "فشل في إتمام عملية الطلب",
+                    errorType: "CheckoutFailed",
                     resultStatus: ResultStatus.Failed));
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Result<bool>>> DeleteCart(Guid id)
-        {
-            try
-            {
-                var command = new DeleteCartCommand(id);
-                var result = await _mediator.Send(command);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error deleting cart {CartId} for user {UserId}", id, User.GetId());
-                return StatusCode(500, Result<bool>.Fail(
-                    message: "فشل في حذف سلة التسوق",
-                    errorType: "DeleteCartFailed",
-                    resultStatus: ResultStatus.Failed));
-            }
-        }
-
+        /// <summary>
+        /// [ADMIN] Get all carts with pagination
+        /// </summary>
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Result<PaginatedResult<Cart>>>> GetAll([FromQuery] PaginationParameters parameters)
         {
             try
             {
                 var query = new GetAllCartQuery(parameters);
                 var result = await _mediator.Send(query);
+                
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في جلب سلات التسوق",
+                        errorType: "GetCartsFailed",
+                        resultStatus: ResultStatus.Failed));
+
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting carts for user {UserId}", User.GetId());
+                _logger.LogError(ex, "Error getting all carts");
                 return StatusCode(500, Result<PaginatedResult<Cart>>.Fail(
                     message: "فشل في جلب سلات التسوق",
                     errorType: "GetCartsFailed",
@@ -106,40 +160,92 @@ namespace Shoppings.Presentation.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Cart>> GetById(Guid id)
+        /// <summary>
+        /// Remove item from the current user's cart
+        /// </summary>
+        [HttpDelete("remove-item/{itemId}")]
+        public async Task<ActionResult<Result<bool>>> RemoveFromMyCart(Guid itemId)
         {
             try
             {
                 var userId = User.GetId();
-                // TODO: Implement GetCartByIdQuery with user authorization
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting cart {CartId} for user {UserId}", id, User.GetId());
-                return StatusCode(500, Result<Cart>.Fail(
-                    message: "فشل في جلب سلة التسوق",
-                    errorType: "GetCartFailed",
-                    resultStatus: ResultStatus.Failed));
-            }
-        }
-
-        [HttpPost("{id}/transact-to-order")]
-        public async Task<ActionResult<Result<Guid>>> TransactToOrder(Guid id)
-        {
-            try
-            {
-                var command = new Shoppings.Application.Commands.TransactCartToOrder.TransactCartToOrderCommand(id);
+                var command = new Shoppings.Application.Commands.RemoveFromMyCart.RemoveFromMyCartCommand(userId, itemId);
                 var result = await _mediator.Send(command);
+                
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في حذف العنصر من سلة التسوق",
+                        errorType: "RemoveFromMyCartFailed",
+                        resultStatus: ResultStatus.Failed));
+
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error transacting cart {CartId} to order for user {UserId}", id, User.GetId());
-                return StatusCode(500, Result<Guid>.Fail(
-                    message: "فشل في تحويل سلة التسوق إلى طلب",
-                    errorType: "TransactCartFailed",
+                _logger.LogError(ex, "Error removing item from cart for user {UserId}", User.GetId());
+                return StatusCode(500, Result<bool>.Fail(
+                    message: "فشل في حذف العنصر من سلة التسوق",
+                    errorType: "RemoveFromMyCartFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        /// <summary>
+        /// Update item quantity in the current user's cart
+        /// </summary>
+        [HttpPut("update-item")]
+        public async Task<ActionResult<Result<bool>>> UpdateMyCartItem([FromBody] UpdateCartItemDTO dto)
+        {
+            try
+            {
+                var userId = User.GetId();
+                var command = new Shoppings.Application.Commands.UpdateMyCartItem.UpdateMyCartItemCommand(userId, dto.ItemId, dto.Quantity);
+                var result = await _mediator.Send(command);
+                
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في تحديث كمية العنصر في سلة التسوق",
+                        errorType: "UpdateMyCartItemFailed",
+                        resultStatus: ResultStatus.Failed));
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating item in cart for user {UserId}", User.GetId());
+                return StatusCode(500, Result<bool>.Fail(
+                    message: "فشل في تحديث كمية العنصر في سلة التسوق",
+                    errorType: "UpdateMyCartItemFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        /// <summary>
+        /// Get current user's cart items with pagination
+        /// </summary>
+        [HttpGet("my-cart-items")]
+        public async Task<ActionResult<Result<PaginatedResult<CartItemDTO>>>> GetMyCartItems([FromQuery] PaginationParameters parameters)
+        {
+            try
+            {
+                var userId = User.GetId();
+                var query = new Shoppings.Application.Queries.GetMyCartItems.GetMyCartItemsQuery(userId, parameters);
+                var result = await _mediator.Send(query);
+                
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في جلب عناصر سلة التسوق",
+                        errorType: "GetMyCartItemsFailed",
+                        resultStatus: ResultStatus.Failed));
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting cart items for user {UserId}", User.GetId());
+                return StatusCode(500, Result<PaginatedResult<CartItemDTO>>.Fail(
+                    message: "فشل في جلب عناصر سلة التسوق",
+                    errorType: "GetMyCartItemsFailed",
                     resultStatus: ResultStatus.Failed));
             }
         }

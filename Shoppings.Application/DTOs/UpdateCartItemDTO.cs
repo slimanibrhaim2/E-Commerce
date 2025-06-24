@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Shoppings.Application.DTOs
 {
-    public class CreateCartItemDTO
+    public class UpdateCartItemDTO
     {
-        public Guid CartId { get; set; }
-
         public Guid ItemId { get; set; }
-
         public int Quantity { get; set; }
     }
-}
+} 

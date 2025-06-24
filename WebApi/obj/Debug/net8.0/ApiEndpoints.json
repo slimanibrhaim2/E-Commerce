@@ -600,26 +600,6 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.CartController",
-    "Method": "CreateCart",
-    "RelativePath": "api/Cart",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
     "Method": "GetAll",
     "RelativePath": "api/Cart",
     "HttpMethod": "GET",
@@ -651,119 +631,15 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.CartController",
-    "Method": "UpdateCart",
-    "RelativePath": "api/Cart/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
-    "Method": "DeleteCart",
-    "RelativePath": "api/Cart/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
-    "Method": "GetById",
-    "RelativePath": "api/Cart/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Shoppings.Domain.Entities.Cart",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
-    "Method": "TransactToOrder",
-    "RelativePath": "api/Cart/{id}/transact-to-order",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartItemController",
-    "Method": "CreateCartItem",
-    "RelativePath": "api/CartItem",
+    "Method": "AddToMyCart",
+    "RelativePath": "api/Cart/add-item",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Shoppings.Application.DTOs.CreateCartItemDTO",
+        "Type": "Shoppings.Application.DTOs.AddToCartDTO",
         "IsRequired": true
       }
     ],
@@ -780,9 +656,49 @@
     ]
   },
   {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartItemController",
-    "Method": "GetAll",
-    "RelativePath": "api/CartItem",
+    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
+    "Method": "Checkout",
+    "RelativePath": "api/Cart/checkout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
+    "Method": "GetMyCart",
+    "RelativePath": "api/Cart/my-cart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Shoppings.Application.DTOs.CartDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
+    "Method": "GetMyCartItems",
+    "RelativePath": "api/Cart/my-cart-items",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -800,7 +716,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Domain.Entities.CartItem, Shoppings.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Application.DTOs.CartItemDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -811,46 +727,15 @@
     ]
   },
   {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartItemController",
-    "Method": "UpdateCartItem",
-    "RelativePath": "api/CartItem/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "Shoppings.Application.DTOs.CreateCartItemDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartItemController",
-    "Method": "DeleteCartItem",
-    "RelativePath": "api/CartItem/{id}",
+    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
+    "Method": "RemoveFromMyCart",
+    "RelativePath": "api/Cart/remove-item/{itemId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "itemId",
         "Type": "System.Guid",
         "IsRequired": true
       }
@@ -868,22 +753,22 @@
     ]
   },
   {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartItemController",
-    "Method": "GetById",
-    "RelativePath": "api/CartItem/{id}",
-    "HttpMethod": "GET",
+    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
+    "Method": "UpdateMyCartItem",
+    "RelativePath": "api/Cart/update-item",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Guid",
+        "Name": "dto",
+        "Type": "Shoppings.Application.DTOs.UpdateCartItemDTO",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Shoppings.Domain.Entities.CartItem",
+        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

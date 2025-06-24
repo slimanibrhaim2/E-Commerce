@@ -1935,6 +1935,7 @@
         "dependencies": {
           "MediatR": "12.5.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.5",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.5",
           "Shared.Contracts": "1.0.0",
           "Shoppings.Domain": "1.0.0"
         },

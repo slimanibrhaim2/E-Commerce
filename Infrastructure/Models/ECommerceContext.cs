@@ -125,6 +125,12 @@ public partial class ECommerceContext : DbContext
             entity.ToTable("Cart");
             entity.HasKey(e => e.Id);
 
+            // Unique constraint: one active cart per user
+            entity.HasIndex(e => e.UserId)
+                .IsUnique()
+                .HasFilter("[DeletedAt] IS NULL")
+                .HasDatabaseName("IX_Cart_UserId_Active");
+
             entity.HasOne(d => d.User)
                 .WithMany(p => p.Carts)
                 .HasForeignKey(d => d.UserId)

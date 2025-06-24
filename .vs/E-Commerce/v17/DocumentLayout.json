@@ -3,6 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.presentation\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|solutionrelative:shoppings.presentation\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\queries\\getmycart\\getmycartqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\queries\\getmycart\\getmycartqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\queries\\getmycartitems\\getmycartitemsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\queries\\getmycartitems\\getmycartitemsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\commands\\updatemycartitem\\updatemycartitemcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\commands\\updatemycartitem\\updatemycartitemcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\commands\\removefrommycart\\removefrommycartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\commands\\removefrommycart\\removefrommycartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\commands\\addtomycart\\addtomycartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\commands\\addtomycart\\addtomycartcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getmyfavorites\\getmyfavoritesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getmyfavorites\\getmyfavoritesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -34,11 +58,89 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\CartController.cs",
+              "RelativeToolTip": "Shoppings.Presentation\\Controllers\\CartController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:41:18.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "GetMyCartQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetMyCart\\GetMyCartQueryHandler.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetMyCart\\GetMyCartQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetMyCart\\GetMyCartQueryHandler.cs",
+              "RelativeToolTip": "Shoppings.Application\\Queries\\GetMyCart\\GetMyCartQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:41:13.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GetMyCartItemsQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetMyCartItems\\GetMyCartItemsQueryHandler.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetMyCartItems\\GetMyCartItemsQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetMyCartItems\\GetMyCartItemsQueryHandler.cs",
+              "RelativeToolTip": "Shoppings.Application\\Queries\\GetMyCartItems\\GetMyCartItemsQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:41:09.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UpdateMyCartItemCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\UpdateMyCartItem\\UpdateMyCartItemCommandHandler.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\UpdateMyCartItem\\UpdateMyCartItemCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\UpdateMyCartItem\\UpdateMyCartItemCommandHandler.cs",
+              "RelativeToolTip": "Shoppings.Application\\Commands\\UpdateMyCartItem\\UpdateMyCartItemCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:41:05.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RemoveFromMyCartCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\RemoveFromMyCart\\RemoveFromMyCartCommandHandler.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\RemoveFromMyCart\\RemoveFromMyCartCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\RemoveFromMyCart\\RemoveFromMyCartCommandHandler.cs",
+              "RelativeToolTip": "Shoppings.Application\\Commands\\RemoveFromMyCart\\RemoveFromMyCartCommandHandler.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwAkAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:36:55.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AddToMyCartCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\AddToMyCart\\AddToMyCartCommandHandler.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\AddToMyCart\\AddToMyCartCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\AddToMyCart\\AddToMyCartCommandHandler.cs*",
+              "RelativeToolTip": "Shoppings.Application\\Commands\\AddToMyCart\\AddToMyCartCommandHandler.cs*",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwBAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:35:47.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "FavoriteController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\FavoriteController.cs",
               "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\FavoriteController.cs",
@@ -51,7 +153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "FavoriteRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure\\Repositories\\FavoriteRepository.cs",
               "RelativeDocumentMoniker": "Catalogs.Infrastructure\\Repositories\\FavoriteRepository.cs",
@@ -64,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "GetMyFavoritesQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
@@ -77,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "ProductsController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ProductsController.cs",
               "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\ProductsController.cs",
@@ -90,7 +192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\CategoryController.cs",
@@ -102,7 +204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "ProductRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure\\Repositories\\ProductRepository.cs",
               "RelativeDocumentMoniker": "Catalogs.Infrastructure\\Repositories\\ProductRepository.cs",

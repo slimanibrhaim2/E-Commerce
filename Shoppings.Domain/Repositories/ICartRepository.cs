@@ -10,5 +10,7 @@ namespace Shoppings.Domain.Repositories
 {
     public interface ICartRepository : IRepository<Cart>
     {
+        Task<Cart?> GetActiveCartByUserIdAsync(Guid userId);
+        Task<Cart> GetOrCreateCartByUserIdAsync(Guid userId);
     }
 }
