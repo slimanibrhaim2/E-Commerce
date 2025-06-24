@@ -27,19 +27,43 @@ public class GetAllCommentsQueryHandler : IRequestHandler<GetAllCommentsQuery, R
         {
             var comments = await _commentRepository.GetAllAsync();
             var totalCount = comments.Count();
-            var data = comments
+            
+            // Get paginated comments
+            var paginatedComments = comments
                 .Skip((request.Parameters.PageNumber - 1) * request.Parameters.PageSize)
                 .Take(request.Parameters.PageSize)
-                .Select(c => new CommentDTO
-                {
-                    Id = c.Id,
-                    BaseContentId = c.BaseContentId,
-                    BaseItemId = c.BaseItemId,
-                    CreatedAt = c.CreatedAt,
-                    UpdatedAt = c.UpdatedAt,
-                    DeletedAt = c.DeletedAt,
-                })
                 .ToList();
+
+            // Fetch BaseContent for each comment
+            var data = new List<CommentDTO>();
+            foreach (var comment in paginatedComments)
+            {
+                var baseContent = await _baseContentRepository.GetByIdAsync(comment.BaseContentId);
+                var commentDto = new CommentDTO
+                {
+                    Id = comment.Id,
+                    UserId = baseContent?.UserId ?? Guid.Empty,
+                    Title = baseContent?.Title ?? string.Empty,
+                    Description = baseContent?.Description ?? string.Empty,
+                    BaseContentId = comment.BaseContentId,
+                    BaseItemId = comment.BaseItemId,
+                    CreatedAt = comment.CreatedAt,
+                    UpdatedAt = comment.UpdatedAt,
+                    DeletedAt = comment.DeletedAt,
+                    BaseContent = baseContent != null ? new BaseContentDTO
+                    {
+                        Id = baseContent.Id,
+                        UserId = baseContent.UserId,
+                        Title = baseContent.Title,
+                        Description = baseContent.Description,
+                        CreatedAt = baseContent.CreatedAt,
+                        UpdatedAt = baseContent.UpdatedAt,
+                        DeletedAt = baseContent.DeletedAt
+                    } : null!
+                };
+                data.Add(commentDto);
+            }
+
             var paginated = Core.Pagination.PaginatedResult<CommentDTO>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
             return Result<PaginatedResult<CommentDTO>>.Ok(
                 paginated,

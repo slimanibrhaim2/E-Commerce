@@ -41,10 +41,10 @@ namespace Communication.Application.Commands.AddCommentAggregate
             {
                 // 1. Validate comment
                 var dto = request.DTO;
+                var userId = request.UserId;
+                
                 if (string.IsNullOrWhiteSpace(dto.Content))
                     return Result<Guid>.Fail("محتوى التعليق مطلوب", "ValidationError", ResultStatus.ValidationError);
-                if (dto.UserId == Guid.Empty)
-                    return Result<Guid>.Fail("معرف المستخدم مطلوب", "ValidationError", ResultStatus.ValidationError);
                 if (dto.ItemId == Guid.Empty)
                     return Result<Guid>.Fail("معرف العنصر مطلوب", "ValidationError", ResultStatus.ValidationError);
 
@@ -76,7 +76,7 @@ namespace Communication.Application.Commands.AddCommentAggregate
                 var baseContent = new BaseContent
                 {
                     Id = Guid.NewGuid(),
-                    UserId = dto.UserId,
+                    UserId = userId,
                     Title = dto.Content, // Using content as title since it's required
                     Description = dto.Content,
                     CreatedAt = DateTime.UtcNow,
@@ -90,7 +90,7 @@ namespace Communication.Application.Commands.AddCommentAggregate
                 {
                     Id = Guid.NewGuid(),
                     Content = dto.Content,
-                    UserId = dto.UserId,
+                    UserId = userId,
                     BaseItemId = baseItemId,
                     BaseContentId = baseContent.Id,
                     CreatedAt = DateTime.UtcNow

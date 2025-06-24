@@ -25,16 +25,37 @@ public class GetAllCommentsByBaseItemIdQueryHandler : IRequestHandler<GetAllComm
         try
         {
             var comments = await _commentRepository.GetAllByBaseItemIdAsync(request.BaseItemId);
-            var dtos = comments.Select(c => new CommentDTO
+            
+            // Fetch BaseContent for each comment
+            var dtos = new List<CommentDTO>();
+            foreach (var comment in comments)
             {
-                Id = c.Id,
-                BaseContentId = c.BaseContentId,
-                BaseItemId = c.BaseItemId,
-                CreatedAt = c.CreatedAt,
-                UpdatedAt = c.UpdatedAt,
-                DeletedAt = c.DeletedAt,
-                // BaseContent = c.BaseContent != null ? new BaseContentDTO { ... } : null
-            }).ToList();
+                var baseContent = await _baseContentRepository.GetByIdAsync(comment.BaseContentId);
+                var commentDto = new CommentDTO
+                {
+                    Id = comment.Id,
+                    UserId = baseContent?.UserId ?? Guid.Empty,
+                    Title = baseContent?.Title ?? string.Empty,
+                    Description = baseContent?.Description ?? string.Empty,
+                    BaseContentId = comment.BaseContentId,
+                    BaseItemId = comment.BaseItemId,
+                    CreatedAt = comment.CreatedAt,
+                    UpdatedAt = comment.UpdatedAt,
+                    DeletedAt = comment.DeletedAt,
+                    BaseContent = baseContent != null ? new BaseContentDTO
+                    {
+                        Id = baseContent.Id,
+                        UserId = baseContent.UserId,
+                        Title = baseContent.Title,
+                        Description = baseContent.Description,
+                        CreatedAt = baseContent.CreatedAt,
+                        UpdatedAt = baseContent.UpdatedAt,
+                        DeletedAt = baseContent.DeletedAt
+                    } : null!
+                };
+                dtos.Add(commentDto);
+            }
+            
             return Result<List<CommentDTO>>.Ok(
                 data: dtos,
                 message: "Comments retrieved successfully",

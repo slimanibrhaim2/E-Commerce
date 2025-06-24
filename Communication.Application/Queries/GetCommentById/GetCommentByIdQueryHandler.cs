@@ -11,10 +11,12 @@ namespace Communication.Application.Queries.GetCommentById
     public class GetCommentByIdQueryHandler : IRequestHandler<GetCommentByIdQuery, Result<CommentDTO>>
     {
         private readonly ICommentRepository _commentRepository;
+        private readonly IBaseContentRepository _baseContentRepository;
 
-        public GetCommentByIdQueryHandler(ICommentRepository commentRepository)
+        public GetCommentByIdQueryHandler(ICommentRepository commentRepository, IBaseContentRepository baseContentRepository)
         {
             _commentRepository = commentRepository;
+            _baseContentRepository = baseContentRepository;
         }
 
         public async Task<Result<CommentDTO>> Handle(GetCommentByIdQuery request, CancellationToken cancellationToken)
@@ -27,15 +29,31 @@ namespace Communication.Application.Queries.GetCommentById
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
+
+            // Fetch BaseContent for the comment
+            var baseContent = await _baseContentRepository.GetByIdAsync(entity.BaseContentId);
+            
             var dto = new CommentDTO
             {
                 Id = entity.Id,
+                UserId = baseContent?.UserId ?? Guid.Empty,
+                Title = baseContent?.Title ?? string.Empty,
+                Description = baseContent?.Description ?? string.Empty,
                 BaseContentId = entity.BaseContentId,
                 BaseItemId = entity.BaseItemId,
                 CreatedAt = entity.CreatedAt,
                 UpdatedAt = entity.UpdatedAt,
                 DeletedAt = entity.DeletedAt,
-                // BaseContent = entity.BaseContent != null ? new BaseContentDTO { ... } : null
+                BaseContent = baseContent != null ? new BaseContentDTO
+                {
+                    Id = baseContent.Id,
+                    UserId = baseContent.UserId,
+                    Title = baseContent.Title,
+                    Description = baseContent.Description,
+                    CreatedAt = baseContent.CreatedAt,
+                    UpdatedAt = baseContent.UpdatedAt,
+                    DeletedAt = baseContent.DeletedAt
+                } : null!
             };
             return Result<CommentDTO>.Ok(
                 data: dto,

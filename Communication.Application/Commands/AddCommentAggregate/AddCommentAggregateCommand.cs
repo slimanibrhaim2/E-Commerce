@@ -4,5 +4,5 @@ using Communication.Application.DTOs;
 
 namespace Communication.Application.Commands.AddCommentAggregate
 {
-    public record AddCommentAggregateCommand(AddCommentAggregateDTO DTO) : IRequest<Result<Guid>>;
+    public record AddCommentAggregateCommand(AddCommentAggregateDTO DTO, Guid UserId) : IRequest<Result<Guid>>;
 } 

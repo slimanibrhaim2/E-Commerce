@@ -5,26 +5,40 @@ using Communication.Domain.Entities;
 using Communication.Domain.Repositories;
 using Core.Interfaces;
 using Shared.Contracts.Queries;
+using System.Linq;
 
 namespace Communication.Application.Commands.UpdateComment;
 
 public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand, Result<bool>>
 {
     private readonly ICommentRepository _repository;
+    private readonly IBaseContentRepository _baseContentRepository;
+    private readonly IAttachmentRepository _attachmentRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMediator _mediator;
 
-    public UpdateCommentCommandHandler(ICommentRepository repository, IUnitOfWork unitOfWork, IMediator mediator)
+    public UpdateCommentCommandHandler(
+        ICommentRepository repository, 
+        IBaseContentRepository baseContentRepository,
+        IAttachmentRepository attachmentRepository,
+        IUnitOfWork unitOfWork, 
+        IMediator mediator)
     {
         _repository = repository;
+        _baseContentRepository = baseContentRepository;
+        _attachmentRepository = attachmentRepository;
         _unitOfWork = unitOfWork;
         _mediator = mediator;
     }
 
     public async Task<Result<bool>> Handle(UpdateCommentCommand request, CancellationToken cancellationToken)
     {
+        await _unitOfWork.BeginTransaction();
         try
         {
+            var dto = request.Comment;
+            var userId = request.UserId;
+            
             var entity = await _repository.GetByIdAsync(request.Id);
             if (entity == null)
             {
@@ -33,14 +47,15 @@ public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand,
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
-            if (request.Comment.BaseContentId == Guid.Empty)
+            
+            if (string.IsNullOrWhiteSpace(dto.Content))
             {
                 return Result<bool>.Fail(
-                    message: "معرف المحتوى الأساسي مطلوب",
+                    message: "محتوى التعليق مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
-            if (request.Comment.ItemId == Guid.Empty)
+            if (dto.ItemId == Guid.Empty)
             {
                 return Result<bool>.Fail(
                     message: "معرف العنصر مطلوب",
@@ -48,8 +63,8 @@ public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand,
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            // Try to get BaseItemId from ProductId first
-            var productQuery = new GetBaseItemIdByProductIdQuery(request.Comment.ItemId);
+            // Resolve BaseItemId from ItemId
+            var productQuery = new GetBaseItemIdByProductIdQuery(dto.ItemId);
             var productResult = await _mediator.Send(productQuery, cancellationToken);
             
             Guid baseItemId;
@@ -59,8 +74,7 @@ public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand,
             }
             else
             {
-                // If not a product, try to get BaseItemId from ServiceId
-                var serviceQuery = new GetBaseItemIdByServiceIdQuery(request.Comment.ItemId);
+                var serviceQuery = new GetBaseItemIdByServiceIdQuery(dto.ItemId);
                 var serviceResult = await _mediator.Send(serviceQuery, cancellationToken);
                 
                 if (serviceResult.Success)
@@ -76,11 +90,53 @@ public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand,
                 }
             }
 
-            entity.BaseContentId = request.Comment.BaseContentId;
+            // Update BaseContent
+            var baseContent = await _baseContentRepository.GetByIdAsync(entity.BaseContentId);
+            if (baseContent != null)
+            {
+                baseContent.Title = dto.Content;
+                baseContent.Description = dto.Content;
+                baseContent.UpdatedAt = DateTime.UtcNow;
+                _baseContentRepository.Update(baseContent);
+            }
+
+            // Update Comment
+            entity.Content = dto.Content;
             entity.BaseItemId = baseItemId;
             entity.UpdatedAt = DateTime.UtcNow;
             _repository.Update(entity);
+
+            // Update Attachments - Remove existing and add new ones
+            if (baseContent != null)
+            {
+                // Get existing attachments
+                var existingAttachments = await _attachmentRepository.FindAsync(a => a.BaseContentId == baseContent.Id);
+                
+                // Remove existing attachments
+                foreach (var attachment in existingAttachments)
+                {
+                    _attachmentRepository.Remove(attachment);
+                }
+
+                // Add new attachments
+                foreach (var attachmentDto in dto.Attachments ?? Enumerable.Empty<AttachmentDTO>())
+                {
+                    var attachment = new Attachment
+                    {
+                        Id = Guid.NewGuid(),
+                        BaseContentId = baseContent.Id,
+                        AttachmentUrl = attachmentDto.AttachmentUrl,
+                        AttachmentTypeId = attachmentDto.AttachmentTypeId,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+                    await _attachmentRepository.AddAsync(attachment);
+                }
+            }
+            
             await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.CommitTransaction();
+            
             return Result<bool>.Ok(
                 data: true,
                 message: "تم تحديث التعليق بنجاح",
@@ -88,6 +144,7 @@ public class UpdateCommentCommandHandler : IRequestHandler<UpdateCommentCommand,
         }
         catch (Exception ex)
         {
+            await _unitOfWork.RollbackTransaction();
             return Result<bool>.Fail(
                 message: $"فشل في تحديث التعليق: {ex.Message}",
                 errorType: "UpdateCommentFailed",

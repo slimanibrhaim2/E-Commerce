@@ -3,7 +3,6 @@ using MediatR;
 using Communication.Application.DTOs;
 using Microsoft.Extensions.Logging;
 using Core.Result;
-using Communication.Application.Commands.CreateComment;
 using Communication.Application.Commands.UpdateComment;
 using Communication.Application.Commands.DeleteComment;
 using Communication.Application.Queries.GetCommentById;
@@ -14,6 +13,7 @@ using Communication.Application.Commands.AddCommentAggregate;
 using Communication.Application.Commands.UpdateCommentAggregate;
 using Communication.Application.Commands.DeleteCommentAggregate;
 using Microsoft.AspNetCore.Authorization;
+using Core.Authentication;
 
 namespace Communication.Presentation.Controllers
 {
@@ -29,22 +29,6 @@ namespace Communication.Presentation.Controllers
         {
             _mediator = mediator;
             _logger = logger;
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<Result<Guid>>> Create(CreateCommentDTO dto)
-        {
-            var command = new CreateCommentCommand(dto);
-            var result = await _mediator.Send(command);
-            if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في إنشاء التعليق",
-                    errorType: "CreateCommentFailed",
-                    resultStatus: ResultStatus.Failed));
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
-                data: result.Data,
-                message: "تم إنشاء التعليق بنجاح",
-                resultStatus: ResultStatus.Success));
         }
 
         [HttpGet("{id}")]
@@ -81,9 +65,10 @@ namespace Communication.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Result<bool>>> Update(Guid id, CreateCommentDTO dto)
+        public async Task<ActionResult<Result<bool>>> Update(Guid id, AddCommentAggregateDTO dto)
         {
-            var command = new UpdateCommentCommand(id, dto);
+            var userId = User.GetId();
+            var command = new UpdateCommentCommand(id, dto, userId);
             var result = await _mediator.Send(command);
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
@@ -131,7 +116,8 @@ namespace Communication.Presentation.Controllers
         [HttpPost("aggregate")]
         public async Task<IActionResult> AddCommentAggregate([FromBody] AddCommentAggregateDTO dto)
         {
-            var result = await _mediator.Send(new AddCommentAggregateCommand(dto));
+            var userId = User.GetId();
+            var result = await _mediator.Send(new AddCommentAggregateCommand(dto, userId));
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في إضافة التعليق",
@@ -145,7 +131,8 @@ namespace Communication.Presentation.Controllers
         [HttpPut("aggregate/{id}")]
         public async Task<IActionResult> UpdateCommentAggregate(Guid id, [FromBody] AddCommentAggregateDTO dto)
         {
-            var result = await _mediator.Send(new UpdateCommentAggregateCommand(id, dto));
+            var userId = User.GetId();
+            var result = await _mediator.Send(new UpdateCommentAggregateCommand(id, dto, userId));
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في تحديث التعليق",
