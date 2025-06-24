@@ -45,4 +45,6 @@ public partial class UserDAO
     public virtual ICollection<FavoriteDAO> Favorites { get; set; } = new List<FavoriteDAO>();
 
     public virtual ICollection<OrderDAO> Orders { get; set; } = new List<OrderDAO>();
+
+    public virtual ICollection<ReviewDAO> Reviews { get; set; } = new List<ReviewDAO>();
 }

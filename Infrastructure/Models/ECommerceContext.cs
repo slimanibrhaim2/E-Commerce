@@ -43,6 +43,7 @@ public partial class ECommerceContext : DbContext
     public virtual DbSet<ProductDAO> Products { get; set; }
     public virtual DbSet<ProductFeatureDAO> ProductFeatures { get; set; }
     public virtual DbSet<MediaDAO> Media { get; set; }
+    public virtual DbSet<ReviewDAO> Reviews { get; set; }
     public virtual DbSet<ServiceDAO> Services { get; set; }
     public virtual DbSet<ServiceFeatureDAO> ServiceFeatures { get; set; }
     public virtual DbSet<UserDAO> Users { get; set; }
@@ -386,6 +387,39 @@ public partial class ECommerceContext : DbContext
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_ProductFeature_Product");
+        });
+
+        modelBuilder.Entity<ReviewDAO>(entity =>
+        {
+            entity.ToTable("Review");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Title).HasMaxLength(200).IsRequired();
+            entity.Property(e => e.Content).HasMaxLength(2000).IsRequired();
+            entity.Property(e => e.IsVerifiedPurchase).IsRequired();
+
+            // Unique constraint: one review per user per item
+            entity.HasIndex(e => new { e.UserId, e.BaseItemId })
+                .IsUnique()
+                .HasFilter("[DeletedAt] IS NULL")
+                .HasDatabaseName("IX_Review_UserId_BaseItemId_Unique");
+
+            entity.HasOne(d => d.User)
+                .WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Review_User");
+
+            entity.HasOne(d => d.BaseItem)
+                .WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.BaseItemId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Review_BaseItem");
+
+            entity.HasOne(d => d.Order)
+                .WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Review_Order");
         });
 
         modelBuilder.Entity<MediaDAO>(entity =>

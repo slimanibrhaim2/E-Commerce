@@ -24,5 +24,7 @@ public partial class OrderDAO
 
     public virtual ICollection<PaymentDAO> Payments { get; set; } = new List<PaymentDAO>();
 
+    public virtual ICollection<ReviewDAO> Reviews { get; set; } = new List<ReviewDAO>();
+
     public virtual UserDAO User { get; set; } = null!;
 }

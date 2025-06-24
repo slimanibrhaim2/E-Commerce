@@ -20,6 +20,7 @@ namespace Communication.Infrastructure.DI
             services.AddScoped<IAttachmentRepository, AttachmentRepository>();
             services.AddScoped<IAttachmentTypeRepository, AttachmentTypeRepository>();
             services.AddScoped<IBaseContentRepository, BaseContentRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
 
             // Register Mappers
             services.AddScoped<IMapper<ConversationDAO, Conversation>, ConversationMapper>();
@@ -29,6 +30,7 @@ namespace Communication.Infrastructure.DI
             services.AddScoped<IMapper<AttachmentDAO, Attachment>, AttachmentMapper>();
             services.AddScoped<IMapper<AttachmentTypeDAO, AttachmentType>, AttachmentTypeMapper>();
             services.AddScoped<IMapper<BaseContentDAO, BaseContent>, BaseContentMapper>();
+            services.AddScoped<IMapper<ReviewDAO, Review>, ReviewMapper>();
 
             return services;
         }

@@ -4,6 +4,7 @@ using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    partial class ECommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20250624192048_AddUniqueCartPerUser")]
+    partial class AddUniqueCartPerUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -942,57 +945,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("ProductFeature", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Models.ReviewDAO", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BaseItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsVerifiedPurchase")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BaseItemId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("UserId", "BaseItemId")
-                        .IsUnique()
-                        .HasDatabaseName("IX_Review_UserId_BaseItemId_Unique")
-                        .HasFilter("[DeletedAt] IS NULL");
-
-                    b.ToTable("Review", (string)null);
-                });
-
             modelBuilder.Entity("Infrastructure.Models.ServiceDAO", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1494,36 +1446,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Infrastructure.Models.ReviewDAO", b =>
-                {
-                    b.HasOne("Infrastructure.Models.BaseItemDAO", "BaseItem")
-                        .WithMany("Reviews")
-                        .HasForeignKey("BaseItemId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_Review_BaseItem");
-
-                    b.HasOne("Infrastructure.Models.OrderDAO", "Order")
-                        .WithMany("Reviews")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_Review_Order");
-
-                    b.HasOne("Infrastructure.Models.UserDAO", "User")
-                        .WithMany("Reviews")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_Review_User");
-
-                    b.Navigation("BaseItem");
-
-                    b.Navigation("Order");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Infrastructure.Models.ServiceDAO", b =>
                 {
                     b.HasOne("Infrastructure.Models.BaseItemDAO", "BaseItem")
@@ -1572,8 +1494,6 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Products");
 
-                    b.Navigation("Reviews");
-
                     b.Navigation("Services");
                 });
 
@@ -1606,8 +1526,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("OrderItems");
 
                     b.Navigation("Payments");
-
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.OrderStatusDAO", b =>
@@ -1654,8 +1572,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Notifications");
 
                     b.Navigation("Orders");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

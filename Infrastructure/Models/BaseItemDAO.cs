@@ -40,6 +40,8 @@ public partial class BaseItemDAO
 
     public virtual ICollection<ProductDAO> Products { get; set; } = new List<ProductDAO>();
 
+    public virtual ICollection<ReviewDAO> Reviews { get; set; } = new List<ReviewDAO>();
+
     public virtual ICollection<ServiceDAO> Services { get; set; } = new List<ServiceDAO>();
 
     public virtual UserDAO User { get; set; } = null!;
