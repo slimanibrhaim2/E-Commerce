@@ -3,6 +3,7 @@ using MediatR;
 using Catalogs.Application.DTOs;
 using Microsoft.Extensions.Logging;
 using Catalogs.Application.Queries.GetAllBaseItemsByUserId;
+using Catalogs.Application.Queries.GetUserIdByItemId;
 using Core.Pagination;
 using Core.Result;
 using Microsoft.AspNetCore.Authorization;
@@ -39,6 +40,23 @@ namespace Catalogs.Presentation.Controllers
             return Ok(Result<PaginatedResult<BaseItemDTO>>.Ok(
                 data: result.Data,
                 message: "تم جلب العناصر بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+
+        [HttpGet("{itemId}/user-id")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Result<Guid>>> GetUserIdByItemId(Guid itemId)
+        {
+            var query = new GetUserIdByItemIdQuery(itemId);
+            var result = await _mediator.Send(query);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب معرف المستخدم",
+                    errorType: "GetUserIdByItemIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<Guid>.Ok(
+                data: result.Data,
+                message: "تم جلب معرف المستخدم بنجاح",
                 resultStatus: ResultStatus.Success));
         }
     }

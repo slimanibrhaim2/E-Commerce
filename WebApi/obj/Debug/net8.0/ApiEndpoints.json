@@ -543,6 +543,32 @@
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.BaseItemController",
+    "Method": "GetUserIdByItemId",
+    "RelativePath": "api/BaseItem/{itemId}/user-id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.BaseItemController",
     "Method": "GetMyItems",
     "RelativePath": "api/BaseItem/my-items",
     "HttpMethod": "GET",

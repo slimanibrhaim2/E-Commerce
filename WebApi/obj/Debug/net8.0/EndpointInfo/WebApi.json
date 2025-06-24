@@ -961,6 +961,46 @@
         }
       }
     },
+    "/api/BaseItem/{itemId}/user-id": {
+      "get": {
+        "tags": [
+          "BaseItem"
+        ],
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Cart": {
       "post": {
         "tags": [
