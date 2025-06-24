@@ -30,9 +30,9 @@
               "Title": "ProductsController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ProductsController.cs",
               "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\ProductsController.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ProductsController.cs*",
-              "RelativeToolTip": "Catalogs.Presentation\\Controllers\\ProductsController.cs*",
-              "ViewState": "AgIAAN0AAAAAAAAAAAAQwOcAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "Catalogs.Presentation\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAAYBAAAAAAAAAAAAABUBAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-21T18:15:27.644Z",
               "EditorCaption": ""
@@ -47,8 +47,7 @@
               "RelativeToolTip": "Catalogs.Presentation\\Controllers\\CategoryController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T18:14:37.636Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-21T18:14:37.636Z"
             },
             {
               "$type": "Document",
@@ -60,8 +59,7 @@
               "RelativeToolTip": "Catalogs.Infrastructure\\Repositories\\ProductRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAADwvxIAAABbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T18:13:48.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-21T18:13:48.929Z"
             }
           ]
         }
