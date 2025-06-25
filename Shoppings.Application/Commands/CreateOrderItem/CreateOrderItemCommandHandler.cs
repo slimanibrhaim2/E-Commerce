@@ -20,9 +20,9 @@ namespace Shoppings.Application.Commands.Handlers
         public async Task<Result<Guid>> Handle(CreateOrderItemCommand request, CancellationToken cancellationToken)
         {
             if (request.OrderId == Guid.Empty || request.BaseItemId == Guid.Empty)
-                return Result<Guid>.Fail("OrderId and BaseItemId are required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("معرف الطلب ومعرف العنصر مطلوبان", "ValidationError", ResultStatus.ValidationError);
             if (request.Quantity <= 0)
-                return Result<Guid>.Fail("Quantity must be greater than zero.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("يجب أن تكون الكمية أكبر من صفر", "ValidationError", ResultStatus.ValidationError);
             var orderItem = new OrderItem
             {
                 OrderId = request.OrderId,
@@ -33,7 +33,7 @@ namespace Shoppings.Application.Commands.Handlers
             };
             await _orderItemRepository.AddAsync(orderItem);
             await _unitOfWork.SaveChangesAsync();
-            return Result<Guid>.Ok(orderItem.Id,"added" , ResultStatus.Success);
+            return Result<Guid>.Ok(orderItem.Id, "تم إضافة العنصر إلى الطلب بنجاح", ResultStatus.Success);
         }
     }
 } 

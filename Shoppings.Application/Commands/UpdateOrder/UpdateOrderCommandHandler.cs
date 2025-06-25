@@ -24,7 +24,7 @@ namespace Shoppings.Application.Commands.Handlers
             if (order == null)
                 return Result<bool>.Fail("Order not found.", "NotFound", ResultStatus.NotFound);
             order.OrderActivityId = request.OrderActivityId;
-            order.TotalAmount = order.OrderItems.Sum(item => (decimal)item.Quantity * (decimal)item.Price);
+            order.TotalAmount = order.OrderItems.Sum(item => item.Quantity * item.Price);
             _orderRepository.Update(order);
             await _unitOfWork.SaveChangesAsync();
             return Result<bool>.Ok(true, "updated", ResultStatus.Success);

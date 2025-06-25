@@ -961,6 +961,46 @@
         }
       }
     },
+    "/api/BaseItem/{baseItemId}/details": {
+      "get": {
+        "tags": [
+          "BaseItem"
+        ],
+        "parameters": [
+          {
+            "name": "baseItemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetailsDTOResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetailsDTOResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetailsDTOResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/BaseItem/{itemId}/user-id": {
       "get": {
         "tags": [
@@ -1271,17 +1311,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartItemDTOPaginatedResultResult"
+                  "$ref": "#/components/schemas/CartItemWithDetailsDTOPaginatedResultResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartItemDTOPaginatedResultResult"
+                  "$ref": "#/components/schemas/CartItemWithDetailsDTOPaginatedResultResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartItemDTOPaginatedResultResult"
+                  "$ref": "#/components/schemas/CartItemWithDetailsDTOPaginatedResultResult"
                 }
               }
             }
@@ -3959,17 +3999,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrderItemPaginatedResultResult"
+                  "$ref": "#/components/schemas/OrderItemWithDetailsDTOPaginatedResultResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrderItemPaginatedResultResult"
+                  "$ref": "#/components/schemas/OrderItemWithDetailsDTOPaginatedResultResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrderItemPaginatedResultResult"
+                  "$ref": "#/components/schemas/OrderItemWithDetailsDTOPaginatedResultResult"
                 }
               }
             }
@@ -3999,17 +4039,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrderItemResult"
+                  "$ref": "#/components/schemas/OrderItemWithDetailsDTOResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrderItemResult"
+                  "$ref": "#/components/schemas/OrderItemWithDetailsDTOResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrderItemResult"
+                  "$ref": "#/components/schemas/OrderItemWithDetailsDTOResult"
                 }
               }
             }
@@ -7242,6 +7282,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "quantity": {
             "type": "integer",
             "format": "int32"
@@ -7262,13 +7306,63 @@
         },
         "additionalProperties": false
       },
-      "CartItemDTOPaginatedResult": {
+      "CartItemWithDetailsDTO": {
+        "type": "object",
+        "properties": {
+          "cartItem": {
+            "$ref": "#/components/schemas/CartItemDTO"
+          },
+          "itemDetails": {
+            "$ref": "#/components/schemas/ItemDetailsDTO"
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "itemDescription": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "itemPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "readOnly": true
+          },
+          "isAvailable": {
+            "type": "boolean",
+            "nullable": true,
+            "readOnly": true
+          },
+          "itemType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "itemId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "readOnly": true
+          },
+          "totalPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CartItemWithDetailsDTOPaginatedResult": {
         "type": "object",
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CartItemDTO"
+              "$ref": "#/components/schemas/CartItemWithDetailsDTO"
             },
             "nullable": true
           },
@@ -7299,7 +7393,7 @@
         },
         "additionalProperties": false
       },
-      "CartItemDTOPaginatedResultResult": {
+      "CartItemWithDetailsDTOPaginatedResultResult": {
         "type": "object",
         "properties": {
           "resultStatus": {
@@ -7317,7 +7411,7 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/CartItemDTOPaginatedResult"
+            "$ref": "#/components/schemas/CartItemWithDetailsDTOPaginatedResult"
           }
         },
         "additionalProperties": false
@@ -8318,6 +8412,39 @@
         },
         "additionalProperties": false
       },
+      "ItemDetailsDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemDetailsDTOResult": {
+        "type": "object",
+        "properties": {
+          "resultStatus": {
+            "$ref": "#/components/schemas/ResultStatus"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorType": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ItemDetailsDTO"
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginRequest": {
         "type": "object",
         "properties": {
@@ -8835,13 +8962,110 @@
         },
         "additionalProperties": false
       },
-      "OrderItemPaginatedResult": {
+      "OrderItemDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "orderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "baseItemId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "couponId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderItemWithDetailsDTO": {
+        "type": "object",
+        "properties": {
+          "orderItem": {
+            "$ref": "#/components/schemas/OrderItemDTO"
+          },
+          "itemDetails": {
+            "$ref": "#/components/schemas/ItemDetailsDTO"
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "itemDescription": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "itemPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "readOnly": true
+          },
+          "isAvailable": {
+            "type": "boolean",
+            "nullable": true,
+            "readOnly": true
+          },
+          "itemType": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "itemId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true,
+            "readOnly": true
+          },
+          "totalPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderItemWithDetailsDTOPaginatedResult": {
         "type": "object",
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OrderItem"
+              "$ref": "#/components/schemas/OrderItemWithDetailsDTO"
             },
             "nullable": true
           },
@@ -8872,7 +9096,7 @@
         },
         "additionalProperties": false
       },
-      "OrderItemPaginatedResultResult": {
+      "OrderItemWithDetailsDTOPaginatedResultResult": {
         "type": "object",
         "properties": {
           "resultStatus": {
@@ -8890,12 +9114,12 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/OrderItemPaginatedResult"
+            "$ref": "#/components/schemas/OrderItemWithDetailsDTOPaginatedResult"
           }
         },
         "additionalProperties": false
       },
-      "OrderItemResult": {
+      "OrderItemWithDetailsDTOResult": {
         "type": "object",
         "properties": {
           "resultStatus": {
@@ -8913,7 +9137,7 @@
             "nullable": true
           },
           "data": {
-            "$ref": "#/components/schemas/OrderItem"
+            "$ref": "#/components/schemas/OrderItemWithDetailsDTO"
           }
         },
         "additionalProperties": false

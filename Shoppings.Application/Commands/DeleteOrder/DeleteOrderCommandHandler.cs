@@ -19,10 +19,10 @@ namespace Shoppings.Application.Commands.Handlers
         {
             var order = await _orderRepository.GetByIdAsync(request.Id);
             if (order == null)
-                return Result<bool>.Fail("Order not found.", "NotFound", ResultStatus.NotFound);
+                return Result<bool>.Fail("الطلب غير موجود", "OrderNotFound", ResultStatus.NotFound);
             _orderRepository.Remove(order);
             await _unitOfWork.SaveChangesAsync();
-            return Result<bool>.Ok(true, "deleted", ResultStatus.Success);
+            return Result<bool>.Ok(true, "تم حذف الطلب بنجاح", ResultStatus.Success);
         }
     }
 } 

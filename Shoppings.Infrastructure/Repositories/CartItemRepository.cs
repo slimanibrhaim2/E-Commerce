@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Shoppings.Infrastructure.Repositories
 {
@@ -14,10 +15,37 @@ namespace Shoppings.Infrastructure.Repositories
     {
         private readonly ECommerceContext _ctx;
         private readonly IMapper<CartItemDAO, CartItem> _cartMapper;
+        
         public CartItemRepository(ECommerceContext ctx, IMapper<CartItemDAO, CartItem> mapper) : base(ctx, mapper)
         {
             _ctx = ctx;
-            _cartMapper= mapper;
+            _cartMapper = mapper;
+        }
+
+        public async Task<CartItem?> GetByCartIdAndBaseItemIdAsync(Guid cartId, Guid baseItemId)
+        {
+            var cartItemDao = await _ctx.CartItems
+                .Where(ci => ci.CartId == cartId && ci.BaseItemId == baseItemId && ci.DeletedAt == null)
+                .FirstOrDefaultAsync();
+            
+            return cartItemDao != null ? _cartMapper.Map(cartItemDao) : null;
+        }
+
+        public async Task<bool> UpdateAsync(CartItem cartItem)
+        {
+            var existingDao = await _ctx.CartItems
+                .FirstOrDefaultAsync(ci => ci.Id == cartItem.Id);
+            
+            if (existingDao == null)
+                return false;
+
+            // Update properties
+            existingDao.Quantity = cartItem.Quantity;
+            existingDao.UpdatedAt = cartItem.UpdatedAt;
+            existingDao.DeletedAt = cartItem.DeletedAt;
+
+            // EF will track changes automatically - SaveChanges is handled by UnitOfWork
+            return true;
         }
     }
 }

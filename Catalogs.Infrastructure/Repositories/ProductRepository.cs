@@ -23,6 +23,15 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         _categoryMapper = categoryMapper;
     }
 
+    public override async Task<IEnumerable<Product>> GetAllAsync()
+    {
+        var products = await _context.Products
+            .Include(p => p.BaseItem)
+            .Where(p => p.DeletedAt == null)
+            .ToListAsync();
+        return products.Select(p => _mapper.Map(p));
+    }
+
     public async Task<Product?> GetById(Guid id)
     {
         var productDao = await _context.Products
@@ -216,6 +225,16 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         var product = await _context.Products
             .Where(p => p.Id == productId && p.DeletedAt == null)
             .Select(p => p.BaseItemId)
+            .FirstOrDefaultAsync();
+
+        return product == Guid.Empty ? null : product;
+    }
+
+    public async Task<Guid?> GetProductIdByBaseItemIdAsync(Guid baseItemId)
+    {
+        var product = await _context.Products
+            .Where(p => p.BaseItemId == baseItemId && p.DeletedAt == null)
+            .Select(p => p.Id)
             .FirstOrDefaultAsync();
 
         return product == Guid.Empty ? null : product;

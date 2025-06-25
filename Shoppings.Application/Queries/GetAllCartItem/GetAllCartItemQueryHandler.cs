@@ -22,7 +22,7 @@ namespace Shoppings.Application.Queries.GetAllCartItem
                           .Take(request.Parameters.PageSize)
                           .ToList();
             var paginated = PaginatedResult<CartItem>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
-            return Result<PaginatedResult<CartItem>>.Ok(paginated, "success", ResultStatus.Success);
+            return Result<PaginatedResult<CartItem>>.Ok(paginated, "تم جلب عناصر سلات التسوق بنجاح", ResultStatus.Success);
         }
     }
 } 

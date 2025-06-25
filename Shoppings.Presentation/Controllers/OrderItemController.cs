@@ -53,16 +53,22 @@ namespace Shoppings.Presentation.Controllers
             }
         }
 
+        /// <summary>
+        /// Get all order items with pagination and full item details (name, price, etc.)
+        /// </summary>
         [HttpGet]
-        public async Task<ActionResult<Result<PaginatedResult<OrderItem>>>> GetAll([FromQuery] PaginationParameters parameters)
+        public async Task<ActionResult<Result<PaginatedResult<OrderItemWithDetailsDTO>>>> GetAll([FromQuery] PaginationParameters parameters)
         {
             var query = new GetAllOrderItemQuery(parameters);
             var result = await _mediator.Send(query);
             return Ok(result);
         }
 
+        /// <summary>
+        /// Get order item by ID with full item details (name, price, etc.)
+        /// </summary>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Result<OrderItem>>> GetById(Guid id)
+        public async Task<ActionResult<Result<OrderItemWithDetailsDTO>>> GetById(Guid id)
         {
             try
             {
@@ -73,7 +79,7 @@ namespace Shoppings.Presentation.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting order item {OrderItemId}", id);
-                return StatusCode(500, Result<OrderItem>.Fail(
+                return StatusCode(500, Result<OrderItemWithDetailsDTO>.Fail(
                     message: "فشل في جلب عنصر الطلب",
                     errorType: "GetOrderItemFailed",
                     resultStatus: ResultStatus.Failed));

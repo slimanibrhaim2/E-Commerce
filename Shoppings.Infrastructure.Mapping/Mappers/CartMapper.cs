@@ -19,7 +19,17 @@ namespace Shoppings.Infrastructure.Mapping.Mappers
                 UserId = s.UserId,
                 CreatedAt = s.CreatedAt,
                 DeletedAt = s.DeletedAt,
-                UpdatedAt = s.UpdatedAt
+                UpdatedAt = s.UpdatedAt,
+                CartItems = s.CartItems?.Select(ci => new CartItem
+                {
+                    Id = ci.Id,
+                    CartId = ci.CartId,
+                    BaseItemId = ci.BaseItemId,
+                    Quantity = ci.Quantity,
+                    CreatedAt = ci.CreatedAt,
+                    UpdatedAt = ci.UpdatedAt,
+                    DeletedAt = ci.DeletedAt
+                }).ToList() ?? new List<CartItem>()
             });
         }
 
@@ -31,7 +41,17 @@ namespace Shoppings.Infrastructure.Mapping.Mappers
                 UserId = t.UserId,
                 CreatedAt = t.CreatedAt,
                 DeletedAt = t.DeletedAt,
-                UpdatedAt = t.UpdatedAt
+                UpdatedAt = t.UpdatedAt,
+                CartItems = t.CartItems?.Select(ci => new CartItemDAO
+                {
+                    Id = ci.Id,
+                    CartId = ci.CartId,
+                    BaseItemId = ci.BaseItemId,
+                    Quantity = ci.Quantity,
+                    CreatedAt = ci.CreatedAt,
+                    UpdatedAt = ci.UpdatedAt,
+                    DeletedAt = ci.DeletedAt
+                }).ToList() ?? new List<CartItemDAO>()
             });
         }
     }

@@ -14,7 +14,7 @@ namespace Shoppings.Domain.Entities
 
         public Guid OrderActivityId { get; set; }
 
-        public decimal TotalAmount { get; set; }
+        public double TotalAmount { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

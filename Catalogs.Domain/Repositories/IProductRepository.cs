@@ -25,4 +25,7 @@ public interface IProductRepository : IRepository<Product>
     Task<IEnumerable<Product>> GetByIdsAsync(IEnumerable<Guid> ids);
 
     Task<Guid?> GetBaseItemIdByProductIdAsync(Guid productId);
+    
+    // Add reverse lookup method
+    Task<Guid?> GetProductIdByBaseItemIdAsync(Guid baseItemId);
 } 

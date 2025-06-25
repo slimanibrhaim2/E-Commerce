@@ -17,8 +17,8 @@ namespace Shoppings.Application.Queries.GetOrderStatusById
         {
             var entity = await _orderStatusRepository.GetByIdAsync(request.Id);
             if (entity == null)
-                return Result<OrderStatus>.Fail("OrderStatus not found.", "NotFound", ResultStatus.NotFound);
-            return Result<OrderStatus>.Ok(entity, "success", ResultStatus.Success);
+                return Result<OrderStatus>.Fail("حالة الطلب غير موجودة", "OrderStatusNotFound", ResultStatus.NotFound);
+            return Result<OrderStatus>.Ok(entity, "تم جلب حالة الطلب بنجاح", ResultStatus.Success);
         }
     }
 } 

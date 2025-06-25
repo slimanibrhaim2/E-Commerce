@@ -36,7 +36,7 @@ namespace Shoppings.Application.Commands.UpdateMyCartItem
                 if (request.UserId == Guid.Empty || request.ItemId == Guid.Empty)
                 {
                     return Result<bool>.Fail(
-                        message: "معرف المستخدم ومعرف العنصر مطلوبان",
+                        message: "معرف المستخدم ومعرف المنتج/الخدمة مطلوبان لتحديث كمية العنصر",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -44,7 +44,7 @@ namespace Shoppings.Application.Commands.UpdateMyCartItem
                 if (request.Quantity <= 0)
                 {
                     return Result<bool>.Fail(
-                        message: "يجب أن تكون الكمية أكبر من صفر",
+                        message: "يجب أن تكون الكمية الجديدة أكبر من صفر",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -57,7 +57,7 @@ namespace Shoppings.Application.Commands.UpdateMyCartItem
                 if (cart == null)
                 {
                     return Result<bool>.Fail(
-                        message: "سلة التسوق غير موجودة",
+                        message: "سلة التسوق الخاصة بك غير موجودة",
                         errorType: "CartNotFound",
                         resultStatus: ResultStatus.NotFound);
                 }
@@ -84,7 +84,7 @@ namespace Shoppings.Application.Commands.UpdateMyCartItem
                     else
                     {
                         return Result<bool>.Fail(
-                            message: "العنصر غير موجود. المعرف المدخل ليس معرف منتج أو خدمة صالح",
+                            message: "المنتج أو الخدمة غير موجودة. تأكد من صحة معرف المنتج أو الخدمة",
                             errorType: "NotFound",
                             resultStatus: ResultStatus.NotFound);
                     }
@@ -95,7 +95,7 @@ namespace Shoppings.Application.Commands.UpdateMyCartItem
                 if (cartItem == null)
                 {
                     return Result<bool>.Fail(
-                        message: "العنصر غير موجود في سلة التسوق",
+                        message: "المنتج أو الخدمة غير موجودة في سلة التسوق الخاصة بك",
                         errorType: "CartItemNotFound",
                         resultStatus: ResultStatus.NotFound);
                 }
@@ -103,21 +103,20 @@ namespace Shoppings.Application.Commands.UpdateMyCartItem
                 // Update quantity
                 cartItem.Quantity = request.Quantity;
                 cartItem.UpdatedAt = DateTime.UtcNow;
-                _cartItemRepository.Update(cartItem);
                 
                 await _unitOfWork.SaveChangesAsync();
                 
                 return Result<bool>.Ok(
                     data: true,
-                    message: "تم تحديث كمية العنصر في سلة التسوق بنجاح",
+                    message: "تم تحديث كمية المنتج/الخدمة في سلة التسوق بنجاح",
                     resultStatus: ResultStatus.Success);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to update item {ItemId} quantity in user {UserId} cart", request.ItemId, request.UserId);
                 return Result<bool>.Fail(
-                    message: $"فشل في تحديث كمية العنصر في سلة التسوق: {ex.Message}",
-                    errorType: "UpdateMyCartItemFailed",
+                    message: $"فشل في تحديث كمية المنتج/الخدمة في سلة التسوق: {ex.Message}",
+                    errorType: "UpdateCartItemFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);
             }

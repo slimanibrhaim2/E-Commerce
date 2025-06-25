@@ -20,7 +20,7 @@ namespace Shoppings.Application.Commands.Handlers
         public async Task<Result<Guid>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             if (request.UserId == Guid.Empty || request.OrderActivityId == Guid.Empty)
-                return Result<Guid>.Fail("UserId and OrderActivityId are required.", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("معرف المستخدم ومعرف نشاط الطلب مطلوبان", "ValidationError", ResultStatus.ValidationError);
             var order = new Order
             {
                 UserId = request.UserId,
@@ -29,7 +29,7 @@ namespace Shoppings.Application.Commands.Handlers
             };
             await _orderRepository.AddAsync(order);
             await _unitOfWork.SaveChangesAsync();
-            return Result<Guid>.Ok(order.Id, "added", ResultStatus.Success);
+            return Result<Guid>.Ok(order.Id, "تم إنشاء الطلب بنجاح", ResultStatus.Success);
         }
     }
 } 

@@ -17,8 +17,8 @@ namespace Shoppings.Application.Queries.GetOrderActivityById
         {
             var entity = await _orderActivityRepository.GetByIdAsync(request.Id);
             if (entity == null)
-                return Result<OrderActivity>.Fail("OrderActivity not found.", "NotFound", ResultStatus.NotFound);
-            return Result<OrderActivity>.Ok(entity, "success", ResultStatus.Success);
+                return Result<OrderActivity>.Fail("نشاط الطلب غير موجود", "OrderActivityNotFound", ResultStatus.NotFound);
+            return Result<OrderActivity>.Ok(entity, "تم جلب نشاط الطلب بنجاح", ResultStatus.Success);
         }
     }
 } 

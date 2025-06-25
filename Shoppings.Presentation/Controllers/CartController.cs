@@ -221,10 +221,10 @@ namespace Shoppings.Presentation.Controllers
         }
 
         /// <summary>
-        /// Get current user's cart items with pagination
+        /// Get current user's cart items with pagination and full item details (name, price, etc.)
         /// </summary>
         [HttpGet("my-cart-items")]
-        public async Task<ActionResult<Result<PaginatedResult<CartItemDTO>>>> GetMyCartItems([FromQuery] PaginationParameters parameters)
+        public async Task<ActionResult<Result<PaginatedResult<CartItemWithDetailsDTO>>>> GetMyCartItems([FromQuery] PaginationParameters parameters)
         {
             try
             {
@@ -243,7 +243,7 @@ namespace Shoppings.Presentation.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting cart items for user {UserId}", User.GetId());
-                return StatusCode(500, Result<PaginatedResult<CartItemDTO>>.Fail(
+                return StatusCode(500, Result<PaginatedResult<CartItemWithDetailsDTO>>.Fail(
                     message: "فشل في جلب عناصر سلة التسوق",
                     errorType: "GetMyCartItemsFailed",
                     resultStatus: ResultStatus.Failed));

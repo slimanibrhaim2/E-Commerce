@@ -198,4 +198,14 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
 
         return service == Guid.Empty ? null : service;
     }
+
+    public async Task<Guid?> GetServiceIdByBaseItemIdAsync(Guid baseItemId)
+    {
+        var service = await _context.Services
+            .Where(s => s.BaseItemId == baseItemId && s.DeletedAt == null)
+            .Select(s => s.Id)
+            .FirstOrDefaultAsync();
+
+        return service == Guid.Empty ? null : service;
+    }
 } 

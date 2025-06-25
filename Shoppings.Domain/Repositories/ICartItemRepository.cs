@@ -10,5 +10,7 @@ namespace Shoppings.Domain.Repositories
 {
     public interface ICartItemRepository : IRepository<CartItem>
     {
+        Task<CartItem?> GetByCartIdAndBaseItemIdAsync(Guid cartId, Guid baseItemId);
+        Task<bool> UpdateAsync(CartItem cartItem);
     }
 }

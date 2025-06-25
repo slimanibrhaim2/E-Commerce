@@ -20,4 +20,7 @@ public interface IServiceRepository : IRepository<Service>
     Task<IEnumerable<Service>> GetByIdsAsync(IEnumerable<Guid> ids);
 
     Task<Guid?> GetBaseItemIdByServiceIdAsync(Guid serviceId);
+    
+    // Add reverse lookup method
+    Task<Guid?> GetServiceIdByBaseItemIdAsync(Guid baseItemId);
 } 

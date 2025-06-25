@@ -14,6 +14,8 @@ namespace Shoppings.Application.DTOs
 
         public Guid BaseItemId { get; set; }
 
+        public Guid ItemId { get; set; }
+
         public int Quantity { get; set; }
 
         public DateTime CreatedAt { get; set; }
@@ -21,6 +23,5 @@ namespace Shoppings.Application.DTOs
         public DateTime UpdatedAt { get; set; }
 
         public DateTime? DeletedAt { get; set; }
-
     }
 }

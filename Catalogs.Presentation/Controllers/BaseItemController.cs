@@ -8,6 +8,8 @@ using Core.Pagination;
 using Core.Result;
 using Microsoft.AspNetCore.Authorization;
 using Core.Authentication;
+using Shared.Contracts.Queries;
+using Shared.Contracts.DTOs;
 
 namespace Catalogs.Presentation.Controllers
 {
@@ -40,6 +42,33 @@ namespace Catalogs.Presentation.Controllers
             return Ok(Result<PaginatedResult<BaseItemDTO>>.Ok(
                 data: result.Data,
                 message: "تم جلب العناصر بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+
+        [HttpGet("{baseItemId}/details")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Result<ItemDetailsDTO>>> GetItemDetailsByBaseItemId(Guid baseItemId)
+        {
+            var query = new GetItemDetailsByBaseItemIdQuery(baseItemId);
+            var result = await _mediator.Send(query);
+            
+            if (!result.Success)
+            {
+                if (result.ResultStatus == ResultStatus.NotFound)
+                    return NotFound(Result<ItemDetailsDTO>.Fail(
+                        message: "العنصر غير موجود",
+                        errorType: "ItemNotFound",
+                        resultStatus: ResultStatus.NotFound));
+                        
+                return StatusCode(500, Result<ItemDetailsDTO>.Fail(
+                    message: "فشل في جلب تفاصيل العنصر",
+                    errorType: "GetItemDetailsFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+            
+            return Ok(Result<ItemDetailsDTO>.Ok(
+                data: result.Data,
+                message: "تم جلب تفاصيل العنصر بنجاح",
                 resultStatus: ResultStatus.Success));
         }
 

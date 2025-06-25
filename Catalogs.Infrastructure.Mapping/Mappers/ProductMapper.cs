@@ -16,6 +16,7 @@ public class ProductMapper : IMapper<ProductDAO, Product>
             StockQuantity = source.StockQuantity,
             Name = source.BaseItem?.Name,
             Description = source.BaseItem?.Description,
+            BaseItemId=source.BaseItemId,
             Price = (decimal)(source.BaseItem?.Price ?? 0),
             CategoryId = source.BaseItem?.CategoryId ?? Guid.Empty,
             IsAvailable = source.BaseItem?.IsAvailable ?? false,
@@ -42,8 +43,10 @@ public class ProductMapper : IMapper<ProductDAO, Product>
             Id = target.Id,
             SKU = target.SKU,
             StockQuantity = target.StockQuantity,
+            BaseItemId= target.BaseItemId,
             BaseItem = new BaseItemDAO
             {
+                Id=target.BaseItemId,
                 Name = target.Name,
                 Description = target.Description,
                 Price = (double)target.Price,

@@ -22,7 +22,7 @@ namespace Shoppings.Application.Queries.GetAllOrderStatus
                           .Take(request.Parameters.PageSize)
                           .ToList();
             var paginated = PaginatedResult<OrderStatus>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
-            return Result<PaginatedResult<OrderStatus>>.Ok(paginated, "success", ResultStatus.Success);
+            return Result<PaginatedResult<OrderStatus>>.Ok(paginated, "تم جلب حالات الطلبات بنجاح", ResultStatus.Success);
         }
     }
 } 

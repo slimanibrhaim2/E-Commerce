@@ -46,7 +46,7 @@ namespace Shoppings.Application.Commands.TransactCartToOrder
             };
             await _orderRepository.AddAsync(order);
 
-            decimal total = 0;
+            double total = 0;
             foreach (var cartItem in cart.CartItems)
             {
                 var orderItem = new OrderItem
@@ -60,7 +60,7 @@ namespace Shoppings.Application.Commands.TransactCartToOrder
                     UpdatedAt = DateTime.UtcNow
                 };
                 await _orderItemRepository.AddAsync(orderItem);
-                // total += orderItem.Price * (decimal)orderItem.Quantity; // Uncomment when pricing is set
+                total += orderItem.Price * orderItem.Quantity; // Uncomment when pricing is set
             }
             order.TotalAmount = total;
             _orderRepository.Update(order);

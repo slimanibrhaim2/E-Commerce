@@ -30,7 +30,7 @@ namespace Shoppings.Application.Queries.GetMyCart
                 if (request.UserId == Guid.Empty)
                 {
                     return Result<CartDTO>.Fail(
-                        message: "معرف المستخدم مطلوب",
+                        message: "معرف المستخدم مطلوب للوصول إلى سلة التسوق",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -61,15 +61,15 @@ namespace Shoppings.Application.Queries.GetMyCart
 
                 return Result<CartDTO>.Ok(
                     data: cartDto,
-                    message: "تم جلب سلة التسوق بنجاح",
+                    message: "تم جلب سلة التسوق الخاصة بك بنجاح",
                     resultStatus: ResultStatus.Success);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to get cart for user {UserId}", request.UserId);
                 return Result<CartDTO>.Fail(
-                    message: $"فشل في جلب سلة التسوق: {ex.Message}",
-                    errorType: "GetMyCartFailed",
+                    message: $"فشل في الوصول إلى سلة التسوق: {ex.Message}",
+                    errorType: "GetCartFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);
             }

@@ -13,6 +13,9 @@ namespace Shoppings.Application.DTOs
         public Guid OrderId { get; set; }
 
         public Guid BaseItemId { get; set; }
+        
+        // Original Product ID or Service ID
+        public Guid ItemId { get; set; }
 
         public double Quantity { get; set; }
 
@@ -24,6 +27,5 @@ namespace Shoppings.Application.DTOs
         public DateTime UpdatedAt { get; set; }
 
         public DateTime? DeletedAt { get; set; }
-
     }
 }

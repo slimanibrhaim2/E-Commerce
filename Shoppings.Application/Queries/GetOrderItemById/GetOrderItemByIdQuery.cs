@@ -1,8 +1,8 @@
 using MediatR;
-using Shoppings.Domain.Entities;
+using Shoppings.Application.DTOs;
 using Core.Result;
 
 namespace Shoppings.Application.Queries.GetOrderItemById
 {
-    public record GetOrderItemByIdQuery(Guid Id) : IRequest<Result<OrderItem>>;
+    public record GetOrderItemByIdQuery(Guid Id) : IRequest<Result<OrderItemWithDetailsDTO>>;
 } 

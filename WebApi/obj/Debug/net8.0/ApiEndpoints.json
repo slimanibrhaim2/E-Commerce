@@ -543,6 +543,32 @@
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.BaseItemController",
+    "Method": "GetItemDetailsByBaseItemId",
+    "RelativePath": "api/BaseItem/{baseItemId}/details",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "baseItemId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Shared.Contracts.DTOs.ItemDetailsDTO, Shared.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.BaseItemController",
     "Method": "GetUserIdByItemId",
     "RelativePath": "api/BaseItem/{itemId}/user-id",
     "HttpMethod": "GET",
@@ -716,7 +742,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Application.DTOs.CartItemDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Application.DTOs.CartItemWithDetailsDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2345,7 +2371,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Domain.Entities.OrderItem, Shoppings.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Application.DTOs.OrderItemWithDetailsDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -2371,7 +2397,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Shoppings.Domain.Entities.OrderItem, Shoppings.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Shoppings.Application.DTOs.OrderItemWithDetailsDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
