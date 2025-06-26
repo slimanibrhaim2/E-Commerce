@@ -16,7 +16,7 @@ public class ServiceMapper : IMapper<ServiceDAO, Service>
             Duration = source.Duration,
             Name = source.BaseItem?.Name,
             Description = source.BaseItem?.Description,
-            Price = (decimal)(source.BaseItem?.Price ?? 0),
+            Price = (source.BaseItem?.Price ?? 0),
             CategoryId = source.BaseItem?.CategoryId ?? Guid.Empty,
             IsAvailable = source.BaseItem?.IsAvailable ?? false,
             UserId = source.BaseItem?.UserId ?? Guid.Empty

@@ -13,6 +13,7 @@ using Communication.Application.Commands.AddMessageAggregate;
 using Communication.Application.Commands.UpdateMessageAggregate;
 using Communication.Application.Commands.DeleteMessageAggregate;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Communication.Presentation.Controllers
 {
@@ -30,20 +31,68 @@ namespace Communication.Presentation.Controllers
             _logger = logger;
         }
 
+        private Guid GetCurrentUserId()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out Guid userId))
+            {
+                throw new UnauthorizedAccessException("Invalid user token");
+            }
+            return userId;
+        }
+
         [HttpPost]
         public async Task<ActionResult<Result<Guid>>> Create(CreateMessageDTO dto)
         {
-            var command = new CreateMessageCommand(dto);
-            var result = await _mediator.Send(command);
-            if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في إنشاء الرسالة",
-                    errorType: "CreateMessageFailed",
-                    resultStatus: ResultStatus.Failed));
-            return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
-                data: result.Data,
-                message: "تم إنشاء الرسالة بنجاح",
-                resultStatus: ResultStatus.Success));
+            try
+            {
+                dto.SenderId = GetCurrentUserId(); // Always set sender from token
+                var command = new CreateMessageCommand(dto);
+                var result = await _mediator.Send(command);
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في إنشاء الرسالة",
+                        errorType: "CreateMessageFailed",
+                        resultStatus: ResultStatus.Failed));
+                return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
+                    data: result.Data,
+                    message: "تم إنشاء الرسالة بنجاح",
+                    resultStatus: ResultStatus.Success));
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return StatusCode(401, Result.Fail(
+                    message: "غير مصرح",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError));
+            }
+        }
+
+        [HttpPost("aggregate")]
+        public async Task<ActionResult<Result<Guid>>> AddMessageAggregate(AddMessageAggregateDTO dto)
+        {
+            try
+            {
+                dto.SenderId = GetCurrentUserId(); // Always set sender from token
+                var command = new AddMessageAggregateCommand(dto);
+                var result = await _mediator.Send(command);
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في إنشاء الرسالة",
+                        errorType: "CreateMessageFailed",
+                        resultStatus: ResultStatus.Failed));
+                return CreatedAtAction(nameof(GetById), new { id = result.Data }, Result<Guid>.Ok(
+                    data: result.Data,
+                    message: "تم إنشاء الرسالة بنجاح",
+                    resultStatus: ResultStatus.Success));
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return StatusCode(401, Result.Fail(
+                    message: "غير مصرح",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError));
+            }
         }
 
         [HttpGet("{id}")]
@@ -54,45 +103,70 @@ namespace Communication.Presentation.Controllers
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في جلب الرسالة",
-                    errorType: "GetMessageByIdFailed",
+                    errorType: "GetMessageFailed",
                     resultStatus: ResultStatus.Failed));
-            return Ok(Result<MessageDTO>.Ok(
-                data: result.Data,
-                message: "تم جلب الرسالة بنجاح",
-                resultStatus: ResultStatus.Success));
+            return Ok(result);
         }
 
         [HttpGet]
-        public async Task<ActionResult<Result<PaginatedResult<MessageDTO>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<Result<PaginatedResult<MessageDTO>>>> GetAll([FromQuery] PaginationParameters parameters)
         {
-            var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAllMessagesQuery(parameters);
             var result = await _mediator.Send(query);
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في جلب الرسائل",
-                    errorType: "GetAllMessagesFailed",
+                    errorType: "GetMessagesFailed",
                     resultStatus: ResultStatus.Failed));
-            return Ok(Result<PaginatedResult<MessageDTO>>.Ok(
-                data: result.Data,
-                message: "تم جلب الرسائل بنجاح",
-                resultStatus: ResultStatus.Success));
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Result<bool>>> Update(Guid id, CreateMessageDTO dto)
         {
-            var command = new UpdateMessageCommand(id, dto);
-            var result = await _mediator.Send(command);
-            if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في تحديث الرسالة",
-                    errorType: "UpdateMessageFailed",
-                    resultStatus: ResultStatus.Failed));
-            return Ok(Result<bool>.Ok(
-                data: result.Data,
-                message: "تم تحديث الرسالة بنجاح",
-                resultStatus: ResultStatus.Success));
+            try
+            {
+                dto.SenderId = GetCurrentUserId(); // Always set sender from token
+                var command = new UpdateMessageCommand(id, dto);
+                var result = await _mediator.Send(command);
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في تحديث الرسالة",
+                        errorType: "UpdateMessageFailed",
+                        resultStatus: ResultStatus.Failed));
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return StatusCode(401, Result.Fail(
+                    message: "غير مصرح",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError));
+            }
+        }
+
+        [HttpPut("aggregate/{id}")]
+        public async Task<ActionResult<Result<Guid>>> UpdateMessageAggregate(Guid id, AddMessageAggregateDTO dto)
+        {
+            try
+            {
+                dto.SenderId = GetCurrentUserId(); // Always set sender from token
+                var command = new UpdateMessageAggregateCommand(id, dto);
+                var result = await _mediator.Send(command);
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في تحديث الرسالة",
+                        errorType: "UpdateMessageFailed",
+                        resultStatus: ResultStatus.Failed));
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return StatusCode(401, Result.Fail(
+                    message: "غير مصرح",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError));
+            }
         }
 
         [HttpDelete("{id}")]
@@ -105,52 +179,20 @@ namespace Communication.Presentation.Controllers
                     message: "فشل في حذف الرسالة",
                     errorType: "DeleteMessageFailed",
                     resultStatus: ResultStatus.Failed));
-            return Ok(Result<bool>.Ok(
-                data: result.Data,
-                message: "تم حذف الرسالة بنجاح",
-                resultStatus: ResultStatus.Success));
-        }
-
-        [HttpPost("aggregate")]
-        public async Task<IActionResult> AddMessageAggregate([FromBody] AddMessageAggregateDTO dto)
-        {
-            var result = await _mediator.Send(new AddMessageAggregateCommand(dto));
-            if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في إضافة الرسالة",
-                    errorType: "AddMessageAggregateFailed",
-                    resultStatus: ResultStatus.Failed));
-            return Ok(Result.Ok(
-                message: "تم إضافة الرسالة بنجاح",
-                resultStatus: ResultStatus.Success));
-        }
-
-        [HttpPut("aggregate/{id}")]
-        public async Task<IActionResult> UpdateMessageAggregate(Guid id, [FromBody] AddMessageAggregateDTO dto)
-        {
-            var result = await _mediator.Send(new UpdateMessageAggregateCommand(id, dto));
-            if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                    message: "فشل في تحديث الرسالة",
-                    errorType: "UpdateMessageAggregateFailed",
-                    resultStatus: ResultStatus.Failed));
-            return Ok(Result.Ok(
-                message: "تم تحديث الرسالة بنجاح",
-                resultStatus: ResultStatus.Success));
+            return Ok(result);
         }
 
         [HttpDelete("aggregate/{id}")]
-        public async Task<IActionResult> DeleteMessageAggregate(Guid id)
+        public async Task<ActionResult<Result<bool>>> DeleteMessageAggregate(Guid id)
         {
-            var result = await _mediator.Send(new DeleteMessageAggregateCommand(id));
+            var command = new DeleteMessageAggregateCommand(id);
+            var result = await _mediator.Send(command);
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "فشل في حذف الرسالة",
-                    errorType: "DeleteMessageAggregateFailed",
+                    errorType: "DeleteMessageFailed",
                     resultStatus: ResultStatus.Failed));
-            return Ok(Result.Ok(
-                message: "تم حذف الرسالة بنجاح",
-                resultStatus: ResultStatus.Success));
+            return Ok(result);
         }
     }
 } 

@@ -3192,21 +3192,19 @@
         ],
         "parameters": [
           {
-            "name": "pageNumber",
+            "name": "PageNumber",
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 1
+              "format": "int32"
             }
           },
           {
-            "name": "pageSize",
+            "name": "PageSize",
             "in": "query",
             "schema": {
               "type": "integer",
-              "format": "int32",
-              "default": 10
+              "format": "int32"
             }
           }
         ],
@@ -3227,6 +3225,54 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MessageDTOPaginatedResultResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Message/aggregate": {
+      "post": {
+        "tags": [
+          "Message"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMessageAggregateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMessageAggregateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMessageAggregateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
                 }
               }
             }
@@ -3369,37 +3415,6 @@
         }
       }
     },
-    "/api/Message/aggregate": {
-      "post": {
-        "tags": [
-          "Message"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddMessageAggregateDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddMessageAggregateDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddMessageAggregateDTO"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Message/aggregate/{id}": {
       "put": {
         "tags": [
@@ -3437,7 +3452,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidResult"
+                }
+              }
+            }
           }
         }
       },
@@ -3458,7 +3490,24 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanResult"
+                }
+              }
+            }
           }
         }
       }
@@ -7309,48 +7358,34 @@
       "CartItemWithDetailsDTO": {
         "type": "object",
         "properties": {
-          "cartItem": {
-            "$ref": "#/components/schemas/CartItemDTO"
-          },
-          "itemDetails": {
-            "$ref": "#/components/schemas/ItemDetailsDTO"
-          },
-          "itemName": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "itemDescription": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "itemPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true,
-            "readOnly": true
-          },
-          "isAvailable": {
-            "type": "boolean",
-            "nullable": true,
-            "readOnly": true
-          },
-          "itemType": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
           "itemId": {
             "type": "string",
             "format": "uuid",
+            "readOnly": true
+          },
+          "imageUrl": {
+            "type": "string",
             "nullable": true,
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
             "readOnly": true
           },
           "totalPrice": {
             "type": "number",
             "format": "double",
-            "nullable": true,
+            "readOnly": true
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
             "readOnly": true
           }
         },
@@ -8962,98 +8997,37 @@
         },
         "additionalProperties": false
       },
-      "OrderItemDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "orderId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "baseItemId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "itemId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "quantity": {
-            "type": "number",
-            "format": "double"
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "couponId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "deletedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "OrderItemWithDetailsDTO": {
         "type": "object",
         "properties": {
-          "orderItem": {
-            "$ref": "#/components/schemas/OrderItemDTO"
-          },
-          "itemDetails": {
-            "$ref": "#/components/schemas/ItemDetailsDTO"
-          },
-          "itemName": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "itemDescription": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "itemPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true,
-            "readOnly": true
-          },
-          "isAvailable": {
-            "type": "boolean",
-            "nullable": true,
-            "readOnly": true
-          },
-          "itemType": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
           "itemId": {
             "type": "string",
             "format": "uuid",
+            "readOnly": true
+          },
+          "imageUrl": {
+            "type": "string",
             "nullable": true,
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
             "readOnly": true
           },
           "totalPrice": {
             "type": "number",
             "format": "double",
-            "nullable": true,
+            "readOnly": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double",
             "readOnly": true
           }
         },

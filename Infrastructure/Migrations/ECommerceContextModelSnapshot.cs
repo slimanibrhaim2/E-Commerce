@@ -699,9 +699,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("OrderActivityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("TotalAmount")
+                    b.Property<double>("TotalAmount")
                         .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("float(18)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");

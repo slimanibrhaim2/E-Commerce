@@ -10,7 +10,7 @@ namespace Catalogs.Application.DTOs
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public Guid CategoryId { get; set; }
         public string ServiceType { get; set; }
         public int Duration { get; set; }

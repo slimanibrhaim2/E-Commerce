@@ -14,7 +14,7 @@ public class BaseItemMapper : IMapper<BaseItemDAO, BaseItem>
             Id = source.Id,
             Name = source.Name,
             Description = source.Description,
-            Price = (decimal)source.Price,
+            Price = source.Price,
             IsAvailable = source.IsAvailable,
             CategoryId = source.CategoryId ?? Guid.Empty,
             UserId = source.UserId

@@ -71,7 +71,7 @@ public class GetMyFavoritesQueryHandler : IRequestHandler<GetMyFavoritesQuery, R
                     Id = f.BaseItem.Id,
                     Name = f.BaseItem.Name,
                     Description = f.BaseItem.Description,
-                    Price = (decimal)f.BaseItem.Price,
+                    Price = f.BaseItem.Price,
                     IsAvailable = f.BaseItem.IsAvailable,
                     CategoryId = f.BaseItem.CategoryId,
                     UserId = f.BaseItem.UserId

@@ -17,7 +17,7 @@ public class ProductMapper : IMapper<ProductDAO, Product>
             Name = source.BaseItem?.Name,
             Description = source.BaseItem?.Description,
             BaseItemId=source.BaseItemId,
-            Price = (decimal)(source.BaseItem?.Price ?? 0),
+            Price = (source.BaseItem?.Price ?? 0),
             CategoryId = source.BaseItem?.CategoryId ?? Guid.Empty,
             IsAvailable = source.BaseItem?.IsAvailable ?? false,
             UserId = source.BaseItem?.UserId ?? Guid.Empty,

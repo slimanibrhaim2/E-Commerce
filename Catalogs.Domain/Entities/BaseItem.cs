@@ -12,7 +12,7 @@ namespace Catalogs.Domain.Entities
         public Guid Id { get; set; }
         public string Name { get;  set; }
         public string Description { get; set; }
-        public decimal Price { get;  set; }
+        public double Price { get;  set; }
         public bool IsAvailable { get;  set; }
         public Guid CategoryId { get;  set; }
         public Category Category { get;  set; }
@@ -29,7 +29,7 @@ namespace Catalogs.Domain.Entities
         public BaseItem(
             string name,
             string description,
-            decimal price,
+            double price,
             Guid categoryId,
             Guid userId) : this()
         {
@@ -57,7 +57,7 @@ namespace Catalogs.Domain.Entities
             Description = description;
         }
 
-        public void SetPrice(decimal price)
+        public void SetPrice(double price)
         {
             if (price < 0)
                 throw new ArgumentException("Price cannot be negative", nameof(price));

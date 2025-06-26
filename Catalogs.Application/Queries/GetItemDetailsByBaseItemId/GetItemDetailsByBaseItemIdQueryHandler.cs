@@ -40,7 +40,7 @@ namespace Catalogs.Application.Queries.GetItemDetailsByBaseItemId
                 var productId = await _productRepository.GetProductIdByBaseItemIdAsync(request.BaseItemId);
                 if (productId.HasValue)
                 {
-                    var productQuery = new GetProductsByIdsQuery(new[] { request.BaseItemId }, new Core.Pagination.PaginationParameters { PageNumber = 1, PageSize = 1 });
+                    var productQuery = new GetProductsByIdsQuery(new[] { productId.Value }, new Core.Pagination.PaginationParameters { PageNumber = 1, PageSize = 1 });
                     var productResult = await _mediator.Send(productQuery, cancellationToken);
                     
                     if (productResult.Success && productResult.Data.Data.Any())
@@ -53,7 +53,7 @@ namespace Catalogs.Application.Queries.GetItemDetailsByBaseItemId
                 var serviceId = await _serviceRepository.GetServiceIdByBaseItemIdAsync(request.BaseItemId);
                 if (serviceId.HasValue)
                 {
-                    var serviceQuery = new GetServicesByIdsQuery(new[] { request.BaseItemId }, new Core.Pagination.PaginationParameters { PageNumber = 1, PageSize = 1 });
+                    var serviceQuery = new GetServicesByIdsQuery(new[] { serviceId.Value }, new Core.Pagination.PaginationParameters { PageNumber = 1, PageSize = 1 });
                     var serviceResult = await _mediator.Send(serviceQuery, cancellationToken);
                     
                     if (serviceResult.Success && serviceResult.Data.Data.Any())

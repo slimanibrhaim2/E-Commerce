@@ -18,19 +18,22 @@ namespace Communication.Application.Commands.AddMessageAggregate
         private readonly IBaseContentRepository _baseContentRepo;
         private readonly IAttachmentRepository _attachmentRepo;
         private readonly IConversationRepository _conversationRepo;
+        private readonly IConversationMemberRepository _memberRepo;
 
         public AddMessageAggregateCommandHandler(
             IUnitOfWork unitOfWork,
             IMessageRepository messageRepo,
             IBaseContentRepository baseContentRepo,
             IAttachmentRepository attachmentRepo,
-            IConversationRepository conversationRepo)
+            IConversationRepository conversationRepo,
+            IConversationMemberRepository memberRepo)
         {
             _unitOfWork = unitOfWork;
             _messageRepo = messageRepo;
             _baseContentRepo = baseContentRepo;
             _attachmentRepo = attachmentRepo;
             _conversationRepo = conversationRepo;
+            _memberRepo = memberRepo;
         }
 
         public async Task<Result<Guid>> Handle(AddMessageAggregateCommand request, CancellationToken cancellationToken)
@@ -51,6 +54,7 @@ namespace Communication.Application.Commands.AddMessageAggregate
                 var conversation = await _conversationRepo.GetConversationByMembersAsync(dto.SenderId, dto.ReceiverId);
                 if (conversation == null)
                 {
+                    // Create new conversation
                     conversation = new Conversation
                     {
                         Id = Guid.NewGuid(),
@@ -60,6 +64,49 @@ namespace Communication.Application.Commands.AddMessageAggregate
                     };
                     await _conversationRepo.AddAsync(conversation);
                     await _unitOfWork.SaveChangesAsync();
+
+                    // Add both users as members
+                    var members = new[]
+                    {
+                        new ConversationMember
+                        {
+                            Id = Guid.NewGuid(),
+                            ConversationId = conversation.Id,
+                            UserId = dto.SenderId,
+                            CreatedAt = DateTime.UtcNow,
+                            UpdatedAt = DateTime.UtcNow
+                        },
+                        new ConversationMember
+                        {
+                            Id = Guid.NewGuid(),
+                            ConversationId = conversation.Id,
+                            UserId = dto.ReceiverId,
+                            CreatedAt = DateTime.UtcNow,
+                            UpdatedAt = DateTime.UtcNow
+                        }
+                    };
+
+                    foreach (var member in members)
+                    {
+                        await _memberRepo.AddAsync(member);
+                    }
+                    await _unitOfWork.SaveChangesAsync();
+                }
+                else
+                {
+                    // Verify both users are members
+                    var members = await _memberRepo.GetAllAsync();
+                    var conversationMembers = members.Where(m => m.ConversationId == conversation.Id).ToList();
+                    var isSenderMember = conversationMembers.Any(m => m.UserId == dto.SenderId);
+                    var isReceiverMember = conversationMembers.Any(m => m.UserId == dto.ReceiverId);
+
+                    if (!isSenderMember || !isReceiverMember)
+                    {
+                        return Result<Guid>.Fail(
+                            message: "One or both users are not members of this conversation",
+                            errorType: "ValidationError",
+                            resultStatus: ResultStatus.ValidationError);
+                    }
                 }
 
                 // 3. Create BaseContent
@@ -90,28 +137,38 @@ namespace Communication.Application.Commands.AddMessageAggregate
                 await _unitOfWork.SaveChangesAsync();
 
                 // 5. Add Attachments
-                foreach (var attachmentDto in dto.Attachments ?? Enumerable.Empty<AttachmentDTO>())
+                if (dto.Attachments != null)
                 {
-                    var attachment = new Attachment
+                    foreach (var attachmentDto in dto.Attachments)
                     {
-                        Id = Guid.NewGuid(),
-                        BaseContentId = baseContent.Id,
-                        AttachmentUrl = attachmentDto.AttachmentUrl,
-                        AttachmentTypeId = attachmentDto.AttachmentTypeId,
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow
-                    };
-                    await _attachmentRepo.AddAsync(attachment);
+                        var attachment = new Attachment
+                        {
+                            Id = Guid.NewGuid(),
+                            BaseContentId = baseContent.Id,
+                            AttachmentUrl = attachmentDto.AttachmentUrl,
+                            AttachmentTypeId = attachmentDto.AttachmentTypeId,
+                            CreatedAt = DateTime.UtcNow,
+                            UpdatedAt = DateTime.UtcNow
+                        };
+                        await _attachmentRepo.AddAsync(attachment);
+                    }
+                    await _unitOfWork.SaveChangesAsync();
                 }
 
-                await _unitOfWork.SaveChangesAsync();
                 await _unitOfWork.CommitTransaction();
-                return Result<Guid>.Ok(message.Id, "تم إضافة الرسالة مع المرفقات بنجاح", ResultStatus.Success);
+                return Result<Guid>.Ok(
+                    data: message.Id,
+                    message: "تم إنشاء الرسالة بنجاح",
+                    resultStatus: ResultStatus.Success);
             }
             catch (Exception ex)
             {
                 await _unitOfWork.RollbackTransaction();
-                return Result<Guid>.Fail($"فشل في إضافة الرسالة: {ex.Message}", "AddMessageAggregateFailed", ResultStatus.Failed, ex);
+                return Result<Guid>.Fail(
+                    message: $"فشل في إنشاء الرسالة: {ex.Message}",
+                    errorType: "CreateMessageFailed",
+                    resultStatus: ResultStatus.Failed,
+                    exception: ex);
             }
         }
     }
