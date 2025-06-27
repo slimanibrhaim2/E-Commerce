@@ -25,6 +25,7 @@ namespace Shoppings.Infrastructure.Repositories
         public async Task<CartItem?> GetByCartIdAndBaseItemIdAsync(Guid cartId, Guid baseItemId)
         {
             var cartItemDao = await _ctx.CartItems
+                .Include(ci => ci.BaseItem)
                 .Where(ci => ci.CartId == cartId && ci.BaseItemId == baseItemId && ci.DeletedAt == null)
                 .FirstOrDefaultAsync();
             
@@ -33,19 +34,27 @@ namespace Shoppings.Infrastructure.Repositories
 
         public async Task<bool> UpdateAsync(CartItem cartItem)
         {
-            var existingDao = await _ctx.CartItems
-                .FirstOrDefaultAsync(ci => ci.Id == cartItem.Id);
-            
-            if (existingDao == null)
+            try
+            {
+                var existingDao = await _ctx.CartItems
+                    .Include(ci => ci.BaseItem)
+                    .FirstOrDefaultAsync(ci => ci.Id == cartItem.Id && ci.DeletedAt == null);
+                
+                if (existingDao == null)
+                    return false;
+
+                // Update properties
+                existingDao.Quantity = cartItem.Quantity;
+                existingDao.UpdatedAt = cartItem.UpdatedAt;
+                existingDao.DeletedAt = cartItem.DeletedAt;
+
+                // EF will track changes automatically - SaveChanges is handled by UnitOfWork
+                return true;
+            }
+            catch (Exception)
+            {
                 return false;
-
-            // Update properties
-            existingDao.Quantity = cartItem.Quantity;
-            existingDao.UpdatedAt = cartItem.UpdatedAt;
-            existingDao.DeletedAt = cartItem.DeletedAt;
-
-            // EF will track changes automatically - SaveChanges is handled by UnitOfWork
-            return true;
+            }
         }
     }
 }

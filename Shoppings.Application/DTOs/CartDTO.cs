@@ -18,7 +18,6 @@ namespace Shoppings.Application.DTOs
 
         public DateTime? DeletedAt { get; set; }
 
-
-        public virtual ICollection<CartItemDTO> CartItems { get; set; } = new List<CartItemDTO>();
+        public virtual ICollection<CartItemWithDetailsDTO> CartItemsWithDetails { get; set; } = new List<CartItemWithDetailsDTO>();
     }
 }

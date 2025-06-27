@@ -671,7 +671,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Shoppings.Application.DTOs.CartDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -768,7 +768,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Shoppings.Application.DTOs.CartDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -790,11 +790,21 @@
         "Name": "dto",
         "Type": "Shoppings.Application.DTOs.UpdateCartItemDTO",
         "IsRequired": true
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Shoppings.Application.DTOs.CartDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result",
         "MediaTypes": [
           "text/plain",
           "application/json",

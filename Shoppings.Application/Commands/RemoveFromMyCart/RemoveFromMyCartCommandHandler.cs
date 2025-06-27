@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Shoppings.Application.Commands.RemoveFromMyCart
 {
-    public class RemoveFromMyCartCommandHandler : IRequestHandler<RemoveFromMyCartCommand, Result<bool>>
+    public class RemoveFromMyCartCommandHandler : IRequestHandler<RemoveFromMyCartCommand, Result>
     {
         private readonly ICartRepository _cartRepository;
         private readonly ICartItemRepository _cartItemRepository;
@@ -29,13 +29,13 @@ namespace Shoppings.Application.Commands.RemoveFromMyCart
             _logger = logger;
         }
 
-        public async Task<Result<bool>> Handle(RemoveFromMyCartCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(RemoveFromMyCartCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 if (request.UserId == Guid.Empty || request.ItemId == Guid.Empty)
                 {
-                    return Result<bool>.Fail(
+                    return Result.Fail(
                         message: "معرف المستخدم ومعرف المنتج/الخدمة مطلوبان لحذف العنصر من سلة التسوق",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
@@ -47,7 +47,7 @@ namespace Shoppings.Application.Commands.RemoveFromMyCart
                 var cart = await _cartRepository.GetActiveCartByUserIdAsync(request.UserId);
                 if (cart == null)
                 {
-                    return Result<bool>.Fail(
+                    return Result.Fail(
                         message: "سلة التسوق الخاصة بك غير موجودة أو فارغة",
                         errorType: "CartNotFound",
                         resultStatus: ResultStatus.NotFound);
@@ -74,7 +74,7 @@ namespace Shoppings.Application.Commands.RemoveFromMyCart
                     }
                     else
                     {
-                        return Result<bool>.Fail(
+                        return Result.Fail(
                             message: "المنتج أو الخدمة غير موجودة. تأكد من صحة معرف المنتج أو الخدمة",
                             errorType: "NotFound",
                             resultStatus: ResultStatus.NotFound);
@@ -85,7 +85,7 @@ namespace Shoppings.Application.Commands.RemoveFromMyCart
                 var cartItem = cart.CartItems?.FirstOrDefault(ci => ci.BaseItemId == baseItemId && ci.DeletedAt == null);
                 if (cartItem == null)
                 {
-                    return Result<bool>.Fail(
+                    return Result.Fail(
                         message: "المنتج أو الخدمة غير موجودة في سلة التسوق الخاصة بك",
                         errorType: "CartItemNotFound",
                         resultStatus: ResultStatus.NotFound);
@@ -93,18 +93,28 @@ namespace Shoppings.Application.Commands.RemoveFromMyCart
 
                 // Remove the cart item (soft delete)
                 cartItem.DeletedAt = DateTime.UtcNow;
+                cartItem.UpdatedAt = DateTime.UtcNow;
+                
+                // Save changes
+                var updateResult = await _cartItemRepository.UpdateAsync(cartItem);
+                if (!updateResult)
+                {
+                    return Result.Fail(
+                        message: "فشل في حذف المنتج/الخدمة من سلة التسوق",
+                        errorType: "DeleteFailed",
+                        resultStatus: ResultStatus.Failed);
+                }
                 
                 await _unitOfWork.SaveChangesAsync();
                 
-                return Result<bool>.Ok(
-                    data: true,
+                return Result.Ok(
                     message: "تم حذف المنتج/الخدمة من سلة التسوق بنجاح",
                     resultStatus: ResultStatus.Success);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to remove item {ItemId} from user {UserId} cart", request.ItemId, request.UserId);
-                return Result<bool>.Fail(
+                return Result.Fail(
                     message: $"فشل في حذف المنتج/الخدمة من سلة التسوق: {ex.Message}",
                     errorType: "RemoveFromCartFailed",
                     resultStatus: ResultStatus.Failed,

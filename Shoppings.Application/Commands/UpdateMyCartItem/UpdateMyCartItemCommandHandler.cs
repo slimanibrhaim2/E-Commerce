@@ -4,10 +4,15 @@ using Core.Result;
 using Core.Interfaces;
 using Shared.Contracts.Queries;
 using Microsoft.Extensions.Logging;
+using Core.Pagination;
+using Shoppings.Application.DTOs;
+using System.Collections.Generic;
+using System.Linq;
+using Shoppings.Domain.Entities;
 
 namespace Shoppings.Application.Commands.UpdateMyCartItem
 {
-    public class UpdateMyCartItemCommandHandler : IRequestHandler<UpdateMyCartItemCommand, Result<bool>>
+    public class UpdateMyCartItemCommandHandler : IRequestHandler<UpdateMyCartItemCommand, Result>
     {
         private readonly ICartRepository _cartRepository;
         private readonly ICartItemRepository _cartItemRepository;
@@ -29,22 +34,22 @@ namespace Shoppings.Application.Commands.UpdateMyCartItem
             _logger = logger;
         }
 
-        public async Task<Result<bool>> Handle(UpdateMyCartItemCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(UpdateMyCartItemCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 if (request.UserId == Guid.Empty || request.ItemId == Guid.Empty)
                 {
-                    return Result<bool>.Fail(
+                    return Result.Fail(
                         message: "معرف المستخدم ومعرف المنتج/الخدمة مطلوبان لتحديث كمية العنصر",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
 
-                if (request.Quantity <= 0)
+                if (request.Quantity < 0)
                 {
-                    return Result<bool>.Fail(
-                        message: "يجب أن تكون الكمية الجديدة أكبر من صفر",
+                    return Result.Fail(
+                        message: "يجب أن تكون الكمية الجديدة 0 أو أكثر",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -56,8 +61,8 @@ namespace Shoppings.Application.Commands.UpdateMyCartItem
                 var cart = await _cartRepository.GetActiveCartByUserIdAsync(request.UserId);
                 if (cart == null)
                 {
-                    return Result<bool>.Fail(
-                        message: "سلة التسوق الخاصة بك غير موجودة",
+                    return Result.Fail(
+                        message: "سلة التسوق فارغة",
                         errorType: "CartNotFound",
                         resultStatus: ResultStatus.NotFound);
                 }
@@ -83,38 +88,59 @@ namespace Shoppings.Application.Commands.UpdateMyCartItem
                     }
                     else
                     {
-                        return Result<bool>.Fail(
+                        return Result.Fail(
                             message: "المنتج أو الخدمة غير موجودة. تأكد من صحة معرف المنتج أو الخدمة",
                             errorType: "NotFound",
                             resultStatus: ResultStatus.NotFound);
                     }
                 }
 
-                // Find the cart item
-                var cartItem = cart.CartItems?.FirstOrDefault(ci => ci.BaseItemId == baseItemId && ci.DeletedAt == null);
+                // Find the cart item using the repository to ensure we get fresh data
+                var cartItem = await _cartItemRepository.GetByCartIdAndBaseItemIdAsync(cart.Id, baseItemId);
                 if (cartItem == null)
                 {
-                    return Result<bool>.Fail(
+                    return Result.Fail(
                         message: "المنتج أو الخدمة غير موجودة في سلة التسوق الخاصة بك",
                         errorType: "CartItemNotFound",
                         resultStatus: ResultStatus.NotFound);
                 }
 
-                // Update quantity
-                cartItem.Quantity = request.Quantity;
-                cartItem.UpdatedAt = DateTime.UtcNow;
-                
+                // If quantity is 0, soft delete the item
+                if (request.Quantity == 0)
+                {
+                    cartItem.DeletedAt = DateTime.UtcNow;
+                    cartItem.UpdatedAt = DateTime.UtcNow;
+                }
+                else
+                {
+                    // Update the cart item
+                    cartItem.Quantity = request.Quantity;
+                    cartItem.UpdatedAt = DateTime.UtcNow;
+                }
+
+                // Save changes
+                var updateResult = await _cartItemRepository.UpdateAsync(cartItem);
+                if (!updateResult)
+                {
+                    return Result.Fail(
+                        message: request.Quantity == 0 
+                            ? "فشل في حذف المنتج/الخدمة من سلة التسوق"
+                            : "فشل في تحديث كمية المنتج/الخدمة في سلة التسوق",
+                        errorType: "UpdateFailed",
+                        resultStatus: ResultStatus.Failed);
+                }
+
                 await _unitOfWork.SaveChangesAsync();
                 
-                return Result<bool>.Ok(
-                    data: true,
+                return Result.Ok(
                     message: "تم تحديث كمية المنتج/الخدمة في سلة التسوق بنجاح",
                     resultStatus: ResultStatus.Success);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to update item {ItemId} quantity in user {UserId} cart", request.ItemId, request.UserId);
-                return Result<bool>.Fail(
+                _logger.LogError(ex, "Failed to update item {ItemId} quantity to {Quantity} in user {UserId} cart", 
+                    request.ItemId, request.Quantity, request.UserId);
+                return Result.Fail(
                     message: $"فشل في تحديث كمية المنتج/الخدمة في سلة التسوق: {ex.Message}",
                     errorType: "UpdateCartItemFailed",
                     resultStatus: ResultStatus.Failed,

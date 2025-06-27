@@ -1100,17 +1100,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartDTOResult"
+                  "$ref": "#/components/schemas/Result"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartDTOResult"
+                  "$ref": "#/components/schemas/Result"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartDTOResult"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -1216,17 +1216,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartDTOResult"
+                  "$ref": "#/components/schemas/Result"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartDTOResult"
+                  "$ref": "#/components/schemas/Result"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartDTOResult"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -1238,6 +1238,24 @@
       "put": {
         "tags": [
           "Cart"
+        ],
+        "parameters": [
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -1264,17 +1282,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartDTOResult"
+                  "$ref": "#/components/schemas/Result"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartDTOResult"
+                  "$ref": "#/components/schemas/Result"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CartDTOResult"
+                  "$ref": "#/components/schemas/Result"
                 }
               }
             }
@@ -7389,10 +7407,10 @@
             "format": "date-time",
             "nullable": true
           },
-          "cartItems": {
+          "cartItemsWithDetails": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CartItemDTO"
+              "$ref": "#/components/schemas/CartItemWithDetailsDTO"
             },
             "nullable": true
           }
@@ -7456,45 +7474,6 @@
           },
           "cart": {
             "$ref": "#/components/schemas/Cart"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CartItemDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "cartId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "baseItemId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "itemId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "quantity": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "deletedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -9778,6 +9757,26 @@
           },
           "data": {
             "$ref": "#/components/schemas/PaymentStatusDTO"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "resultStatus": {
+            "$ref": "#/components/schemas/ResultStatus"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorType": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Shoppings.Application.Commands.AddToMyCart
 {
-    public class AddToMyCartCommandHandler : IRequestHandler<AddToMyCartCommand, Result<Guid>>
+    public class AddToMyCartCommandHandler : IRequestHandler<AddToMyCartCommand, Result>
     {
         private readonly ICartRepository _cartRepository;
         private readonly ICartItemRepository _cartItemRepository;
@@ -30,13 +30,13 @@ namespace Shoppings.Application.Commands.AddToMyCart
             _logger = logger;
         }
 
-        public async Task<Result<Guid>> Handle(AddToMyCartCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(AddToMyCartCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 if (request.UserId == Guid.Empty || request.ItemId == Guid.Empty)
                 {
-                    return Result<Guid>.Fail(
+                    return Result.Fail(
                         message: "معرف المستخدم ومعرف المنتج/الخدمة مطلوبان لإضافة العنصر إلى سلة التسوق",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
@@ -44,8 +44,8 @@ namespace Shoppings.Application.Commands.AddToMyCart
 
                 if (request.Quantity <= 0)
                 {
-                    return Result<Guid>.Fail(
-                        message: "يجب أن تكون كمية المنتج/الخدمة أكبر من صفر",
+                    return Result.Fail(
+                        message: "يجب أن تكون كمية المنتج/الخدمة أكبر من صفر عند الإضافة إلى سلة التسوق",
                         errorType: "ValidationError",
                         resultStatus: ResultStatus.ValidationError);
                 }
@@ -73,29 +73,28 @@ namespace Shoppings.Application.Commands.AddToMyCart
                     }
                     else
                     {
-                        return Result<Guid>.Fail(
+                        return Result.Fail(
                             message: "المنتج أو الخدمة غير موجودة. تأكد من صحة معرف المنتج أو الخدمة",
                             errorType: "NotFound",
                             resultStatus: ResultStatus.NotFound);
                     }
                 }
 
-                // Get or create user's cart (this returns domain entity, but we need to work at DAO level)
+                // Get or create user's cart
                 var cart = await _cartRepository.GetOrCreateCartByUserIdAsync(request.UserId);
 
-                // Check if item already exists in cart by querying the repository directly
+                // Check if item already exists in cart
                 var existingCartItem = await _cartItemRepository.GetByCartIdAndBaseItemIdAsync(cart.Id, baseItemId);
                 if (existingCartItem != null)
                 {
-                    // Update quantity using repository method that handles tracking properly
+                    // Update quantity
                     existingCartItem.Quantity += request.Quantity;
                     existingCartItem.UpdatedAt = DateTime.UtcNow;
                     
                     await _cartItemRepository.UpdateAsync(existingCartItem);
                     await _unitOfWork.SaveChangesAsync();
                     
-                    return Result<Guid>.Ok(
-                        data: existingCartItem.Id,
+                    return Result.Ok(
                         message: "تم تحديث كمية المنتج/الخدمة في سلة التسوق بنجاح",
                         resultStatus: ResultStatus.Success);
                 }
@@ -115,8 +114,7 @@ namespace Shoppings.Application.Commands.AddToMyCart
                     await _cartItemRepository.AddAsync(cartItem);
                     await _unitOfWork.SaveChangesAsync();
                     
-                    return Result<Guid>.Ok(
-                        data: cartItem.Id,
+                    return Result.Ok(
                         message: "تم إضافة المنتج/الخدمة إلى سلة التسوق بنجاح",
                         resultStatus: ResultStatus.Success);
                 }
@@ -124,7 +122,7 @@ namespace Shoppings.Application.Commands.AddToMyCart
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to add item {ItemId} to user {UserId} cart", request.ItemId, request.UserId);
-                return Result<Guid>.Fail(
+                return Result.Fail(
                     message: $"فشل في إضافة المنتج/الخدمة إلى سلة التسوق: {ex.Message}",
                     errorType: "AddToCartFailed",
                     resultStatus: ResultStatus.Failed,

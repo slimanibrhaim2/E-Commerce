@@ -25,7 +25,8 @@ namespace Shoppings.Infrastructure.Repositories
         public async Task<Cart?> GetActiveCartByUserIdAsync(Guid userId)
         {
             var cartDao = await _ctx.Carts
-                .Include(c => c.CartItems)
+                .Include(c => c.CartItems.Where(ci => ci.DeletedAt == null))
+                .ThenInclude(ci => ci.BaseItem)
                 .Where(c => c.UserId == userId && c.DeletedAt == null)
                 .FirstOrDefaultAsync();
             
@@ -36,7 +37,8 @@ namespace Shoppings.Infrastructure.Repositories
         public override async Task<Cart?> GetByIdAsync(Guid id)
         {
             var cartDao = await _ctx.Carts
-                .Include(c => c.CartItems)
+                .Include(c => c.CartItems.Where(ci => ci.DeletedAt == null))
+                .ThenInclude(ci => ci.BaseItem)
                 .FirstOrDefaultAsync(c => c.Id == id && c.DeletedAt == null);
             
             return cartDao != null ? _cartMapper.Map(cartDao) : null;
