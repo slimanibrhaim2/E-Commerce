@@ -5,4 +5,4 @@ using Core.Pagination;
 
 namespace Catalogs.Application.Queries.GetServicesByCategory;
 
-public record GetServicesByCategoryQuery(Guid CategoryId, int PageNumber = 1, int PageSize = 10) : IRequest<Result<PaginatedResult<ServiceDTO>>>; 
+public record GetServicesByCategoryQuery(Guid CategoryId, Guid UserId, int PageNumber = 1, int PageSize = 10) : IRequest<Result<PaginatedResult<ServiceDTO>>>;

@@ -5,4 +5,4 @@ using Core.Pagination;
 
 namespace Catalogs.Application.Queries.GetAllProducts;
 
-public record GetAllProductsQuery(PaginationParameters Pagination) : IRequest<Result<PaginatedResult<ProductDTO>>>; 
+public record GetAllProductsQuery(PaginationParameters Pagination, Guid UserId) : IRequest<Result<PaginatedResult<ProductDTO>>>; 

@@ -13,6 +13,7 @@ public class ProductDTO
     public string SKU { get; set; }
     public int StockQuantity { get; set; }
     public bool IsAvailable { get; set; }
+    public bool IsFavorite { get; set; }
     public Guid UserId { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }

@@ -72,8 +72,9 @@ public class ServicesController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
         var pagination = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
-        var query = new GetAllServicesQuery(pagination);
+        var query = new GetAllServicesQuery(pagination, userId);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -90,7 +91,8 @@ public class ServicesController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var query = new GetServiceByIdQuery(id);
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetServiceByIdQuery(id, userId);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -199,9 +201,10 @@ public class ServicesController : ControllerBase
 
     [HttpGet("search")]
     [AllowAnonymous]
-    public async Task<IActionResult> SearchServices([FromQuery] string name)
+    public async Task<IActionResult> SearchServices([FromQuery] string name, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var query = new GetServicesByNameQuery(name, new PaginationParameters { PageNumber = 1, PageSize = 10 });
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetServicesByNameQuery(name, userId, new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize });
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -218,7 +221,8 @@ public class ServicesController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetServicesByCategory(Guid categoryId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var query = new GetServicesByCategoryQuery(categoryId, pageNumber, pageSize);
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetServicesByCategoryQuery(categoryId, userId, pageNumber, pageSize);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -235,7 +239,8 @@ public class ServicesController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetServicesByPriceRange([FromQuery] decimal minPrice, [FromQuery] decimal maxPrice, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var query = new GetServicesByPriceRangeQuery(minPrice, maxPrice, pageNumber, pageSize);
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetServicesByPriceRangeQuery(minPrice, maxPrice, userId, pageNumber, pageSize);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -252,7 +257,8 @@ public class ServicesController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetServicesByDuration([FromQuery] int minDuration, [FromQuery] int maxDuration, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var query = new GetServicesByDurationQuery(minDuration, maxDuration, pageNumber, pageSize);
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetServicesByDurationQuery(minDuration, maxDuration, userId, pageNumber, pageSize);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(

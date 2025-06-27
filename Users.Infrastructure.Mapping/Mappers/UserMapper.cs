@@ -12,13 +12,13 @@ public class UserMapper : BaseMapper<UserDAO, User>
         {
             Id = s.Id,
             FirstName = s.FirstName,
-            MiddleName = null,
+            MiddleName = s.MiddleName,
             LastName = s.LastName,
             PhoneNumber = s.PhoneNumber,
             Email = s.Email,
             Rate = null,
             ProfilePhoto = s.ProfilePhoto,
-            Description = null,
+            Description = s.Description,
             CreatedAt = s.CreatedAt,
             DeletedAt = s.DeletedAt,
             UpdatedAt = s.UpdatedAt
@@ -31,14 +31,15 @@ public class UserMapper : BaseMapper<UserDAO, User>
         {
             Id = t.Id,
             FirstName = t.FirstName,
+            MiddleName = t.MiddleName,
             LastName = t.LastName,
             PhoneNumber = t.PhoneNumber,
             Email = t.Email,
             ProfilePhoto = t.ProfilePhoto,
             Description = t.Description,
-            CreatedAt=t.CreatedAt,
-            UpdatedAt=t.UpdatedAt,
-            DeletedAt=t.DeletedAt
+            CreatedAt = t.CreatedAt,
+            UpdatedAt = t.UpdatedAt,
+            DeletedAt = t.DeletedAt
         });
     }
 }

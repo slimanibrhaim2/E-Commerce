@@ -13,15 +13,18 @@ public class GetAllServicesQueryHandler : IRequestHandler<GetAllServicesQuery, R
     private readonly IServiceRepository _repo;
     private readonly ILogger<GetAllServicesQueryHandler> _logger;
     private readonly IFeatureRepository _featureRepo;
+    private readonly IFavoriteRepository _favoriteRepo;
 
     public GetAllServicesQueryHandler(
         IServiceRepository repo, 
         ILogger<GetAllServicesQueryHandler> logger,
-        IFeatureRepository featureRepo)
+        IFeatureRepository featureRepo,
+        IFavoriteRepository favoriteRepo)
     {
         _repo = repo;
         _logger = logger;
         _featureRepo = featureRepo;
+        _favoriteRepo = favoriteRepo;
     }
 
     public async Task<Result<PaginatedResult<ServiceDTO>>> Handle(GetAllServicesQuery request, CancellationToken cancellationToken)
@@ -45,75 +48,71 @@ public class GetAllServicesQueryHandler : IRequestHandler<GetAllServicesQuery, R
             }
 
             var services = await _repo.GetAllAsync();
-            if (!services.Any())
-            {
-                return Result<PaginatedResult<ServiceDTO>>.Ok(
-                    data: PaginatedResult<ServiceDTO>.Create(
-                        data: new List<ServiceDTO>(),
-                        pageNumber: request.Pagination.PageNumber,
-                        pageSize: request.Pagination.PageSize,
-                        totalCount: 0),
-                    message: "No services found",
-                    resultStatus: ResultStatus.Success);
-            }
+            var servicesList = services.ToList();
 
-            var serviceDtos = new List<ServiceDTO>();
+            // Get all favorites for the user if authenticated
+            var userFavorites = request.UserId != Guid.Empty 
+                ? await _favoriteRepo.GetFavoritesByUserIdAsync(request.UserId)
+                : new List<Domain.Entities.Favorite>();
 
-            foreach (var service in services)
+            // Get all favorite base item IDs for quick lookup
+            var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
+
+            // Apply pagination
+            var totalCount = servicesList.Count;
+            var pagedServices = servicesList
+                .Skip((request.Pagination.PageNumber - 1) * request.Pagination.PageSize)
+                .Take(request.Pagination.PageSize)
+                .ToList();
+
+            // Map to DTOs and include features
+            var serviceDTOs = new List<ServiceDTO>();
+            foreach (var service in pagedServices)
             {
-                try
+                var features = await _featureRepo.GetServiceFeaturesByEntityIdAsync(service.Id);
+                var serviceDTO = new ServiceDTO
                 {
-                    var features = await _featureRepo.GetServiceFeaturesByEntityIdAsync(service.Id);
-                    serviceDtos.Add(new ServiceDTO
+                    Id = service.Id,
+                    Name = service.Name,
+                    Description = service.Description,
+                    Price = service.Price,
+                    CategoryId = service.CategoryId,
+                    ServiceType = service.ServiceType,
+                    Duration = service.Duration,
+                    IsAvailable = service.IsAvailable,
+                    UserId = service.UserId,
+                    CreatedAt = service.CreatedAt,
+                    UpdatedAt = service.UpdatedAt,
+                    Media = service.Media?.Select(m => new MediaDTO
                     {
-                        Id = service.Id,
-                        Name = service.Name,
-                        Description = service.Description,
-                        Price = service.Price,
-                        CategoryId = service.CategoryId,
-                        ServiceType = service.ServiceType,
-                        Duration = service.Duration,
-                        IsAvailable = service.IsAvailable,
-                        UserId = service.UserId,
-                        CreatedAt = service.CreatedAt,
-                        UpdatedAt = service.UpdatedAt,
-                        Media = service.Media?.Select(m => new MediaDTO
-                        {
-                            Id = m.Id,
-                            Url = m.MediaUrl,
-                            MediaTypeId = m.MediaTypeId,
-                            ItemId = m.BaseItemId,
-                            CreatedAt = m.CreatedAt,
-                            UpdatedAt = m.UpdatedAt
-                        }).ToList() ?? new List<MediaDTO>(),
-                        Features = features.Select(f => new ServiceFeatureDTO
-                        {
-                            Id = f.Id,
-                            Name = f.Name,
-                            Value = f.Value,
-                            ServiceId = f.ServiceId,
-                            CreatedAt = f.CreatedAt,
-                            UpdatedAt = f.UpdatedAt
-                        }).ToList()
-                    });
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogWarning(ex, "Failed to process service {ServiceId}: {Message}", service.Id, ex.Message);
-                    // Continue processing other services even if one fails
-                }
+                        Id = m.Id,
+                        Url = m.MediaUrl,
+                        MediaTypeId = m.MediaTypeId,
+                        BaseItemId = m.BaseItemId
+                    }).ToList() ?? new List<MediaDTO>(),
+                    Features = features.Select(f => new ServiceFeatureDTO
+                    {
+                        Id = f.Id,
+                        Name = f.Name,
+                        Value = f.Value
+                    }).ToList(),
+                    IsFavorite = favoriteBaseItemIds.Contains(service.BaseItemId)
+                };
+                serviceDTOs.Add(serviceDTO);
             }
 
-            var totalCount = serviceDtos.Count;
-            var paginatedServices = PaginatedResult<ServiceDTO>.Create(
-                data: serviceDtos,
+            var paginatedResult = PaginatedResult<ServiceDTO>.Create(
+                data: serviceDTOs,
                 pageNumber: request.Pagination.PageNumber,
                 pageSize: request.Pagination.PageSize,
-                totalCount: totalCount);
+                totalCount: totalCount
+            );
+
+            _logger.LogInformation("تم جلب {Count} خدمة", serviceDTOs.Count);
 
             return Result<PaginatedResult<ServiceDTO>>.Ok(
-                data: paginatedServices,
-                message: $"Successfully retrieved {serviceDtos.Count} services out of {totalCount} total services",
+                data: paginatedResult,
+                message: "تم جلب الخدمات بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (DBConcurrencyException ex)
@@ -126,11 +125,12 @@ public class GetAllServicesQueryHandler : IRequestHandler<GetAllServicesQuery, R
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error while retrieving services: {Message}", ex.Message);
+            _logger.LogError(ex, "فشل في جلب الخدمات");
             return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "An unexpected error occurred while retrieving services. Please try again later.",
-                errorType: "UnexpectedError",
-                resultStatus: ResultStatus.Failed);
+                message: $"فشل في جلب الخدمات: {ex.Message}",
+                errorType: "GetAllServicesFailed",
+                resultStatus: ResultStatus.Failed,
+                exception: ex);
         }
     }
 } 

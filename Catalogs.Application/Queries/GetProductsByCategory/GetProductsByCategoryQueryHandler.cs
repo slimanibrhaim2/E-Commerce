@@ -12,11 +12,19 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
 {
     private readonly IProductRepository _repo;
     private readonly ILogger<GetProductsByCategoryQueryHandler> _logger;
+    private readonly IFeatureRepository _featureRepo;
+    private readonly IFavoriteRepository _favoriteRepo;
 
-    public GetProductsByCategoryQueryHandler(IProductRepository repo, ILogger<GetProductsByCategoryQueryHandler> logger)
+    public GetProductsByCategoryQueryHandler(
+        IProductRepository repo, 
+        ILogger<GetProductsByCategoryQueryHandler> logger,
+        IFeatureRepository featureRepo,
+        IFavoriteRepository favoriteRepo)
     {
         _repo = repo;
         _logger = logger;
+        _featureRepo = featureRepo;
+        _favoriteRepo = favoriteRepo;
     }
 
     public async Task<Result<PaginatedResult<ProductDTO>>> Handle(GetProductsByCategoryQuery request, CancellationToken cancellationToken)
@@ -26,7 +34,7 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
             if (request.CategoryId == Guid.Empty)
             {
                 return Result<PaginatedResult<ProductDTO>>.Fail(
-                    message: "Category ID is required",
+                    message: "معرف الفئة مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -48,70 +56,71 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
             }
 
             var products = await _repo.GetByCategory(request.CategoryId);
-            var productList = products.ToList();
-            var totalCount = productList.Count;
+            var productsList = products.ToList();
 
-            if (!productList.Any())
+            // Get all favorites for the user if authenticated
+            var userFavorites = request.UserId != Guid.Empty 
+                ? await _favoriteRepo.GetFavoritesByUserIdAsync(request.UserId)
+                : new List<Domain.Entities.Favorite>();
+
+            // Get all favorite base item IDs for quick lookup
+            var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
+
+            // Apply pagination
+            var totalCount = productsList.Count;
+            var pagedProducts = productsList
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+
+            // Map to DTOs and include features
+            var productDTOs = new List<ProductDTO>();
+            foreach (var product in pagedProducts)
             {
-                return Result<PaginatedResult<ProductDTO>>.Ok(
-                    data: PaginatedResult<ProductDTO>.Create(
-                        data: new List<ProductDTO>(),
-                        pageNumber: request.PageNumber,
-                        pageSize: request.PageSize,
-                        totalCount: 0),
-                    message: "No products found",
-                    resultStatus: ResultStatus.Success);
+                var features = await _featureRepo.GetProductFeaturesByEntityIdAsync(product.Id);
+                var productDTO = new ProductDTO
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    CategoryId = product.CategoryId,
+                    SKU = product.SKU,
+                    StockQuantity = product.StockQuantity,
+                    IsAvailable = product.IsAvailable,
+                    UserId = product.UserId,
+                    CreatedAt = product.CreatedAt,
+                    UpdatedAt = product.UpdatedAt,
+                    Media = product.Media?.Select(m => new MediaDTO
+                    {
+                        Id = m.Id,
+                        Url = m.MediaUrl,
+                        MediaTypeId = m.MediaTypeId,
+                        BaseItemId = m.BaseItemId
+                    }).ToList() ?? new List<MediaDTO>(),
+                    Features = features.Select(f => new ProductFeatureDTO
+                    {
+                        Id = f.Id,
+                        Name = f.Name,
+                        Value = f.Value
+                    }).ToList(),
+                    IsFavorite = favoriteBaseItemIds.Contains(product.BaseItemId)
+                };
+                productDTOs.Add(productDTO);
             }
 
-            var productDtos = productList.Select(p => new ProductDTO
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                CategoryId = p.CategoryId,
-                SKU = p.SKU,
-                StockQuantity = p.StockQuantity,
-                IsAvailable = p.IsAvailable,
-                UserId = p.UserId,
-                CreatedAt = p.CreatedAt,
-                UpdatedAt = p.UpdatedAt,
-                Media = p.Media?.Select(m => new MediaDTO
-                {
-                    Id = m.Id,
-                    Url = m.MediaUrl,
-                    MediaTypeId = m.MediaTypeId,
-                    ItemId = m.BaseItemId,
-                    MediaType = m.MediaType != null ? new MediaTypeDTO
-                    {
-                        Id = m.MediaType.Id,
-                        Name = m.MediaType.Name,
-                        CreatedAt = m.MediaType.CreatedAt,
-                        UpdatedAt = m.MediaType.UpdatedAt
-                    } : null,
-                    CreatedAt = m.CreatedAt,
-                    UpdatedAt = m.UpdatedAt
-                }).ToList() ?? new List<MediaDTO>(),
-                Features = p.Features?.Select(f => new ProductFeatureDTO
-                {
-                    Id = f.Id,
-                    Name = f.Name,
-                    Value = f.Value,
-                    ProductId = p.Id,
-                    CreatedAt = f.CreatedAt,
-                    UpdatedAt = f.UpdatedAt
-                }).ToList() ?? new List<ProductFeatureDTO>()
-            }).ToList();
-
-            var paginatedProducts = PaginatedResult<ProductDTO>.Create(
-                data: productDtos,
+            var paginatedResult = PaginatedResult<ProductDTO>.Create(
+                data: productDTOs,
                 pageNumber: request.PageNumber,
                 pageSize: request.PageSize,
-                totalCount: totalCount);
+                totalCount: totalCount
+            );
+
+            _logger.LogInformation("تم جلب {Count} منتج من الفئة {CategoryId}", productDTOs.Count, request.CategoryId);
 
             return Result<PaginatedResult<ProductDTO>>.Ok(
-                data: paginatedProducts,
-                message: $"Successfully retrieved {productDtos.Count} products out of {totalCount} total products",
+                data: paginatedResult,
+                message: "تم جلب المنتجات بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (DBConcurrencyException ex)
@@ -124,11 +133,12 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error while retrieving products by category: {Message}", ex.Message);
+            _logger.LogError(ex, "فشل في جلب المنتجات من الفئة {CategoryId}", request.CategoryId);
             return Result<PaginatedResult<ProductDTO>>.Fail(
-                message: "An unexpected error occurred while retrieving products. Please try again later.",
-                errorType: "UnexpectedError",
-                resultStatus: ResultStatus.Failed);
+                message: $"فشل في جلب المنتجات: {ex.Message}",
+                errorType: "GetProductsByCategoryFailed",
+                resultStatus: ResultStatus.Failed,
+                exception: ex);
         }
     }
 } 

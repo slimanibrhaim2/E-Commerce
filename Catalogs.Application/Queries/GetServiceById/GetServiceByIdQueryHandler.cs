@@ -13,13 +13,19 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
 {
     private readonly IServiceRepository _repo;
     private readonly ILogger<GetServiceByIdQueryHandler> _logger;
+    private readonly IFeatureRepository _featureRepo;
+    private readonly IFavoriteRepository _favoriteRepo;
 
     public GetServiceByIdQueryHandler(
         IServiceRepository repo,
-        ILogger<GetServiceByIdQueryHandler> logger)
+        ILogger<GetServiceByIdQueryHandler> logger,
+        IFeatureRepository featureRepo,
+        IFavoriteRepository favoriteRepo)
     {
         _repo = repo;
         _logger = logger;
+        _featureRepo = featureRepo;
+        _favoriteRepo = favoriteRepo;
     }
 
     public async Task<Result<ServiceDTO>> Handle(GetServiceByIdQuery request, CancellationToken cancellationToken)
@@ -29,7 +35,7 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
             if (request.Id == Guid.Empty)
             {
                 return Result<ServiceDTO>.Fail(
-                    message: "Service ID is required",
+                    message: "معرف الخدمة مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -39,12 +45,18 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
             if (service == null)
             {
                 return Result<ServiceDTO>.Fail(
-                    message: $"Service with ID {request.Id} not found",
+                    message: $"الخدمة غير موجودة {request.Id}",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
 
-            var dto = new ServiceDTO
+            // Check if the service is in user's favorites
+            var isFavorite = request.UserId != Guid.Empty && 
+                await _favoriteRepo.GetFavoritesByUserIdAsync(request.UserId) is var favorites &&
+                favorites.Any(f => f.BaseItemId == service.BaseItemId);
+
+            var features = await _featureRepo.GetServiceFeaturesByEntityIdAsync(service.Id);
+            var serviceDTO = new ServiceDTO
             {
                 Id = service.Id,
                 Name = service.Name,
@@ -62,31 +74,20 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
                     Id = m.Id,
                     Url = m.MediaUrl,
                     MediaTypeId = m.MediaTypeId,
-                    ItemId = m.BaseItemId,
-                    MediaType = m.MediaType != null ? new MediaTypeDTO
-                    {
-                        Id = m.MediaType.Id,
-                        Name = m.MediaType.Name,
-                        CreatedAt = m.MediaType.CreatedAt,
-                        UpdatedAt = m.MediaType.UpdatedAt
-                    } : null,
-                    CreatedAt = m.CreatedAt,
-                    UpdatedAt = m.UpdatedAt
+                    BaseItemId = m.BaseItemId
                 }).ToList() ?? new List<MediaDTO>(),
-                Features = service.Features?.Select(f => new ServiceFeatureDTO
+                Features = features.Select(f => new ServiceFeatureDTO
                 {
                     Id = f.Id,
                     Name = f.Name,
-                    Value = f.Value,
-                    ServiceId = service.Id,
-                    CreatedAt = f.CreatedAt,
-                    UpdatedAt = f.UpdatedAt
-                }).ToList() ?? new List<ServiceFeatureDTO>()
+                    Value = f.Value
+                }).ToList(),
+                IsFavorite = isFavorite
             };
 
             return Result<ServiceDTO>.Ok(
-                data: dto,
-                message: $"Successfully retrieved service '{service.Name}'",
+                data: serviceDTO,
+                message: "تم جلب الخدمة بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (DBConcurrencyException ex)
@@ -99,11 +100,12 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error while retrieving service with ID {ServiceId}: {Message}", request.Id, ex.Message);
+            _logger.LogError(ex, "فشل في جلب الخدمة {ServiceId}", request.Id);
             return Result<ServiceDTO>.Fail(
-                message: "An unexpected error occurred while retrieving the service. Please try again later.",
-                errorType: "UnexpectedError",
-                resultStatus: ResultStatus.Failed);
+                message: $"فشل في جلب الخدمة: {ex.Message}",
+                errorType: "GetServiceByIdFailed",
+                resultStatus: ResultStatus.Failed,
+                exception: ex);
         }
     }
 } 

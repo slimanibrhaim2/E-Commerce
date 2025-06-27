@@ -372,3 +372,4 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\ref\WebApi.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\WebApi\bin\Debug\net8.0\WebApi.staticwebassets.runtime.json

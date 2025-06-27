@@ -10,6 +10,7 @@ public class ServiceDTO
     public string ServiceType { get; set; }
     public int Duration { get; set; }
     public bool IsAvailable { get; set; }
+    public bool IsFavorite { get; set; }
     public Guid UserId { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }

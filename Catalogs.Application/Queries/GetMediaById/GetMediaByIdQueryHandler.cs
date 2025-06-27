@@ -34,7 +34,7 @@ public class GetMediaByIdQueryHandler : IRequestHandler<GetMediaByIdQuery, Resul
                 Id = media.Id,
                 Url = media.MediaUrl,
                 MediaTypeId = media.MediaTypeId,
-                ItemId = media.BaseItemId,
+                BaseItemId = media.BaseItemId,
                 // Add other properties as needed
             };
 

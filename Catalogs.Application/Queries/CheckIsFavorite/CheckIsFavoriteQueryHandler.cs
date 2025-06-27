@@ -45,7 +45,7 @@ public class CheckIsFavoriteQueryHandler : IRequestHandler<CheckIsFavoriteQuery,
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            // Resolve ItemId to BaseItemId (similar to other handlers)
+            // Resolve BaseItemId to BaseItemId (similar to other handlers)
             Guid baseItemId = Guid.Empty;
             
             // First, try to find as a product
@@ -59,7 +59,7 @@ public class CheckIsFavoriteQueryHandler : IRequestHandler<CheckIsFavoriteQuery,
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Error while checking product repository for item ID {ItemId}", request.ItemId);
+                _logger.LogWarning(ex, "Error while checking product repository for item ID {BaseItemId}", request.ItemId);
             }
 
             // If not found as product, try to find as a service
@@ -75,7 +75,7 @@ public class CheckIsFavoriteQueryHandler : IRequestHandler<CheckIsFavoriteQuery,
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning(ex, "Error while checking service repository for item ID {ItemId}", request.ItemId);
+                    _logger.LogWarning(ex, "Error while checking service repository for item ID {BaseItemId}", request.ItemId);
                 }
             }
 
@@ -98,7 +98,7 @@ public class CheckIsFavoriteQueryHandler : IRequestHandler<CheckIsFavoriteQuery,
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "فشل في فحص حالة المفضلة للعنصر {ItemId} والمستخدم {UserId}", request.ItemId, request.UserId);
+            _logger.LogError(ex, "فشل في فحص حالة المفضلة للعنصر {BaseItemId} والمستخدم {UserId}", request.ItemId, request.UserId);
             return Result<bool>.Fail(
                 message: $"فشل في فحص حالة المفضلة: {ex.Message}",
                 errorType: "CheckIsFavoriteFailed",

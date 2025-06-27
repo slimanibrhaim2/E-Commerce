@@ -6,7 +6,7 @@ public class MediaDTO
     public string Url { get; set; }
     public Guid MediaTypeId { get; set; }
     public MediaTypeDTO MediaType { get; set; } // Optional, for navigation
-    public Guid ItemId { get; set; }
+    public Guid BaseItemId { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 } 

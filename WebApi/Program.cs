@@ -27,6 +27,7 @@ using Payments.Infrastructure.Data;
 using Shoppings.Infrastructure.Data;
 using Communication.Infrastructure.Data;
 using Catalogs.Infrastructure.Data;
+using Core.DI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,6 +84,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddCoreServices(builder.Configuration);
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -90,6 +93,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Ensure upload directory exists
+var uploadPath = Path.Combine(builder.Environment.WebRootPath ?? "wwwroot", "uploads");
+if (!Directory.Exists(uploadPath))
+{
+    Directory.CreateDirectory(uploadPath);
+}
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 

@@ -50,7 +50,7 @@ public class GetItemIdByFavoriteIdQueryHandler : IRequestHandler<GetItemIdByFavo
                     resultStatus: ResultStatus.NotFound);
             }
 
-            // Now resolve BaseItemId back to the original ItemId (Product or Service)
+            // Now resolve BaseItemId back to the original BaseItemId (Product or Service)
             // First, try to find as a product
             try
             {

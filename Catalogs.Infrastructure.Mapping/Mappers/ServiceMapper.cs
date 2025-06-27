@@ -20,6 +20,7 @@ public class ServiceMapper : IMapper<ServiceDAO, Service>
             CategoryId = source.BaseItem?.CategoryId ?? Guid.Empty,
             IsAvailable = source.BaseItem?.IsAvailable ?? false,
             UserId = source.BaseItem?.UserId ?? Guid.Empty
+            
             // Media, Favorites, etc. can be mapped if needed
         };
     }

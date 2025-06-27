@@ -1,4 +1,7 @@
 ﻿// Users.Application/DTOs/UserDTO.cs
+using System;
+using System.Text.Json.Serialization;
+
 namespace Users.Application.DTOs
 {
     public class UserDTO
@@ -11,6 +14,5 @@ namespace Users.Application.DTOs
         public string Email { get; set; } = null!;
         public string? ProfilePhoto { get; set; }
         public string? Description { get; set; }
-
     }
 }

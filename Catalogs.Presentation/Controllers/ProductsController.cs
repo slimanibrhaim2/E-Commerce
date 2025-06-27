@@ -71,8 +71,9 @@ public class ProductsController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
         var pagination = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
-        var query = new GetAllProductsQuery(pagination);
+        var query = new GetAllProductsQuery(pagination, userId);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -89,7 +90,8 @@ public class ProductsController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var query = new GetProductByIdQuery(id);
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetProductByIdQuery(id, userId);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -198,9 +200,10 @@ public class ProductsController : ControllerBase
 
     [HttpGet("search")]
     [AllowAnonymous]
-    public async Task<IActionResult> SearchProducts([FromQuery] string name)
+    public async Task<IActionResult> SearchProducts([FromQuery] string name, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var query = new GetProductsByNameQuery(name, new PaginationParameters { PageNumber = 1, PageSize = 10 });
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetProductsByNameQuery(name, userId, new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize });
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -217,7 +220,8 @@ public class ProductsController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetProductsByCategory(Guid categoryId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var query = new GetProductsByCategoryQuery(categoryId, pageNumber, pageSize);
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetProductsByCategoryQuery(categoryId, userId, pageNumber, pageSize);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(
@@ -234,7 +238,8 @@ public class ProductsController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> GetProductsByPriceRange([FromQuery] decimal minPrice, [FromQuery] decimal maxPrice, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
     {
-        var query = new GetProductsByPriceRangeQuery(minPrice, maxPrice, pageNumber, pageSize);
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetProductsByPriceRangeQuery(minPrice, maxPrice, userId, pageNumber, pageSize);
         var result = await _mediator.Send(query);
         if (!result.Success)
             return StatusCode(500, Result.Fail(

@@ -50,7 +50,7 @@ public class GetUserIdByItemIdQueryHandler : IRequestHandler<GetUserIdByItemIdQu
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Error while checking product repository for item ID {ItemId}", request.ItemId);
+                _logger.LogWarning(ex, "Error while checking product repository for item ID {BaseItemId}", request.ItemId);
             }
 
             // If not found as product, try to find as a service
@@ -67,7 +67,7 @@ public class GetUserIdByItemIdQueryHandler : IRequestHandler<GetUserIdByItemIdQu
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Error while checking service repository for item ID {ItemId}", request.ItemId);
+                _logger.LogWarning(ex, "Error while checking service repository for item ID {BaseItemId}", request.ItemId);
             }
 
             // If not found in either repository
@@ -78,7 +78,7 @@ public class GetUserIdByItemIdQueryHandler : IRequestHandler<GetUserIdByItemIdQu
         }
         catch (DBConcurrencyException ex)
         {
-            _logger.LogError(ex, "Database error while retrieving user ID for item with ID {ItemId}", request.ItemId);
+            _logger.LogError(ex, "Database error while retrieving user ID for item with ID {BaseItemId}", request.ItemId);
             return Result<Guid>.Fail(
                 message: "فشل في جلب معرف المستخدم بسبب خطأ في قاعدة البيانات. يرجى المحاولة مرة أخرى لاحقاً.",
                 errorType: "DatabaseError",
@@ -86,7 +86,7 @@ public class GetUserIdByItemIdQueryHandler : IRequestHandler<GetUserIdByItemIdQu
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error while retrieving user ID for item with ID {ItemId}: {Message}", request.ItemId, ex.Message);
+            _logger.LogError(ex, "Unexpected error while retrieving user ID for item with ID {BaseItemId}: {Message}", request.ItemId, ex.Message);
             return Result<Guid>.Fail(
                 message: "حدث خطأ غير متوقع أثناء جلب معرف المستخدم. يرجى المحاولة مرة أخرى لاحقاً.",
                 errorType: "UnexpectedError",

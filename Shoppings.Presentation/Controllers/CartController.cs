@@ -59,30 +59,73 @@ namespace Shoppings.Presentation.Controllers
         }
 
         /// <summary>
-        /// Add item to the current user's cart
+        /// Add item to the current user's cart. If item already exists, increases its quantity.
         /// </summary>
         [HttpPost("add-item")]
-        public async Task<ActionResult<Result<Guid>>> AddToMyCart([FromBody] AddToCartDTO dto)
+        public async Task<ActionResult<Result<CartDTO>>> AddToMyCart([FromBody] AddToCartDTO dto)
         {
             try
             {
+                // Validate input
+                if (dto == null)
+                {
+                    return BadRequest(Result<CartDTO>.Fail(
+                        message: "البيانات المطلوبة غير موجودة",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                if (dto.ItemId == Guid.Empty)
+                {
+                    return BadRequest(Result<CartDTO>.Fail(
+                        message: "معرف العنصر غير صالح",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                if (dto.Quantity <= 0)
+                {
+                    return BadRequest(Result<CartDTO>.Fail(
+                        message: "الكمية يجب أن تكون أكبر من صفر",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
                 var userId = User.GetId();
                 var command = new AddToMyCartCommand(userId, dto.ItemId, dto.Quantity);
                 var result = await _mediator.Send(command);
                 
                 if (!result.Success)
-                    return StatusCode(500, Result.Fail(
-                        message: "فشل في إضافة العنصر إلى سلة التسوق",
-                        errorType: "AddToMyCartFailed",
+                {
+                    // Map different error types to appropriate HTTP status codes
+                    return result.ResultStatus switch
+                    {
+                        ResultStatus.ValidationError => BadRequest(result),
+                        ResultStatus.NotFound => NotFound(result),
+                        _ => StatusCode(500, result)
+                    };
+                }
+
+                // Get updated cart state
+                var cartQuery = new GetMyCartQuery(userId);
+                var cartResult = await _mediator.Send(cartQuery);
+                
+                if (!cartResult.Success)
+                    return StatusCode(500, Result<CartDTO>.Fail(
+                        message: "تم إضافة/تحديث العنصر ولكن فشل في جلب حالة سلة التسوق المحدثة",
+                        errorType: "GetCartFailed",
                         resultStatus: ResultStatus.Failed));
 
-                return Ok(result);
+                return Ok(Result<CartDTO>.Ok(
+                    data: cartResult.Data,
+                    message: result.Message,
+                    resultStatus: ResultStatus.Success));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error adding item to cart for user {UserId}", User.GetId());
-                return StatusCode(500, Result<Guid>.Fail(
-                    message: "فشل في إضافة العنصر إلى سلة التسوق",
+                _logger.LogError(ex, "Error adding/updating item in cart for user {UserId}", User.GetId());
+                return StatusCode(500, Result<CartDTO>.Fail(
+                    message: "فشل في إضافة/تحديث العنصر في سلة التسوق",
                     errorType: "AddToMyCartFailed",
                     resultStatus: ResultStatus.Failed));
             }
@@ -164,26 +207,52 @@ namespace Shoppings.Presentation.Controllers
         /// Remove item from the current user's cart
         /// </summary>
         [HttpDelete("remove-item/{itemId}")]
-        public async Task<ActionResult<Result<bool>>> RemoveFromMyCart(Guid itemId)
+        public async Task<ActionResult<Result<CartDTO>>> RemoveFromMyCart(Guid itemId)
         {
             try
             {
+                if (itemId == Guid.Empty)
+                {
+                    return BadRequest(Result<CartDTO>.Fail(
+                        message: "معرف العنصر غير صالح",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
                 var userId = User.GetId();
                 var command = new Shoppings.Application.Commands.RemoveFromMyCart.RemoveFromMyCartCommand(userId, itemId);
                 var result = await _mediator.Send(command);
                 
                 if (!result.Success)
-                    return StatusCode(500, Result.Fail(
-                        message: "فشل في حذف العنصر من سلة التسوق",
-                        errorType: "RemoveFromMyCartFailed",
+                {
+                    // Map different error types to appropriate HTTP status codes
+                    return result.ResultStatus switch
+                    {
+                        ResultStatus.ValidationError => BadRequest(result),
+                        ResultStatus.NotFound => NotFound(result),
+                        _ => StatusCode(500, result)
+                    };
+                }
+
+                // Get updated cart state
+                var cartQuery = new GetMyCartQuery(userId);
+                var cartResult = await _mediator.Send(cartQuery);
+                
+                if (!cartResult.Success)
+                    return StatusCode(500, Result<CartDTO>.Fail(
+                        message: "تم حذف العنصر ولكن فشل في جلب حالة سلة التسوق المحدثة",
+                        errorType: "GetCartFailed",
                         resultStatus: ResultStatus.Failed));
 
-                return Ok(result);
+                return Ok(Result<CartDTO>.Ok(
+                    data: cartResult.Data,
+                    message: "تم حذف العنصر من سلة التسوق بنجاح",
+                    resultStatus: ResultStatus.Success));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error removing item from cart for user {UserId}", User.GetId());
-                return StatusCode(500, Result<bool>.Fail(
+                _logger.LogError(ex, "Error removing item {ItemId} from cart for user {UserId}", itemId, User.GetId());
+                return StatusCode(500, Result<CartDTO>.Fail(
                     message: "فشل في حذف العنصر من سلة التسوق",
                     errorType: "RemoveFromMyCartFailed",
                     resultStatus: ResultStatus.Failed));
@@ -194,26 +263,77 @@ namespace Shoppings.Presentation.Controllers
         /// Update item quantity in the current user's cart
         /// </summary>
         [HttpPut("update-item")]
-        public async Task<ActionResult<Result<bool>>> UpdateMyCartItem([FromBody] UpdateCartItemDTO dto)
+        public async Task<ActionResult<Result<CartDTO>>> UpdateMyCartItem([FromBody] UpdateCartItemDTO dto)
         {
             try
             {
+                // Validate input
+                if (dto == null)
+                {
+                    return BadRequest(Result<CartDTO>.Fail(
+                        message: "البيانات المطلوبة غير موجودة",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                if (dto.ItemId == Guid.Empty)
+                {
+                    return BadRequest(Result<CartDTO>.Fail(
+                        message: "معرف العنصر غير صالح",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                if (dto.Quantity < 0)
+                {
+                    return BadRequest(Result<CartDTO>.Fail(
+                        message: "الكمية يجب أن تكون أكبر من أو تساوي صفر",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
                 var userId = User.GetId();
+
+                // If quantity is 0, remove the item
+                if (dto.Quantity == 0)
+                {
+                    return await RemoveFromMyCart(dto.ItemId);
+                }
+
+                // Update quantity
                 var command = new Shoppings.Application.Commands.UpdateMyCartItem.UpdateMyCartItemCommand(userId, dto.ItemId, dto.Quantity);
                 var result = await _mediator.Send(command);
                 
                 if (!result.Success)
-                    return StatusCode(500, Result.Fail(
-                        message: "فشل في تحديث كمية العنصر في سلة التسوق",
-                        errorType: "UpdateMyCartItemFailed",
+                {
+                    // Map different error types to appropriate HTTP status codes
+                    return result.ResultStatus switch
+                    {
+                        ResultStatus.ValidationError => BadRequest(result),
+                        ResultStatus.NotFound => NotFound(result),
+                        _ => StatusCode(500, result)
+                    };
+                }
+
+                // Get updated cart state
+                var cartQuery = new GetMyCartQuery(userId);
+                var cartResult = await _mediator.Send(cartQuery);
+                
+                if (!cartResult.Success)
+                    return StatusCode(500, Result<CartDTO>.Fail(
+                        message: "تم تحديث الكمية ولكن فشل في جلب حالة سلة التسوق المحدثة",
+                        errorType: "GetCartFailed",
                         resultStatus: ResultStatus.Failed));
 
-                return Ok(result);
+                return Ok(Result<CartDTO>.Ok(
+                    data: cartResult.Data,
+                    message: "تم تحديث كمية العنصر في سلة التسوق بنجاح",
+                    resultStatus: ResultStatus.Success));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error updating item in cart for user {UserId}", User.GetId());
-                return StatusCode(500, Result<bool>.Fail(
+                return StatusCode(500, Result<CartDTO>.Fail(
                     message: "فشل في تحديث كمية العنصر في سلة التسوق",
                     errorType: "UpdateMyCartItemFailed",
                     resultStatus: ResultStatus.Failed));

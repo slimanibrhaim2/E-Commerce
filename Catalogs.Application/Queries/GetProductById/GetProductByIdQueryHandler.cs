@@ -13,11 +13,19 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, R
 {
     private readonly IProductRepository _repo;
     private readonly ILogger<GetProductByIdQueryHandler> _logger;
+    private readonly IFeatureRepository _featureRepo;
+    private readonly IFavoriteRepository _favoriteRepo;
 
-    public GetProductByIdQueryHandler(IProductRepository repo, ILogger<GetProductByIdQueryHandler> logger)
+    public GetProductByIdQueryHandler(
+        IProductRepository repo, 
+        ILogger<GetProductByIdQueryHandler> logger,
+        IFeatureRepository featureRepo,
+        IFavoriteRepository favoriteRepo)
     {
         _repo = repo;
         _logger = logger;
+        _featureRepo = featureRepo;
+        _favoriteRepo = favoriteRepo;
     }
 
     public async Task<Result<ProductDTO>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
@@ -27,7 +35,7 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, R
             if (request.Id == Guid.Empty)
             {
                 return Result<ProductDTO>.Fail(
-                    message: "Product ID is required",
+                    message: "معرف المنتج مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -36,12 +44,18 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, R
             if (product == null)
             {
                 return Result<ProductDTO>.Fail(
-                    message: $"Product with ID {request.Id} not found",
+                    message: $"المنتج غير موجود {request.Id}",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
 
-            var productDto = new ProductDTO
+            // Check if the product is in user's favorites
+            var isFavorite = request.UserId != Guid.Empty && 
+                await _favoriteRepo.GetFavoritesByUserIdAsync(request.UserId) is var favorites &&
+                favorites.Any(f => f.BaseItemId == product.BaseItemId);
+
+            var features = await _featureRepo.GetProductFeaturesByEntityIdAsync(product.Id);
+            var productDTO = new ProductDTO
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -59,48 +73,30 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, R
                     Id = m.Id,
                     Url = m.MediaUrl,
                     MediaTypeId = m.MediaTypeId,
-                    ItemId = m.BaseItemId,
-                    MediaType = m.MediaType != null ? new MediaTypeDTO
-                    {
-                        Id = m.MediaType.Id,
-                        Name = m.MediaType.Name,
-                        CreatedAt = m.MediaType.CreatedAt,
-                        UpdatedAt = m.MediaType.UpdatedAt
-                    } : null,
-                    CreatedAt = m.CreatedAt,
-                    UpdatedAt = m.UpdatedAt
+                    BaseItemId = m.BaseItemId
                 }).ToList() ?? new List<MediaDTO>(),
-                Features = product.Features?.Select(f => new ProductFeatureDTO
+                Features = features.Select(f => new ProductFeatureDTO
                 {
                     Id = f.Id,
                     Name = f.Name,
-                    Value = f.Value,
-                    ProductId = product.Id,
-                    CreatedAt = f.CreatedAt,
-                    UpdatedAt = f.UpdatedAt
-                }).ToList() ?? new List<ProductFeatureDTO>()
+                    Value = f.Value
+                }).ToList(),
+                IsFavorite = isFavorite
             };
 
             return Result<ProductDTO>.Ok(
-                data: productDto,
-                message: $"Successfully retrieved product with ID {request.Id}",
+                data: productDTO,
+                message: "تم جلب المنتج بنجاح",
                 resultStatus: ResultStatus.Success);
-        }
-        catch (DBConcurrencyException ex)
-        {
-            _logger.LogError(ex, "Database error while retrieving product with ID {ProductId}", request.Id);
-            return Result<ProductDTO>.Fail(
-                message: "Failed to retrieve product due to a database error. Please try again later.",
-                errorType: "DatabaseError",
-                resultStatus: ResultStatus.InternalServerError);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error while retrieving product with ID {ProductId}: {Message}", request.Id, ex.Message);
+            _logger.LogError(ex, "فشل في جلب المنتج {ProductId}", request.Id);
             return Result<ProductDTO>.Fail(
-                message: "An unexpected error occurred while retrieving the product. Please try again later.",
-                errorType: "UnexpectedError",
-                resultStatus: ResultStatus.Failed);
+                message: $"فشل في جلب المنتج: {ex.Message}",
+                errorType: "GetProductByIdFailed",
+                resultStatus: ResultStatus.Failed,
+                exception: ex);
         }
     }
 } 

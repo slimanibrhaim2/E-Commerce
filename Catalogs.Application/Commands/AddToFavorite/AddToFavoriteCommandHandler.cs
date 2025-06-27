@@ -51,7 +51,7 @@ public class AddToFavoriteCommandHandler : IRequestHandler<AddToFavoriteCommand,
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            // Resolve ItemId to BaseItemId (similar to GetUserIdByItemIdQueryHandler)
+            // Resolve BaseItemId to BaseItemId (similar to GetUserIdByItemIdQueryHandler)
             Guid baseItemId = Guid.Empty;
             
             // First, try to find as a product
@@ -65,7 +65,7 @@ public class AddToFavoriteCommandHandler : IRequestHandler<AddToFavoriteCommand,
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Error while checking product repository for item ID {ItemId}", request.Favorite.ItemId);
+                _logger.LogWarning(ex, "Error while checking product repository for item ID {BaseItemId}", request.Favorite.ItemId);
             }
 
             // If not found as product, try to find as a service
@@ -81,7 +81,7 @@ public class AddToFavoriteCommandHandler : IRequestHandler<AddToFavoriteCommand,
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning(ex, "Error while checking service repository for item ID {ItemId}", request.Favorite.ItemId);
+                    _logger.LogWarning(ex, "Error while checking service repository for item ID {BaseItemId}", request.Favorite.ItemId);
                 }
             }
 
@@ -117,7 +117,7 @@ public class AddToFavoriteCommandHandler : IRequestHandler<AddToFavoriteCommand,
             await _favoriteRepository.AddAsync(favorite);
             await _unitOfWork.SaveChangesAsync();
 
-            _logger.LogInformation("تم إضافة العنصر {ItemId} (BaseItemId: {BaseItemId}) إلى مفضلة المستخدم {UserId}", 
+            _logger.LogInformation("تم إضافة العنصر {BaseItemId} (BaseItemId: {BaseItemId}) إلى مفضلة المستخدم {UserId}", 
                 request.Favorite.ItemId, baseItemId, request.UserId);
 
             return Result<Guid>.Ok(

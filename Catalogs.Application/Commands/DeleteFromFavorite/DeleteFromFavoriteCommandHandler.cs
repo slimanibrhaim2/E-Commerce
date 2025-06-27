@@ -49,7 +49,7 @@ public class DeleteFromFavoriteCommandHandler : IRequestHandler<DeleteFromFavori
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            // Resolve ItemId to BaseItemId (similar to GetUserIdByItemIdQueryHandler)
+            // Resolve BaseItemId to BaseItemId (similar to GetUserIdByItemIdQueryHandler)
             Guid baseItemId = Guid.Empty;
             
             // First, try to find as a product
@@ -63,7 +63,7 @@ public class DeleteFromFavoriteCommandHandler : IRequestHandler<DeleteFromFavori
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Error while checking product repository for item ID {ItemId}", request.ItemId);
+                _logger.LogWarning(ex, "Error while checking product repository for item ID {BaseItemId}", request.ItemId);
             }
 
             // If not found as product, try to find as a service
@@ -79,7 +79,7 @@ public class DeleteFromFavoriteCommandHandler : IRequestHandler<DeleteFromFavori
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning(ex, "Error while checking service repository for item ID {ItemId}", request.ItemId);
+                    _logger.LogWarning(ex, "Error while checking service repository for item ID {BaseItemId}", request.ItemId);
                 }
             }
 
@@ -108,7 +108,7 @@ public class DeleteFromFavoriteCommandHandler : IRequestHandler<DeleteFromFavori
             _favoriteRepository.Remove(favorite);
             await _unitOfWork.SaveChangesAsync();
 
-            _logger.LogInformation("تم حذف العنصر {ItemId} (BaseItemId: {BaseItemId}) من مفضلة المستخدم {UserId}", 
+            _logger.LogInformation("تم حذف العنصر {BaseItemId} (BaseItemId: {BaseItemId}) من مفضلة المستخدم {UserId}", 
                 request.ItemId, baseItemId, request.UserId);
 
             return Result<bool>.Ok(

@@ -89,7 +89,7 @@ public class GetProductsByUserIdQueryHandler : IRequestHandler<GetProductsByUser
                     Id = m.Id,
                     Url = m.MediaUrl,
                     MediaTypeId = m.MediaTypeId,
-                    ItemId = m.BaseItemId,
+                    BaseItemId = m.BaseItemId,
                     MediaType = m.MediaType != null ? new MediaTypeDTO
                     {
                         Id = m.MediaType.Id,
