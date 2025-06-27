@@ -5,4 +5,4 @@ using Core.Pagination;
 
 namespace Catalogs.Application.Queries.GetMyFavorites;
 
-public record GetMyFavoritesQuery(Guid UserId, PaginationParameters Parameters) : IRequest<Result<PaginatedResult<FavoriteDTO>>>; 
+public record GetMyFavoritesQuery(Guid UserId, PaginationParameters Parameters) : IRequest<Result<PaginatedResult<FavoriteResponseDTO>>>; 

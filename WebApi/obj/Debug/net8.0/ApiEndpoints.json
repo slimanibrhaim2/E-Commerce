@@ -1443,7 +1443,17 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Catalogs.Application.DTOs.FavoriteResponseDTO, Catalogs.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.FavoriteController",

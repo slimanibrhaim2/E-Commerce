@@ -58,7 +58,7 @@ public class FavoriteController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetMyFavorites([FromQuery] PaginationParameters parameters)
+    public async Task<ActionResult<Result<PaginatedResult<FavoriteResponseDTO>>>> GetMyFavorites([FromQuery] PaginationParameters parameters)
     {
         var userId = User.GetId();
         var query = new GetMyFavoritesQuery(userId, parameters);
