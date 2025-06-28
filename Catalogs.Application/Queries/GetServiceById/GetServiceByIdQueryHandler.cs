@@ -40,7 +40,7 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var service = await _repo.GetByIdAsync(request.Id);
+            var service = await _repo.GetByIdWithDetails(request.Id);
             
             if (service == null)
             {
@@ -71,14 +71,11 @@ public class GetServiceByIdQueryHandler : IRequestHandler<GetServiceByIdQuery, R
                 UpdatedAt = service.UpdatedAt,
                 Media = service.Media?.Select(m => new MediaDTO
                 {
-                    Id = m.Id,
                     Url = m.MediaUrl,
-                    MediaTypeId = m.MediaTypeId,
-                    BaseItemId = m.BaseItemId
+                    MediaTypeName = m.MediaType?.Name ?? "unknown"
                 }).ToList() ?? new List<MediaDTO>(),
                 Features = features.Select(f => new ServiceFeatureDTO
                 {
-                    Id = f.Id,
                     Name = f.Name,
                     Value = f.Value
                 }).ToList(),

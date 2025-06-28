@@ -73,41 +73,22 @@ public class GetServicesByCategoryQueryHandler : IRequestHandler<GetServicesByCa
             
             var dtos = paged.Select(s => new ServiceDTO
             {
-                Id = s.Id,
                 Name = s.Name,
                 Description = s.Description,
                 Price = s.Price,
-                CategoryId = s.CategoryId,
                 ServiceType = s.ServiceType,
                 Duration = s.Duration,
                 IsAvailable = s.IsAvailable,
-                UserId = s.UserId,
-                CreatedAt = s.CreatedAt,
-                UpdatedAt = s.UpdatedAt,
+                CategoryName = s.Category?.Name,
                 Media = s.Media?.Select(m => new MediaDTO
                 {
-                    Id = m.Id,
                     Url = m.MediaUrl,
-                    MediaTypeId = m.MediaTypeId,
-                    BaseItemId = m.BaseItemId,
-                    MediaType = m.MediaType != null ? new MediaTypeDTO
-                    {
-                        Id = m.MediaType.Id,
-                        Name = m.MediaType.Name,
-                        CreatedAt = m.MediaType.CreatedAt,
-                        UpdatedAt = m.MediaType.UpdatedAt
-                    } : null,
-                    CreatedAt = m.CreatedAt,
-                    UpdatedAt = m.UpdatedAt
+                    MediaTypeName = m.MediaType?.Name
                 }).ToList() ?? new List<MediaDTO>(),
                 Features = s.Features?.Select(f => new ServiceFeatureDTO
                 {
-                    Id = f.Id,
                     Name = f.Name,
-                    Value = f.Value,
-                    ServiceId = s.Id,
-                    CreatedAt = f.CreatedAt,
-                    UpdatedAt = f.UpdatedAt
+                    Value = f.Value
                 }).ToList() ?? new List<ServiceFeatureDTO>()
             }).ToList();
 

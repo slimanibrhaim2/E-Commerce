@@ -40,7 +40,7 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, R
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var product = await _repo.GetById(request.Id);
+            var product = await _repo.GetByIdWithDetails(request.Id);
             if (product == null)
             {
                 return Result<ProductDTO>.Fail(
@@ -70,14 +70,11 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, R
                 UpdatedAt = product.UpdatedAt,
                 Media = product.Media?.Select(m => new MediaDTO
                 {
-                    Id = m.Id,
                     Url = m.MediaUrl,
-                    MediaTypeId = m.MediaTypeId,
-                    BaseItemId = m.BaseItemId
+                    MediaTypeName = m.MediaType?.Name ?? "unknown"
                 }).ToList() ?? new List<MediaDTO>(),
                 Features = features.Select(f => new ProductFeatureDTO
                 {
-                    Id = f.Id,
                     Name = f.Name,
                     Value = f.Value
                 }).ToList(),

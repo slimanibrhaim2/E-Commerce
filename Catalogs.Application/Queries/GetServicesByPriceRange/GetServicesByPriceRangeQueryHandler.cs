@@ -15,13 +15,16 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
 {
     private readonly IServiceRepository _repo;
     private readonly ILogger<GetServicesByPriceRangeQueryHandler> _logger;
+    private readonly IFavoriteRepository _favoriteRepo;
 
     public GetServicesByPriceRangeQueryHandler(
         IServiceRepository repo,
-        ILogger<GetServicesByPriceRangeQueryHandler> logger)
+        ILogger<GetServicesByPriceRangeQueryHandler> logger,
+        IFavoriteRepository favoriteRepo)
     {
         _repo = repo;
         _logger = logger;
+        _favoriteRepo = favoriteRepo;
     }
 
     public async Task<Result<PaginatedResult<ServiceDTO>>> Handle(GetServicesByPriceRangeQuery request, CancellationToken cancellationToken)
@@ -70,6 +73,14 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
 
             var services = (await _repo.GetByPriceRange(request.MinPrice, request.MaxPrice)).ToList();
             
+            // Get all favorites for the user if authenticated
+            var userFavorites = request.UserId != Guid.Empty 
+                ? await _favoriteRepo.GetFavoritesByUserIdAsync(request.UserId)
+                : new List<Domain.Entities.Favorite>();
+
+            // Get all favorite base item IDs for quick lookup
+            var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
+
             if (!services.Any())
             {
                 return Result<PaginatedResult<ServiceDTO>>.Ok(
@@ -93,38 +104,21 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
                 Name = s.Name,
                 Description = s.Description,
                 Price = s.Price,
-                CategoryId = s.CategoryId,
+                CategoryName = s.Category?.Name,
                 ServiceType = s.ServiceType,
                 Duration = s.Duration,
                 IsAvailable = s.IsAvailable,
-                UserId = s.UserId,
-                CreatedAt = s.CreatedAt,
-                UpdatedAt = s.UpdatedAt,
                 Media = s.Media?.Select(m => new MediaDTO
                 {
-                    Id = m.Id,
                     Url = m.MediaUrl,
-                    MediaTypeId = m.MediaTypeId,
-                    BaseItemId = m.BaseItemId,
-                    MediaType = m.MediaType != null ? new MediaTypeDTO
-                    {
-                        Id = m.MediaType.Id,
-                        Name = m.MediaType.Name,
-                        CreatedAt = m.MediaType.CreatedAt,
-                        UpdatedAt = m.MediaType.UpdatedAt
-                    } : null,
-                    CreatedAt = m.CreatedAt,
-                    UpdatedAt = m.UpdatedAt
+                    MediaTypeName = m.MediaType?.Name
                 }).ToList() ?? new List<MediaDTO>(),
                 Features = s.Features?.Select(f => new ServiceFeatureDTO
                 {
-                    Id = f.Id,
                     Name = f.Name,
-                    Value = f.Value,
-                    ServiceId = s.Id,
-                    CreatedAt = f.CreatedAt,
-                    UpdatedAt = f.UpdatedAt
-                }).ToList() ?? new List<ServiceFeatureDTO>()
+                    Value = f.Value
+                }).ToList() ?? new List<ServiceFeatureDTO>(),
+                IsFavorite = favoriteBaseItemIds.Contains(s.BaseItemId)
             }).ToList();
 
             var paginated = PaginatedResult<ServiceDTO>.Create(
@@ -135,25 +129,17 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
 
             return Result<PaginatedResult<ServiceDTO>>.Ok(
                 data: paginated,
-                message: $"Successfully retrieved {dtos.Count} services with price between {request.MinPrice} and {request.MaxPrice} out of {totalCount} total services",
+                message: $"Successfully retrieved {dtos.Count} services with price between {request.MinPrice} and {request.MaxPrice}",
                 resultStatus: ResultStatus.Success);
-        }
-        catch (DBConcurrencyException ex)
-        {
-            _logger.LogError(ex, "Database error while retrieving services in price range {MinPrice} - {MaxPrice}", request.MinPrice, request.MaxPrice);
-            return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "Failed to retrieve services due to a database error. Please try again later.",
-                errorType: "DatabaseError",
-                resultStatus: ResultStatus.InternalServerError);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error while retrieving services in price range {MinPrice} - {MaxPrice}: {Message}", 
-                request.MinPrice, request.MaxPrice, ex.Message);
+            _logger.LogError(ex, "Error retrieving services in price range {MinPrice} - {MaxPrice}", request.MinPrice, request.MaxPrice);
             return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "An unexpected error occurred while retrieving services. Please try again later.",
-                errorType: "UnexpectedError",
-                resultStatus: ResultStatus.Failed);
+                message: "An error occurred while retrieving services",
+                errorType: "GetServicesByPriceRangeFailed",
+                resultStatus: ResultStatus.Failed,
+                exception: ex);
         }
     }
 } 

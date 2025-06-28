@@ -1,5 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
 namespace Catalogs.Application.DTOs
 {
@@ -12,7 +16,16 @@ namespace Catalogs.Application.DTOs
         public string SKU { get; set; }
         public int StockQuantity { get; set; }
         public bool IsAvailable { get; set; }
+        
+        [BindNever]
         public List<CreateMediaDTO> Media { get; set; } = new();
+
+        [FromForm(Name = "features")]
         public List<CreateFeatureDTO> Features { get; set; } = new();
+
+        public void SetMedia(List<CreateMediaDTO> media)
+        {
+            Media = media ?? new List<CreateMediaDTO>();
+        }
     }
 } 

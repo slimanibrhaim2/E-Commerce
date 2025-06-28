@@ -22,6 +22,14 @@ using Catalogs.Application.Queries.GetBaseItemIdByProductId;
 using Microsoft.AspNetCore.Authorization;
 using Core.Authentication;
 using Shared.Contracts.Queries;
+using Core.Interfaces;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using Catalogs.Application.Queries.GetAllMediaTypes;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using System.Text.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Catalogs.Presentation.Controllers;
 
@@ -31,9 +39,17 @@ namespace Catalogs.Presentation.Controllers;
 public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IFileService _fileService;
+    private readonly ILogger<ProductsController> _logger;
+    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public ProductsController(IMediator mediator)
-        => _mediator = mediator;
+    public ProductsController(IMediator mediator, IFileService fileService, ILogger<ProductsController> logger, IWebHostEnvironment webHostEnvironment)
+    {
+        _mediator = mediator;
+        _fileService = fileService;
+        _logger = logger;
+        _webHostEnvironment = webHostEnvironment;
+    }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateProductDTO dto)
@@ -52,19 +68,153 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost("aggregate")]
-    public async Task<IActionResult> CreateAggregate([FromBody] CreateProductAggregateDTO dto)
+    public async Task<IActionResult> CreateAggregate([FromForm] CreateProductAggregateDTO dto, List<IFormFile> mediaFiles)
     {
-        var userId = User.GetId();
-        var result = await _mediator.Send(new CreateProductAggregateCommand(dto, userId));
-        if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في إنشاء المنتج مع الوسائط والميزات",
-                errorType: "CreateProductAggregateFailed",
-                resultStatus: ResultStatus.Failed));
-        return CreatedAtAction("GetById", new { id = result.Data }, Result<Guid>.Ok(
-            data: result.Data,
-            message: "تم إنشاء المنتج مع الوسائط والميزات بنجاح",
-            resultStatus: ResultStatus.Success));
+        try
+        {
+            var userId = User.GetId();
+
+            // Parse features from form data
+            var featuresJson = Request.Form["features"].ToString();
+            _logger.LogInformation("Received features JSON: {JsonString}", featuresJson);
+
+            if (!string.IsNullOrEmpty(featuresJson))
+            {
+                try
+                {
+                    // Check if the JSON string starts with [ and ends with ]
+                    if (!featuresJson.TrimStart().StartsWith("[") || !featuresJson.TrimEnd().EndsWith("]"))
+                    {
+                        featuresJson = $"[{featuresJson}]";
+                        _logger.LogInformation("Modified features JSON with array brackets: {JsonString}", featuresJson);
+                    }
+                    
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                        WriteIndented = true
+                    };
+                    
+                    var features = JsonSerializer.Deserialize<List<CreateFeatureDTO>>(featuresJson, options);
+                    _logger.LogInformation("Deserialized features count: {Count}", features?.Count ?? 0);
+                    
+                    if (features == null)
+                    {
+                        _logger.LogError("Features deserialized to null");
+                        return BadRequest(new { error = "Features could not be deserialized", receivedJson = featuresJson });
+                    }
+
+                    // Log each feature
+                    foreach (var feature in features)
+                    {
+                        _logger.LogInformation("Feature: Name = {Name}, Value = {Value}", feature?.Name, feature?.Value);
+                    }
+                    
+                    // Validate features
+                    var validationResults = new List<ValidationResult>();
+                    foreach (var feature in features)
+                    {
+                        if (!Validator.TryValidateObject(feature, new ValidationContext(feature), validationResults, true))
+                        {
+                            _logger.LogError("Validation failed for feature: {Feature}, Errors: {Errors}", 
+                                JsonSerializer.Serialize(feature), 
+                                JsonSerializer.Serialize(validationResults));
+                            return BadRequest(new { error = "Invalid feature", validationErrors = validationResults });
+                        }
+                    }
+                    dto.Features = features;
+                }
+                catch (JsonException ex)
+                {
+                    _logger.LogError(ex, "JSON deserialization error. Raw JSON: {JsonString}", featuresJson);
+                    return BadRequest(new { 
+                        error = "Invalid features format", 
+                        details = ex.Message, 
+                        receivedJson = featuresJson,
+                        path = ex.Path,
+                        lineNumber = ex.LineNumber,
+                        bytePositionInLine = ex.BytePositionInLine
+                    });
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "General error processing features. Raw JSON: {JsonString}", featuresJson);
+                    return BadRequest(new { error = "Error processing features", details = ex.Message, receivedJson = featuresJson });
+                }
+            }
+
+            // Handle media files
+            if (mediaFiles != null && mediaFiles.Any())
+            {
+                // Get all media types using mediator
+                var mediaTypesResult = await _mediator.Send(new GetAllMediaTypesQuery(new PaginationParameters { PageNumber = 1, PageSize = 100 }));
+                if (!mediaTypesResult.Success)
+                {
+                    _logger.LogError("Failed to get media types: {Error}", mediaTypesResult.Message);
+                    return StatusCode(500, mediaTypesResult);
+                }
+
+                var mediaTypes = mediaTypesResult.Data.Data;
+                var imageType = mediaTypes.FirstOrDefault(mt => mt.Name.ToLower() == "image");
+                var videoType = mediaTypes.FirstOrDefault(mt => mt.Name.ToLower() == "video");
+
+                if (imageType == null || videoType == null)
+                {
+                    return StatusCode(500, Result.Fail("Media types not properly configured", "ConfigurationError", ResultStatus.Failed));
+                }
+
+                var mediaList = new List<CreateMediaDTO>();
+                foreach (var file in mediaFiles)
+                {
+                    // Validate file
+                    if (file.Length > 10 * 1024 * 1024) // 10MB limit
+                    {
+                        return BadRequest(Result.Fail($"File {file.FileName} is too large. Maximum size is 10MB", "ValidationError", ResultStatus.ValidationError));
+                    }
+
+                    var allowedImageTypes = new[] { "image/jpeg", "image/png", "image/gif" };
+                    var allowedVideoTypes = new[] { "video/mp4", "video/mpeg" };
+
+                    var mediaTypeId = allowedImageTypes.Contains(file.ContentType) ? imageType.Id :
+                                    allowedVideoTypes.Contains(file.ContentType) ? videoType.Id :
+                                    Guid.Empty;
+
+                    if (mediaTypeId == Guid.Empty)
+                    {
+                        return BadRequest(Result.Fail($"File {file.FileName} has unsupported type: {file.ContentType}", "ValidationError", ResultStatus.ValidationError));
+                    }
+
+                    // Save file
+                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                    var mediaDirectory = allowedImageTypes.Contains(file.ContentType) ? "media/products/images" : "media/products/videos";
+                    var directoryPath = Path.Combine(_webHostEnvironment.WebRootPath, mediaDirectory);
+                    Directory.CreateDirectory(directoryPath);
+                    var filePath = Path.Combine(directoryPath, fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    var url = $"/{mediaDirectory}/{fileName}";
+                    mediaList.Add(new CreateMediaDTO { Url = url, MediaTypeId = mediaTypeId });
+                }
+
+                // Set the media list using the new method
+                dto.SetMedia(mediaList);
+            }
+
+            var result = await _mediator.Send(new CreateProductAggregateCommand(dto, userId));
+            if (!result.Success)
+                return StatusCode(500, result);
+
+            return CreatedAtAction(nameof(GetById), new { id = result.Data }, result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error creating product aggregate");
+            return StatusCode(500, Result.Fail(ex.Message, "UnexpectedError", ResultStatus.Failed));
+        }
     }
 
     [HttpGet]
@@ -105,32 +255,134 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPut("aggregate/{id}")]
-    public async Task<IActionResult> UpdateAggregate(Guid id, [FromBody] CreateProductAggregateDTO dto)
+    public async Task<IActionResult> UpdateAggregate(Guid id, [FromForm] CreateProductAggregateDTO dto, List<IFormFile> mediaFiles)
     {
-        var userId = User.GetId();
-        var result = await _mediator.Send(new UpdateProductAggregateCommand(id, dto, userId));
-        if (!result.Success)
+        try
+        {
+            var userId = User.GetId();
+
+            // Get current product to handle media update
+            var currentProduct = await _mediator.Send(new GetProductByIdQuery(id, userId));
+            if (!currentProduct.Success)
+            {
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في العثور على المنتج",
+                    errorType: "ProductNotFound",
+                    resultStatus: ResultStatus.NotFound));
+            }
+
+            // Handle media files
+            if (mediaFiles != null && mediaFiles.Any())
+            {
+                dto.Media = new List<CreateMediaDTO>();
+                foreach (var file in mediaFiles)
+                {
+                    // Validate file
+                    var validationResult = _fileService.ValidateFile(
+                        file,
+                        new[] { "image/jpeg", "image/png", "image/gif", "video/mp4", "video/mpeg" },
+                        10 * 1024 * 1024 // 10MB
+                    );
+
+                    if (!validationResult.Success)
+                    {
+                        _logger.LogWarning("File validation failed: {Error}", validationResult.Message);
+                        return BadRequest(validationResult);
+                    }
+
+                    // Save file
+                    var fileResult = await _fileService.SaveFileAsync(file, "media/products");
+                    if (!fileResult.Success)
+                    {
+                        _logger.LogError("File save failed: {Error}", fileResult.Message);
+                        return StatusCode(500, fileResult);
+                    }
+
+                    // Add media to DTO
+                    dto.Media.Add(new CreateMediaDTO
+                    {
+                        Url = fileResult.Data,
+                        MediaTypeId = file.ContentType.StartsWith("image/") 
+                            ? new Guid("YOUR-IMAGE-MEDIA-TYPE-ID") // Replace with actual image media type ID
+                            : new Guid("YOUR-VIDEO-MEDIA-TYPE-ID")  // Replace with actual video media type ID
+                    });
+                }
+            }
+
+            // Delete old media files
+            if (currentProduct.Data.Media != null)
+            {
+                foreach (var media in currentProduct.Data.Media)
+                {
+                    var deleteResult = _fileService.DeleteFile(media.Url);
+                    if (!deleteResult.Success)
+                    {
+                        _logger.LogWarning("Failed to delete media file: {Url}, Error: {Error}", 
+                            media.Url, deleteResult.Message);
+                    }
+                }
+            }
+
+            var result = await _mediator.Send(new UpdateProductAggregateCommand(id, dto, userId));
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في تحديث المنتج مع الوسائط والميزات",
+                    errorType: "UpdateProductAggregateFailed",
+                    resultStatus: ResultStatus.Failed));
+
+            return Ok(Result.Ok(
+                message: "تم تحديث المنتج مع الوسائط والميزات بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error updating product aggregate {ProductId}", id);
             return StatusCode(500, Result.Fail(
-                message: "فشل في تحديث المنتج مع الوسائط والميزات",
+                message: $"فشل في تحديث المنتج: {ex.Message}",
                 errorType: "UpdateProductAggregateFailed",
                 resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم تحديث المنتج مع الوسائط والميزات بنجاح",
-            resultStatus: ResultStatus.Success));
+        }
     }
 
     [HttpDelete("aggregate/{id}")]
     public async Task<IActionResult> DeleteAggregate(Guid id)
     {
-        var result = await _mediator.Send(new DeleteProductAggregateCommand(id));
-        if (!result.Success)
+        try
+        {
+            // Get current product to delete media files
+            var currentProduct = await _mediator.Send(new GetProductByIdQuery(id, User.GetId()));
+            if (currentProduct.Success && currentProduct.Data.Media != null)
+            {
+                foreach (var media in currentProduct.Data.Media)
+                {
+                    var deleteResult = _fileService.DeleteFile(media.Url);
+                    if (!deleteResult.Success)
+                    {
+                        _logger.LogWarning("Failed to delete media file: {Url}, Error: {Error}", 
+                            media.Url, deleteResult.Message);
+                    }
+                }
+            }
+
+            var result = await _mediator.Send(new DeleteProductAggregateCommand(id));
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في حذف المنتج مع الوسائط والميزات",
+                    errorType: "DeleteProductAggregateFailed",
+                    resultStatus: ResultStatus.Failed));
+
+            return Ok(Result.Ok(
+                message: "تم حذف المنتج مع الوسائط والميزات بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting product aggregate {ProductId}", id);
             return StatusCode(500, Result.Fail(
                 message: "فشل في حذف المنتج مع الوسائط والميزات",
                 errorType: "DeleteProductAggregateFailed",
                 resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم حذف المنتج مع الوسائط والميزات بنجاح",
-            resultStatus: ResultStatus.Success));
+        }
     }
 
     [HttpPut("{id}")]

@@ -55,7 +55,7 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var products = await _repo.GetByCategory(request.CategoryId);
+            var products = await _repo.GetByCategoryWithDetails(request.CategoryId);
             var productsList = products.ToList();
 
             // Get all favorites for the user if authenticated
@@ -93,14 +93,11 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
                     UpdatedAt = product.UpdatedAt,
                     Media = product.Media?.Select(m => new MediaDTO
                     {
-                        Id = m.Id,
                         Url = m.MediaUrl,
-                        MediaTypeId = m.MediaTypeId,
-                        BaseItemId = m.BaseItemId
+                        MediaTypeName = m.MediaType?.Name ?? "unknown"
                     }).ToList() ?? new List<MediaDTO>(),
                     Features = features.Select(f => new ProductFeatureDTO
                     {
-                        Id = f.Id,
                         Name = f.Name,
                         Value = f.Value
                     }).ToList(),

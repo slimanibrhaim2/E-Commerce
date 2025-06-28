@@ -27,6 +27,11 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
     {
         var products = await _context.Products
             .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(p => p.ProductFeatures)
             .Where(p => p.DeletedAt == null)
             .ToListAsync();
         return products.Select(p => _mapper.Map(p));
@@ -36,8 +41,12 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
     {
         var productDao = await _context.Products
             .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
             .Include(p => p.ProductFeatures)
-            .FirstOrDefaultAsync(p => p.Id == id);
+            .FirstOrDefaultAsync(p => p.Id == id && p.DeletedAt == null);
 
         if (productDao == null)
             return null;
@@ -52,8 +61,9 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
                 .ThenInclude(bi => bi.Category)
             .Include(p => p.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
             .Include(p => p.ProductFeatures)
-            .FirstOrDefaultAsync(p => p.Id == id);
+            .FirstOrDefaultAsync(p => p.Id == id && p.DeletedAt == null);
 
         if (productDao == null)
             return null;
@@ -86,7 +96,14 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
     {
         var query = _context.Products
             .Include(p => p.BaseItem)
-            .Where(p => p.BaseItem.Price >= (double)minPrice && p.BaseItem.Price <= (double)maxPrice);
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(p => p.ProductFeatures)
+            .Where(p => p.BaseItem.Price >= (double)minPrice && 
+                       p.BaseItem.Price <= (double)maxPrice && 
+                       p.DeletedAt == null);
 
         var totalCount = await query.CountAsync();
         var products = await query
@@ -104,7 +121,12 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
     {
         var products = await _context.Products
             .Include(p => p.BaseItem)
-            .Where(p => p.StockQuantity <= threshold)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(p => p.ProductFeatures)
+            .Where(p => p.StockQuantity <= threshold && p.DeletedAt == null)
             .ToListAsync();
 
         return products.Select(p => _mapper.Map(p));
@@ -191,7 +213,12 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
     {
         var products = await _context.Products
             .Include(p => p.BaseItem)
-            .Where(p => p.BaseItem.UserId == userId)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(p => p.ProductFeatures)
+            .Where(p => p.BaseItem.UserId == userId && p.DeletedAt == null)
             .ToListAsync();
         return products.Select(p => _mapper.Map(p));
     }
@@ -200,12 +227,20 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
     {
         var products = await _context.Products
             .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(p => p.ProductFeatures)
+            .Where(p => p.DeletedAt == null)
             .ToListAsync();
+
         var results = products
             .Select(p => new { Product = p, Score = Fuzz.Ratio(p.BaseItem.Name, name) })
             .OrderByDescending(x => x.Score)
             .Where(x => x.Score > 60)
             .Select(x => x.Product);
+
         return results.Select(p => _mapper.Map(p));
     }
 
@@ -238,5 +273,33 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
             .FirstOrDefaultAsync();
 
         return product == Guid.Empty ? null : product;
+    }
+
+    public async Task<IEnumerable<Product>> GetAllWithDetails()
+    {
+        var products = await _context.Products
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(p => p.ProductFeatures)
+            .Where(p => p.DeletedAt == null)
+            .ToListAsync();
+        return products.Select(p => _mapper.Map(p));
+    }
+
+    public async Task<IEnumerable<Product>> GetByCategoryWithDetails(Guid categoryId)
+    {
+        var products = await _context.Products
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(p => p.ProductFeatures)
+            .Where(p => p.BaseItem.CategoryId == categoryId && p.DeletedAt == null)
+            .ToListAsync();
+        return products.Select(p => _mapper.Map(p));
     }
 } 

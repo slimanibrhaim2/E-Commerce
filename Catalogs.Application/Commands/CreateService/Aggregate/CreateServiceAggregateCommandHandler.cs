@@ -98,7 +98,7 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
             // 5. Add media
             foreach (var media in dto.Media ?? Enumerable.Empty<CreateMediaDTO>())
             {
-                await _mediaRepository.AddMediaAsync(service.Id, media.Url, media.MediaTypeId);
+                await _mediaRepository.AddMediaAsync(baseItem.Id, media.Url, media.MediaTypeId);
             }
 
             // 6. Add features

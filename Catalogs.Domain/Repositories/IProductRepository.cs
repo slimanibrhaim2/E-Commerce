@@ -6,8 +6,12 @@ namespace Catalogs.Domain.Repositories;
 
 public interface IProductRepository : IRepository<Product>
 {
+    Task<IEnumerable<Product>> GetAllAsync();
+    Task<IEnumerable<Product>> GetAllWithDetails();
     Task<Product?> GetById(Guid id);
+    Task<Product?> GetByIdWithDetails(Guid id);
     Task<IEnumerable<Product>> GetByCategory(Guid categoryId);
+    Task<IEnumerable<Product>> GetByCategoryWithDetails(Guid categoryId);
     Task<IEnumerable<Product>> GetByBrand(Guid brandId);
     Task<PaginatedResult<Product>> GetByPriceRange(decimal minPrice, decimal maxPrice, int pageNumber, int pageSize);
     Task<IEnumerable<Product>> GetLowStockProducts(int threshold);

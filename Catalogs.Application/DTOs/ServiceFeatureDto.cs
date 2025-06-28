@@ -1,10 +1,7 @@
 namespace Catalogs.Application.DTOs;
 
-public class ServiceFeatureDTO : FeatureDTO
+public class ServiceFeatureDTO
 {
-    public Guid ServiceId { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
-    public DateTime DeletedAt { get; set; }
-
+    public string Name { get; set; }
+    public string Value { get; set; }
 } 

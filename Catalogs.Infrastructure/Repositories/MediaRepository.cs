@@ -15,7 +15,9 @@ public class MediaRepository : BaseRepository<Media, MediaDAO>, IMediaRepository
 
     public async Task<Media?> GetByIdAsync(Guid id)
     {
-        var mediaDao = await _ctx.Media.FirstOrDefaultAsync(m => m.Id == id && m.DeletedAt == null);
+        var mediaDao = await _ctx.Media
+            .Include(m => m.MediaType)
+            .FirstOrDefaultAsync(m => m.Id == id && m.DeletedAt == null);
         return mediaDao == null ? null : _mapper.Map(mediaDao);
     }
 

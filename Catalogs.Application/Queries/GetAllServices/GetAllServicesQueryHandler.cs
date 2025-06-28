@@ -47,7 +47,7 @@ public class GetAllServicesQueryHandler : IRequestHandler<GetAllServicesQuery, R
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var services = await _repo.GetAllAsync();
+            var services = await _repo.GetAllWithDetails();
             var servicesList = services.ToList();
 
             // Get all favorites for the user if authenticated
@@ -85,14 +85,11 @@ public class GetAllServicesQueryHandler : IRequestHandler<GetAllServicesQuery, R
                     UpdatedAt = service.UpdatedAt,
                     Media = service.Media?.Select(m => new MediaDTO
                     {
-                        Id = m.Id,
                         Url = m.MediaUrl,
-                        MediaTypeId = m.MediaTypeId,
-                        BaseItemId = m.BaseItemId
+                        MediaTypeName = m.MediaType?.Name ?? "unknown"
                     }).ToList() ?? new List<MediaDTO>(),
                     Features = features.Select(f => new ServiceFeatureDTO
                     {
-                        Id = f.Id,
                         Name = f.Name,
                         Value = f.Value
                     }).ToList(),

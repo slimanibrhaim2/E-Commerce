@@ -8,6 +8,7 @@ using Catalogs.Application.DTOs;
 using System.Linq.Expressions;
 using Catalogs.Infrastructure.Mapping.Mappers;
 using FuzzySharp;
+using Core.Pagination;
 
 namespace Catalogs.Infrastructure.Repositories;
 
@@ -36,10 +37,12 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
     {
         var serviceDao = await _context.Services
             .Include(s => s.BaseItem)
-                .ThenInclude(bi => bi.Category)
-            .Include(s => s.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
-            .FirstOrDefaultAsync(s => s.Id == id);
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .FirstOrDefaultAsync(s => s.Id == id && s.DeletedAt == null);
 
         if (serviceDao == null)
             return null;
@@ -51,7 +54,12 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
     {
         var services = await _context.Services
             .Include(s => s.BaseItem)
-            .Where(s => s.BaseItem.CategoryId == categoryId)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.BaseItem.CategoryId == categoryId && s.DeletedAt == null)
             .ToListAsync();
 
         return services.Select(s => _mapper.Map(s));
@@ -72,7 +80,12 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
     {
         var services = await _context.Services
             .Include(s => s.BaseItem)
-            .Where(s => s.BaseItem.Price >= (double)minPrice && s.BaseItem.Price <= (double)maxPrice)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.BaseItem.Price >= (double)minPrice && s.BaseItem.Price <= (double)maxPrice && s.DeletedAt == null)
             .ToListAsync();
 
         return services.Select(s => _mapper.Map(s));
@@ -104,7 +117,12 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
     {
         var services = await _context.Services
             .Include(s => s.BaseItem)
-            .Where(s => s.Duration >= minDuration && s.Duration <= maxDuration)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.Duration >= minDuration && s.Duration <= maxDuration && s.DeletedAt == null)
             .ToListAsync();
 
         return services.Select(s => _mapper.Map(s));
@@ -161,7 +179,12 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
     {
         var services = await _context.Services
             .Include(s => s.BaseItem)
-            .Where(s => s.BaseItem.UserId == userId)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.BaseItem.UserId == userId && s.DeletedAt == null)
             .ToListAsync();
         return services.Select(s => _mapper.Map(s));
     }
@@ -207,5 +230,61 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
             .FirstOrDefaultAsync();
 
         return service == Guid.Empty ? null : service;
+    }
+
+    public async Task<IEnumerable<Service>> GetAllWithDetails()
+    {
+        var services = await _context.Services
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.DeletedAt == null)
+            .ToListAsync();
+        return services.Select(s => _mapper.Map(s));
+    }
+
+    public async Task<Service> AddAsync(Service service)
+    {
+        var dao = _mapper.MapBack(service);
+        dao.Id = Guid.NewGuid();
+        dao.CreatedAt = DateTime.UtcNow;
+        dao.UpdatedAt = DateTime.UtcNow;
+        dao.DeletedAt = null;
+        await _context.Services.AddAsync(dao);
+        await _context.SaveChangesAsync();
+        return _mapper.Map(dao);
+    }
+
+ 
+
+    public async Task<PaginatedResult<Service>> GetByPriceRange(decimal minPrice, decimal maxPrice, int pageNumber, int pageSize)
+    {
+        var query = _context.Services
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.BaseItem.Price >= (double)minPrice && 
+                       s.BaseItem.Price <= (double)maxPrice && 
+                       s.DeletedAt == null);
+
+        var totalCount = await query.CountAsync();
+        var items = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PaginatedResult<Service>
+        {
+            Data = items.Select(s => _mapper.Map(s)),
+            TotalCount = totalCount,
+            PageNumber = pageNumber,
+            PageSize = pageSize
+        };
     }
 } 

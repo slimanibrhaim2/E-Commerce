@@ -82,32 +82,15 @@ public class GetProductsByNameQueryHandler : IRequestHandler<GetProductsByNameQu
                 StockQuantity = p.StockQuantity,
                 IsAvailable = p.IsAvailable,
                 UserId = p.UserId,
-                CreatedAt = p.CreatedAt,
-                UpdatedAt = p.UpdatedAt,
                 Media = p.Media?.Select(m => new MediaDTO
                 {
-                    Id = m.Id,
                     Url = m.MediaUrl,
-                    MediaTypeId = m.MediaTypeId,
-                    BaseItemId = m.BaseItemId,
-                    MediaType = m.MediaType != null ? new MediaTypeDTO
-                    {
-                        Id = m.MediaType.Id,
-                        Name = m.MediaType.Name,
-                        CreatedAt = m.MediaType.CreatedAt,
-                        UpdatedAt = m.MediaType.UpdatedAt
-                    } : null,
-                    CreatedAt = m.CreatedAt,
-                    UpdatedAt = m.UpdatedAt
+                    MediaTypeName = m.MediaType?.Name
                 }).ToList() ?? new List<MediaDTO>(),
                 Features = p.Features?.Select(f => new ProductFeatureDTO
                 {
-                    Id = f.Id,
                     Name = f.Name,
-                    Value = f.Value,
-                    ProductId = p.Id,
-                    CreatedAt = f.CreatedAt,
-                    UpdatedAt = f.UpdatedAt
+                    Value = f.Value
                 }).ToList() ?? new List<ProductFeatureDTO>()
             }).ToList();
 

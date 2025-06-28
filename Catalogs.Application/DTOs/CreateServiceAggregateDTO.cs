@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Catalogs.Application.DTOs
 {
@@ -12,6 +13,8 @@ namespace Catalogs.Application.DTOs
         public string ServiceType { get; set; }
         public int Duration { get; set; }
         public bool IsAvailable { get; set; }
+        
+        [JsonIgnore]
         public List<CreateMediaDTO> Media { get; set; } = new();
         public List<CreateFeatureDTO> Features { get; set; } = new();
     }

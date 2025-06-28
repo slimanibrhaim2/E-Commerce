@@ -11,6 +11,9 @@ using MediatR;
 using System.Reflection;
 using Catalogs.Application.Commands.CreateProduct;
 using Catalogs.Application.Commands.CreateProduct.Simple;
+using Catalogs.Presentation.ModelBinders;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Catalogs.Application.DTOs;
 
 namespace Catalogs.Presentation.DI
 {
@@ -27,6 +30,34 @@ namespace Catalogs.Presentation.DI
             });
 
             return services;
+        }
+
+        public static IServiceCollection AddPresentation(this IServiceCollection services)
+        {
+            services.AddControllers(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new FormCollectionModelBinderProvider());
+            });
+
+            return services;
+        }
+    }
+
+    public class FormCollectionModelBinderProvider : IModelBinderProvider
+    {
+        public IModelBinder GetBinder(ModelBinderProviderContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (context.Metadata.ModelType == typeof(List<CreateFeatureDTO>))
+            {
+                return new FormCollectionModelBinder();
+            }
+
+            return null;
         }
     }
 }

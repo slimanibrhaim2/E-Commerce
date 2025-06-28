@@ -1,5 +1,9 @@
 using Core.Interfaces;
 using Catalogs.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Core.Pagination;
 
 namespace Catalogs.Domain.Repositories;
 
@@ -23,4 +27,11 @@ public interface IServiceRepository : IRepository<Service>
     
     // Add reverse lookup method
     Task<Guid?> GetServiceIdByBaseItemIdAsync(Guid baseItemId);
+
+    Task<Service?> GetByIdWithDetails(Guid id);
+    Task<Service> AddAsync(Service service);
+    Task<PaginatedResult<Service>> GetByPriceRange(decimal minPrice, decimal maxPrice, int pageNumber, int pageSize);
+
+    Task<IEnumerable<Service>> GetAllAsync();
+    Task<IEnumerable<Service>> GetAllWithDetails();
 } 

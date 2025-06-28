@@ -1382,19 +1382,52 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
+                "required": [
+                  "Name"
+                ],
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Description": {
+                    "maxLength": 500,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "ParentId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "IsActive": {
+                    "type": "boolean"
+                  },
+                  "imageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "ParentId": {
+                  "style": "form"
+                },
+                "IsActive": {
+                  "style": "form"
+                },
+                "imageFile": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -1445,19 +1478,52 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
+                "required": [
+                  "Name"
+                ],
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Description": {
+                    "maxLength": 500,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "ParentId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "IsActive": {
+                    "type": "boolean"
+                  },
+                  "imageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "ParentId": {
+                  "style": "form"
+                },
+                "IsActive": {
+                  "style": "form"
+                },
+                "imageFile": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -2760,6 +2826,28 @@
           },
           {
             "name": "followerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Media/file/{filePath}": {
+      "get": {
+        "tags": [
+          "Media"
+        ],
+        "parameters": [
+          {
+            "name": "filePath",
             "in": "path",
             "required": true,
             "schema": {
@@ -5244,19 +5332,86 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProductAggregateDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductAggregateDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductAggregateDTO"
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "Price": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "CategoryId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "SKU": {
+                    "type": "string"
+                  },
+                  "StockQuantity": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IsAvailable": {
+                    "type": "boolean"
+                  },
+                  "Media": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateMediaDTO"
+                    }
+                  },
+                  "features": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateFeatureDTO"
+                    }
+                  },
+                  "mediaFiles": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Price": {
+                  "style": "form"
+                },
+                "CategoryId": {
+                  "style": "form"
+                },
+                "SKU": {
+                  "style": "form"
+                },
+                "StockQuantity": {
+                  "style": "form"
+                },
+                "IsAvailable": {
+                  "style": "form"
+                },
+                "Media": {
+                  "style": "form"
+                },
+                "features": {
+                  "style": "form"
+                },
+                "mediaFiles": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -5370,19 +5525,86 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProductAggregateDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductAggregateDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductAggregateDTO"
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "Price": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "CategoryId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "SKU": {
+                    "type": "string"
+                  },
+                  "StockQuantity": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IsAvailable": {
+                    "type": "boolean"
+                  },
+                  "Media": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateMediaDTO"
+                    }
+                  },
+                  "features": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateFeatureDTO"
+                    }
+                  },
+                  "mediaFiles": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Price": {
+                  "style": "form"
+                },
+                "CategoryId": {
+                  "style": "form"
+                },
+                "SKU": {
+                  "style": "form"
+                },
+                "StockQuantity": {
+                  "style": "form"
+                },
+                "IsAvailable": {
+                  "style": "form"
+                },
+                "Media": {
+                  "style": "form"
+                },
+                "features": {
+                  "style": "form"
+                },
+                "mediaFiles": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -6127,19 +6349,86 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreateServiceAggregateDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateServiceAggregateDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateServiceAggregateDTO"
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "Price": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "CategoryId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "ServiceType": {
+                    "type": "string"
+                  },
+                  "Duration": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IsAvailable": {
+                    "type": "boolean"
+                  },
+                  "Media": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateMediaDTO"
+                    }
+                  },
+                  "Features": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateFeatureDTO"
+                    }
+                  },
+                  "mediaFiles": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Price": {
+                  "style": "form"
+                },
+                "CategoryId": {
+                  "style": "form"
+                },
+                "ServiceType": {
+                  "style": "form"
+                },
+                "Duration": {
+                  "style": "form"
+                },
+                "IsAvailable": {
+                  "style": "form"
+                },
+                "Media": {
+                  "style": "form"
+                },
+                "Features": {
+                  "style": "form"
+                },
+                "mediaFiles": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -6253,19 +6542,86 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreateServiceAggregateDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateServiceAggregateDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateServiceAggregateDTO"
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "Price": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "CategoryId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "ServiceType": {
+                    "type": "string"
+                  },
+                  "Duration": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IsAvailable": {
+                    "type": "boolean"
+                  },
+                  "Media": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateMediaDTO"
+                    }
+                  },
+                  "Features": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CreateFeatureDTO"
+                    }
+                  },
+                  "mediaFiles": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "Price": {
+                  "style": "form"
+                },
+                "CategoryId": {
+                  "style": "form"
+                },
+                "ServiceType": {
+                  "style": "form"
+                },
+                "Duration": {
+                  "style": "form"
+                },
+                "IsAvailable": {
+                  "style": "form"
+                },
+                "Media": {
+                  "style": "form"
+                },
+                "Features": {
+                  "style": "form"
+                },
+                "mediaFiles": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -8099,32 +8455,6 @@
         },
         "additionalProperties": false
       },
-      "CreateCategoryDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "parentId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "imageUrl": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateConversationDTO": {
         "type": "object",
         "properties": {
@@ -8150,31 +8480,27 @@
         "additionalProperties": false
       },
       "CreateFeatureDTO": {
+        "required": [
+          "name",
+          "value"
+        ],
         "type": "object",
         "properties": {
           "name": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
           },
           "value": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 500,
+            "minLength": 0,
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
       "CreateMediaDTO": {
         "type": "object",
-        "properties": {
-          "url": {
-            "type": "string",
-            "nullable": true
-          },
-          "mediaTypeId": {
-            "type": "string",
-            "format": "uuid"
-          }
-        },
         "additionalProperties": false
       },
       "CreateMediaTypeDTO": {
@@ -8314,53 +8640,6 @@
         },
         "additionalProperties": false
       },
-      "CreateProductAggregateDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "categoryId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "sku": {
-            "type": "string",
-            "nullable": true
-          },
-          "stockQuantity": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isAvailable": {
-            "type": "boolean"
-          },
-          "media": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CreateMediaDTO"
-            },
-            "nullable": true
-          },
-          "features": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CreateFeatureDTO"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateProductDTO": {
         "type": "object",
         "properties": {
@@ -8411,53 +8690,6 @@
           },
           "content": {
             "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreateServiceAggregateDTO": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "categoryId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "serviceType": {
-            "type": "string",
-            "nullable": true
-          },
-          "duration": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isAvailable": {
-            "type": "boolean"
-          },
-          "media": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CreateMediaDTO"
-            },
-            "nullable": true
-          },
-          "features": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CreateFeatureDTO"
-            },
             "nullable": true
           }
         },
@@ -8731,32 +8963,12 @@
       "MediaDTO": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
           "url": {
             "type": "string",
             "nullable": true
           },
-          "mediaTypeId": {
+          "mediaTypeName": {
             "type": "string",
-            "format": "uuid"
-          },
-          "mediaType": {
-            "$ref": "#/components/schemas/MediaTypeDTO"
-          },
-          "baseItemId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
             "nullable": true
           }
         },

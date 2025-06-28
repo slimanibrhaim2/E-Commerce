@@ -3,6 +3,122 @@
   "WorkspaceRootPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.presentation\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|solutionrelative:catalogs.presentation\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\commands\\updatecategory\\updatecategorycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\commands\\updatecategory\\updatecategorycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\commands\\createcategory\\createcategorycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\commands\\createcategory\\createcategorycommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63FE3A1D-8869-46B9-A86F-85A3167D21DF}|Catalogs.Infrastructure\\Catalogs.Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.infrastructure\\repositories\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FE3A1D-8869-46B9-A86F-85A3167D21DF}|Catalogs.Infrastructure\\Catalogs.Infrastructure.csproj|solutionrelative:catalogs.infrastructure\\repositories\\servicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.domain\\repositories\\iservicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|solutionrelative:catalogs.domain\\repositories\\iservicerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbyuserid\\getservicesbyuseridqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbyuserid\\getservicesbyuseridqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbypricerange\\getservicesbypricerangequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbypricerange\\getservicesbypricerangequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbyduration\\getservicesbydurationqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbyduration\\getservicesbydurationqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbycategory\\getservicesbycategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbycategory\\getservicesbycategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getproductsbyuserid\\getproductsbyuseridqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getproductsbyuserid\\getproductsbyuseridqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getproductsbypricerange\\getproductsbypricerangequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getproductsbypricerange\\getproductsbypricerangequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getmediabyid\\getmediabyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getmediabyid\\getmediabyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getproductsbyname\\getproductsbynamequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getproductsbyname\\getproductsbynamequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getlowstockproducts\\getlowstockproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getlowstockproducts\\getlowstockproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getallservices\\getallservicesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getallservices\\getallservicesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicebyid\\getservicebyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicebyid\\getservicebyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getproductsbycategory\\getproductsbycategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getproductsbycategory\\getproductsbycategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getallproducts\\getallproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getallproducts\\getallproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getproductbyid\\getproductbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getproductbyid\\getproductbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.presentation\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|solutionrelative:catalogs.presentation\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.presentation\\di\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|solutionrelative:catalogs.presentation\\di\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\dtos\\createproductaggregatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\dtos\\createproductaggregatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\commands\\createproduct\\aggregate\\createproductaggregatecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\commands\\createproduct\\aggregate\\createproductaggregatecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.domain\\entities\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|solutionrelative:catalogs.domain\\entities\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.infrastructure.mapping\\mappers\\servicemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|solutionrelative:catalogs.infrastructure.mapping\\mappers\\servicemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.domain\\entities\\media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|solutionrelative:catalogs.domain\\entities\\media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.infrastructure.mapping\\mappers\\productmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|solutionrelative:catalogs.infrastructure.mapping\\mappers\\productmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.presentation\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|solutionrelative:catalogs.presentation\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.presentation\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|solutionrelative:shoppings.presentation\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,36 +143,8 @@
       "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\queries\\getmycart\\getmycartqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicebyid\\getservicebyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicebyid\\getservicebyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getproductsbycategory\\getproductsbycategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getproductsbycategory\\getproductsbycategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getproductbyid\\getproductbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getproductbyid\\getproductbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.presentation\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|solutionrelative:catalogs.presentation\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.presentation\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|solutionrelative:catalogs.presentation\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getallservices\\getallservicesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getallservices\\getallservicesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\dtos\\mediadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\dtos\\mediadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getallproducts\\getallproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getallproducts\\getallproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getmyfavorites\\getmyfavoritesqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,36 +171,12 @@
       "RelativeMoniker": "D:0:0:{2724552D-D9EF-427C-BD77-C2E6C6A8055A}|Core\\Core.csproj|solutionrelative:core\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.infrastructure.mapping\\mappers\\servicemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|solutionrelative:catalogs.infrastructure.mapping\\mappers\\servicemapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.infrastructure.mapping\\mappers\\productmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|solutionrelative:catalogs.infrastructure.mapping\\mappers\\productmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.infrastructure.mapping\\mappers\\baseitemmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FBB7090F-818E-4BF0-BEE4-CD77EA53FBE5}|Catalogs.Infrastructure.Mapping\\Catalogs.Infrastructure.Mapping.csproj|solutionrelative:catalogs.infrastructure.mapping\\mappers\\baseitemmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbyuserid\\getservicesbyuseridqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbyuserid\\getservicesbyuseridqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbypricerange\\getservicesbypricerangequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbypricerange\\getservicesbypricerangequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbyname\\getservicesbynamequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbyname\\getservicesbynamequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbyduration\\getservicesbydurationqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbyduration\\getservicesbydurationqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbycategory\\getservicesbycategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getservicesbycategory\\getservicesbycategoryqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{679BB9C2-D82D-49C4-9068-DA0EE1A3440E}|Catalogs.Domain\\Catalogs.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.domain\\entities\\baseitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -121,14 +185,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\dtos\\servicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\dtos\\servicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getlowstockproducts\\getlowstockproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\queries\\getlowstockproducts\\getlowstockproductsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getallbaseitemsbyuserid\\getallbaseitemsbyuseridqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -177,14 +233,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\commands\\createproduct\\simple\\createproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\commands\\createproduct\\simple\\createproductcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\commands\\createproduct\\aggregate\\createproductaggregatecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\commands\\createproduct\\aggregate\\createproductaggregatecommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\dtos\\createproductaggregatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|solutionrelative:catalogs.application\\dtos\\createproductaggregatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getservicesbyids\\getservicesbyidsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -287,10 +335,6 @@
       "RelativeMoniker": "D:0:0:{63FE3A1D-8869-46B9-A86F-85A3167D21DF}|Catalogs.Infrastructure\\Catalogs.Infrastructure.csproj|solutionrelative:catalogs.infrastructure\\repositories\\favoriterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.presentation\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E68422C-33B8-4023-906A-66E813A87103}|Catalogs.Presentation\\Catalogs.Presentation.csproj|solutionrelative:catalogs.presentation\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{63FE3A1D-8869-46B9-A86F-85A3167D21DF}|Catalogs.Infrastructure\\Catalogs.Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.infrastructure\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{63FE3A1D-8869-46B9-A86F-85A3167D21DF}|Catalogs.Infrastructure\\Catalogs.Infrastructure.csproj|solutionrelative:catalogs.infrastructure\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -311,6 +355,396 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "UpdateCategoryCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\UpdateCategory\\UpdateCategoryCommandHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\UpdateCategory\\UpdateCategoryCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\UpdateCategory\\UpdateCategoryCommandHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Commands\\UpdateCategory\\UpdateCategoryCommandHandler.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAjwC8AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T13:04:41.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateCategoryCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\CreateCategory\\CreateCategoryCommandHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\CreateCategory\\CreateCategoryCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\CreateCategory\\CreateCategoryCommandHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Commands\\CreateCategory\\CreateCategoryCommandHandler.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAjwDQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T13:04:12.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\CategoryController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "Catalogs.Presentation\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAArwF8AAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:14:37.636Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ServiceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure\\Repositories\\ServiceRepository.cs",
+              "RelativeDocumentMoniker": "Catalogs.Infrastructure\\Repositories\\ServiceRepository.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure\\Repositories\\ServiceRepository.cs",
+              "RelativeToolTip": "Catalogs.Infrastructure\\Repositories\\ServiceRepository.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAAASwBkBAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T12:11:10.432Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IServiceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Repositories\\IServiceRepository.cs",
+              "RelativeDocumentMoniker": "Catalogs.Domain\\Repositories\\IServiceRepository.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Repositories\\IServiceRepository.cs",
+              "RelativeToolTip": "Catalogs.Domain\\Repositories\\IServiceRepository.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAADwvx8AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T12:14:02.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GetServicesByDurationQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAlwEAAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:59:22.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GetServicesByPriceRangeQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAlwHAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:59:29.642Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GetServicesByUserIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAlwD0AAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:59:31.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GetServicesByCategoryQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAlwFEAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:58:33.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetProductsByUserIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByUserId\\GetProductsByUserIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByUserId\\GetProductsByUserIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByUserId\\GetProductsByUserIdQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByUserId\\GetProductsByUserIdQueryHandler.cs",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAlwFEAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T11:50:35.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProductDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\ProductDTO.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\ProductDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\ProductDTO.cs",
+              "RelativeToolTip": "Catalogs.Application\\DTOs\\ProductDTO.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwAwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:57:33.364Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GetProductsByPriceRangeQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByPriceRange\\GetProductsByPriceRangeQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByPriceRange\\GetProductsByPriceRangeQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByPriceRange\\GetProductsByPriceRangeQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByPriceRange\\GetProductsByPriceRangeQueryHandler.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAlwGoAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T11:28:16.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GetMediaByIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetMediaById\\GetMediaByIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetMediaById\\GetMediaByIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetMediaById\\GetMediaByIdQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetMediaById\\GetMediaByIdQueryHandler.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAQwCIAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T11:28:36.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GetProductsByNameQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByName\\GetProductsByNameQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByName\\GetProductsByNameQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByName\\GetProductsByNameQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByName\\GetProductsByNameQueryHandler.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAQwHYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T11:24:15.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "GetServiceByIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServiceById\\GetServiceByIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServiceById\\GetServiceByIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServiceById\\GetServiceByIdQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServiceById\\GetServiceByIdQueryHandler.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAlwEoAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:59:03.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "GetAllServicesQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAQwH8AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:57:41.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "GetLowStockProductsQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAlwF4AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:57:47.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "GetProductsByCategoryQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAlwF8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:57:51.103Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "GetAllProductsQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAQwGsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:57:24.292Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "GetProductByIdQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductById\\GetProductByIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductById\\GetProductByIdQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductById\\GetProductByIdQueryHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductById\\GetProductByIdQueryHandler.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAlwCoAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T12:34:57.597Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "Catalogs.Presentation\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAnwEcAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:15:27.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ServiceMapper.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure.Mapping\\Mappers\\ServiceMapper.cs",
+              "RelativeDocumentMoniker": "Catalogs.Infrastructure.Mapping\\Mappers\\ServiceMapper.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure.Mapping\\Mappers\\ServiceMapper.cs",
+              "RelativeToolTip": "Catalogs.Infrastructure.Mapping\\Mappers\\ServiceMapper.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAlwFMAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:59:57.424Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Media.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\Media.cs",
+              "RelativeDocumentMoniker": "Catalogs.Domain\\Entities\\Media.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\Media.cs",
+              "RelativeToolTip": "Catalogs.Domain\\Entities\\Media.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA5wBgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T09:35:20.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\DI\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "Catalogs.Presentation\\DI\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\DI\\DependencyInjection.cs",
+              "RelativeToolTip": "Catalogs.Presentation\\DI\\DependencyInjection.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAADgvzYAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T10:17:02.034Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "CreateProductAggregateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\CreateProductAggregateDTO.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\CreateProductAggregateDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\CreateProductAggregateDTO.cs",
+              "RelativeToolTip": "Catalogs.Application\\DTOs\\CreateProductAggregateDTO.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAIA4wBYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:54:06.077Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Service.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\Service.cs",
+              "RelativeDocumentMoniker": "Catalogs.Domain\\Entities\\Service.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\Service.cs",
+              "RelativeToolTip": "Catalogs.Domain\\Entities\\Service.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAUwBAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T09:36:02.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "CreateProductAggregateCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\CreateProduct\\Aggregate\\CreateProductAggregateCommandHandler.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\CreateProduct\\Aggregate\\CreateProductAggregateCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\CreateProduct\\Aggregate\\CreateProductAggregateCommandHandler.cs",
+              "RelativeToolTip": "Catalogs.Application\\Commands\\CreateProduct\\Aggregate\\CreateProductAggregateCommandHandler.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAjwCcAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T19:53:56.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ProductMapper.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure.Mapping\\Mappers\\ProductMapper.cs",
+              "RelativeDocumentMoniker": "Catalogs.Infrastructure.Mapping\\Mappers\\ProductMapper.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure.Mapping\\Mappers\\ProductMapper.cs",
+              "RelativeToolTip": "Catalogs.Infrastructure.Mapping\\Mappers\\ProductMapper.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAjwFUAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T10:01:11.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ServicesController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ServicesController.cs",
+              "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\ServicesController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ServicesController.cs",
+              "RelativeToolTip": "Catalogs.Presentation\\Controllers\\ServicesController.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAlwFEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T12:15:47.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\CartController.cs",
+              "RelativeToolTip": "Shoppings.Presentation\\Controllers\\CartController.cs",
+              "ViewState": "AgIAAMkAAAAAAAAAAAAAwMQAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T17:41:18.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
               "Title": "DeleteOrderActivityCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\DeleteOrderActivity\\DeleteOrderActivityCommandHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\DeleteOrderActivity\\DeleteOrderActivityCommandHandler.cs",
@@ -323,7 +757,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 31,
               "Title": "TransactCartCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\TransactCartToOrder\\TransactCartCommandHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\TransactCartToOrder\\TransactCartCommandHandler.cs",
@@ -336,20 +770,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CartController.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\CartController.cs",
-              "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\CartController.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\CartController.cs",
-              "RelativeToolTip": "Shoppings.Presentation\\Controllers\\CartController.cs",
-              "ViewState": "AgIAANIAAAAAAAAAAAAAwMQAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T17:41:18.319Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 34,
               "Title": "GetMyCartQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetMyCart\\GetMyCartQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetMyCart\\GetMyCartQueryHandler.cs",
@@ -362,7 +783,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 33,
               "Title": "UpdateMyCartItemCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\UpdateMyCartItem\\UpdateMyCartItemCommandHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\UpdateMyCartItem\\UpdateMyCartItemCommandHandler.cs",
@@ -375,7 +796,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 32,
               "Title": "CartItemWithDetailsDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\DTOs\\CartItemWithDetailsDTO.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\DTOs\\CartItemWithDetailsDTO.cs",
@@ -388,111 +809,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GetServiceByIdQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServiceById\\GetServiceByIdQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServiceById\\GetServiceByIdQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServiceById\\GetServiceByIdQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServiceById\\GetServiceByIdQueryHandler.cs",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAQwG0AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:59:03.272Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "GetProductsByCategoryQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAlwGAAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:57:51.103Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "GetProductByIdQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductById\\GetProductByIdQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductById\\GetProductByIdQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductById\\GetProductByIdQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductById\\GetProductByIdQueryHandler.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAlwEkAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T12:34:57.597Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ServicesController.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ServicesController.cs",
-              "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\ServicesController.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ServicesController.cs",
-              "RelativeToolTip": "Catalogs.Presentation\\Controllers\\ServicesController.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAawF4AAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T12:15:47.306Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "GetAllServicesQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAQwIUAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:57:41.882Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 35,
               "Title": "MediaDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\MediaDTO.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\MediaDTO.cs",
               "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\MediaDTO.cs",
               "RelativeToolTip": "Catalogs.Application\\DTOs\\MediaDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-27T12:22:06.052Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ProductsController.cs",
-              "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\ProductsController.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\ProductsController.cs",
-              "RelativeToolTip": "Catalogs.Presentation\\Controllers\\ProductsController.cs",
-              "ViewState": "AgIAAMIAAAAAAAAAAAAawM0AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T18:15:27.644Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 36,
               "Title": "GetMyFavoritesQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
               "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAQwIMAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAQwIYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-24T13:03:04.748Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 37,
               "Title": "CreateUserDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DTOs\\CreateUserDTO.cs",
               "RelativeDocumentMoniker": "Users.Application\\DTOs\\CreateUserDTO.cs",
@@ -505,20 +848,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "GetAllProductsQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAQwEkAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:57:24.292Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 41,
               "Title": "FileService.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Core\\Services\\FileService.cs",
               "RelativeDocumentMoniker": "Core\\Services\\FileService.cs",
@@ -530,7 +860,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 39,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Users.Presentation\\Controllers\\UsersController.cs",
@@ -542,7 +872,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 40,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Program.cs",
               "RelativeDocumentMoniker": "WebApi\\Program.cs",
@@ -554,7 +884,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 38,
               "Title": "FileController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\FileController.cs",
               "RelativeDocumentMoniker": "Users.Presentation\\Controllers\\FileController.cs",
@@ -566,19 +896,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "ServiceMapper.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure.Mapping\\Mappers\\ServiceMapper.cs",
-              "RelativeDocumentMoniker": "Catalogs.Infrastructure.Mapping\\Mappers\\ServiceMapper.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure.Mapping\\Mappers\\ServiceMapper.cs",
-              "RelativeToolTip": "Catalogs.Infrastructure.Mapping\\Mappers\\ServiceMapper.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAjwBYAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:59:57.424Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 42,
               "Title": "BaseItemMapper.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure.Mapping\\Mappers\\BaseItemMapper.cs",
               "RelativeDocumentMoniker": "Catalogs.Infrastructure.Mapping\\Mappers\\BaseItemMapper.cs",
@@ -590,45 +908,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "GetServicesByUserIdQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAjwE4AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:59:31.821Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "GetServicesByPriceRangeQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAjwF4AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:59:29.642Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "ProductMapper.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure.Mapping\\Mappers\\ProductMapper.cs",
-              "RelativeDocumentMoniker": "Catalogs.Infrastructure.Mapping\\Mappers\\ProductMapper.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure.Mapping\\Mappers\\ProductMapper.cs",
-              "RelativeToolTip": "Catalogs.Infrastructure.Mapping\\Mappers\\ProductMapper.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAIA2wBMAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T10:01:11.307Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 43,
               "Title": "GetServicesByNameQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByName\\GetServicesByNameQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByName\\GetServicesByNameQueryHandler.cs",
@@ -640,19 +920,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "GetServicesByDurationQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAjwCQAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:59:22.407Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 45,
               "Title": "ServiceDto.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\ServiceDto.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\ServiceDto.cs",
@@ -660,24 +928,12 @@
               "RelativeToolTip": "Catalogs.Application\\DTOs\\ServiceDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAwwAcAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:58:39.754Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "GetServicesByCategoryQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAlwE4AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:58:33.347Z",
+              "WhenOpened": "2025-06-26T19:58:39.754Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 44,
               "Title": "BaseItem.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Domain\\Entities\\BaseItem.cs",
               "RelativeDocumentMoniker": "Catalogs.Domain\\Entities\\BaseItem.cs",
@@ -689,32 +945,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "GetLowStockProductsQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAjwFAAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:57:47.735Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "ProductDTO.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\ProductDTO.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\ProductDTO.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\ProductDTO.cs",
-              "RelativeToolTip": "Catalogs.Application\\DTOs\\ProductDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvwoAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:57:33.364Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 47,
               "Title": "BaseItemDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\BaseItemDTO.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\BaseItemDTO.cs",
@@ -726,7 +957,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 46,
               "Title": "GetAllBaseItemsByUserIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllBaseItemsByUserId\\GetAllBaseItemsByUserIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetAllBaseItemsByUserId\\GetAllBaseItemsByUserIdQueryHandler.cs",
@@ -738,7 +969,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 48,
               "Title": "UpdateServiceSimpleCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\UpdateService\\Simple\\UpdateServiceSimpleCommandHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\UpdateService\\Simple\\UpdateServiceSimpleCommandHandler.cs",
@@ -750,7 +981,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 49,
               "Title": "UpdateServiceAggregateCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\UpdateService\\Aggregate\\UpdateServiceAggregateCommandHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\UpdateService\\Aggregate\\UpdateServiceAggregateCommandHandler.cs",
@@ -762,7 +993,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 50,
               "Title": "UpdateProductSimpleCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\UpdateProduct\\Simple\\UpdateProductSimpleCommandHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\UpdateProduct\\Simple\\UpdateProductSimpleCommandHandler.cs",
@@ -774,7 +1005,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 51,
               "Title": "UpdateProductAggregateCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\UpdateProduct\\Aggregate\\UpdateProductAggregateCommandHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\UpdateProduct\\Aggregate\\UpdateProductAggregateCommandHandler.cs",
@@ -786,7 +1017,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 53,
               "Title": "CreateServiceDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\CreateServiceDTO.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\CreateServiceDTO.cs",
@@ -798,7 +1029,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 52,
               "Title": "CreateServiceCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\CreateService\\Simple\\CreateServiceCommandHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\CreateService\\Simple\\CreateServiceCommandHandler.cs",
@@ -810,7 +1041,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 54,
               "Title": "CreateServiceAggregateDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\CreateServiceAggregateDTO.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\CreateServiceAggregateDTO.cs",
@@ -822,7 +1053,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 55,
               "Title": "CreateServiceAggregateCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\CreateService\\Aggregate\\CreateServiceAggregateCommandHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\CreateService\\Aggregate\\CreateServiceAggregateCommandHandler.cs",
@@ -834,7 +1065,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 56,
               "Title": "CreateProductDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\CreateProductDTO.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\CreateProductDTO.cs",
@@ -846,7 +1077,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 57,
               "Title": "CreateProductCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\CreateProduct\\Simple\\CreateProductCommandHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\CreateProduct\\Simple\\CreateProductCommandHandler.cs",
@@ -858,31 +1089,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "CreateProductAggregateDTO.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\CreateProductAggregateDTO.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\CreateProductAggregateDTO.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\CreateProductAggregateDTO.cs",
-              "RelativeToolTip": "Catalogs.Application\\DTOs\\CreateProductAggregateDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:54:06.077Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 44,
-              "Title": "CreateProductAggregateCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\CreateProduct\\Aggregate\\CreateProductAggregateCommandHandler.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\CreateProduct\\Aggregate\\CreateProductAggregateCommandHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\CreateProduct\\Aggregate\\CreateProductAggregateCommandHandler.cs",
-              "RelativeToolTip": "Catalogs.Application\\Commands\\CreateProduct\\Aggregate\\CreateProductAggregateCommandHandler.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAAlwEAAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:53:56.062Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 58,
               "Title": "GetServicesByIdsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByIds\\GetServicesByIdsQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByIds\\GetServicesByIdsQueryHandler.cs",
@@ -894,7 +1101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 59,
               "Title": "GetProductsByIdsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByIds\\GetProductsByIdsQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByIds\\GetProductsByIdsQueryHandler.cs",
@@ -906,7 +1113,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 60,
               "Title": "MessageController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Presentation\\Controllers\\MessageController.cs",
               "RelativeDocumentMoniker": "Communication.Presentation\\Controllers\\MessageController.cs",
@@ -918,7 +1125,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 62,
               "Title": "ServiceDetailsDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
@@ -930,7 +1137,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 63,
               "Title": "ProductDetailsDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
@@ -942,7 +1149,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 61,
               "Title": "OrderItemWithDetailsDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\DTOs\\OrderItemWithDetailsDTO.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\DTOs\\OrderItemWithDetailsDTO.cs",
@@ -954,7 +1161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 64,
               "Title": "ItemDetailsDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ItemDetailsDTO.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ItemDetailsDTO.cs",
@@ -966,7 +1173,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 66,
               "Title": "GetMyCartItemsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetMyCartItems\\GetMyCartItemsQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetMyCartItems\\GetMyCartItemsQueryHandler.cs",
@@ -978,7 +1185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 65,
               "Title": "GetItemDetailsByBaseItemIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetItemDetailsByBaseItemId\\GetItemDetailsByBaseItemIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetItemDetailsByBaseItemId\\GetItemDetailsByBaseItemIdQueryHandler.cs",
@@ -990,7 +1197,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 67,
               "Title": "20250625130322_fixTotalAmmounType.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250625130322_fixTotalAmmounType.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250625130322_fixTotalAmmounType.cs",
@@ -1002,7 +1209,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 71,
               "Title": "Order.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Domain\\Entities\\Order.cs",
               "RelativeDocumentMoniker": "Shoppings.Domain\\Entities\\Order.cs",
@@ -1014,7 +1221,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 70,
               "Title": "OrderMapper.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Infrastructure.Mapping\\Mappers\\OrderMapper.cs",
               "RelativeDocumentMoniker": "Shoppings.Infrastructure.Mapping\\Mappers\\OrderMapper.cs",
@@ -1026,7 +1233,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 69,
               "Title": "OrderDAO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Models\\OrderDAO.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Models\\OrderDAO.cs",
@@ -1038,7 +1245,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 68,
               "Title": "UpdateOrderCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\UpdateOrder\\UpdateOrderCommandHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\UpdateOrder\\UpdateOrderCommandHandler.cs",
@@ -1050,7 +1257,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 72,
               "Title": "GetOrderItemByIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderItemById\\GetOrderItemByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrderItemById\\GetOrderItemByIdQueryHandler.cs",
@@ -1062,7 +1269,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 73,
               "Title": "GetAllOrderItemQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetAllOrderItem\\GetAllOrderItemQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetAllOrderItem\\GetAllOrderItemQueryHandler.cs",
@@ -1074,7 +1281,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 74,
               "Title": "20250624203950_AddReview.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250624203950_AddReview.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250624203950_AddReview.cs",
@@ -1086,7 +1293,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 78,
               "Title": "ReviewController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Presentation\\Controllers\\ReviewController.cs",
               "RelativeDocumentMoniker": "Communication.Presentation\\Controllers\\ReviewController.cs",
@@ -1098,7 +1305,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 75,
               "Title": "ReviewRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\Repositories\\ReviewRepository.cs",
               "RelativeDocumentMoniker": "Communication.Infrastructure\\Repositories\\ReviewRepository.cs",
@@ -1110,7 +1317,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 77,
               "Title": "UpdateReviewCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\Commands\\UpdateReview\\UpdateReviewCommandHandler.cs",
               "RelativeDocumentMoniker": "Communication.Application\\Commands\\UpdateReview\\UpdateReviewCommandHandler.cs",
@@ -1122,7 +1329,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 76,
               "Title": "DeleteReviewCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\Commands\\DeleteReview\\DeleteReviewCommandHandler.cs",
               "RelativeDocumentMoniker": "Communication.Application\\Commands\\DeleteReview\\DeleteReviewCommandHandler.cs",
@@ -1134,7 +1341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 84,
               "Title": "20250624192048_AddUniqueCartPerUser.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250624192048_AddUniqueCartPerUser.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250624192048_AddUniqueCartPerUser.cs",
@@ -1146,7 +1353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 79,
               "Title": "RemoveFromMyCartCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\RemoveFromMyCart\\RemoveFromMyCartCommandHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\RemoveFromMyCart\\RemoveFromMyCartCommandHandler.cs",
@@ -1158,7 +1365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 80,
               "Title": "AddToMyCartCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\AddToMyCart\\AddToMyCartCommandHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\AddToMyCart\\AddToMyCartCommandHandler.cs",
@@ -1170,7 +1377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 81,
               "Title": "FavoriteController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\FavoriteController.cs",
               "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\FavoriteController.cs",
@@ -1182,7 +1389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 82,
               "Title": "FavoriteRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure\\Repositories\\FavoriteRepository.cs",
               "RelativeDocumentMoniker": "Catalogs.Infrastructure\\Repositories\\FavoriteRepository.cs",
@@ -1194,19 +1401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\CategoryController.cs",
-              "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\CategoryController.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\CategoryController.cs",
-              "RelativeToolTip": "Catalogs.Presentation\\Controllers\\CategoryController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T18:14:37.636Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 83,
               "Title": "ProductRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure\\Repositories\\ProductRepository.cs",
               "RelativeDocumentMoniker": "Catalogs.Infrastructure\\Repositories\\ProductRepository.cs",

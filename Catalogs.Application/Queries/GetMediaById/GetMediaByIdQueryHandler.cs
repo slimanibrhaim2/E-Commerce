@@ -25,29 +25,26 @@ public class GetMediaByIdQueryHandler : IRequestHandler<GetMediaByIdQuery, Resul
             Media? media = await _mediaRepo.GetByIdAsync(request.Id);
             if (media == null)
                 return Result<MediaDTO>.Fail(
-                    message: "الوسائط غير موجودة",
+                    message: "Media not found",
                     errorType: "MediaNotFound",
                     resultStatus: ResultStatus.NotFound);
 
             var mediaDto = new MediaDTO
             {
-                Id = media.Id,
                 Url = media.MediaUrl,
-                MediaTypeId = media.MediaTypeId,
-                BaseItemId = media.BaseItemId,
-                // Add other properties as needed
+                MediaTypeName = media.MediaType?.Name
             };
 
             return Result<MediaDTO>.Ok(
                 data: mediaDto,
-                message: "تم جلب الوسائط بنجاح",
+                message: "Media retrieved successfully",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error retrieving media with ID {MediaId}", request.Id);
             return Result<MediaDTO>.Fail(
-                message: "حدث خطأ أثناء جلب الوسائط",
+                message: "An error occurred while retrieving the media",
                 errorType: "GetMediaFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

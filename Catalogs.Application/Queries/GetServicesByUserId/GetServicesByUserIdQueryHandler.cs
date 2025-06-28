@@ -15,13 +15,16 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
 {
     private readonly IServiceRepository _repository;
     private readonly ILogger<GetServicesByUserIdQueryHandler> _logger;
+    private readonly IFavoriteRepository _favoriteRepo;
 
     public GetServicesByUserIdQueryHandler(
         IServiceRepository repository,
-        ILogger<GetServicesByUserIdQueryHandler> logger)
+        ILogger<GetServicesByUserIdQueryHandler> logger,
+        IFavoriteRepository favoriteRepo)
     {
         _repository = repository;
         _logger = logger;
+        _favoriteRepo = favoriteRepo;
     }
 
     public async Task<Result<PaginatedResult<ServiceDTO>>> Handle(GetServicesByUserIdQuery request, CancellationToken cancellationToken)
@@ -54,6 +57,14 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
 
             var services = (await _repository.GetServicesByUserIdAsync(request.UserId)).ToList();
             
+            // Get all favorites for the user if authenticated
+            var userFavorites = request.UserId != Guid.Empty 
+                ? await _favoriteRepo.GetFavoritesByUserIdAsync(request.UserId)
+                : new List<Domain.Entities.Favorite>();
+
+            // Get all favorite base item IDs for quick lookup
+            var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
+
             if (!services.Any())
             {
                 return Result<PaginatedResult<ServiceDTO>>.Ok(
@@ -77,38 +88,21 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
                 Name = s.Name,
                 Description = s.Description,
                 Price = s.Price,
-                CategoryId = s.CategoryId,
+                CategoryName = s.Category?.Name,
                 ServiceType = s.ServiceType,
                 Duration = s.Duration,
                 IsAvailable = s.IsAvailable,
-                UserId = s.UserId,
-                CreatedAt = s.CreatedAt,
-                UpdatedAt = s.UpdatedAt,
                 Media = s.Media?.Select(m => new MediaDTO
                 {
-                    Id = m.Id,
                     Url = m.MediaUrl,
-                    MediaTypeId = m.MediaTypeId,
-                    BaseItemId = m.BaseItemId,
-                    MediaType = m.MediaType != null ? new MediaTypeDTO
-                    {
-                        Id = m.MediaType.Id,
-                        Name = m.MediaType.Name,
-                        CreatedAt = m.MediaType.CreatedAt,
-                        UpdatedAt = m.MediaType.UpdatedAt
-                    } : null,
-                    CreatedAt = m.CreatedAt,
-                    UpdatedAt = m.UpdatedAt
+                    MediaTypeName = m.MediaType?.Name
                 }).ToList() ?? new List<MediaDTO>(),
                 Features = s.Features?.Select(f => new ServiceFeatureDTO
                 {
-                    Id = f.Id,
                     Name = f.Name,
-                    Value = f.Value,
-                    ServiceId = s.Id,
-                    CreatedAt = f.CreatedAt,
-                    UpdatedAt = f.UpdatedAt
-                }).ToList() ?? new List<ServiceFeatureDTO>()
+                    Value = f.Value
+                }).ToList() ?? new List<ServiceFeatureDTO>(),
+                IsFavorite = favoriteBaseItemIds.Contains(s.BaseItemId)
             }).ToList();
 
             var paginated = PaginatedResult<ServiceDTO>.Create(
@@ -119,24 +113,17 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
 
             return Result<PaginatedResult<ServiceDTO>>.Ok(
                 data: paginated,
-                message: $"Successfully retrieved {dtos.Count} services for user {request.UserId} out of {totalCount} total services",
+                message: $"Successfully retrieved {dtos.Count} services for user {request.UserId}",
                 resultStatus: ResultStatus.Success);
-        }
-        catch (DBConcurrencyException ex)
-        {
-            _logger.LogError(ex, "Database error while retrieving services for user {UserId}", request.UserId);
-            return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "Failed to retrieve services due to a database error. Please try again later.",
-                errorType: "DatabaseError",
-                resultStatus: ResultStatus.InternalServerError);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error while retrieving services for user {UserId}: {Message}", request.UserId, ex.Message);
+            _logger.LogError(ex, "Error retrieving services for user {UserId}", request.UserId);
             return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "An unexpected error occurred while retrieving services. Please try again later.",
-                errorType: "UnexpectedError",
-                resultStatus: ResultStatus.Failed);
+                message: "An error occurred while retrieving services",
+                errorType: "GetServicesByUserIdFailed",
+                resultStatus: ResultStatus.Failed,
+                exception: ex);
         }
     }
 } 
