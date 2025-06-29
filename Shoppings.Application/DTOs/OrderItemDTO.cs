@@ -8,24 +8,11 @@ namespace Shoppings.Application.DTOs
 {
     public class OrderItemDTO
     {
-        public Guid Id { get; set; }
-
-        public Guid OrderId { get; set; }
-
-        public Guid BaseItemId { get; set; }
-        
-        // Original Product ID or Service ID
         public Guid ItemId { get; set; }
-
-        public double Quantity { get; set; }
-
+        public string? ImageUrl { get; set; }
+        public string Name { get; set; } = null!;
         public double Price { get; set; }
-
-        public Guid CouponId { get; set; }
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
-
-        public DateTime? DeletedAt { get; set; }
+        public double TotalPrice { get; set; }
+        public double Quantity { get; set; }
     }
 }

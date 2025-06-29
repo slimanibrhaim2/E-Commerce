@@ -21,5 +21,6 @@ namespace Catalogs.Domain.Entities
         public List<Category>? SubCategories { get; set; }
         public List<Product>? Products { get; set; }
         public List<Service>? Services { get; set; }
+        public Guid? ParentId { get; set; }
     }
 }

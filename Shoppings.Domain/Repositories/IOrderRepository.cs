@@ -10,5 +10,8 @@ namespace Shoppings.Domain.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        Task<Order?> GetByIdWithItemsAsync(Guid id);
+        Task<IEnumerable<Order>> GetAllWithItemsAsync();
+        Task<IEnumerable<Order>> GetAllByUserIdWithItemsAsync(Guid userId);
     }
 }

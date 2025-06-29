@@ -23,7 +23,6 @@ namespace Shoppings.Application.Commands.UpdateOrderItem
                 return Result<bool>.Fail("OrderItem not found.", "NotFound", ResultStatus.NotFound);
             orderItem.Quantity = request.Quantity;
             orderItem.Price = request.Price;
-            orderItem.CouponId = request.CouponId;
             _orderItemRepository.Update(orderItem);
             await _unitOfWork.SaveChangesAsync();
             return Result<bool>.Ok(true, "updated", ResultStatus.Success);

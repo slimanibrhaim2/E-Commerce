@@ -27,19 +27,19 @@ namespace Catalogs.Presentation.Controllers
     {
         private readonly IMediator _mediator;
         private readonly ILogger<CategoryController> _logger;
-        private readonly IFileService _fileService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IFileService _fileService;
 
         public CategoryController(
-            IMediator mediator, 
+            IMediator mediator,
             ILogger<CategoryController> logger,
-            IFileService fileService,
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment,
+            IFileService fileService)
         {
             _mediator = mediator;
             _logger = logger;
-            _fileService = fileService;
             _webHostEnvironment = webHostEnvironment;
+            _fileService = fileService;
         }
 
         [HttpGet]
@@ -51,7 +51,7 @@ namespace Catalogs.Presentation.Controllers
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
                     message: "Failed to get categories",
-                    errorType: "GetAllCategoriesFailed",
+                    errorType: "GetCategoriesFailed",
                     resultStatus: ResultStatus.Failed));
             return Ok(Result<PaginatedResult<CategoryDTO>>.Ok(
                 data: result.Data,
@@ -114,19 +114,15 @@ namespace Catalogs.Presentation.Controllers
                         return BadRequest(validationResult);
                     }
 
-                    // Save file
-                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(imageFile.FileName)}";
-                    var directoryPath = Path.Combine(_webHostEnvironment.WebRootPath, "media/categories");
-                    Directory.CreateDirectory(directoryPath);
-                    var filePath = Path.Combine(directoryPath, fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    // Save file using FileService
+                    var saveResult = await _fileService.SaveFileAsync(imageFile, "media/categories");
+                    if (!saveResult.Success)
                     {
-                        await imageFile.CopyToAsync(stream);
+                        _logger.LogError("File save failed: {Error}", saveResult.Message);
+                        return StatusCode(500, saveResult);
                     }
 
-                    // Set the image URL
-                    imageUrl = $"/media/categories/{fileName}";
+                    imageUrl = saveResult.Data;
                 }
 
                 // Create the DTO for the command
@@ -188,27 +184,23 @@ namespace Catalogs.Presentation.Controllers
                     var currentCategory = await _mediator.Send(new GetCategoryByIdQuery(id));
                     if (currentCategory.Success && !string.IsNullOrEmpty(currentCategory.Data.ImageUrl))
                     {
-                        // Delete old image file if it exists
-                        var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, currentCategory.Data.ImageUrl.TrimStart('/'));
-                        if (System.IO.File.Exists(oldImagePath))
+                        // Delete old image file
+                        var deleteResult = _fileService.DeleteFile(currentCategory.Data.ImageUrl);
+                        if (!deleteResult.Success)
                         {
-                            System.IO.File.Delete(oldImagePath);
+                            _logger.LogWarning("Failed to delete old image: {Error}", deleteResult.Message);
                         }
                     }
 
-                    // Save new file
-                    var fileName = $"{Guid.NewGuid()}{Path.GetExtension(imageFile.FileName)}";
-                    var directoryPath = Path.Combine(_webHostEnvironment.WebRootPath, "media/categories");
-                    Directory.CreateDirectory(directoryPath);
-                    var filePath = Path.Combine(directoryPath, fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    // Save new file using FileService
+                    var saveResult = await _fileService.SaveFileAsync(imageFile, "media/categories");
+                    if (!saveResult.Success)
                     {
-                        await imageFile.CopyToAsync(stream);
+                        _logger.LogError("File save failed: {Error}", saveResult.Message);
+                        return StatusCode(500, saveResult);
                     }
 
-                    // Set the new image URL
-                    imageUrl = $"/media/categories/{fileName}";
+                    imageUrl = saveResult.Data;
                 }
                 else
                 {
@@ -262,22 +254,22 @@ namespace Catalogs.Presentation.Controllers
                 var currentCategory = await _mediator.Send(new GetCategoryByIdQuery(id));
                 if (currentCategory.Success && !string.IsNullOrEmpty(currentCategory.Data.ImageUrl))
                 {
-                    // Delete image file if it exists
-                    var imagePath = Path.Combine(_webHostEnvironment.WebRootPath, currentCategory.Data.ImageUrl.TrimStart('/'));
-                    if (System.IO.File.Exists(imagePath))
+                    // Delete image file using FileService
+                    var deleteResult = _fileService.DeleteFile(currentCategory.Data.ImageUrl);
+                    if (!deleteResult.Success)
                     {
-                        System.IO.File.Delete(imagePath);
+                        _logger.LogWarning("Failed to delete image: {Error}", deleteResult.Message);
                     }
                 }
 
-            var command = new DeleteCategoryCommand(id);
-            var result = await _mediator.Send(command);
-            
-            if (!result.Success)
-                return StatusCode(500, Result.Fail(
-                        message: "Failed to delete category",
-                        errorType: "DeleteCategoryFailed",
-                        resultStatus: ResultStatus.Failed));
+                var command = new DeleteCategoryCommand(id);
+                var result = await _mediator.Send(command);
+                
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                            message: "Failed to delete category",
+                            errorType: "DeleteCategoryFailed",
+                            resultStatus: ResultStatus.Failed));
 
                 return Ok(Result.Ok(
                     message: "Category deleted successfully",
@@ -334,34 +326,6 @@ namespace Catalogs.Presentation.Controllers
                 if (!result.Success)
                 {
                     _logger.LogWarning("Category image not found: {ImagePath}", imagePath);
-                    
-                    // Log the full physical path for debugging
-                    var fullPath = Path.Combine(_webHostEnvironment.WebRootPath, imagePath);
-                    _logger.LogWarning("Full physical path that was checked: {FullPath}", fullPath);
-                    
-                    // Try to list files in the parent directory to help debug
-                    try
-                    {
-                        var directory = Path.GetDirectoryName(fullPath);
-                        if (Directory.Exists(directory))
-                        {
-                            var files = Directory.GetFiles(directory);
-                            _logger.LogInformation("Files in directory {Directory}:", directory);
-                            foreach (var file in files)
-                            {
-                                _logger.LogInformation("Found file: {File}", file);
-                            }
-                        }
-                        else
-                        {
-                            _logger.LogWarning("Directory does not exist: {Directory}", directory);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex, "Error listing directory contents");
-                    }
-
                     return NotFound(Result.Fail(
                         message: "Category image not found",
                         errorType: "FileNotFound",

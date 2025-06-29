@@ -11,6 +11,8 @@ public partial class OrderDAO
 
     public Guid OrderActivityId { get; set; }
 
+    public Guid? AddressId { get; set; }
+
     public double TotalAmount { get; set; }
 
     public DateTime CreatedAt { get; set; }
@@ -27,4 +29,6 @@ public partial class OrderDAO
     public virtual ICollection<ReviewDAO> Reviews { get; set; } = new List<ReviewDAO>();
 
     public virtual UserDAO User { get; set; } = null!;
+
+    public virtual AddressDAO? Address { get; set; }
 }

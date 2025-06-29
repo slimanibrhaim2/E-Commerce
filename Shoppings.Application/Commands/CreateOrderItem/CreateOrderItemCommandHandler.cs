@@ -28,8 +28,7 @@ namespace Shoppings.Application.Commands.Handlers
                 OrderId = request.OrderId,
                 BaseItemId = request.BaseItemId,
                 Quantity = request.Quantity,
-                Price = request.Price,
-                CouponId = request.CouponId
+                Price = request.Price
             };
             await _orderItemRepository.AddAsync(orderItem);
             await _unitOfWork.SaveChangesAsync();

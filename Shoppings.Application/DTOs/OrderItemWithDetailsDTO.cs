@@ -6,7 +6,7 @@ namespace Shoppings.Application.DTOs
 {
     public class OrderItemWithDetailsDTO
     {
-        public Guid ItemId => ItemDetails?.Id ?? OrderItem?.BaseItemId ?? Guid.Empty;
+        public Guid ItemId => ItemDetails?.Id ?? OrderItem?.ItemId ?? Guid.Empty;
         public string ImageUrl => GetImageUrl();
         public string Name => GetItemName();
         public double Price => GetItemPrice();

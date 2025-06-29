@@ -306,6 +306,12 @@ public partial class ECommerceContext : DbContext
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Order_OrderActivity");
 
+            entity.HasOne(d => d.Address)
+                .WithMany()
+                .HasForeignKey(d => d.AddressId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Order_Address");
+
             entity.Property(e => e.TotalAmount)
                 .HasPrecision(18, 2);
         });

@@ -4,5 +4,5 @@ using System;
 
 namespace Shoppings.Application.Commands.TransactCartToOrder
 {
-    public record TransactCartToOrderCommand(Guid CartId) : IRequest<Result<Guid>>;
+    public record TransactCartToOrderCommand(Guid CartId, Guid AddressId) : IRequest<Result<Guid>>;
 } 

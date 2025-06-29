@@ -40,16 +40,9 @@ namespace Shoppings.Application.Queries.GetOrderItemById
             // Create basic order item DTO
             var orderItemDto = new OrderItemDTO
             {
-                Id = entity.Id,
-                OrderId = entity.OrderId,
-                BaseItemId = entity.BaseItemId,
                 ItemId = itemId, // Set the original Product ID or Service ID
                 Quantity = entity.Quantity,
                 Price = entity.Price,
-                CouponId = entity.CouponId,
-                CreatedAt = entity.CreatedAt,
-                UpdatedAt = entity.UpdatedAt,
-                DeletedAt = entity.DeletedAt
             };
 
             // Create composed DTO

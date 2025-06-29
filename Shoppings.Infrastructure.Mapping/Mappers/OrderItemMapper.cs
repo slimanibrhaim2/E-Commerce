@@ -15,10 +15,19 @@ namespace Shoppings.Infrastructure.Mapping.Mappers
                 BaseItemId = s.BaseItemId,
                 Quantity = s.Quantity,
                 Price = s.Price,
-                CouponId = s.CouponId,
                 CreatedAt = s.CreatedAt,
                 UpdatedAt = s.UpdatedAt,
-                DeletedAt = s.DeletedAt
+                DeletedAt = s.DeletedAt,
+                Order = s.Order != null ? new Order 
+                {
+                    Id = s.Order.Id,
+                    UserId = s.Order.UserId,
+                    OrderActivityId = s.Order.OrderActivityId,
+                    TotalAmount = s.Order.TotalAmount,
+                    CreatedAt = s.Order.CreatedAt,
+                    UpdatedAt = s.Order.UpdatedAt,
+                    DeletedAt = s.Order.DeletedAt
+                } : null
             });
         }
 
@@ -31,10 +40,19 @@ namespace Shoppings.Infrastructure.Mapping.Mappers
                 BaseItemId = t.BaseItemId,
                 Quantity = t.Quantity,
                 Price = t.Price,
-                CouponId = t.CouponId,
                 CreatedAt = t.CreatedAt,
                 UpdatedAt = t.UpdatedAt,
-                DeletedAt = t.DeletedAt
+                DeletedAt = t.DeletedAt,
+                Order = t.Order != null ? new OrderDAO
+                {
+                    Id = t.Order.Id,
+                    UserId = t.Order.UserId,
+                    OrderActivityId = t.Order.OrderActivityId,
+                    TotalAmount = t.Order.TotalAmount,
+                    CreatedAt = t.Order.CreatedAt,
+                    UpdatedAt = t.Order.UpdatedAt,
+                    DeletedAt = t.Order.DeletedAt
+                } : null
             });
         }
     }

@@ -47,16 +47,9 @@ namespace Shoppings.Application.Queries.GetAllOrderItem
 
                 var orderItemDto = new OrderItemDTO
                 {
-                    Id = orderItem.Id,
-                    OrderId = orderItem.OrderId,
-                    BaseItemId = orderItem.BaseItemId,
                     ItemId = itemId, // Set the original Product ID or Service ID
                     Quantity = orderItem.Quantity,
                     Price = orderItem.Price,
-                    CouponId = orderItem.CouponId,
-                    CreatedAt = orderItem.CreatedAt,
-                    UpdatedAt = orderItem.UpdatedAt,
-                    DeletedAt = orderItem.DeletedAt
                 };
 
                 var composedDto = new OrderItemWithDetailsDTO

@@ -3,6 +3,7 @@ using Core.Result;
 using Core.Pagination;
 using Shoppings.Domain.Entities;
 using Shoppings.Domain.Repositories;
+using System.Linq;
 
 namespace Shoppings.Application.Queries.GetAllOrder
 {
@@ -16,7 +17,7 @@ namespace Shoppings.Application.Queries.GetAllOrder
 
         public async Task<Result<PaginatedResult<Order>>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
         {
-            var all = await _orderRepository.GetAllAsync();
+            var all = await _orderRepository.GetAllWithItemsAsync();
             var totalCount = all.Count();
             var data = all.Skip((request.Parameters.PageNumber - 1) * request.Parameters.PageSize)
                           .Take(request.Parameters.PageSize)

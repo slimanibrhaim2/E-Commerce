@@ -11,6 +11,11 @@ using Core.Authentication;
 using Microsoft.Extensions.Logging;
 using Shoppings.Application.Commands;
 using Shoppings.Application.Queries.GetAllOrder;
+using Shoppings.Application.Queries.GetOrderById;
+using Shoppings.Application.Queries.GetMyOrders;
+using Shoppings.Application.Commands.TransactCartToOrder;
+using Shoppings.Application.Commands.CancelOrder;
+using Shoppings.Application.Commands.MarkOrderDelivered;
 
 namespace Shoppings.Presentation.Controllers
 {
@@ -88,19 +93,117 @@ namespace Shoppings.Presentation.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<ActionResult<Result<PaginatedResult<Order>>>> GetAll([FromQuery] PaginationParameters parameters)
+        [HttpPost("{id}/cancel")]
+        public async Task<ActionResult<Result<bool>>> CancelOrder(Guid id)
         {
+            try
+            {
+                var userId = User.GetId();
+                var command = new CancelOrderCommand(id, userId);
+                var result = await _mediator.Send(command);
+                
+                if (!result.Success)
+                {
+                    // Map different error types to appropriate HTTP status codes
+                    return result.ResultStatus switch
+                    {
+                        ResultStatus.ValidationError => BadRequest(result),
+                        ResultStatus.NotFound => NotFound(result),
+                        _ => StatusCode(500, result)
+                    };
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error cancelling order {OrderId} for user {UserId}", id, User.GetId());
+                return StatusCode(500, Result<bool>.Fail(
+                    message: "فشل في إلغاء الطلب",
+                    errorType: "CancelOrderFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        [HttpPost("{id}/mark-delivered")]
+        public async Task<ActionResult<Result<bool>>> MarkOrderDelivered(Guid id)
+        {
+            try
+            {
+                var userId = User.GetId();
+                var command = new MarkOrderDeliveredCommand(id, userId);
+                var result = await _mediator.Send(command);
+                
+                if (!result.Success)
+                {
+                    // Map different error types to appropriate HTTP status codes
+                    return result.ResultStatus switch
+                    {
+                        ResultStatus.ValidationError => BadRequest(result),
+                        ResultStatus.NotFound => NotFound(result),
+                        _ => StatusCode(500, result)
+                    };
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error marking order {OrderId} as delivered for user {UserId}", id, User.GetId());
+                return StatusCode(500, Result<bool>.Fail(
+                    message: "فشل في تحديث حالة الطلب إلى تم التوصيل",
+                    errorType: "MarkDeliveredFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<Result<PaginatedResult<Order>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAllOrderQuery(parameters);
             var result = await _mediator.Send(query);
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetById(Guid id)
+        [HttpGet("my-orders")]
+        public async Task<ActionResult<Result<PaginatedResult<OrderItemDTO>>>> GetMyOrders([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            // Placeholder: Map to GetOrderByIdQuery and send
-            return Ok();
+            try
+            {
+                var userId = User.GetId();
+                var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+                var query = new GetMyOrdersQuery(userId, parameters);
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting orders for authenticated user");
+                return StatusCode(500, Result<PaginatedResult<OrderItemDTO>>.Fail(
+                    message: "فشل في جلب الطلبات",
+                    errorType: "GetOrdersFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Result<OrderWithItemsDTO>>> GetById(Guid id)
+        {
+            try
+            {
+                var query = new GetOrderByIdQuery(id);
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting order {OrderId}", id);
+                return StatusCode(500, Result<OrderWithItemsDTO>.Fail(
+                    message: "فشل في جلب الطلب",
+                    errorType: "GetOrderFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
         }
     }
 } 

@@ -19,6 +19,14 @@ public class ProductMapper : IMapper<ProductDAO, Product>
             BaseItemId = source.BaseItemId,
             Price = (source.BaseItem?.Price ?? 0),
             CategoryId = source.BaseItem?.CategoryId ?? Guid.Empty,
+            Category = source.BaseItem?.Category != null ? new Category
+            {
+                Id = source.BaseItem.Category.Id,
+                Name = source.BaseItem.Category.Name,
+                ParentId = source.BaseItem.Category.ParentId,
+                CreatedAt = source.BaseItem.Category.CreatedAt,
+                UpdatedAt = source.BaseItem.Category.UpdatedAt
+            } : null,
             IsAvailable = source.BaseItem?.IsAvailable ?? false,
             UserId = source.BaseItem?.UserId ?? Guid.Empty,
             Features = source.ProductFeatures?.Select(f => new ProductFeature
@@ -69,6 +77,14 @@ public class ProductMapper : IMapper<ProductDAO, Product>
                 CategoryId = target.CategoryId,
                 IsAvailable = target.IsAvailable,
                 UserId = target.UserId,
+                Category = target.Category != null ? new CategoryDAO
+                {
+                    Id = target.Category.Id,
+                    Name = target.Category.Name,
+                    ParentId = target.Category.ParentId,
+                    CreatedAt = target.Category.CreatedAt,
+                    UpdatedAt = target.Category.UpdatedAt
+                } : null,
                 ProductMedia = target.Media?.Select(m => new MediaDAO
                 {
                     Id = m.Id,

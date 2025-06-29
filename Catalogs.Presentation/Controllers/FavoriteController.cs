@@ -34,7 +34,7 @@ public class FavoriteController : ControllerBase
 
         if (!result.Success)
             return StatusCode(500, Result.Fail(
-                message: "فشل في إضافة العنصر للمفضلة",
+                message: result.Message,
                 errorType: "AddToFavoriteFailed",
                 resultStatus: ResultStatus.Failed));
 

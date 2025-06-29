@@ -15,7 +15,6 @@ public partial class OrderItemDAO
 
     public double Price { get; set; }
 
-    public Guid CouponId { get; set; }
      public DateTime CreatedAt { get; set; }
 
     public DateTime UpdatedAt { get; set; }

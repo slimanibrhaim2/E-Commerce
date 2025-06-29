@@ -11,6 +11,7 @@ using Shoppings.Application.Queries.GetAllCart;
 using Microsoft.AspNetCore.Authorization;
 using Core.Authentication;
 using Microsoft.Extensions.Logging;
+using Shoppings.Application.Commands.TransactCartToOrder;
 
 namespace Shoppings.Presentation.Controllers
 {
@@ -121,8 +122,8 @@ namespace Shoppings.Presentation.Controllers
         /// <summary>
         /// Convert the current user's cart to an order
         /// </summary>
-        [HttpPost("checkout")]
-        public async Task<ActionResult<Result<Guid>>> Checkout()
+        [HttpPost("TransactCartToOrder")]
+        public async Task<ActionResult<Result<Guid>>> TransactCartToOrder([FromBody] Guid AddressId)
         {
             try
             {
@@ -139,23 +140,23 @@ namespace Shoppings.Presentation.Controllers
                         resultStatus: ResultStatus.Failed));
 
                 // Then convert to order
-                var command = new Shoppings.Application.Commands.TransactCartToOrder.TransactCartToOrderCommand(cartResult.Data.Id);
+                var command = new TransactCartToOrderCommand(cartResult.Data.Id, AddressId);
                 var result = await _mediator.Send(command);
                 
                 if (!result.Success)
                     return StatusCode(500, Result.Fail(
                         message: "فشل في تحويل سلة التسوق إلى طلب",
-                        errorType: "CheckoutFailed",
+                        errorType: "TransactCartToOrderFailed",
                         resultStatus: ResultStatus.Failed));
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error during checkout for user {UserId}", User.GetId());
+                _logger.LogError(ex, "Error during Transact Cart ToOrder for user {UserId}", User.GetId());
                 return StatusCode(500, Result<Guid>.Fail(
                     message: "فشل في إتمام عملية الطلب",
-                    errorType: "CheckoutFailed",
+                    errorType: "TransactCartToOrderFailed",
                     resultStatus: ResultStatus.Failed));
             }
         }

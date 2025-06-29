@@ -37,8 +37,7 @@ namespace Shoppings.Presentation.Controllers
                     dto.OrderId,
                     dto.BaseItemId,
                     dto.Quantity,
-                    dto.Price,
-                    dto.CouponId
+                    dto.Price
                 );
                 var result = await _mediator.Send(command);
                 return Ok(result);
@@ -94,8 +93,7 @@ namespace Shoppings.Presentation.Controllers
                 var command = new UpdateOrderItemCommand(
                     id,
                     dto.Quantity,
-                    dto.Price,
-                    dto.CouponId
+                    dto.Price
                 );
                 var result = await _mediator.Send(command);
                 return Ok(result);

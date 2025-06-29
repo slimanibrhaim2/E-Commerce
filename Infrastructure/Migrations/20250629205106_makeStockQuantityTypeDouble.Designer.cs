@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    [Migration("20250625130322_fixTotalAmmounType")]
-    partial class fixTotalAmmounType
+    [Migration("20250629205106_makeStockQuantityTypeDouble")]
+    partial class makeStockQuantityTypeDouble
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -693,6 +693,9 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -714,6 +717,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.HasIndex("OrderActivityId");
 
                     b.HasIndex("UserId");
@@ -728,9 +733,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("BaseItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CouponId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -897,8 +899,8 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("StockQuantity")
-                        .HasColumnType("int");
+                    b.Property<double>("StockQuantity")
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -1403,6 +1405,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Models.OrderDAO", b =>
                 {
+                    b.HasOne("Infrastructure.Models.AddressDAO", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("FK_Order_Address");
+
                     b.HasOne("Infrastructure.Models.OrderActivityDAO", "OrderActivity")
                         .WithMany("Orders")
                         .HasForeignKey("OrderActivityId")
@@ -1416,6 +1424,8 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_Order_User");
+
+                    b.Navigation("Address");
 
                     b.Navigation("OrderActivity");
 

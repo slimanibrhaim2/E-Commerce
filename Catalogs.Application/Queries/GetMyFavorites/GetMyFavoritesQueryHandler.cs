@@ -71,7 +71,7 @@ public class GetMyFavoritesQueryHandler : IRequestHandler<GetMyFavoritesQuery, R
             
             foreach (var f in pagedFavorites)
             {
-                var quantity = 0;
+                double quantity = 0;
 
                 // Try to get product quantity
                 var productId = await _productRepository.GetProductIdByBaseItemIdAsync(f.BaseItemId);

@@ -15,13 +15,16 @@ public class GetProductsByUserIdQueryHandler : IRequestHandler<GetProductsByUser
 {
     private readonly IProductRepository _repo;
     private readonly ILogger<GetProductsByUserIdQueryHandler> _logger;
+    private readonly IFavoriteRepository _favoriteRepo;
 
     public GetProductsByUserIdQueryHandler(
         IProductRepository repo,
-        ILogger<GetProductsByUserIdQueryHandler> logger)
+        ILogger<GetProductsByUserIdQueryHandler> logger,
+        IFavoriteRepository favoriteRepo)
     {
         _repo = repo;
         _logger = logger;
+        _favoriteRepo = favoriteRepo;
     }
 
     public async Task<Result<PaginatedResult<ProductDTO>>> Handle(GetProductsByUserIdQuery request, CancellationToken cancellationToken)
@@ -66,6 +69,10 @@ public class GetProductsByUserIdQueryHandler : IRequestHandler<GetProductsByUser
                     resultStatus: ResultStatus.Success);
             }
 
+            // Get user's favorites
+            var userFavorites = await _favoriteRepo.GetFavoritesByUserIdAsync(request.UserId);
+            var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
+
             var totalCount = products.Count;
             var pageNumber = request.Parameters.PageNumber;
             var pageSize = request.Parameters.PageSize;
@@ -73,13 +80,19 @@ public class GetProductsByUserIdQueryHandler : IRequestHandler<GetProductsByUser
             
             var dtos = paged.Select(p => new ProductDTO
             {
+                Id = p.Id,
                 Name = p.Name,
                 Description = p.Description,
                 Price = p.Price,
+                CategoryId = p.CategoryId,
+                CategoryName = p.Category?.Name,
                 SKU = p.SKU,
                 StockQuantity = p.StockQuantity,
                 IsAvailable = p.IsAvailable,
-                CategoryName = p.Category?.Name,
+                IsFavorite = favoriteBaseItemIds.Contains(p.BaseItemId),
+                UserId = p.UserId,
+                CreatedAt = p.CreatedAt.ToUniversalTime(),
+                UpdatedAt = p.UpdatedAt?.ToUniversalTime(),
                 Media = p.Media?.Select(m => new MediaDTO
                 {
                     Url = m.MediaUrl,

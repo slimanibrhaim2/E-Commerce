@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initdb : Migration
+    public partial class initDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -372,7 +372,8 @@ namespace Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderActivityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    TotalAmount = table.Column<double>(type: "float(18)", precision: 18, scale: 2, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -380,6 +381,12 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Order", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Order_Address",
+                        column: x => x.AddressId,
+                        principalTable: "Address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Order_OrderActivity",
                         column: x => x.OrderActivityId,
@@ -489,39 +496,31 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Coupon",
+                name: "Favorite",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DiscountAmount = table.Column<double>(type: "float", nullable: false),
-                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BaseItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    BaseItemDAOId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DiscountTypeDAOId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Coupon", x => x.Id);
+                    table.PrimaryKey("PK_Favorite", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Coupon_BaseItem_BaseItemDAOId",
-                        column: x => x.BaseItemDAOId,
+                        name: "FK_Favorite_BaseItem",
+                        column: x => x.BaseItemId,
                         principalTable: "BaseItem",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Coupon_DiscountTypes_DiscountTypeDAOId",
-                        column: x => x.DiscountTypeDAOId,
-                        principalTable: "DiscountTypes",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Coupon_User",
+                        name: "FK_Favorite_User",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -637,7 +636,6 @@ namespace Infrastructure.Migrations
                     BaseItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Quantity = table.Column<double>(type: "float", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    CouponId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -696,37 +694,41 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Favorite",
+                name: "Review",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BaseItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    IsVerifiedPurchase = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    BaseItemDAOId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favorite", x => x.Id);
+                    table.PrimaryKey("PK_Review", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Favorite_BaseItem_BaseItemDAOId",
-                        column: x => x.BaseItemDAOId,
+                        name: "FK_Review_BaseItem",
+                        column: x => x.BaseItemId,
                         principalTable: "BaseItem",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Favorite_Product",
-                        column: x => x.ProductId,
-                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Favorite_User",
+                        name: "FK_Review_Order",
+                        column: x => x.OrderId,
+                        principalTable: "Order",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Review_User",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -862,9 +864,11 @@ namespace Infrastructure.Migrations
                 column: "ServiceDAOId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cart_UserId",
+                name: "IX_Cart_UserId_Active",
                 table: "Cart",
-                column: "UserId");
+                column: "UserId",
+                unique: true,
+                filter: "[DeletedAt] IS NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItem_BaseItemId",
@@ -902,29 +906,9 @@ namespace Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Coupon_BaseItemDAOId",
-                table: "Coupon",
-                column: "BaseItemDAOId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Coupon_DiscountTypeDAOId",
-                table: "Coupon",
-                column: "DiscountTypeDAOId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Coupon_UserId",
-                table: "Coupon",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Favorite_BaseItemDAOId",
+                name: "IX_Favorite_BaseItemId",
                 table: "Favorite",
-                column: "BaseItemDAOId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Favorite_ProductId",
-                table: "Favorite",
-                column: "ProductId");
+                column: "BaseItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Favorite_UserId",
@@ -970,6 +954,11 @@ namespace Infrastructure.Migrations
                 name: "IX_Notification_UserId",
                 table: "Notification",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_AddressId",
+                table: "Order",
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_OrderActivityId",
@@ -1022,6 +1011,23 @@ namespace Infrastructure.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Review_BaseItemId",
+                table: "Review",
+                column: "BaseItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Review_OrderId",
+                table: "Review",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Review_UserId_BaseItemId_Unique",
+                table: "Review",
+                columns: new[] { "UserId", "BaseItemId" },
+                unique: true,
+                filter: "[DeletedAt] IS NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Service_BaseItemId",
                 table: "Service",
                 column: "BaseItemId");
@@ -1042,9 +1048,6 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Address");
-
-            migrationBuilder.DropTable(
                 name: "Attachment");
 
             migrationBuilder.DropTable(
@@ -1060,7 +1063,7 @@ namespace Infrastructure.Migrations
                 name: "ConversationMember");
 
             migrationBuilder.DropTable(
-                name: "Coupon");
+                name: "DiscountTypes");
 
             migrationBuilder.DropTable(
                 name: "Favorite");
@@ -1087,6 +1090,9 @@ namespace Infrastructure.Migrations
                 name: "ProductFeature");
 
             migrationBuilder.DropTable(
+                name: "Review");
+
+            migrationBuilder.DropTable(
                 name: "ServiceFeature");
 
             migrationBuilder.DropTable(
@@ -1099,9 +1105,6 @@ namespace Infrastructure.Migrations
                 name: "Cart");
 
             migrationBuilder.DropTable(
-                name: "DiscountTypes");
-
-            migrationBuilder.DropTable(
                 name: "MediaTypes");
 
             migrationBuilder.DropTable(
@@ -1109,9 +1112,6 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Conversation");
-
-            migrationBuilder.DropTable(
-                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "PaymentMethods");
@@ -1123,7 +1123,13 @@ namespace Infrastructure.Migrations
                 name: "Product");
 
             migrationBuilder.DropTable(
+                name: "Order");
+
+            migrationBuilder.DropTable(
                 name: "Service");
+
+            migrationBuilder.DropTable(
+                name: "Address");
 
             migrationBuilder.DropTable(
                 name: "OrderActivity");
