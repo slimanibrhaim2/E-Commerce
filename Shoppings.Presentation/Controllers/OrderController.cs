@@ -167,7 +167,7 @@ namespace Shoppings.Presentation.Controllers
         }
 
         [HttpGet("my-orders")]
-        public async Task<ActionResult<Result<PaginatedResult<OrderItemDTO>>>> GetMyOrders([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<ActionResult<Result<PaginatedResult<MyOrderDTO>>>> GetMyOrders([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             try
             {
@@ -180,7 +180,7 @@ namespace Shoppings.Presentation.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting orders for authenticated user");
-                return StatusCode(500, Result<PaginatedResult<OrderItemDTO>>.Fail(
+                return StatusCode(500, Result<PaginatedResult<MyOrderDTO>>.Fail(
                     message: "فشل في جلب الطلبات",
                     errorType: "GetOrdersFailed",
                     resultStatus: ResultStatus.Failed));

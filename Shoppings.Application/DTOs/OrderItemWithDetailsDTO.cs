@@ -6,12 +6,11 @@ namespace Shoppings.Application.DTOs
 {
     public class OrderItemWithDetailsDTO
     {
-        public Guid ItemId => ItemDetails?.Id ?? OrderItem?.ItemId ?? Guid.Empty;
-        public string ImageUrl => GetImageUrl();
-        public string Name => GetItemName();
-        public double Price => GetItemPrice();
-        public double TotalPrice => GetItemPrice() * (OrderItem?.Quantity ?? 0);
-        public double Quantity => OrderItem?.Quantity ?? 0;
+        public string Name { get; set; } = string.Empty;
+        public string ImageUrl { get; set; } = string.Empty;
+        public double Quantity { get; set; }
+        public double Price { get; set; }
+        public double TotalPrice { get; set; }
         
         // Internal use only - will not be serialized due to the computed properties above
         internal OrderItemDTO OrderItem { get; set; }

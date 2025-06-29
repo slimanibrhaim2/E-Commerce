@@ -53,5 +53,26 @@ namespace Shoppings.Infrastructure.Repositories
 
             return orderDaos.Select(dao => _orderMapper.Map(dao));
         }
+
+        public override void Update(Order entity)
+        {
+            var dao = _orderMapper.MapBack(entity);
+            
+            // Find the existing entity that's being tracked
+            var existingEntry = _ctx.ChangeTracker.Entries<OrderDAO>()
+                .FirstOrDefault(e => e.Entity.Id == dao.Id);
+
+            if (existingEntry != null)
+            {
+                // Update the existing tracked entity's values
+                existingEntry.CurrentValues.SetValues(dao);
+            }
+            else
+            {
+                // If no entity is being tracked, attach and mark as modified
+                _ctx.Attach(dao);
+                _ctx.Entry(dao).State = EntityState.Modified;
+            }
+        }
     }
 }

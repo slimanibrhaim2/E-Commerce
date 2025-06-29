@@ -1,115 +1,150 @@
 using MediatR;
 using Core.Result;
 using Core.Pagination;
-using Shoppings.Application.DTOs;
 using Shoppings.Domain.Repositories;
+using Shoppings.Application.DTOs;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using Shared.Contracts.Queries;
 using Shared.Contracts.DTOs;
-using System.Linq;
 
-namespace Shoppings.Application.Queries.GetMyOrders
+namespace Shoppings.Application.Queries.GetMyOrders;
+
+public class GetMyOrdersQueryHandler : IRequestHandler<GetMyOrdersQuery, Result<PaginatedResult<MyOrderDTO>>>
 {
-    public class GetMyOrdersQueryHandler : IRequestHandler<GetMyOrdersQuery, Result<PaginatedResult<OrderItemDTO>>>
+    private readonly IOrderRepository _orderRepository;
+    private readonly IOrderStatusRepository _orderStatusRepository;
+    private readonly IMediator _mediator;
+    private readonly ILogger<GetMyOrdersQueryHandler> _logger;
+
+    public GetMyOrdersQueryHandler(
+        IOrderRepository orderRepository,
+        IOrderStatusRepository orderStatusRepository,
+        IMediator mediator,
+        ILogger<GetMyOrdersQueryHandler> logger)
     {
-        private readonly IOrderRepository _orderRepository;
-        private readonly IMediator _mediator;
-        private readonly ILogger<GetMyOrdersQueryHandler> _logger;
+        _orderRepository = orderRepository;
+        _orderStatusRepository = orderStatusRepository;
+        _mediator = mediator;
+        _logger = logger;
+    }
 
-        public GetMyOrdersQueryHandler(
-            IOrderRepository orderRepository,
-            IMediator mediator,
-            ILogger<GetMyOrdersQueryHandler> logger)
+    public async Task<Result<PaginatedResult<MyOrderDTO>>> Handle(GetMyOrdersQuery request, CancellationToken cancellationToken)
+    {
+        try
         {
-            _orderRepository = orderRepository;
-            _mediator = mediator;
-            _logger = logger;
-        }
-
-        public async Task<Result<PaginatedResult<OrderItemDTO>>> Handle(GetMyOrdersQuery request, CancellationToken cancellationToken)
-        {
-            try
+            // Get all orders for the user with their items
+            var orders = await _orderRepository.GetAllByUserIdWithItemsAsync(request.UserId);
+            if (!orders.Any())
             {
-                var orders = await _orderRepository.GetAllByUserIdWithItemsAsync(request.UserId);
-                var orderItems = new List<OrderItemDTO>();
-
-                foreach (var order in orders)
-                {
-                    foreach (var item in order.OrderItems)
-                    {
-                        // Get item details from Catalogs module
-                        var itemDetailsQuery = new GetItemDetailsByBaseItemIdQuery(item.BaseItemId);
-                        var itemDetailsResult = await _mediator.Send(itemDetailsQuery, cancellationToken);
-
-                        if (!itemDetailsResult.Success)
-                            continue;
-
-                        var itemDetails = itemDetailsResult.Data;
-                        string name = GetItemName(itemDetails);
-                        string imageUrl = GetImageUrl(itemDetails);
-
-                        orderItems.Add(new OrderItemDTO
-                        {
-                            ItemId = itemDetails.Id,
-                            ImageUrl = imageUrl,
-                            Name = name,
-                            Price = item.Price,
-                            Quantity = (int)item.Quantity,
-                            TotalPrice = item.Price * item.Quantity
-                        });
-                    }
-                }
-
-                // Apply pagination
-                var totalCount = orderItems.Count;
-                var paginatedItems = orderItems
-                    .Skip((request.Parameters.PageNumber - 1) * request.Parameters.PageSize)
-                    .Take(request.Parameters.PageSize)
-                    .ToList();
-
-                var paginated = PaginatedResult<OrderItemDTO>.Create(
-                    paginatedItems,
-                    request.Parameters.PageNumber,
-                    request.Parameters.PageSize,
-                    totalCount);
-
-                return Result<PaginatedResult<OrderItemDTO>>.Ok(
-                    data: paginated,
-                    message: "تم جلب الطلبات بنجاح",
+                return Result<PaginatedResult<MyOrderDTO>>.Ok(
+                    data: PaginatedResult<MyOrderDTO>.Create(
+                        Enumerable.Empty<MyOrderDTO>(),
+                        request.Parameters.PageNumber,
+                        request.Parameters.PageSize,
+                        0),
+                    message: "لا توجد طلبات",
                     resultStatus: ResultStatus.Success);
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting orders for user {UserId}", request.UserId);
-                return Result<PaginatedResult<OrderItemDTO>>.Fail(
-                    message: "فشل في جلب الطلبات",
-                    errorType: "GetOrdersFailed",
-                    resultStatus: ResultStatus.Failed,
-                    exception: ex);
-            }
-        }
 
-        private static string GetItemName(ItemDetailsDTO itemDetails)
-        {
-            return itemDetails switch
-            {
-                ProductDetailsDTO product => product.Name,
-                ServiceDetailsDTO service => service.Name,
-                _ => "عنصر غير معروف"
-            };
-        }
+            // Get all order statuses to map status IDs to names
+            var orderStatuses = await _orderStatusRepository.GetAllAsync();
+            var statusDictionary = orderStatuses.ToDictionary(s => s.Id, s => s.Name);
 
-        private static string GetImageUrl(ItemDetailsDTO itemDetails)
-        {
-            if (itemDetails is ProductDetailsDTO product && product.Media != null && product.Media.Any())
+            // Transform orders into DTOs with grouped items
+            var orderDtos = new List<MyOrderDTO>();
+
+            foreach (var order in orders.OrderByDescending(o => o.CreatedAt))
             {
-                return product.Media.FirstOrDefault()?.Url;
+                var orderDto = new MyOrderDTO
+                {
+                    Id = order.Id,
+                    OrderStatus = order.OrderActivity != null && statusDictionary.ContainsKey(order.OrderActivity.Status)
+                        ? statusDictionary[order.OrderActivity.Status]
+                        : string.Empty,
+                    TotalAmount = order.TotalAmount,
+                    CreatedAt = order.CreatedAt,
+                    UpdatedAt = order.UpdatedAt,
+                    AddressId = order.AddressId,
+                    Items = new List<OrderItemWithDetailsDTO>()
+                };
+
+                foreach (var item in order.OrderItems)
+                {
+                    // Get item details from Catalogs module
+                    var itemDetailsResult = await _mediator.Send(
+                        new GetItemDetailsByBaseItemIdQuery(item.BaseItemId),
+                        cancellationToken
+                    );
+
+                    if (!itemDetailsResult.Success)
+                        continue;
+
+                    var itemDetails = itemDetailsResult.Data;
+                    string name = GetItemName(itemDetails);
+                    string imageUrl = GetImageUrl(itemDetails);
+
+                    orderDto.Items.Add(new OrderItemWithDetailsDTO
+                    {
+                        Name = name,
+                        ImageUrl = imageUrl,
+                        Quantity = item.Quantity,
+                        Price = item.Price,
+                        TotalPrice = item.Price * item.Quantity
+                    });
+                }
+
+                orderDtos.Add(orderDto);
             }
-            else if (itemDetails is ServiceDetailsDTO service && service.Media != null && service.Media.Any())
-            {
-                return service.Media.FirstOrDefault()?.Url;
-            }
-            return null;
+
+            // Apply pagination
+            var paginatedOrders = orderDtos
+                .Skip((request.Parameters.PageNumber - 1) * request.Parameters.PageSize)
+                .Take(request.Parameters.PageSize)
+                .ToList();
+
+            var totalCount = orderDtos.Count;
+
+            return Result<PaginatedResult<MyOrderDTO>>.Ok(
+                data: PaginatedResult<MyOrderDTO>.Create(
+                    paginatedOrders,
+                    request.Parameters.PageNumber,
+                    request.Parameters.PageSize,
+                    totalCount),
+                message: "تم جلب الطلبات بنجاح",
+                resultStatus: ResultStatus.Success);
         }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error getting orders for user {UserId}", request.UserId);
+            return Result<PaginatedResult<MyOrderDTO>>.Fail(
+                message: "حدث خطأ أثناء جلب الطلبات",
+                errorType: "GetOrdersFailed",
+                resultStatus: ResultStatus.Failed,
+                exception: ex);
+        }
+    }
+
+    private static string GetItemName(ItemDetailsDTO itemDetails)
+    {
+        return itemDetails switch
+        {
+            ProductDetailsDTO product => product.Name,
+            ServiceDetailsDTO service => service.Name,
+            _ => "عنصر غير معروف"
+        };
+    }
+
+    private static string GetImageUrl(ItemDetailsDTO itemDetails)
+    {
+        if (itemDetails is ProductDetailsDTO product && product.Media != null && product.Media.Any())
+        {
+            return product.Media.FirstOrDefault()?.Url ?? string.Empty;
+        }
+        else if (itemDetails is ServiceDetailsDTO service && service.Media != null && service.Media.Any())
+        {
+            return service.Media.FirstOrDefault()?.Url ?? string.Empty;
+        }
+        return string.Empty;
     }
 } 

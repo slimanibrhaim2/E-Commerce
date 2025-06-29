@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Shoppings.Domain.Repositories;
 using Shoppings.Domain.Constants;
 using System.Linq;
+using Core.Interfaces;
 
 namespace Shoppings.Application.Commands.MarkOrderDelivered;
 
@@ -13,17 +14,20 @@ public class MarkOrderDeliveredCommandHandler : IRequestHandler<MarkOrderDeliver
     private readonly IOrderActivityRepository _orderActivityRepository;
     private readonly IOrderStatusRepository _orderStatusRepository;
     private readonly ILogger<MarkOrderDeliveredCommandHandler> _logger;
+    private readonly IUnitOfWork _unitOfWork;
 
     public MarkOrderDeliveredCommandHandler(
         IOrderRepository orderRepository,
         IOrderActivityRepository orderActivityRepository,
         IOrderStatusRepository orderStatusRepository,
-        ILogger<MarkOrderDeliveredCommandHandler> logger)
+        ILogger<MarkOrderDeliveredCommandHandler> logger,
+        IUnitOfWork unitOfWork)
     {
         _orderRepository = orderRepository;
         _orderActivityRepository = orderActivityRepository;
         _orderStatusRepository = orderStatusRepository;
         _logger = logger;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<bool>> Handle(MarkOrderDeliveredCommand request, CancellationToken cancellationToken)
@@ -76,6 +80,9 @@ public class MarkOrderDeliveredCommandHandler : IRequestHandler<MarkOrderDeliver
             order.OrderActivityId = orderActivity.Id;
             order.UpdatedAt = DateTime.UtcNow;
             _orderRepository.Update(order);
+
+            // Save all changes
+            await _unitOfWork.SaveChangesAsync();
 
             return Result<bool>.Ok(
                 data: true,

@@ -5,5 +5,5 @@ using Shoppings.Application.DTOs;
 
 namespace Shoppings.Application.Queries.GetMyOrders
 {
-    public record GetMyOrdersQuery(Guid UserId, PaginationParameters Parameters) : IRequest<Result<PaginatedResult<OrderItemDTO>>>;
+    public record GetMyOrdersQuery(Guid UserId, PaginationParameters Parameters) : IRequest<Result<PaginatedResult<MyOrderDTO>>>;
 } 
