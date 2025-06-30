@@ -137,6 +137,22 @@ namespace Infrastructure.Common
             var dao = _mapper.MapBack(entity);
             _dbSet.Remove(dao);
         }
+
+        public virtual async Task UpdateFields(Guid id, Dictionary<string, object> fields)
+        {
+            var entity = await _ctx.Set<TDao>().FindAsync(id);
+            if (entity == null)
+                return;
+
+            foreach (var field in fields)
+            {
+                var property = _ctx.Entry(entity).Property(field.Key);
+                if (property != null)
+                {
+                    property.CurrentValue = field.Value;
+                }
+            }
+        }
     }
 }
 

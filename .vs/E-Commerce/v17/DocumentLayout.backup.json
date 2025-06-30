@@ -3,8 +3,68 @@
   "WorkspaceRootPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{639DDA88-D485-495F-BFA7-971ED436A07C}|Payments.Infrastructure\\Payments.Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.infrastructure\\repositories\\paymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{639DDA88-D485-495F-BFA7-971ED436A07C}|Payments.Infrastructure\\Payments.Infrastructure.csproj|solutionrelative:payments.infrastructure\\repositories\\paymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.presentation\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|solutionrelative:shoppings.presentation\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.application\\commands\\processpayment\\processpaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|solutionrelative:payments.application\\commands\\processpayment\\processpaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.application\\commands\\createpayment\\createpaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|solutionrelative:payments.application\\commands\\createpayment\\createpaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{031B1B30-2CD9-4330-8A21-596D07A0B909}|Payments.Domain\\Payments.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.domain\\repositories\\ipaymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{031B1B30-2CD9-4330-8A21-596D07A0B909}|Payments.Domain\\Payments.Domain.csproj|solutionrelative:payments.domain\\repositories\\ipaymentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\migrations\\20250630224011_maketheamounttypeinpaymentdouble.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20250630224011_maketheamounttypeinpaymentdouble.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25226665-1655-4C0A-8752-D18DC808C408}|Payments.Presentation\\Payments.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.presentation\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25226665-1655-4C0A-8752-D18DC808C408}|Payments.Presentation\\Payments.Presentation.csproj|solutionrelative:payments.presentation\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.application\\dtos\\createpaymentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|solutionrelative:payments.application\\dtos\\createpaymentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.application\\commands\\createpayment\\createpaymentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|solutionrelative:payments.application\\commands\\createpayment\\createpaymentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.application\\commands\\updatepayment\\updatepaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|solutionrelative:payments.application\\commands\\updatepayment\\updatepaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.application\\commands\\updatepayment\\updatepaymentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|solutionrelative:payments.application\\commands\\updatepayment\\updatepaymentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\commands\\payorder\\payordercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\commands\\payorder\\payordercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\models\\ecommercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\models\\ecommercecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\models\\paymentdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\models\\paymentdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5FA5C6BE-4FAA-4731-A1B5-DF2DE76B40FE}|Payments.Infrastructure.Mapping\\Payments.Infrastructure.Mapping.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.infrastructure.mapping\\mappers\\paymentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5FA5C6BE-4FAA-4731-A1B5-DF2DE76B40FE}|Payments.Infrastructure.Mapping\\Payments.Infrastructure.Mapping.csproj|solutionrelative:payments.infrastructure.mapping\\mappers\\paymentmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AF90EA6-048C-48AB-9D10-5EEE0F276A9D}|Shoppings.Domain\\Shoppings.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.domain\\constants\\orderstatusnames.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AF90EA6-048C-48AB-9D10-5EEE0F276A9D}|Shoppings.Domain\\Shoppings.Domain.csproj|solutionrelative:shoppings.domain\\constants\\orderstatusnames.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.presentation\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,14 +93,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{06873C2F-0B04-4D53-A0D4-8E9A8BDEC6F0}|Shoppings.Infrastructure\\Shoppings.Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.infrastructure\\repositories\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06873C2F-0B04-4D53-A0D4-8E9A8BDEC6F0}|Shoppings.Infrastructure\\Shoppings.Infrastructure.csproj|solutionrelative:shoppings.infrastructure\\repositories\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\commands\\payorder\\payordercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\commands\\payorder\\payordercommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\commands\\payorder\\payordercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\commands\\payorder\\payordercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\queries\\getuseridbyitemid\\getuseridbyitemidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -86,37 +138,219 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CheckoutCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
-              "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
-              "RelativeToolTip": "Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
-              "ViewState": "AgIAAA0BAAAAAAAAAAAIwBQBAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "PaymentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Infrastructure\\Repositories\\PaymentRepository.cs",
+              "RelativeDocumentMoniker": "Payments.Infrastructure\\Repositories\\PaymentRepository.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Infrastructure\\Repositories\\PaymentRepository.cs*",
+              "RelativeToolTip": "Payments.Infrastructure\\Repositories\\PaymentRepository.cs*",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAowBIAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T19:26:55.052Z",
+              "WhenOpened": "2025-06-30T22:51:07.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IPaymentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Repositories\\IPaymentRepository.cs",
+              "RelativeDocumentMoniker": "Payments.Domain\\Repositories\\IPaymentRepository.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Repositories\\IPaymentRepository.cs",
+              "RelativeToolTip": "Payments.Domain\\Repositories\\IPaymentRepository.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAwwAoAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:48:45.196Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProcessPaymentCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
+              "RelativeDocumentMoniker": "Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
+              "RelativeToolTip": "Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAgwFYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:20:00.036Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "OrderWithItemsDTO.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
-              "RelativeDocumentMoniker": "Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
-              "RelativeToolTip": "Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAARAAAAAAAAAA==",
+              "Title": "CreatePaymentCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommandHandler.cs",
+              "RelativeDocumentMoniker": "Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommandHandler.cs",
+              "RelativeToolTip": "Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommandHandler.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAIwCcAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T19:02:58.579Z",
+              "WhenOpened": "2025-06-30T22:35:20.631Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "Shoppings.Presentation\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAAPAAAAAAAAAAAAAowCgBAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T12:50:43.991Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20250630224011_makeTheAmountTypeInPaymentDouble.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250630224011_makeTheAmountTypeInPaymentDouble.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250630224011_makeTheAmountTypeInPaymentDouble.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250630224011_makeTheAmountTypeInPaymentDouble.cs",
+              "RelativeToolTip": "Infrastructure\\Migrations\\20250630224011_makeTheAmountTypeInPaymentDouble.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:40:12.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PaymentController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Presentation\\Controllers\\PaymentController.cs",
+              "RelativeDocumentMoniker": "Payments.Presentation\\Controllers\\PaymentController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Presentation\\Controllers\\PaymentController.cs",
+              "RelativeToolTip": "Payments.Presentation\\Controllers\\PaymentController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAwwCYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:35:47.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CreatePaymentDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\DTOs\\CreatePaymentDTO.cs",
+              "RelativeDocumentMoniker": "Payments.Application\\DTOs\\CreatePaymentDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\DTOs\\CreatePaymentDTO.cs",
+              "RelativeToolTip": "Payments.Application\\DTOs\\CreatePaymentDTO.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAIAwwAsAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:36:11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UpdatePaymentCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommandHandler.cs",
+              "RelativeDocumentMoniker": "Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommandHandler.cs",
+              "RelativeToolTip": "Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommandHandler.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAIwCMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:35:33.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CreatePaymentCommand.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommand.cs",
+              "RelativeDocumentMoniker": "Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommand.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommand.cs",
+              "RelativeToolTip": "Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:35:23.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UpdatePaymentCommand.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommand.cs",
+              "RelativeDocumentMoniker": "Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommand.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommand.cs",
+              "RelativeToolTip": "Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:36:00.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ECommerceContext.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Models\\ECommerceContext.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Models\\ECommerceContext.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Models\\ECommerceContext.cs",
+              "RelativeToolTip": "Infrastructure\\Models\\ECommerceContext.cs",
+              "ViewState": "AgIAAEEBAAAAAAAAAAAAwG4BAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:12:57.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PayOrderCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
+              "RelativeToolTip": "Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA4AAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T13:07:53.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PaymentDAO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Models\\PaymentDAO.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Models\\PaymentDAO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Models\\PaymentDAO.cs",
+              "RelativeToolTip": "Infrastructure\\Models\\PaymentDAO.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAApwAsAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:09:03.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PaymentMapper.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Infrastructure.Mapping\\Mappers\\PaymentMapper.cs",
+              "RelativeDocumentMoniker": "Payments.Infrastructure.Mapping\\Mappers\\PaymentMapper.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Infrastructure.Mapping\\Mappers\\PaymentMapper.cs",
+              "RelativeToolTip": "Payments.Infrastructure.Mapping\\Mappers\\PaymentMapper.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAowCQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:12:36.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "OrderStatusNames.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Domain\\Constants\\OrderStatusNames.cs",
+              "RelativeDocumentMoniker": "Shoppings.Domain\\Constants\\OrderStatusNames.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Domain\\Constants\\OrderStatusNames.cs",
+              "RelativeToolTip": "Shoppings.Domain\\Constants\\OrderStatusNames.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T20:06:32.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
               "Title": "CartController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\CartController.cs",
               "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\CartController.cs",
@@ -129,20 +363,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\OrderController.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "Shoppings.Presentation\\Controllers\\OrderController.cs",
-              "ViewState": "AgIAAO0AAAAAAAAAAAAqwAkAAAAaAAAAAAAAAA==",
+              "DocumentIndex": 17,
+              "Title": "CheckoutCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
+              "RelativeToolTip": "Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
+              "ViewState": "AgIAAA0BAAAAAAAAAAAIwBQBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:50:43.991Z",
+              "WhenOpened": "2025-06-30T19:26:55.052Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 18,
+              "Title": "OrderWithItemsDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
+              "RelativeToolTip": "Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T19:02:58.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "GetOrderByIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderById\\GetOrderByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrderById\\GetOrderByIdQueryHandler.cs",
@@ -155,7 +402,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 22,
               "Title": "OrderRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Infrastructure\\Repositories\\OrderRepository.cs",
               "RelativeDocumentMoniker": "Shoppings.Infrastructure\\Repositories\\OrderRepository.cs",
@@ -167,7 +414,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 21,
               "Title": "GetItemIdByBaseItemIdQuery.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetItemIdByBaseItemIdQuery.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetItemIdByBaseItemIdQuery.cs",
@@ -179,7 +426,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 20,
               "Title": "GetOrdersForSellerQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrdersForSeller\\GetOrdersForSellerQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrdersForSeller\\GetOrdersForSellerQueryHandler.cs",
@@ -192,31 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PayOrderCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
-              "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
-              "RelativeToolTip": "Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAYwE8AAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T13:07:53.86Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "PayOrderCommand.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\PayOrder\\PayOrderCommand.cs",
-              "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\PayOrder\\PayOrderCommand.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\PayOrder\\PayOrderCommand.cs",
-              "RelativeToolTip": "Shoppings.Application\\Commands\\PayOrder\\PayOrderCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T13:07:41.936Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 24,
               "Title": "GetUserIdByItemIdQuery.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetUserIdByItemIdQuery.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetUserIdByItemIdQuery.cs",
@@ -228,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 23,
               "Title": "GetUserIdByItemIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetUserIdByItemId\\GetUserIdByItemIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetUserIdByItemId\\GetUserIdByItemIdQueryHandler.cs",
@@ -240,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 25,
               "Title": "BaseItemController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\BaseItemController.cs",
               "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\BaseItemController.cs",
@@ -252,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 26,
               "Title": "SellerOrderDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\DTOs\\SellerOrderDTO.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\DTOs\\SellerOrderDTO.cs",
@@ -264,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 27,
               "Title": "UpdateProductQuantityCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\UpdateProductQuantity\\UpdateProductQuantityCommandHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\UpdateProductQuantity\\UpdateProductQuantityCommandHandler.cs",
@@ -276,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 29,
               "Title": "GetMyFavoritesQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
@@ -288,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 28,
               "Title": "FavoriteResponseDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\FavoriteResponseDTO.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\FavoriteResponseDTO.cs",
@@ -300,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 30,
               "Title": "GetMyOrdersQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetMyOrders\\GetMyOrdersQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetMyOrders\\GetMyOrdersQueryHandler.cs",
@@ -312,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 31,
               "Title": "20250629205106_makeStockQuantityTypeDouble.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250629205106_makeStockQuantityTypeDouble.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250629205106_makeStockQuantityTypeDouble.cs",

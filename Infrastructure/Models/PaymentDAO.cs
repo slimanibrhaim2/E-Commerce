@@ -9,7 +9,7 @@ public partial class PaymentDAO
 
     public Guid OrderId { get; set; }
 
-    public decimal Amount { get; set; }
+    public double Amount { get; set; }
 
     public Guid PaymentMethodId { get; set; }
 

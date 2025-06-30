@@ -12,7 +12,7 @@ namespace Payments.Domain.Entities
 
         public Guid OrderId { get; set; }
 
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
 
         public Guid PaymentMethodId { get; set; } 
 

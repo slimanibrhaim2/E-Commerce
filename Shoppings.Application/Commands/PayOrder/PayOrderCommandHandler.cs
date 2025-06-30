@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Core.Interfaces;
 using Shoppings.Domain.Entities;
+using Shared.Contracts.Commands;
 
 namespace Shoppings.Application.Commands.PayOrder
 {

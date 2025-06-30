@@ -10,5 +10,6 @@ namespace Payments.Domain.Repositories
 {
     public interface IPaymentRepository : IRepository<Payment>
     {
+        Task UpdateFields(Guid id, Dictionary<string, object> fields);
     }
 }

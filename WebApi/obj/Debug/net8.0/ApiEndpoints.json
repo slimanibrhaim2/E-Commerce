@@ -3060,6 +3060,32 @@
     ]
   },
   {
+    "ContainingType": "Payments.Presentation.Controllers.PaymentController",
+    "Method": "ProcessPayment",
+    "RelativePath": "api/Payment/process",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Payments.Application.Commands.ProcessPayment.ProcessPaymentCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Payments.Domain.Entities.Payment, Payments.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Payments.Presentation.Controllers.PaymentMethodController",
     "Method": "Create",
     "RelativePath": "api/PaymentMethod",

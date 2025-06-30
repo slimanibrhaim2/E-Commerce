@@ -19,6 +19,7 @@ using Shoppings.Application.Queries.GetOrdersForSeller;
 using Shoppings.Application.Commands.PayOrder;
 using Shoppings.Application.Commands.Checkout;
 using Shoppings.Application.Queries.GetMyCart;
+using Shared.Contracts.Commands;
 
 namespace Shoppings.Presentation.Controllers
 {

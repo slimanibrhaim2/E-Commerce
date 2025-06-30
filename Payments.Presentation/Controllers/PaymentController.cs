@@ -11,6 +11,8 @@ using Core.Pagination;
 using Core.Result;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
+using Payments.Application.Commands.ProcessPayment;
+using Core.Authentication;
 
 namespace Payments.Presentation.Controllers
 {
@@ -131,5 +133,28 @@ namespace Payments.Presentation.Controllers
                     resultStatus: ResultStatus.Failed));
             }
         }
+
+        [HttpPost("process")]
+        public async Task<ActionResult<Result<Payment>>> ProcessPayment([FromBody] ProcessPaymentCommand command)
+        {
+            var result = await _mediator.Send(command);
+            
+            return result.ResultStatus switch
+            {
+                ResultStatus.Success => Ok(result),
+                ResultStatus.NotFound => NotFound(result),
+                ResultStatus.ValidationError => BadRequest(result),
+                ResultStatus.Failed => BadRequest(result),
+                _ => StatusCode(500, result)
+            };
+        }
+    }
+
+    public class ProcessPaymentRequest
+    {
+        public Guid OrderId { get; set; }
+        public double Amount { get; set; }
+        public Guid PaymentMethodId { get; set; }
+        public string? PaymentDetails { get; set; }
     }
 }

@@ -1959,7 +1959,8 @@
         "dependencies": {
           "MediatR": "12.5.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.5",
-          "Payments.Domain": "1.0.0"
+          "Payments.Domain": "1.0.0",
+          "Shared.Contracts": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Payments.Application.dll": {}

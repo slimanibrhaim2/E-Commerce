@@ -984,6 +984,9 @@
             "projectReferences": {
               "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Payments.Domain.csproj": {
                 "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Payments.Domain.csproj"
+              },
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Shared.Contracts.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Shared.Contracts.csproj"
               }
             }
           }
