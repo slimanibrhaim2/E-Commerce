@@ -4,6 +4,7 @@ namespace Catalogs.Application.DTOs
 {
     public class FavoriteResponseDTO
     {
+        public Guid itemId { get; set; }
         public double Quantity { get; set; }
         public BaseItemResponseDTO BaseItem { get; set; } = null!;
         public DateTime CreatedAt { get; set; }

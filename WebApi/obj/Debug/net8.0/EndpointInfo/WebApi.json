@@ -8991,6 +8991,10 @@
       "FavoriteResponseDTO": {
         "type": "object",
         "properties": {
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
           "quantity": {
             "type": "number",
             "format": "double"

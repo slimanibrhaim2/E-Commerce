@@ -72,8 +72,9 @@ public class GetMyFavoritesQueryHandler : IRequestHandler<GetMyFavoritesQuery, R
             foreach (var f in pagedFavorites)
             {
                 double quantity = 0;
+                Guid? itemId = null;
 
-                // Try to get product quantity
+                // Try to get product quantity and ID
                 var productId = await _productRepository.GetProductIdByBaseItemIdAsync(f.BaseItemId);
                 if (productId.HasValue)
                 {
@@ -81,18 +82,25 @@ public class GetMyFavoritesQueryHandler : IRequestHandler<GetMyFavoritesQuery, R
                     if (product != null)
                     {
                         quantity = product.StockQuantity;
+                        itemId = product.Id;
                     }
                 }
                 else
                 {
-                    // If not a product, it's a service (quantity = 1)
-                    quantity = 1;
+                    // If not a product, try to get service ID
+                    var serviceId = await _serviceRepository.GetServiceIdByBaseItemIdAsync(f.BaseItemId);
+                    if (serviceId.HasValue)
+                    {
+                        quantity = 1;
+                        itemId = serviceId.Value;
+                    }
                 }
 
-                if (f.BaseItem != null)
+                if (f.BaseItem != null && itemId.HasValue)
                 {
                     favoriteDTOs.Add(new FavoriteResponseDTO
                     {
+                        itemId = itemId.Value,
                         Quantity = quantity,
                         BaseItem = new BaseItemResponseDTO
                         {
