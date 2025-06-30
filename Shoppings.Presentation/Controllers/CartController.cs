@@ -5,13 +5,11 @@ using Shoppings.Application.Queries.GetMyCart;
 using Shoppings.Application.DTOs;
 using Core.Pagination;
 using Shoppings.Domain.Entities;
-using Core.Pagination;
 using Core.Result;
 using Shoppings.Application.Queries.GetAllCart;
 using Microsoft.AspNetCore.Authorization;
 using Core.Authentication;
 using Microsoft.Extensions.Logging;
-using Shoppings.Application.Commands.TransactCartToOrder;
 
 namespace Shoppings.Presentation.Controllers
 {
@@ -119,47 +117,7 @@ namespace Shoppings.Presentation.Controllers
             }
         }
 
-        /// <summary>
-        /// Convert the current user's cart to an order
-        /// </summary>
-        [HttpPost("TransactCartToOrder")]
-        public async Task<ActionResult<Result<Guid>>> TransactCartToOrder([FromBody] Guid AddressId)
-        {
-            try
-            {
-                var userId = User.GetId();
-                
-                // First get the user's cart
-                var cartQuery = new GetMyCartQuery(userId);
-                var cartResult = await _mediator.Send(cartQuery);
-                
-                if (!cartResult.Success)
-                    return StatusCode(500, Result.Fail(
-                        message: "فشل في العثور على سلة التسوق",
-                        errorType: "CartNotFound",
-                        resultStatus: ResultStatus.Failed));
-
-                // Then convert to order
-                var command = new TransactCartToOrderCommand(cartResult.Data.Id, AddressId);
-                var result = await _mediator.Send(command);
-                
-                if (!result.Success)
-                    return StatusCode(500, Result.Fail(
-                        message: "فشل في تحويل سلة التسوق إلى طلب",
-                        errorType: "TransactCartToOrderFailed",
-                        resultStatus: ResultStatus.Failed));
-
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error during Transact Cart ToOrder for user {UserId}", User.GetId());
-                return StatusCode(500, Result<Guid>.Fail(
-                    message: "فشل في إتمام عملية الطلب",
-                    errorType: "TransactCartToOrderFailed",
-                    resultStatus: ResultStatus.Failed));
-            }
-        }
+      
 
         /// <summary>
         /// [ADMIN] Get all carts with pagination

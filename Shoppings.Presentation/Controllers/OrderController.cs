@@ -13,9 +13,12 @@ using Shoppings.Application.Commands;
 using Shoppings.Application.Queries.GetAllOrder;
 using Shoppings.Application.Queries.GetOrderById;
 using Shoppings.Application.Queries.GetMyOrders;
-using Shoppings.Application.Commands.TransactCartToOrder;
 using Shoppings.Application.Commands.CancelOrder;
 using Shoppings.Application.Commands.MarkOrderDelivered;
+using Shoppings.Application.Queries.GetOrdersForSeller;
+using Shoppings.Application.Commands.PayOrder;
+using Shoppings.Application.Commands.Checkout;
+using Shoppings.Application.Queries.GetMyCart;
 
 namespace Shoppings.Presentation.Controllers
 {
@@ -202,6 +205,115 @@ namespace Shoppings.Presentation.Controllers
                 return StatusCode(500, Result<OrderWithItemsDTO>.Fail(
                     message: "فشل في جلب الطلب",
                     errorType: "GetOrderFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        [HttpGet("seller-orders")]
+        public async Task<ActionResult<Result<PaginatedResult<SellerOrderDTO>>>> GetOrdersForSeller([FromQuery] PaginationParameters parameters)
+        {
+            try
+            {
+                var sellerId = User.GetId();
+                var query = new GetOrdersForSellerQuery(sellerId, parameters);
+                var result = await _mediator.Send(query);
+
+                if (!result.Success)
+                {
+                    return result.ResultStatus switch
+                    {
+                        ResultStatus.NotFound => NotFound(result),
+                        ResultStatus.ValidationError => BadRequest(result),
+                        _ => StatusCode(500, result)
+                    };
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting orders for seller");
+                return StatusCode(500, Result<PaginatedResult<SellerOrderDTO>>.Fail(
+                    message: "حدث خطأ أثناء جلب الطلبات",
+                    errorType: "GetSellerOrdersFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+        /// <summary>
+        /// Convert the current user's cart to an order
+        /// </summary>
+        [HttpPost("Checkout")]
+        public async Task<ActionResult<Result<OrderWithItemsDTO>>> Checkout([FromBody] Guid AddressId)
+        {
+            try
+            {
+                var userId = User.GetId();
+
+                // Get user's cart
+                var cartQuery = new GetMyCartQuery(userId);
+                var cartResult = await _mediator.Send(cartQuery);
+
+                if (!cartResult.Success)
+                {
+                    return StatusCode(500, Result<OrderWithItemsDTO>.Fail(
+                        message: cartResult.Message,
+                        errorType: cartResult.ErrorType,
+                        resultStatus: cartResult.ResultStatus));
+                }
+
+                // Create checkout command
+                var command = new CheckoutCommand(cartResult.Data.Id, AddressId);
+                var checkoutResult = await _mediator.Send(command);
+
+                if (!checkoutResult.Success)
+                {
+                    return StatusCode(500, Result<OrderWithItemsDTO>.Fail(
+                        message: checkoutResult.Message,
+                        errorType: checkoutResult.ErrorType,
+                        resultStatus: checkoutResult.ResultStatus));
+                }
+
+                // Get the created order details using GetOrderById
+                var orderQuery = new GetOrderByIdQuery(checkoutResult.Data);
+                var orderResult = await _mediator.Send(orderQuery);
+
+                return Ok(orderResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during checkout for user {UserId}", User.GetId());
+                return StatusCode(500, Result<OrderWithItemsDTO>.Fail(
+                    message: "فشل في إتمام عملية الشراء",
+                    errorType: "CheckoutFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+        [HttpPost("{id}/pay")]
+        public async Task<ActionResult<Result>> PayOrder(Guid id)
+        {
+            try
+            {
+                var command = new PayOrderCommand(id);
+                var result = await _mediator.Send(command);
+
+                if (!result.Success)
+                {
+                    return result.ResultStatus switch
+                    {
+                        ResultStatus.NotFound => NotFound(result),
+                        ResultStatus.ValidationError => BadRequest(result),
+                        _ => StatusCode(500, result)
+                    };
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error paying order {OrderId}", id);
+                return StatusCode(500, Result.Fail(
+                    message: "حدث خطأ أثناء دفع الطلب",
+                    errorType: "PayOrderFailed",
                     resultStatus: ResultStatus.Failed));
             }
         }

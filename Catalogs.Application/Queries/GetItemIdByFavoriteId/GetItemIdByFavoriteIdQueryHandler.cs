@@ -1,11 +1,13 @@
 using MediatR;
 using Core.Result;
-using Catalogs.Application.DTOs;
 using Catalogs.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Data;
+using Shared.Contracts.DTOs;
+using System;
+using System.Linq;
 
 namespace Catalogs.Application.Queries.GetItemIdByFavoriteId;
 

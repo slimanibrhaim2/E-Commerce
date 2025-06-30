@@ -8,6 +8,7 @@ namespace Shoppings.Application.DTOs
         public Guid Id { get; set; }
         public string StatusName { get; set; } = null!;
         public double TotalAmount { get; set; }
+        public Guid? AddressId { get; set; }
         public List<OrderItemDetailsDTO> Items { get; set; } = new List<OrderItemDetailsDTO>();
     }
 

@@ -37,6 +37,7 @@ namespace Shoppings.Infrastructure.Repositories
                 .Include(o => o.OrderItems.Where(oi => oi.DeletedAt == null))
                 .Include(o => o.OrderActivity)
                 .Where(o => o.DeletedAt == null)
+                .OrderByDescending(o => o.CreatedAt)
                 .ToListAsync();
 
             return orderDaos.Select(dao => _orderMapper.Map(dao));

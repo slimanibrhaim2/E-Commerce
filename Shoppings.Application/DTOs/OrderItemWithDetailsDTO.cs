@@ -18,6 +18,9 @@ namespace Shoppings.Application.DTOs
         
         private string GetItemName()
         {
+            if (ItemDetails == null)
+                return "عنصر غير معروف";
+
             return ItemDetails switch
             {
                 ProductDetailsDTO product => product.Name,
@@ -28,6 +31,9 @@ namespace Shoppings.Application.DTOs
 
         private double GetItemPrice()
         {
+            if (ItemDetails == null)
+                return OrderItem?.Price ?? 0;
+
             return ItemDetails switch
             {
                 ProductDetailsDTO product => product.Price,
@@ -38,15 +44,18 @@ namespace Shoppings.Application.DTOs
 
         private string GetImageUrl()
         {
+            if (ItemDetails == null)
+                return string.Empty;
+
             if (ItemDetails is ProductDetailsDTO product && product.Media != null && product.Media.Any())
             {
-                return product.Media.FirstOrDefault()?.Url;
+                return product.Media.FirstOrDefault()?.Url ?? string.Empty;
             }
             else if (ItemDetails is ServiceDetailsDTO service && service.Media != null && service.Media.Any())
             {
-                return service.Media.FirstOrDefault()?.Url;
+                return service.Media.FirstOrDefault()?.Url ?? string.Empty;
             }
-            return null;
+            return string.Empty;
         }
     }
 } 

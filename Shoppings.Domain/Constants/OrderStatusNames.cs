@@ -9,4 +9,5 @@ public static class OrderStatusNames
     public const string Delivered = "تم التوصيل";
     public const string Cancelled = "ملغي";
     public const string Refunded = "مسترد";
+    public const string Paid = "تم الدفع";
 } 

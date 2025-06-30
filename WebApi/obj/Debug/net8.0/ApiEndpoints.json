@@ -760,32 +760,6 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.CartController",
-    "Method": "TransactCartToOrder",
-    "RelativePath": "api/Cart/TransactCartToOrder",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "AddressId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Shoppings.Presentation.Controllers.CartController",
     "Method": "UpdateMyCartItem",
     "RelativePath": "api/Cart/update-item",
     "HttpMethod": "PUT",
@@ -2413,6 +2387,58 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.OrderController",
+    "Method": "PayOrder",
+    "RelativePath": "api/Order/{id}/pay",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shoppings.Presentation.Controllers.OrderController",
+    "Method": "Checkout",
+    "RelativePath": "api/Order/Checkout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "AddressId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Shoppings.Application.DTOs.OrderWithItemsDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shoppings.Presentation.Controllers.OrderController",
     "Method": "GetMyOrders",
     "RelativePath": "api/Order/my-orders",
     "HttpMethod": "GET",
@@ -2433,6 +2459,37 @@
     "ReturnTypes": [
       {
         "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Application.DTOs.MyOrderDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shoppings.Presentation.Controllers.OrderController",
+    "Method": "GetOrdersForSeller",
+    "RelativePath": "api/Order/seller-orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Application.DTOs.SellerOrderDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

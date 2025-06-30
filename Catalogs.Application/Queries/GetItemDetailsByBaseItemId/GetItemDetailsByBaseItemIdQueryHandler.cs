@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace Catalogs.Application.Queries.GetItemDetailsByBaseItemId
 {
@@ -36,16 +37,54 @@ namespace Catalogs.Application.Queries.GetItemDetailsByBaseItemId
             {
                 _logger.LogInformation("Getting item details for BaseItemId {BaseItemId}", request.BaseItemId);
 
+                if (request.BaseItemId == Guid.Empty)
+                {
+                    return Result<ItemDetailsDTO>.Fail(
+                        message: "معرف العنصر الأساسي مطلوب",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
                 // First, try to find if it's a product
                 var productId = await _productRepository.GetProductIdByBaseItemIdAsync(request.BaseItemId);
                 if (productId.HasValue)
                 {
-                    var productQuery = new GetProductsByIdsQuery(new[] { productId.Value }, new Core.Pagination.PaginationParameters { PageNumber = 1, PageSize = 1 });
-                    var productResult = await _mediator.Send(productQuery, cancellationToken);
-                    
-                    if (productResult.Success && productResult.Data.Data.Any())
+                    var product = await _productRepository.GetByIdWithDetails(productId.Value);
+                    if (product != null)
                     {
-                        return Result<ItemDetailsDTO>.Ok(productResult.Data.Data.First(), "Product details retrieved successfully", ResultStatus.Success);
+                        var productDetails = new ProductDetailsDTO
+                        {
+                            Id = product.Id,
+                            Name = product.Name,
+                            Description = product.Description,
+                            Price = product.Price,
+                            CategoryId = product.CategoryId,
+                            SKU = product.SKU,
+                            StockQuantity = product.StockQuantity,
+                            IsAvailable = product.IsAvailable,
+                            UserId = product.UserId,
+                            CreatedAt = product.CreatedAt,
+                            UpdatedAt = product.UpdatedAt,
+                            Media = product.Media?.Select(m => new MediaDTO
+                            {
+                                Id = m.Id,
+                                Url = m.MediaUrl,
+                                MediaTypeId = m.MediaTypeId,
+                                ItemId = m.BaseItemId,
+                                CreatedAt = m.CreatedAt,
+                                UpdatedAt = m.UpdatedAt
+                            }).ToList() ?? new List<MediaDTO>(),
+                            Features = product.Features?.Select(f => new ProductFeatureDTO
+                            {
+                                Id = f.Id,
+                                Name = f.Name,
+                                Value = f.Value,
+                                ProductId = product.Id,
+                                CreatedAt = f.CreatedAt,
+                                UpdatedAt = f.UpdatedAt
+                            }).ToList() ?? new List<ProductFeatureDTO>()
+                        };
+                        return Result<ItemDetailsDTO>.Ok(productDetails, "تم جلب تفاصيل المنتج بنجاح", ResultStatus.Success);
                     }
                 }
 
@@ -53,17 +92,38 @@ namespace Catalogs.Application.Queries.GetItemDetailsByBaseItemId
                 var serviceId = await _serviceRepository.GetServiceIdByBaseItemIdAsync(request.BaseItemId);
                 if (serviceId.HasValue)
                 {
-                    var serviceQuery = new GetServicesByIdsQuery(new[] { serviceId.Value }, new Core.Pagination.PaginationParameters { PageNumber = 1, PageSize = 1 });
-                    var serviceResult = await _mediator.Send(serviceQuery, cancellationToken);
-                    
-                    if (serviceResult.Success && serviceResult.Data.Data.Any())
+                    var service = await _serviceRepository.GetByIdWithDetails(serviceId.Value);
+                    if (service != null)
                     {
-                        return Result<ItemDetailsDTO>.Ok(serviceResult.Data.Data.First(), "Service details retrieved successfully", ResultStatus.Success);
+                        var serviceDetails = new ServiceDetailsDTO
+                        {
+                            Id = service.Id,
+                            Name = service.Name,
+                            Description = service.Description,
+                            Price = service.Price,
+                            CategoryId = service.CategoryId,
+                            ServiceType = service.ServiceType,
+                            Duration = service.Duration,
+                            IsAvailable = service.IsAvailable,
+                            UserId = service.UserId,
+                            CreatedAt = service.CreatedAt,
+                            UpdatedAt = service.UpdatedAt,
+                            Media = service.Media?.Select(m => new MediaDTO
+                            {
+                                Id = m.Id,
+                                Url = m.MediaUrl,
+                                MediaTypeId = m.MediaTypeId,
+                                ItemId = m.BaseItemId,
+                                CreatedAt = m.CreatedAt,
+                                UpdatedAt = m.UpdatedAt
+                            }).ToList() ?? new List<MediaDTO>()
+                        };
+                        return Result<ItemDetailsDTO>.Ok(serviceDetails, "تم جلب تفاصيل الخدمة بنجاح", ResultStatus.Success);
                     }
                 }
 
                 return Result<ItemDetailsDTO>.Fail(
-                    message: $"Item with BaseItemId {request.BaseItemId} not found",
+                    message: $"لم يتم العثور على عنصر بالمعرف الأساسي {request.BaseItemId}",
                     errorType: "NotFound",
                     resultStatus: ResultStatus.NotFound);
             }
@@ -71,7 +131,7 @@ namespace Catalogs.Application.Queries.GetItemDetailsByBaseItemId
             {
                 _logger.LogError(ex, "Error getting item details for BaseItemId {BaseItemId}", request.BaseItemId);
                 return Result<ItemDetailsDTO>.Fail(
-                    message: "Failed to retrieve item details",
+                    message: "فشل في جلب تفاصيل العنصر",
                     errorType: "GetItemDetailsFailed",
                     resultStatus: ResultStatus.Failed);
             }

@@ -59,6 +59,7 @@ namespace Shoppings.Application.Queries.GetOrderById
                     Id = order.Id,
                     StatusName = status.Name,
                     TotalAmount = order.TotalAmount,
+                    AddressId = order.AddressId,
                     Items = new List<OrderItemDetailsDTO>()
                 };
 

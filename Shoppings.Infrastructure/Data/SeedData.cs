@@ -32,6 +32,13 @@ namespace Shoppings.Infrastructure.Data
                     new OrderStatus
                     {
                         Id = Guid.NewGuid(),
+                        Name = "تم الدفع",
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    },
+                    new OrderStatus
+                    {
+                        Id = Guid.NewGuid(),
                         Name = "تم التأكيد",
                         CreatedAt = DateTime.UtcNow,
                         UpdatedAt = DateTime.UtcNow

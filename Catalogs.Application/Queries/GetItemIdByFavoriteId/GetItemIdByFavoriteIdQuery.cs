@@ -1,6 +1,6 @@
 using MediatR;
 using Core.Result;
-using Catalogs.Application.DTOs;
+using Shared.Contracts.DTOs;
 
 namespace Catalogs.Application.Queries.GetItemIdByFavoriteId;
 
