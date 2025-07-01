@@ -65,4 +65,5 @@ public enum ResultStatus
     InternalServerError = 3,
     Failed = 4,
     NotFound = 5,
+    Unauthorized = 6
 }

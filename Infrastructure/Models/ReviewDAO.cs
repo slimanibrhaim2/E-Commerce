@@ -7,17 +7,21 @@ public partial class ReviewDAO
 {
     public Guid Id { get; set; }
 
-    public Guid UserId { get; set; }
+    public string ExperienceDescription { get; set; }
 
-    public Guid BaseItemId { get; set; }
+    public int OverallSatisfaction { get; set; }
 
-    public Guid OrderId { get; set; }
+    public int ItemQuality { get; set; }
 
-    public string Title { get; set; } = null!;
+    public int Communication { get; set; }
 
-    public string Content { get; set; } = null!;
+    public int Timeliness { get; set; }
 
-    public bool IsVerifiedPurchase { get; set; }
+    public string ValueForMoney { get; set; }
+
+    public int NetPromoterScore { get; set; }
+
+    public bool WillUseAgain { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
@@ -25,9 +29,15 @@ public partial class ReviewDAO
 
     public DateTime? DeletedAt { get; set; }
 
-    public virtual UserDAO User { get; set; } = null!;
+    public Guid ProviderId { get; set; }
 
-    public virtual BaseItemDAO BaseItem { get; set; } = null!;
+    public Guid ReviewerId { get; set; }
 
-    public virtual OrderDAO Order { get; set; } = null!;
+    public Guid OrderId { get; set; }
+
+    public virtual UserDAO Reviewer { get; set; }
+
+    public virtual UserDAO Provider { get; set; }
+
+    public virtual OrderDAO Order { get; set; }
 } 

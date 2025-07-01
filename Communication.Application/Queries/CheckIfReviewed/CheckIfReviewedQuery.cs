@@ -4,4 +4,4 @@ using System;
 
 namespace Communication.Application.Queries.CheckIfReviewed;
 
-public record CheckIfReviewedQuery(Guid ItemId, Guid UserId) : IRequest<Result<bool>>; 
+public record CheckIfReviewedQuery(Guid OrderId, Guid UserId) : IRequest<Result<bool>>; 

@@ -1,18 +1,23 @@
-using Communication.Domain.Entities;
-using Core.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Communication.Domain.Entities;
+using Core.Pagination;
+using Core.Interfaces;
 
 namespace Communication.Domain.Repositories
 {
-    public interface IReviewRepository : IRepository<Review>
+    public interface IReviewRepository:IRepository<Review>
     {
-        Task<IEnumerable<Review>> GetAllByBaseItemIdAsync(Guid baseItemId);
-        Task<IEnumerable<Review>> GetAllByUserIdAsync(Guid userId);
-        Task<IEnumerable<Review>> GetAllByOrderIdAsync(Guid orderId);
-        Task<Review?> GetByUserAndItemIdAsync(Guid userId, Guid baseItemId);
-        Task<bool> HasUserReviewedItemAsync(Guid userId, Guid baseItemId);
-        Task<bool> HasUserPurchasedItemAsync(Guid userId, Guid baseItemId, Guid orderId);
+        Task<Review> GetByIdAsync(Guid id);
+        Task<PaginatedResult<Review>> GetAllAsync(PaginationParameters parameters);
+        Task<PaginatedResult<Review>> GetByReviewerIdAsync(Guid reviewerId, PaginationParameters parameters);
+        Task<PaginatedResult<Review>> GetByProviderIdAsync(Guid providerId, PaginationParameters parameters);
+        Task<PaginatedResult<Review>> GetByOrderIdAsync(Guid orderId, PaginationParameters parameters);
+        Task<bool> HasUserReviewedOrderAsync(Guid userId, Guid orderId);
+        Task AddAsync(Review review);
+        Task UpdateAsync(Review review);
+        Task DeleteAsync(Review review);
+        Task<bool> ExistsAsync(Guid id);
     }
 } 

@@ -2,31 +2,29 @@ using MediatR;
 using Core.Result;
 using Communication.Application.DTOs;
 using Communication.Domain.Repositories;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Pagination;
-using System;
 
-namespace Communication.Application.Queries.GetReviewsByUserId;
+namespace Communication.Application.Queries.GetReviewsByOrderId;
 
-public class GetReviewsByUserIdQueryHandler : IRequestHandler<GetReviewsByUserIdQuery, Result<PaginatedResult<ReviewDTO>>>
+public class GetReviewsByOrderIdQueryHandler : IRequestHandler<GetReviewsByOrderIdQuery, Result<PaginatedResult<ReviewDTO>>>
 {
     private readonly IReviewRepository _reviewRepository;
 
-    public GetReviewsByUserIdQueryHandler(IReviewRepository reviewRepository)
+    public GetReviewsByOrderIdQueryHandler(IReviewRepository reviewRepository)
     {
         _reviewRepository = reviewRepository;
     }
 
-    public async Task<Result<PaginatedResult<ReviewDTO>>> Handle(GetReviewsByUserIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<PaginatedResult<ReviewDTO>>> Handle(GetReviewsByOrderIdQuery request, CancellationToken cancellationToken)
     {
         try
         {
-            var reviews = await _reviewRepository.GetByReviewerIdAsync(request.UserId, request.Parameters);
+            var reviews = await _reviewRepository.GetByOrderIdAsync(request.OrderId, request.Parameters);
 
-            // Map to DTOs
             var data = reviews.Data.Select(review => new ReviewDTO
             {
                 Id = review.Id,
@@ -53,14 +51,14 @@ public class GetReviewsByUserIdQueryHandler : IRequestHandler<GetReviewsByUserId
 
             return Result<PaginatedResult<ReviewDTO>>.Ok(
                 data: result,
-                message: "تم جلب مراجعات المستخدم بنجاح",
+                message: "تم جلب مراجعات الطلب بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
             return Result<PaginatedResult<ReviewDTO>>.Fail(
-                message: $"فشل في جلب مراجعات المستخدم: {ex.Message}",
-                errorType: "GetReviewsByUserIdFailed",
+                message: $"فشل في جلب مراجعات الطلب: {ex.Message}",
+                errorType: "GetReviewsByOrderIdFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);
         }

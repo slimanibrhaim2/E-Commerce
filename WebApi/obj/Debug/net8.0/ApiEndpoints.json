@@ -74,6 +74,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Users.Presentation.Controllers.AddressesController",
+    "Method": "GetById",
+    "RelativePath": "api/Addresses/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Users.Application.DTOs.AddressDTO, Users.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Communication.Presentation.Controllers.AttachmentController",
     "Method": "Create",
     "RelativePath": "api/Attachment",
@@ -3762,32 +3788,6 @@
   },
   {
     "ContainingType": "Communication.Presentation.Controllers.ReviewController",
-    "Method": "Create",
-    "RelativePath": "api/Review",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "Communication.Application.DTOs.CreateReviewDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Core.Result.Result\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Communication.Presentation.Controllers.ReviewController",
     "Method": "GetAll",
     "RelativePath": "api/Review",
     "HttpMethod": "GET",
@@ -3808,6 +3808,32 @@
     "ReturnTypes": [
       {
         "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Communication.Application.DTOs.ReviewDTO, Communication.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Communication.Presentation.Controllers.ReviewController",
+    "Method": "Create",
+    "RelativePath": "api/Review",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Communication.Application.DTOs.CreateReviewDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3864,7 +3890,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "Core.Result.Result",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3890,7 +3916,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "Core.Result.Result",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -3903,13 +3929,13 @@
   {
     "ContainingType": "Communication.Presentation.Controllers.ReviewController",
     "Method": "CheckIfReviewed",
-    "RelativePath": "api/Review/check/{itemId}",
+    "RelativePath": "api/Review/check/{orderId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "itemId",
+        "Name": "orderId",
         "Type": "System.Guid",
         "IsRequired": true
       }
@@ -3928,14 +3954,45 @@
   },
   {
     "ContainingType": "Communication.Presentation.Controllers.ReviewController",
-    "Method": "GetByBaseItemId",
-    "RelativePath": "api/Review/item/{baseItemId}",
+    "Method": "GetMyReviews",
+    "RelativePath": "api/Review/my-reviews",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "baseItemId",
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Communication.Application.DTOs.ReviewDTO, Communication.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Communication.Presentation.Controllers.ReviewController",
+    "Method": "GetByOrderId",
+    "RelativePath": "api/Review/order/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
         "Type": "System.Guid",
         "IsRequired": true
       },
@@ -3964,12 +4021,17 @@
   },
   {
     "ContainingType": "Communication.Presentation.Controllers.ReviewController",
-    "Method": "GetMyReviews",
-    "RelativePath": "api/Review/my-reviews",
+    "Method": "GetByProviderId",
+    "RelativePath": "api/Review/provider/{providerId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "providerId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
       {
         "Name": "pageNumber",
         "Type": "System.Int32",
@@ -4464,6 +4526,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Users.Presentation.Controllers.UsersController",
+    "Method": "GetById",
+    "RelativePath": "api/users/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Users.Application.DTOs.UserDTO, Users.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Users.Presentation.Controllers.FollowersController",

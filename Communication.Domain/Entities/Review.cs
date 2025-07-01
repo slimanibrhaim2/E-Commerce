@@ -5,14 +5,25 @@ namespace Communication.Domain.Entities
     public class Review
     {
         public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public Guid BaseItemId { get; set; }
+        
+        // Review Content
+        public string ExperienceDescription { get; set; }
+        public int OverallSatisfaction { get; set; }
+        public int ItemQuality { get; set; }
+        public int Communication { get; set; }
+        public int Timeliness { get; set; }
+        public string ValueForMoney { get; set; }
+        public int NetPromoterScore { get; set; }
+        public bool WillUseAgain { get; set; }
+
+        // References
+        public Guid ReviewerId { get; set; }
+        public Guid ProviderId { get; set; }
         public Guid OrderId { get; set; }
-        public string Title { get; set; } = null!;
-        public string Content { get; set; } = null!;
-        public bool IsVerifiedPurchase { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+        // Timestamps
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
     }
 } 

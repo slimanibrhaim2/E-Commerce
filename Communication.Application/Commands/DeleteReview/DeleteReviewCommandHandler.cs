@@ -37,7 +37,7 @@ namespace Communication.Application.Commands.DeleteReview
                 }
 
                 // 2. Check ownership
-                if (existingReview.UserId != userId)
+                if (existingReview.ReviewerId != userId)
                 {
                     return Result<bool>.Fail("غير مسموح لك بحذف هذه المراجعة", "Unauthorized", ResultStatus.ValidationError);
                 }

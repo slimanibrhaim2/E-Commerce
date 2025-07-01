@@ -24,28 +24,42 @@ public class GetReviewByIdQueryHandler : IRequestHandler<GetReviewByIdQuery, Res
             var review = await _reviewRepository.GetByIdAsync(request.ReviewId);
             if (review == null)
             {
-                return Result<ReviewDTO>.Fail("المراجعة غير موجودة", "ReviewNotFound", ResultStatus.NotFound);
+                return Result<ReviewDTO>.Fail(
+                    message: "المراجعة غير موجودة",
+                    errorType: "ReviewNotFound",
+                    resultStatus: ResultStatus.NotFound);
             }
 
             var reviewDto = new ReviewDTO
             {
                 Id = review.Id,
-                UserId = review.UserId,
-                BaseItemId = review.BaseItemId,
+                ExperienceDescription = review.ExperienceDescription,
+                OverallSatisfaction = review.OverallSatisfaction,
+                ItemQuality = review.ItemQuality,
+                Communication = review.Communication,
+                Timeliness = review.Timeliness,
+                ValueForMoney = review.ValueForMoney,
+                NetPromoterScore = review.NetPromoterScore,
+                WillUseAgain = review.WillUseAgain,
+                ReviewerId = review.ReviewerId,
+                ProviderId = review.ProviderId,
                 OrderId = review.OrderId,
-                Title = review.Title,
-                Content = review.Content,
-                IsVerifiedPurchase = review.IsVerifiedPurchase,
                 CreatedAt = review.CreatedAt,
-                UpdatedAt = review.UpdatedAt,
-                DeletedAt = review.DeletedAt
+                UpdatedAt = review.UpdatedAt
             };
 
-            return Result<ReviewDTO>.Ok(reviewDto, "تم جلب المراجعة بنجاح", ResultStatus.Success);
+            return Result<ReviewDTO>.Ok(
+                data: reviewDto,
+                message: "تم جلب المراجعة بنجاح",
+                resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
-            return Result<ReviewDTO>.Fail($"فشل في جلب المراجعة: {ex.Message}", "GetReviewByIdFailed", ResultStatus.Failed, ex);
+            return Result<ReviewDTO>.Fail(
+                message: $"فشل في جلب المراجعة: {ex.Message}",
+                errorType: "GetReviewByIdFailed",
+                resultStatus: ResultStatus.Failed,
+                exception: ex);
         }
     }
 } 

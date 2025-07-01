@@ -28,14 +28,27 @@ namespace Communication.Application.Commands.UpdateReview
             try
             {
                 var dto = request.DTO;
-                var userId = request.UserId;
+                var reviewerId = request.UserId;
                 var reviewId = request.ReviewId;
-                
+
                 // 1. Validate input
-                if (string.IsNullOrWhiteSpace(dto.Title))
-                    return Result<bool>.Fail("عنوان المراجعة مطلوب", "ValidationError", ResultStatus.ValidationError);
-                if (string.IsNullOrWhiteSpace(dto.Content))
-                    return Result<bool>.Fail("محتوى المراجعة مطلوب", "ValidationError", ResultStatus.ValidationError);
+                if (string.IsNullOrWhiteSpace(dto.ExperienceDescription))
+                    return Result<bool>.Fail("وصف التجربة مطلوب", "ValidationError", ResultStatus.ValidationError);
+                
+                if (dto.OverallSatisfaction < 1 || dto.OverallSatisfaction > 5)
+                    return Result<bool>.Fail("التقييم العام يجب أن يكون بين 1 و 5", "ValidationError", ResultStatus.ValidationError);
+                
+                if (dto.ItemQuality < 1 || dto.ItemQuality > 5)
+                    return Result<bool>.Fail("تقييم جودة المنتج يجب أن يكون بين 1 و 5", "ValidationError", ResultStatus.ValidationError);
+                
+                if (dto.Communication < 1 || dto.Communication > 5)
+                    return Result<bool>.Fail("تقييم التواصل يجب أن يكون بين 1 و 5", "ValidationError", ResultStatus.ValidationError);
+                
+                if (dto.Timeliness < 1 || dto.Timeliness > 5)
+                    return Result<bool>.Fail("تقييم الوقت يجب أن يكون بين 1 و 5", "ValidationError", ResultStatus.ValidationError);
+                
+                if (dto.NetPromoterScore < 0 || dto.NetPromoterScore > 10)
+                    return Result<bool>.Fail("درجة التوصية يجب أن تكون بين 0 و 10", "ValidationError", ResultStatus.ValidationError);
 
                 // 2. Get existing review
                 var existingReview = await _reviewRepo.GetByIdAsync(reviewId);
@@ -44,18 +57,24 @@ namespace Communication.Application.Commands.UpdateReview
                     return Result<bool>.Fail("المراجعة غير موجودة", "ReviewNotFound", ResultStatus.NotFound);
                 }
 
-                // 3. Check ownership
-                if (existingReview.UserId != userId)
+                // 3. Verify ownership
+                if (existingReview.ReviewerId != reviewerId)
                 {
-                    return Result<bool>.Fail("غير مسموح لك بتعديل هذه المراجعة", "Unauthorized", ResultStatus.ValidationError);
+                    return Result<bool>.Fail("لا يمكنك تعديل مراجعة شخص آخر", "UnauthorizedAccess", ResultStatus.Unauthorized);
                 }
 
                 // 4. Update review
-                existingReview.Title = dto.Title;
-                existingReview.Content = dto.Content;
+                existingReview.ExperienceDescription = dto.ExperienceDescription;
+                existingReview.OverallSatisfaction = dto.OverallSatisfaction;
+                existingReview.ItemQuality = dto.ItemQuality;
+                existingReview.Communication = dto.Communication;
+                existingReview.Timeliness = dto.Timeliness;
+                existingReview.ValueForMoney = dto.ValueForMoney;
+                existingReview.NetPromoterScore = dto.NetPromoterScore;
+                existingReview.WillUseAgain = dto.WillUseAgain;
                 existingReview.UpdatedAt = DateTime.UtcNow;
 
-                _reviewRepo.Update(existingReview);
+                await _reviewRepo.UpdateAsync(existingReview);
                 await _unitOfWork.SaveChangesAsync();
                 await _unitOfWork.CommitTransaction();
 

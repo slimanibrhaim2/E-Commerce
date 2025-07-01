@@ -233,6 +233,40 @@ public partial class ECommerceContext : DbContext
                 .HasConstraintName("FK_Favorite_BaseItem");
         });
 
+        modelBuilder.Entity<ReviewDAO>(entity =>
+        {
+            entity.ToTable("Reviews");
+            entity.HasKey(e => e.Id);
+
+            // Properties
+            entity.Property(e => e.ExperienceDescription).IsRequired();
+            entity.Property(e => e.OverallSatisfaction).IsRequired();
+            entity.Property(e => e.ItemQuality).IsRequired();
+            entity.Property(e => e.Communication).IsRequired();
+            entity.Property(e => e.Timeliness).IsRequired();
+            entity.Property(e => e.ValueForMoney).IsRequired();
+            entity.Property(e => e.NetPromoterScore).IsRequired();
+            entity.Property(e => e.WillUseAgain).IsRequired();
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
+
+            // Relationships
+            entity.HasOne(e => e.Reviewer)
+                .WithMany()
+                .HasForeignKey(e => e.ReviewerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(e => e.Provider)
+                .WithMany()
+                .HasForeignKey(e => e.ProviderId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(e => e.Order)
+                .WithMany()
+                .HasForeignKey(e => e.OrderId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
         modelBuilder.Entity<FollowerDAO>(entity =>
         {
             entity.ToTable("Follower");
@@ -393,39 +427,6 @@ public partial class ECommerceContext : DbContext
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_ProductFeature_Product");
-        });
-
-        modelBuilder.Entity<ReviewDAO>(entity =>
-        {
-            entity.ToTable("Review");
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.Title).HasMaxLength(200).IsRequired();
-            entity.Property(e => e.Content).HasMaxLength(2000).IsRequired();
-            entity.Property(e => e.IsVerifiedPurchase).IsRequired();
-
-            // Unique constraint: one review per user per item
-            entity.HasIndex(e => new { e.UserId, e.BaseItemId })
-                .IsUnique()
-                .HasFilter("[DeletedAt] IS NULL")
-                .HasDatabaseName("IX_Review_UserId_BaseItemId_Unique");
-
-            entity.HasOne(d => d.User)
-                .WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_Review_User");
-
-            entity.HasOne(d => d.BaseItem)
-                .WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.BaseItemId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_Review_BaseItem");
-
-            entity.HasOne(d => d.Order)
-                .WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("FK_Review_Order");
         });
 
         modelBuilder.Entity<MediaDAO>(entity =>

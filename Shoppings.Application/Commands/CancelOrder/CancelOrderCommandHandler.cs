@@ -6,6 +6,8 @@ using Shared.Contracts.Commands;
 using Shoppings.Domain.Constants;
 using System.Linq;
 using Core.Interfaces;
+using Shared.Contracts.Queries;
+using Shared.Contracts.DTOs;
 
 namespace Shoppings.Application.Commands.CancelOrder;
 
@@ -91,22 +93,41 @@ public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, Res
             // Return quantities to products using the shared contract
             foreach (var item in order.OrderItems)
             {
-                var updateQuantityResult = await _mediator.Send(
-                    new UpdateProductQuantityCommand(
-                        ProductId: item.Id,
-                        QuantityChange: item.Quantity // Add back the quantity that was reserved
-                    ),
-                    cancellationToken
-                );
+                // Get the actual product ID from the BaseItemId
+                var itemDetailsQuery = new GetItemDetailsByBaseItemIdQuery(item.BaseItemId);
+                var itemDetailsResult = await _mediator.Send(itemDetailsQuery, cancellationToken);
 
-                if (!updateQuantityResult.Success)
+                if (!itemDetailsResult.Success)
                 {
                     _logger.LogWarning(
-                        "Failed to return quantity for product {ProductId} in order {OrderId}: {Message}",
-                        item.Id,
+                        "Failed to get item details for BaseItemId {BaseItemId} in order {OrderId}: {Message}",
+                        item.BaseItemId,
                         order.Id,
-                        updateQuantityResult.Message
+                        itemDetailsResult.Message
                     );
+                    continue;
+                }
+
+                // Only return quantity if it's a product (not a service)
+                if (itemDetailsResult.Data is ProductDetailsDTO productDetails)
+                {
+                    var updateQuantityResult = await _mediator.Send(
+                        new UpdateProductQuantityCommand(
+                            ProductId: productDetails.Id,
+                            QuantityChange: item.Quantity // Add back the quantity that was reserved
+                        ),
+                        cancellationToken
+                    );
+
+                    if (!updateQuantityResult.Success)
+                    {
+                        _logger.LogWarning(
+                            "Failed to return quantity for product {ProductId} in order {OrderId}: {Message}",
+                            productDetails.Id,
+                            order.Id,
+                            updateQuantityResult.Message
+                        );
+                    }
                 }
             }
 
@@ -124,4 +145,4 @@ public class CancelOrderCommandHandler : IRequestHandler<CancelOrderCommand, Res
                 resultStatus: ResultStatus.Failed);
         }
     }
-} 
+}

@@ -29,85 +29,131 @@ namespace Communication.Application.Commands.CreateReview
 
         public async Task<Result<Guid>> Handle(CreateReviewCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.BeginTransaction();
             try
             {
                 var dto = request.DTO;
-                var userId = request.UserId;
-                
+                var reviewerId = request.UserId;
+
                 // 1. Validate input
-                if (string.IsNullOrWhiteSpace(dto.Title))
-                    return Result<Guid>.Fail("عنوان المراجعة مطلوب", "ValidationError", ResultStatus.ValidationError);
-                if (string.IsNullOrWhiteSpace(dto.Content))
-                    return Result<Guid>.Fail("محتوى المراجعة مطلوب", "ValidationError", ResultStatus.ValidationError);
-                if (dto.ItemId == Guid.Empty)
-                    return Result<Guid>.Fail("معرف العنصر مطلوب", "ValidationError", ResultStatus.ValidationError);
-                if (dto.OrderId == Guid.Empty)
-                    return Result<Guid>.Fail("معرف الطلب مطلوب", "ValidationError", ResultStatus.ValidationError);
+                var validationResult = ValidateInput(dto);
+                if (!validationResult.Success)
+                    return validationResult;
 
-                // 2. Resolve BaseItemId from ItemId
-                var productQuery = new GetBaseItemIdByProductIdQuery(dto.ItemId);
-                var productResult = await _mediator.Send(productQuery, cancellationToken);
-                
-                Guid baseItemId;
-                if (productResult.Success)
+                await _unitOfWork.BeginTransaction();
+
+                try
                 {
-                    baseItemId = productResult.Data;
-                }
-                else
-                {
-                    var serviceQuery = new GetBaseItemIdByServiceIdQuery(dto.ItemId);
-                    var serviceResult = await _mediator.Send(serviceQuery, cancellationToken);
+                    // 2. Get provider ID from the order
+                    var providerQuery = new GetProviderIdByOrderIdQuery(dto.OrderId);
+                    var providerResult = await _mediator.Send(providerQuery, cancellationToken);
                     
-                    if (serviceResult.Success)
+                    if (!providerResult.Success)
+                        return Result<Guid>.Fail(
+                            message: "لم يتم العثور على الطلب",
+                            errorType: "OrderNotFound",
+                            resultStatus: ResultStatus.NotFound);
+
+                    var providerId = providerResult.Data.ProviderId;
+                    if (providerId == Guid.Empty)
+                        return Result<Guid>.Fail(
+                            message: "لم يتم العثور على معرف المزود في الطلب",
+                            errorType: "ProviderNotFound",
+                            resultStatus: ResultStatus.NotFound);
+
+                    // 3. Check if user already reviewed this order
+                    var hasReviewed = await _reviewRepo.HasUserReviewedOrderAsync(reviewerId, dto.OrderId);
+                    if (hasReviewed)
+                        return Result<Guid>.Fail(
+                            message: "لقد قمت بمراجعة هذا الطلب من قبل",
+                            errorType: "DuplicateReview",
+                            resultStatus: ResultStatus.ValidationError);
+
+                    // 4. Create Review
+                    var review = new Review
                     {
-                        baseItemId = serviceResult.Data;
-                    }
-                    else
-                    {
-                        return Result<Guid>.Fail("العنصر غير موجود", "ItemNotFound", ResultStatus.NotFound);
-                    }
+                        Id = Guid.NewGuid(),
+                        ExperienceDescription = dto.ExperienceDescription,
+                        OverallSatisfaction = dto.OverallSatisfaction,
+                        ItemQuality = dto.ItemQuality,
+                        Communication = dto.Communication,
+                        Timeliness = dto.Timeliness,
+                        ValueForMoney = dto.ValueForMoney,
+                        NetPromoterScore = dto.NetPromoterScore,
+                        WillUseAgain = dto.WillUseAgain,
+                        ProviderId = providerId,
+                        ReviewerId = reviewerId,
+                        OrderId = dto.OrderId,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+
+                    await _reviewRepo.AddAsync(review);
+                    await _unitOfWork.SaveChangesAsync();
+                    await _unitOfWork.CommitTransaction();
+
+                    return Result<Guid>.Ok(
+                        data: review.Id,
+                        message: "تم إضافة المراجعة بنجاح",
+                        resultStatus: ResultStatus.Success);
                 }
-
-                // 3. Check if user already reviewed this item
-                var hasReviewed = await _reviewRepo.HasUserReviewedItemAsync(userId, baseItemId);
-                if (hasReviewed)
+                catch (Exception)
                 {
-                    return Result<Guid>.Fail("لقد قمت بمراجعة هذا العنصر من قبل", "DuplicateReview", ResultStatus.ValidationError);
+                    await _unitOfWork.RollbackTransaction();
+                    throw;
                 }
-
-                // 4. Verify purchase
-                var hasPurchased = await _reviewRepo.HasUserPurchasedItemAsync(userId, baseItemId, dto.OrderId);
-                if (!hasPurchased)
-                {
-                    return Result<Guid>.Fail("يجب شراء العنصر أولاً لتتمكن من مراجعته", "PurchaseRequired", ResultStatus.ValidationError);
-                }
-
-                // 5. Create Review
-                var review = new Review
-                {
-                    Id = Guid.NewGuid(),
-                    UserId = userId,
-                    BaseItemId = baseItemId,
-                    OrderId = dto.OrderId,
-                    Title = dto.Title,
-                    Content = dto.Content,
-                    IsVerifiedPurchase = true,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                };
-
-                await _reviewRepo.AddAsync(review);
-                await _unitOfWork.SaveChangesAsync();
-                await _unitOfWork.CommitTransaction();
-
-                return Result<Guid>.Ok(review.Id, "تم إضافة المراجعة بنجاح", ResultStatus.Success);
             }
             catch (Exception ex)
             {
-                await _unitOfWork.RollbackTransaction();
-                return Result<Guid>.Fail($"فشل في إضافة المراجعة: {ex.Message}", "CreateReviewFailed", ResultStatus.Failed, ex);
+                return Result<Guid>.Fail(
+                    message: "حدث خطأ أثناء إضافة المراجعة",
+                    errorType: "CreateReviewFailed",
+                    resultStatus: ResultStatus.InternalServerError,
+                    exception: ex);
             }
+        }
+
+        private static Result<Guid> ValidateInput(CreateReviewDTO dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.ExperienceDescription))
+                return Result<Guid>.Fail(
+                    message: "وصف التجربة مطلوب",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            
+            if (dto.OverallSatisfaction < 1 || dto.OverallSatisfaction > 5)
+                return Result<Guid>.Fail(
+                    message: "التقييم العام يجب أن يكون بين 1 و 5",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            
+            if (dto.ItemQuality < 1 || dto.ItemQuality > 5)
+                return Result<Guid>.Fail(
+                    message: "تقييم جودة المنتج يجب أن يكون بين 1 و 5",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            
+            if (dto.Communication < 1 || dto.Communication > 5)
+                return Result<Guid>.Fail(
+                    message: "تقييم التواصل يجب أن يكون بين 1 و 5",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            
+            if (dto.Timeliness < 1 || dto.Timeliness > 5)
+                return Result<Guid>.Fail(
+                    message: "تقييم الوقت يجب أن يكون بين 1 و 5",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            
+            if (dto.NetPromoterScore < 0 || dto.NetPromoterScore > 10)
+                return Result<Guid>.Fail(
+                    message: "درجة التوصية يجب أن تكون بين 0 و 10",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+
+            return Result<Guid>.Ok(
+                data: Guid.Empty,
+                message: null,
+                resultStatus: ResultStatus.Success);
         }
     }
 } 

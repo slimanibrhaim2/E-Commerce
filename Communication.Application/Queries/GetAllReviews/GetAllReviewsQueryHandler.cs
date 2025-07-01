@@ -2,12 +2,11 @@ using MediatR;
 using Core.Result;
 using Communication.Application.DTOs;
 using Communication.Domain.Repositories;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Pagination;
-using System;
 
 namespace Communication.Application.Queries.GetAllReviews;
 
@@ -24,34 +23,35 @@ public class GetAllReviewsQueryHandler : IRequestHandler<GetAllReviewsQuery, Res
     {
         try
         {
-            var reviews = await _reviewRepository.GetAllAsync();
-            var totalCount = reviews.Count();
-            
-            // Get paginated reviews
-            var paginatedReviews = reviews
-                .Skip((request.Parameters.PageNumber - 1) * request.Parameters.PageSize)
-                .Take(request.Parameters.PageSize)
-                .ToList();
+            var reviews = await _reviewRepository.GetAllAsync(request.Parameters);
 
-            // Map to DTOs
-            var data = paginatedReviews.Select(review => new ReviewDTO
+            var data = reviews.Data.Select(review => new ReviewDTO
             {
                 Id = review.Id,
-                UserId = review.UserId,
-                BaseItemId = review.BaseItemId,
+                ExperienceDescription = review.ExperienceDescription,
+                OverallSatisfaction = review.OverallSatisfaction,
+                ItemQuality = review.ItemQuality,
+                Communication = review.Communication,
+                Timeliness = review.Timeliness,
+                ValueForMoney = review.ValueForMoney,
+                NetPromoterScore = review.NetPromoterScore,
+                WillUseAgain = review.WillUseAgain,
+                ReviewerId = review.ReviewerId,
+                ProviderId = review.ProviderId,
                 OrderId = review.OrderId,
-                Title = review.Title,
-                Content = review.Content,
-                IsVerifiedPurchase = review.IsVerifiedPurchase,
                 CreatedAt = review.CreatedAt,
-                UpdatedAt = review.UpdatedAt,
-                DeletedAt = review.DeletedAt
+                UpdatedAt = review.UpdatedAt
             }).ToList();
 
-            var paginated = Core.Pagination.PaginatedResult<ReviewDTO>.Create(data, request.Parameters.PageNumber, request.Parameters.PageSize, totalCount);
+            var result = PaginatedResult<ReviewDTO>.Create(
+                data: data,
+                pageNumber: request.Parameters.PageNumber,
+                pageSize: request.Parameters.PageSize,
+                totalCount: reviews.TotalCount);
+
             return Result<PaginatedResult<ReviewDTO>>.Ok(
-                paginated,
-                message: "تم جلب المراجعات بنجاح",
+                data: result,
+                message: "تم جلب جميع المراجعات بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)

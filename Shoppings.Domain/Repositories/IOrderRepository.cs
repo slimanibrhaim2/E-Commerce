@@ -13,5 +13,6 @@ namespace Shoppings.Domain.Repositories
         Task<Order?> GetByIdWithItemsAsync(Guid id);
         Task<IEnumerable<Order>> GetAllWithItemsAsync();
         Task<IEnumerable<Order>> GetAllByUserIdWithItemsAsync(Guid userId);
+        Task<Guid> GetProviderIdByOrderItemAsync(Guid orderItemId);
     }
 }

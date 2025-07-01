@@ -297,5 +297,40 @@ namespace Users.Presentation.Controllers
                     resultStatus: ResultStatus.Failed));
             }
         }
+
+        /// <summary>
+        /// Get a user by their ID
+        /// </summary>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Result<UserDTO>>> GetById(Guid id)
+        {
+            try
+            {
+                var query = new GetUserByIdQuery(id);
+                var result = await _mediator.Send(query);
+                
+                if (!result.Success)
+                {
+                    if (result.ResultStatus == ResultStatus.NotFound)
+                        return NotFound(result);
+                        
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في جلب بيانات المستخدم",
+                        errorType: "GetUserByIdFailed",
+                        resultStatus: ResultStatus.Failed));
+                }
+                        
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting user with ID: {UserId}", id);
+                return StatusCode(500, Result<UserDTO>.Fail(
+                    message: "حدث خطأ أثناء جلب بيانات المستخدم",
+                    errorType: "GetUserByIdFailed",
+                    resultStatus: ResultStatus.Failed,
+                    exception: ex));
+            }
+        }
     }
 }

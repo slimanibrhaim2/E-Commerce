@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Interfaces;
 
 namespace Shoppings.Infrastructure.Repositories
 {
@@ -15,6 +16,7 @@ namespace Shoppings.Infrastructure.Repositories
     {
         private readonly ECommerceContext _ctx;
         private readonly IMapper<OrderDAO, Order> _orderMapper;
+
         public OrderRepository(ECommerceContext ctx, IMapper<OrderDAO, Order> mapper) : base(ctx, mapper)
         {
             _ctx = ctx;
@@ -53,6 +55,17 @@ namespace Shoppings.Infrastructure.Repositories
                 .ToListAsync();
 
             return orderDaos.Select(dao => _orderMapper.Map(dao));
+        }
+
+        public async Task<Guid> GetProviderIdByOrderItemAsync(Guid orderItemId)
+        {
+            var orderItem = await _ctx.OrderItems
+                .Include(oi => oi.BaseItem)
+                .Where(oi => oi.Id == orderItemId && oi.DeletedAt == null)
+                .Select(oi => new { ProviderId = oi.BaseItem.UserId })
+                .FirstOrDefaultAsync();
+
+            return orderItem?.ProviderId ?? Guid.Empty;
         }
 
         public override void Update(Order entity)

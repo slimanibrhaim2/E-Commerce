@@ -225,9 +225,11 @@ namespace Shoppings.Application.Commands.Checkout
                                     resultStatus: ResultStatus.ValidationError);
                             }
 
-                            // Calculate new quantity by subtracting order quantity from current stock
-                            var newQuantity = productDetails.StockQuantity - cartItem.Quantity;
-                            var updateQuantityCommand = new UpdateProductQuantityCommand(productDetails.Id, newQuantity);
+                            // Update quantity by passing the negative change to decrease stock
+                            var updateQuantityCommand = new UpdateProductQuantityCommand(
+                                ProductId: productDetails.Id,
+                                QuantityChange: -cartItem.Quantity  // Negative value to decrease stock
+                            );
                             var updateResult = await _mediator.Send(updateQuantityCommand, cancellationToken);
 
                             if (!updateResult.Success)

@@ -7,16 +7,21 @@ using System.Threading.Tasks;
 using Users.Application.DTOs;
 using Users.Domain.Repositories;
 using Core.Result;
+using Microsoft.Extensions.Logging;
 
 namespace Users.Application.Queries.GetUserById
 {
     public class GetUserByIdQueryHandler
         : IRequestHandler<GetUserByIdQuery, Result<UserDTO>>
     {
-        private readonly IUserRepository _repo;
+        private readonly IUserRepository _userRepository;
+        private readonly ILogger<GetUserByIdQueryHandler> _logger;
 
-        public GetUserByIdQueryHandler(IUserRepository repo)
-            => _repo = repo;
+        public GetUserByIdQueryHandler(IUserRepository userRepository, ILogger<GetUserByIdQueryHandler> logger)
+        {
+            _userRepository = userRepository;
+            _logger = logger;
+        }
 
         public async Task<Result<UserDTO>> Handle(
             GetUserByIdQuery request,
@@ -24,41 +29,38 @@ namespace Users.Application.Queries.GetUserById
         {
             try
             {
-                // Use the repository method that includes details
-                var user = await _repo.GetByIdWithDetails(request.Id)
-                           ?? throw new KeyNotFoundException($"User with Id {request.Id} not found.");
+                _logger.LogInformation("Attempting to get user with ID: {UserId}", request.UserId);
 
-                var dto = new UserDTO
+                var user = await _userRepository.GetByIdWithDetails(request.UserId);
+                if (user == null)
+                {
+                    _logger.LogWarning("User not found with ID: {UserId}", request.UserId);
+                    return Result<UserDTO>.Fail(
+                        message: "المستخدم غير موجود",
+                        errorType: "UserNotFound",
+                        resultStatus: ResultStatus.NotFound);
+                }
+
+                var userDto = new UserDTO
                 {
                     Id = user.Id,
-                    FirstName = user.FirstName,
-                    MiddleName = user.MiddleName,
-                    LastName = user.LastName,
-                    PhoneNumber = user.PhoneNumber,
                     Email = user.Email,
-                    ProfilePhoto = user.ProfilePhoto,
-                    Description = user.Description,
-                    
+                    PhoneNumber = user.PhoneNumber,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName
                 };
 
                 return Result<UserDTO>.Ok(
-                    data: dto,
+                    data: userDto,
                     message: "تم جلب بيانات المستخدم بنجاح",
                     resultStatus: ResultStatus.Success);
             }
-            catch (KeyNotFoundException knf)
-            {
-                return Result<UserDTO>.Fail(
-                    message: knf.Message,
-                    errorType: "NotFound",
-                    resultStatus: ResultStatus.ValidationError,
-                    exception: knf);
-            }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error getting user with ID: {UserId}", request.UserId);
                 return Result<UserDTO>.Fail(
-                    message: "حدث خطأ أثناء جلب بيانات المستخدم",
-                    errorType: "GetByIdFailed",
+                    message: $"فشل في جلب بيانات المستخدم: {ex.Message}",
+                    errorType: "GetUserByIdFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);
             }

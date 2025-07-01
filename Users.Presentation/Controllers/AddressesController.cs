@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Users.Application.DTOs;
 using Users.Application.Commands.AddAddressByUserId;
 using Users.Application.Queries.GetAddressesByUserId;
+using Users.Application.Queries.GetAddressById;
 using Core.Result;
 using Users.Application.Commands.DeleteAddress;
 using Users.Application.Commands.UpdateAddress;
@@ -25,6 +26,29 @@ namespace Users.Presentation.Controllers
         public AddressesController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        /// <summary>
+        /// Get an address by its ID
+        /// </summary>
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Result<AddressDTO>>> GetById(Guid id)
+        {
+            var query = new GetAddressByIdQuery(id);
+            var result = await _mediator.Send(query);
+            
+            if (!result.Success)
+            {
+                if (result.ResultStatus == ResultStatus.NotFound)
+                    return NotFound(result);
+                    
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب العنوان",
+                    errorType: "GetAddressByIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+                    
+            return Ok(result);
         }
 
         [HttpPost]

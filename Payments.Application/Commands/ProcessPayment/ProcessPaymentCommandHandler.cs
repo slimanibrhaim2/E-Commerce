@@ -163,14 +163,17 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
                         resultStatus: ResultStatus.Success);
 
                 case "بطاقة ائتمان": // Credit Card
+                    return Result.Ok(
+                        message: "تم معالجة الدفع بالبطاقة بنجاح",
+                        resultStatus: ResultStatus.Success);
                 case "بطاقة خصم": // Debit Card
-                    if (string.IsNullOrEmpty(paymentDetails))
-                    {
-                        return Result.Fail(
-                            message: "تفاصيل البطاقة مطلوبة",
-                            errorType: "PaymentDetailsRequired",
-                            resultStatus: ResultStatus.ValidationError);
-                    }
+                    //if (string.IsNullOrEmpty(paymentDetails))
+                    //{
+                    //    return Result.Fail(
+                    //        message: "تفاصيل البطاقة مطلوبة",
+                    //        errorType: "PaymentDetailsRequired",
+                    //        resultStatus: ResultStatus.ValidationError);
+                    //}
                     // Here you would integrate with a payment gateway
                     // For now, we'll simulate success
                     return Result.Ok(
@@ -178,26 +181,26 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
                         resultStatus: ResultStatus.Success);
 
                 case "باي بال": // PayPal
-                    if (string.IsNullOrEmpty(paymentDetails))
-                    {
-                        return Result.Fail(
-                            message: "معرف معاملة PayPal مطلوب",
-                            errorType: "PaymentDetailsRequired",
-                            resultStatus: ResultStatus.ValidationError);
-                    }
+                    //if (string.IsNullOrEmpty(paymentDetails))
+                    //{
+                    //        return Result.Fail(
+                    //            message: "معرف معاملة PayPal مطلوب",
+                    //            errorType: "PaymentDetailsRequired",
+                    //            resultStatus: ResultStatus.ValidationError);
+                    //}
                     // Here you would verify with PayPal API
                     return Result.Ok(
                         message: "تم التحقق من دفع PayPal",
                         resultStatus: ResultStatus.Success);
 
                 case "تحويل بنكي": // Bank Transfer
-                    if (string.IsNullOrEmpty(paymentDetails))
-                    {
-                        return Result.Fail(
-                            message: "تفاصيل التحويل البنكي مطلوبة",
-                            errorType: "PaymentDetailsRequired",
-                            resultStatus: ResultStatus.ValidationError);
-                    }
+                    //if (string.IsNullOrEmpty(paymentDetails))
+                    //{
+                    //    return Result.Fail(
+                    //        message: "تفاصيل التحويل البنكي مطلوبة",
+                    //        errorType: "PaymentDetailsRequired",
+                    //        resultStatus: ResultStatus.ValidationError);
+                    //}
                     // Here you would verify bank transfer details
                     return Result.Ok(
                         message: "تم التحقق من التحويل البنكي",

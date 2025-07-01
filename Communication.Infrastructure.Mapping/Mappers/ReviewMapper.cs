@@ -12,15 +12,20 @@ public class ReviewMapper : IMapper<ReviewDAO, Review>
         return new Review
         {
             Id = source.Id,
-            UserId = source.UserId,
-            BaseItemId = source.BaseItemId,
-            OrderId = source.OrderId,
-            Title = source.Title,
-            Content = source.Content,
-            IsVerifiedPurchase = source.IsVerifiedPurchase,
+            ExperienceDescription = source.ExperienceDescription,
+            OverallSatisfaction = source.OverallSatisfaction,
+            ItemQuality = source.ItemQuality,
+            Communication = source.Communication,
+            Timeliness = source.Timeliness,
+            ValueForMoney = source.ValueForMoney,
+            NetPromoterScore = source.NetPromoterScore,
+            WillUseAgain = source.WillUseAgain,
             CreatedAt = source.CreatedAt,
             UpdatedAt = source.UpdatedAt,
-            DeletedAt = source.DeletedAt
+            DeletedAt = source.DeletedAt,
+            ProviderId = source.ProviderId,
+            ReviewerId = source.ReviewerId,
+            OrderId = source.OrderId
         };
     }
 
@@ -30,15 +35,20 @@ public class ReviewMapper : IMapper<ReviewDAO, Review>
         return new ReviewDAO
         {
             Id = target.Id,
-            UserId = target.UserId,
-            BaseItemId = target.BaseItemId,
-            OrderId = target.OrderId,
-            Title = target.Title,
-            Content = target.Content,
-            IsVerifiedPurchase = target.IsVerifiedPurchase,
+            ExperienceDescription = target.ExperienceDescription,
+            OverallSatisfaction = target.OverallSatisfaction,
+            ItemQuality = target.ItemQuality,
+            Communication = target.Communication,
+            Timeliness = target.Timeliness,
+            ValueForMoney = target.ValueForMoney,
+            NetPromoterScore = target.NetPromoterScore,
+            WillUseAgain = target.WillUseAgain,
             CreatedAt = target.CreatedAt,
             UpdatedAt = target.UpdatedAt,
-            DeletedAt = target.DeletedAt
+            DeletedAt = target.DeletedAt,
+            ProviderId = target.ProviderId,
+            ReviewerId = target.ReviewerId,
+            OrderId = target.OrderId
         };
     }
 } 
