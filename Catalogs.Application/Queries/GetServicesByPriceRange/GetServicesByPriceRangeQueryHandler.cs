@@ -34,7 +34,7 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
             if (request.MinPrice < 0)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Minimum price cannot be negative",
+                    message: "لا يمكن أن يكون السعر الأدنى سالباً",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -42,7 +42,7 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
             if (request.MaxPrice < 0)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Maximum price cannot be negative",
+                    message: "لا يمكن أن يكون السعر الأقصى سالباً",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -50,7 +50,7 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
             if (request.MaxPrice < request.MinPrice)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Maximum price must be greater than or equal to minimum price",
+                    message: "يجب أن يكون السعر الأقصى أكبر من أو يساوي السعر الأدنى",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -58,7 +58,7 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
             if (request.PageNumber < 1)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Page number must be greater than or equal to 1",
+                    message: "يجب أن يكون رقم الصفحة أكبر من أو يساوي 1",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -66,12 +66,12 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
             if (request.PageSize < 1)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Page size must be greater than or equal to 1",
+                    message: "يجب أن يكون حجم الصفحة أكبر من أو يساوي 1",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var services = (await _repo.GetByPriceRange(request.MinPrice, request.MaxPrice)).ToList();
+            var paginatedServices = await _repo.GetByPriceRange(request.MinPrice, request.MaxPrice, request.PageNumber, request.PageSize);
             
             // Get all favorites for the user if authenticated
             var userFavorites = request.UserId != Guid.Empty 
@@ -81,7 +81,7 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
             // Get all favorite base item IDs for quick lookup
             var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
 
-            if (!services.Any())
+            if (!paginatedServices.Data.Any())
             {
                 return Result<PaginatedResult<ServiceDTO>>.Ok(
                     data: PaginatedResult<ServiceDTO>.Create(
@@ -89,16 +89,11 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
                         pageNumber: request.PageNumber,
                         pageSize: request.PageSize,
                         totalCount: 0),
-                    message: $"No services found with price between {request.MinPrice} and {request.MaxPrice}",
+                    message: $"لم يتم العثور على خدمات بسعر بين {request.MinPrice} و {request.MaxPrice}",
                     resultStatus: ResultStatus.Success);
             }
-
-            var totalCount = services.Count;
-            var pageNumber = request.PageNumber;
-            var pageSize = request.PageSize;
-            var paged = services.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             
-            var dtos = paged.Select(s => new ServiceDTO
+            var dtos = paginatedServices.Data.Select(s => new ServiceDTO
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -123,20 +118,20 @@ public class GetServicesByPriceRangeQueryHandler : IRequestHandler<GetServicesBy
 
             var paginated = PaginatedResult<ServiceDTO>.Create(
                 data: dtos,
-                pageNumber: pageNumber,
-                pageSize: pageSize,
-                totalCount: totalCount);
+                pageNumber: request.PageNumber,
+                pageSize: request.PageSize,
+                totalCount: paginatedServices.TotalCount);
 
             return Result<PaginatedResult<ServiceDTO>>.Ok(
                 data: paginated,
-                message: $"Successfully retrieved {dtos.Count} services with price between {request.MinPrice} and {request.MaxPrice}",
+                message: $"تم جلب {dtos.Count} خدمة بسعر بين {request.MinPrice} و {request.MaxPrice}",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error retrieving services in price range {MinPrice} - {MaxPrice}", request.MinPrice, request.MaxPrice);
+            _logger.LogError(ex, "خطأ في جلب الخدمات في نطاق السعر {MinPrice} - {MaxPrice}", request.MinPrice, request.MaxPrice);
             return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "An error occurred while retrieving services",
+                message: "حدث خطأ أثناء جلب الخدمات",
                 errorType: "GetServicesByPriceRangeFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

@@ -30,8 +30,8 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, R
     {
         try
         {
-            var products = await _repo.GetAllWithDetails();
-            var productsList = products.ToList();
+            // Get paginated products with details
+            var paginatedProducts = await _repo.GetAllWithDetails(request.Pagination.PageNumber, request.Pagination.PageSize);
 
             // Get all favorites for the user if authenticated
             var userFavorites = request.UserId != Guid.Empty 
@@ -41,16 +41,9 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, R
             // Get all favorite base item IDs for quick lookup
             var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
 
-            // Apply pagination
-            var totalCount = productsList.Count;
-            var pagedProducts = productsList
-                .Skip((request.Pagination.PageNumber - 1) * request.Pagination.PageSize)
-                .Take(request.Pagination.PageSize)
-                .ToList();
-
             // Map to DTOs and include features
             var productDTOs = new List<ProductDTO>();
-            foreach (var product in pagedProducts)
+            foreach (var product in paginatedProducts.Data)
             {
                 var features = await _featureRepo.GetProductFeaturesByEntityIdAsync(product.Id);
                 var productDTO = new ProductDTO
@@ -83,9 +76,9 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, R
 
             var paginatedResult = PaginatedResult<ProductDTO>.Create(
                 data: productDTOs,
-                pageNumber: request.Pagination.PageNumber,
-                pageSize: request.Pagination.PageSize,
-                totalCount: totalCount
+                pageNumber: paginatedProducts.PageNumber,
+                pageSize: paginatedProducts.PageSize,
+                totalCount: paginatedProducts.TotalCount
             );
 
             _logger.LogInformation("تم جلب {Count} منتج", productDTOs.Count);

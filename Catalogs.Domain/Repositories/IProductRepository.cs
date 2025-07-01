@@ -7,26 +7,21 @@ namespace Catalogs.Domain.Repositories;
 public interface IProductRepository : IRepository<Product>
 {
     Task<IEnumerable<Product>> GetAllAsync();
-    Task<IEnumerable<Product>> GetAllWithDetails();
+    Task<PaginatedResult<Product>> GetAllWithDetails(int pageNumber, int pageSize);
     Task<Product?> GetById(Guid id);
     Task<Product?> GetByIdWithDetails(Guid id);
-    Task<IEnumerable<Product>> GetByCategory(Guid categoryId);
-    Task<IEnumerable<Product>> GetByCategoryWithDetails(Guid categoryId);
-    Task<IEnumerable<Product>> GetByBrand(Guid brandId);
+    Task<PaginatedResult<Product>> GetByCategoryWithDetails(Guid categoryId, int pageNumber, int pageSize);
     Task<PaginatedResult<Product>> GetByPriceRange(decimal minPrice, decimal maxPrice, int pageNumber, int pageSize);
-    Task<IEnumerable<Product>> GetLowStockProducts(int threshold);
+    Task<PaginatedResult<Product>> GetLowStockProducts(int threshold, int pageNumber, int pageSize);
     Task<Product> GetByMediaId(Guid mediaId);
     Task<bool> UpdateAsync(Guid id, Product product);
     
-    // Brand operations
-    Task<bool> AddBrandToProductAsync(Guid productId, Guid brandId);
-    Task<bool> RemoveBrandFromProductAsync(Guid productId, Guid brandId);
 
-    Task<IEnumerable<Product>> GetProductsByUserIdAsync(Guid userId);
+    Task<PaginatedResult<Product>> GetProductsByUserIdAsync(Guid userId, int pageNumber, int pageSize);
 
-    Task<IEnumerable<Product>> GetProductsByNameAsync(string name);
+    Task<PaginatedResult<Product>> GetProductsByNameAsync(string name, int pageNumber, int pageSize);
 
-    Task<IEnumerable<Product>> GetByIdsAsync(IEnumerable<Guid> ids);
+    Task<PaginatedResult<Product>> GetByIdsAsync(IEnumerable<Guid> ids, int pageNumber, int pageSize);
 
     Task<Guid?> GetBaseItemIdByProductIdAsync(Guid productId);
     

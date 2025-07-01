@@ -55,8 +55,7 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var products = await _repo.GetByCategoryWithDetails(request.CategoryId);
-            var productsList = products.ToList();
+            var paginatedProducts = await _repo.GetByCategoryWithDetails(request.CategoryId, request.PageNumber, request.PageSize);
 
             // Get all favorites for the user if authenticated
             var userFavorites = request.UserId != Guid.Empty 
@@ -66,16 +65,9 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
             // Get all favorite base item IDs for quick lookup
             var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
 
-            // Apply pagination
-            var totalCount = productsList.Count;
-            var pagedProducts = productsList
-                .Skip((request.PageNumber - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .ToList();
-
             // Map to DTOs and include features
             var productDTOs = new List<ProductDTO>();
-            foreach (var product in pagedProducts)
+            foreach (var product in paginatedProducts.Data)
             {
                 var features = await _featureRepo.GetProductFeaturesByEntityIdAsync(product.Id);
                 var productDTO = new ProductDTO
@@ -106,17 +98,17 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
                 productDTOs.Add(productDTO);
             }
 
-            var paginatedResult = PaginatedResult<ProductDTO>.Create(
+            var result = PaginatedResult<ProductDTO>.Create(
                 data: productDTOs,
-                pageNumber: request.PageNumber,
-                pageSize: request.PageSize,
-                totalCount: totalCount
+                pageNumber: paginatedProducts.PageNumber,
+                pageSize: paginatedProducts.PageSize,
+                totalCount: paginatedProducts.TotalCount
             );
 
             _logger.LogInformation("تم جلب {Count} منتج من الفئة {CategoryId}", productDTOs.Count, request.CategoryId);
 
             return Result<PaginatedResult<ProductDTO>>.Ok(
-                data: paginatedResult,
+                data: result,
                 message: "تم جلب المنتجات بنجاح",
                 resultStatus: ResultStatus.Success);
         }

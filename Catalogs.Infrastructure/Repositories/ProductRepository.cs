@@ -63,12 +63,12 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
                 .ThenInclude(bi => bi.ProductMedia)
                     .ThenInclude(m => m.MediaType)
             .Include(p => p.ProductFeatures)
-            .FirstOrDefaultAsync(p => p.Id == id && p.DeletedAt == null);
+            .Where(p => p.Id == id && p.DeletedAt == null)
+            .AsSplitQuery()
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
 
-        if (productDao == null)
-            return null;
-
-        return _mapper.Map(productDao);
+        return productDao == null ? null : _mapper.Map(productDao);
     }
 
     public async Task<IEnumerable<Product>> GetByCategory(Guid categoryId)
@@ -103,7 +103,10 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
             .Include(p => p.ProductFeatures)
             .Where(p => p.BaseItem.Price >= (double)minPrice && 
                        p.BaseItem.Price <= (double)maxPrice && 
-                       p.DeletedAt == null);
+                       p.DeletedAt == null)
+            .OrderByDescending(p => p.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
 
         var totalCount = await query.CountAsync();
         var products = await query
@@ -115,11 +118,9 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
 
-    
-
-    public async Task<IEnumerable<Product>> GetLowStockProducts(int threshold)
+    public async Task<PaginatedResult<Product>> GetLowStockProducts(int threshold, int pageNumber, int pageSize)
     {
-        var products = await _context.Products
+        var query = _context.Products
             .Include(p => p.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
                     .ThenInclude(m => m.MediaType)
@@ -127,9 +128,18 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
                 .ThenInclude(bi => bi.Category)
             .Include(p => p.ProductFeatures)
             .Where(p => p.StockQuantity <= threshold && p.DeletedAt == null)
+            .AsSplitQuery()
+            .AsNoTracking()
+            .OrderBy(p => p.StockQuantity);
+
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
 
-        return products.Select(p => _mapper.Map(p));
+        var mappedProducts = products.Select(p => _mapper.Map(p)).ToList();
+        return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
 
     public async Task<Product> GetByMediaId(Guid mediaId)
@@ -209,9 +219,9 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         return true;
     }
 
-    public async Task<IEnumerable<Product>> GetProductsByUserIdAsync(Guid userId)
+    public async Task<PaginatedResult<Product>> GetProductsByUserIdAsync(Guid userId, int pageNumber, int pageSize)
     {
-        var products = await _context.Products
+        var query = _context.Products
             .Include(p => p.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
                     .ThenInclude(m => m.MediaType)
@@ -219,40 +229,83 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
                 .ThenInclude(bi => bi.Category)
             .Include(p => p.ProductFeatures)
             .Where(p => p.BaseItem.UserId == userId && p.DeletedAt == null)
+            .AsSplitQuery()
+            .AsNoTracking()
+            .OrderByDescending(p => p.CreatedAt);
+
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
-        return products.Select(p => _mapper.Map(p));
+
+        var mappedProducts = products.Select(p => _mapper.Map(p)).ToList();
+        return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
 
-    public async Task<IEnumerable<Product>> GetProductsByNameAsync(string name)
+    public async Task<PaginatedResult<Product>> GetProductsByNameAsync(string name, int pageNumber, int pageSize)
     {
-        var products = await _context.Products
+        var query = _context.Products
             .Include(p => p.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
                     .ThenInclude(m => m.MediaType)
             .Include(p => p.BaseItem)
                 .ThenInclude(bi => bi.Category)
             .Include(p => p.ProductFeatures)
-            .Where(p => p.DeletedAt == null)
-            .ToListAsync();
+            .Where(p => p.DeletedAt == null && 
+                (p.BaseItem.Name.Contains(name) || 
+                 EF.Functions.Like(p.BaseItem.Name, $"%{name}%")))
+            .AsSplitQuery()
+            .AsNoTracking();
 
-        var results = products
+        // Get all matching products first to apply fuzzy search
+        var allProducts = await query.ToListAsync();
+        
+        // Apply fuzzy search on all results
+        var scoredProducts = allProducts
             .Select(p => new { Product = p, Score = Fuzz.Ratio(p.BaseItem.Name, name) })
-            .OrderByDescending(x => x.Score)
             .Where(x => x.Score > 60)
-            .Select(x => x.Product);
+            .OrderByDescending(x => x.Score)
+            .ToList();
 
-        return results.Select(p => _mapper.Map(p));
+        var totalCount = scoredProducts.Count;
+        
+        // Apply pagination after fuzzy search
+        var results = scoredProducts
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(x => x.Product)
+            .ToList();
+
+        return PaginatedResult<Product>.Create(
+            results.Select(p => _mapper.Map(p)).ToList(), 
+            pageNumber, 
+            pageSize, 
+            totalCount);
     }
 
-    public async Task<IEnumerable<Product>> GetByIdsAsync(IEnumerable<Guid> ids)
+    public async Task<PaginatedResult<Product>> GetByIdsAsync(IEnumerable<Guid> ids, int pageNumber, int pageSize)
     {
-        var products = await _context.Products
+        var query = _context.Products
             .Include(p => p.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
             .Include(p => p.ProductFeatures)
-            .Where(p => ids.Contains(p.Id))
+            .Where(p => ids.Contains(p.Id) && p.DeletedAt == null)
+            .AsSplitQuery()
+            .AsNoTracking()
+            .OrderBy(p => p.CreatedAt);
+
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
-        return products.Select(p => _mapper.Map(p));
+
+        var mappedProducts = products.Select(p => _mapper.Map(p)).ToList();
+        return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
 
     public async Task<Guid?> GetBaseItemIdByProductIdAsync(Guid productId)
@@ -275,9 +328,9 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         return product == Guid.Empty ? null : product;
     }
 
-    public async Task<IEnumerable<Product>> GetAllWithDetails()
+    public async Task<PaginatedResult<Product>> GetAllWithDetails(int pageNumber, int pageSize)
     {
-        var products = await _context.Products
+        var query = _context.Products
             .Include(p => p.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
                     .ThenInclude(m => m.MediaType)
@@ -285,13 +338,23 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
                 .ThenInclude(bi => bi.Category)
             .Include(p => p.ProductFeatures)
             .Where(p => p.DeletedAt == null)
+            .OrderByDescending(p => p.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
-        return products.Select(p => _mapper.Map(p));
+
+        var mappedProducts = products.Select(p => _mapper.Map(p)).ToList();
+        return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
 
-    public async Task<IEnumerable<Product>> GetByCategoryWithDetails(Guid categoryId)
+    public async Task<PaginatedResult<Product>> GetByCategoryWithDetails(Guid categoryId, int pageNumber, int pageSize)
     {
-        var products = await _context.Products
+        var query = _context.Products
             .Include(p => p.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
                     .ThenInclude(m => m.MediaType)
@@ -299,7 +362,17 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
                 .ThenInclude(bi => bi.Category)
             .Include(p => p.ProductFeatures)
             .Where(p => p.BaseItem.CategoryId == categoryId && p.DeletedAt == null)
+            .OrderByDescending(p => p.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
-        return products.Select(p => _mapper.Map(p));
+
+        var mappedProducts = products.Select(p => _mapper.Map(p)).ToList();
+        return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
 } 

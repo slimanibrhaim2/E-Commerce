@@ -106,26 +106,16 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
         var service = await _context.Services
             .Include(s => s.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
-            .FirstOrDefaultAsync(s => s.BaseItem.ProductMedia.Any(m => m.Id == mediaId));
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .FirstOrDefaultAsync(s => s.BaseItem.ProductMedia.Any(m => m.Id == mediaId) && s.DeletedAt == null);
 
         if (service == null)
             throw new KeyNotFoundException($"No service found with media ID: {mediaId}");
 
         return _mapper.Map(service);
-    }
-    public async Task<IEnumerable<Service>> GetByDurationRange(int minDuration, int maxDuration)
-    {
-        var services = await _context.Services
-            .Include(s => s.BaseItem)
-                .ThenInclude(bi => bi.ProductMedia)
-                    .ThenInclude(m => m.MediaType)
-            .Include(s => s.BaseItem)
-                .ThenInclude(bi => bi.Category)
-            .Include(s => s.ServiceFeatures)
-            .Where(s => s.Duration >= minDuration && s.Duration <= maxDuration && s.DeletedAt == null)
-            .ToListAsync();
-
-        return services.Select(s => _mapper.Map(s));
     }
 
     public async Task<bool> UpdateAsync(Guid id, Service service)
@@ -189,18 +179,7 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
         return services.Select(s => _mapper.Map(s));
     }
 
-    public async Task<IEnumerable<Service>> GetServicesByNameAsync(string name)
-    {
-        var services = await _context.Services
-            .Include(s => s.BaseItem)
-            .ToListAsync();
-        var results = services
-            .Select(s => new { Service = s, Score = Fuzz.Ratio(s.BaseItem.Name, name) })
-            .OrderByDescending(x => x.Score)
-            .Where(x => x.Score > 60)
-            .Select(x => x.Service);
-        return results.Select(s => _mapper.Map(s));
-    }
+    // Removed old non-paginated GetServicesByNameAsync in favor of the paginated version
 
     public async Task<IEnumerable<Service>> GetByIdsAsync(IEnumerable<Guid> ids)
     {
@@ -232,9 +211,9 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
         return service == Guid.Empty ? null : service;
     }
 
-    public async Task<IEnumerable<Service>> GetAllWithDetails()
+    public async Task<PaginatedResult<Service>> GetAllWithDetails(int pageNumber, int pageSize)
     {
-        var services = await _context.Services
+        var query = _context.Services
             .Include(s => s.BaseItem)
                 .ThenInclude(bi => bi.ProductMedia)
                     .ThenInclude(m => m.MediaType)
@@ -242,8 +221,135 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
                 .ThenInclude(bi => bi.Category)
             .Include(s => s.ServiceFeatures)
             .Where(s => s.DeletedAt == null)
+            .OrderByDescending(s => s.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var services = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
-        return services.Select(s => _mapper.Map(s));
+
+        return PaginatedResult<Service>.Create(
+            services.Select(s => _mapper.Map(s)).ToList(),
+            pageNumber,
+            pageSize,
+            totalCount);
+    }
+
+    public async Task<PaginatedResult<Service>> GetByPriceRange(decimal minPrice, decimal maxPrice, int pageNumber, int pageSize)
+    {
+        var query = _context.Services
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.BaseItem.Price >= (double)minPrice && 
+                       s.BaseItem.Price <= (double)maxPrice && 
+                       s.DeletedAt == null)
+            .OrderByDescending(s => s.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var services = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return PaginatedResult<Service>.Create(
+            services.Select(s => _mapper.Map(s)).ToList(),
+            pageNumber,
+            pageSize,
+            totalCount);
+    }
+
+    public async Task<PaginatedResult<Service>> GetServicesByUserIdAsync(Guid userId, int pageNumber, int pageSize)
+    {
+        var query = _context.Services
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.BaseItem.UserId == userId && s.DeletedAt == null)
+            .OrderByDescending(s => s.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var services = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return PaginatedResult<Service>.Create(
+            services.Select(s => _mapper.Map(s)).ToList(),
+            pageNumber,
+            pageSize,
+            totalCount);
+    }
+
+    public async Task<PaginatedResult<Service>> GetServicesByNameAsync(string name, int pageNumber, int pageSize)
+    {
+        var query = _context.Services
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.DeletedAt == null)
+            .OrderByDescending(s => s.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var services = await query.ToListAsync();
+
+        // Use fuzzy matching to find services with similar names
+        var matchedServices = services
+            .Where(s => Fuzz.PartialRatio(s.BaseItem.Name.ToLower(), name.ToLower()) > 80)
+            .OrderByDescending(s => Fuzz.PartialRatio(s.BaseItem.Name.ToLower(), name.ToLower()))
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        return PaginatedResult<Service>.Create(
+            matchedServices.Select(s => _mapper.Map(s)).ToList(),
+            pageNumber,
+            pageSize,
+            matchedServices.Count);
+    }
+
+    public async Task<PaginatedResult<Service>> GetByIdsAsync(IEnumerable<Guid> ids, int pageNumber, int pageSize)
+    {
+        var query = _context.Services
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => ids.Contains(s.Id) && s.DeletedAt == null)
+            .OrderByDescending(s => s.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var services = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return PaginatedResult<Service>.Create(
+            services.Select(s => _mapper.Map(s)).ToList(),
+            pageNumber,
+            pageSize,
+            totalCount);
     }
 
     public async Task<Service> AddAsync(Service service)
@@ -258,9 +364,7 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
         return _mapper.Map(dao);
     }
 
- 
-
-    public async Task<PaginatedResult<Service>> GetByPriceRange(decimal minPrice, decimal maxPrice, int pageNumber, int pageSize)
+    public async Task<PaginatedResult<Service>> GetByCategory(Guid categoryId, int pageNumber, int pageSize)
     {
         var query = _context.Services
             .Include(s => s.BaseItem)
@@ -269,22 +373,98 @@ public class ServiceRepository : BaseRepository<Service, ServiceDAO>, IServiceRe
             .Include(s => s.BaseItem)
                 .ThenInclude(bi => bi.Category)
             .Include(s => s.ServiceFeatures)
-            .Where(s => s.BaseItem.Price >= (double)minPrice && 
-                       s.BaseItem.Price <= (double)maxPrice && 
-                       s.DeletedAt == null);
+            .Where(s => s.BaseItem.CategoryId == categoryId && s.DeletedAt == null)
+            .OrderByDescending(s => s.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
 
         var totalCount = await query.CountAsync();
-        var items = await query
+        var services = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
 
-        return new PaginatedResult<Service>
-        {
-            Data = items.Select(s => _mapper.Map(s)),
-            TotalCount = totalCount,
-            PageNumber = pageNumber,
-            PageSize = pageSize
-        };
+        return PaginatedResult<Service>.Create(
+            services.Select(s => _mapper.Map(s)).ToList(),
+            pageNumber,
+            pageSize,
+            totalCount);
+    }
+
+    public async Task<PaginatedResult<Service>> GetByBrand(Guid brandId, int pageNumber, int pageSize)
+    {
+        var query = _context.Services
+            .Include(s => s.BaseItem)
+            .Include(s => s.Brands)
+            .Where(s => s.Brands.Any(b => b.Id == brandId) && s.DeletedAt == null)
+            .OrderByDescending(s => s.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var services = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return PaginatedResult<Service>.Create(
+            services.Select(s => _mapper.Map(s)).ToList(),
+            pageNumber,
+            pageSize,
+            totalCount);
+    }
+
+    public async Task<PaginatedResult<Service>> GetAvailableServices(int pageNumber, int pageSize)
+    {
+        var query = _context.Services
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.BaseItem.IsAvailable && s.DeletedAt == null)
+            .OrderByDescending(s => s.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var services = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return PaginatedResult<Service>.Create(
+            services.Select(s => _mapper.Map(s)).ToList(),
+            pageNumber,
+            pageSize,
+            totalCount);
+    }
+
+    public async Task<PaginatedResult<Service>> GetByDurationRange(int minDuration, int maxDuration, int pageNumber, int pageSize)
+    {
+        var query = _context.Services
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(s => s.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(s => s.ServiceFeatures)
+            .Where(s => s.Duration >= minDuration && s.Duration <= maxDuration && s.DeletedAt == null)
+            .OrderByDescending(s => s.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var services = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return PaginatedResult<Service>.Create(
+            services.Select(s => _mapper.Map(s)).ToList(),
+            pageNumber,
+            pageSize,
+            totalCount);
     }
 } 

@@ -47,8 +47,7 @@ public class GetAllServicesQueryHandler : IRequestHandler<GetAllServicesQuery, R
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var services = await _repo.GetAllWithDetails();
-            var servicesList = services.ToList();
+            var paginatedServices = await _repo.GetAllWithDetails(request.Pagination.PageNumber, request.Pagination.PageSize);
 
             // Get all favorites for the user if authenticated
             var userFavorites = request.UserId != Guid.Empty 
@@ -58,16 +57,9 @@ public class GetAllServicesQueryHandler : IRequestHandler<GetAllServicesQuery, R
             // Get all favorite base item IDs for quick lookup
             var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
 
-            // Apply pagination
-            var totalCount = servicesList.Count;
-            var pagedServices = servicesList
-                .Skip((request.Pagination.PageNumber - 1) * request.Pagination.PageSize)
-                .Take(request.Pagination.PageSize)
-                .ToList();
-
             // Map to DTOs and include features
             var serviceDTOs = new List<ServiceDTO>();
-            foreach (var service in pagedServices)
+            foreach (var service in paginatedServices.Data)
             {
                 var features = await _featureRepo.GetServiceFeaturesByEntityIdAsync(service.Id);
                 var serviceDTO = new ServiceDTO
@@ -102,7 +94,7 @@ public class GetAllServicesQueryHandler : IRequestHandler<GetAllServicesQuery, R
                 data: serviceDTOs,
                 pageNumber: request.Pagination.PageNumber,
                 pageSize: request.Pagination.PageSize,
-                totalCount: totalCount
+                totalCount: paginatedServices.TotalCount
             );
 
             _logger.LogInformation("تم جلب {Count} خدمة", serviceDTOs.Count);

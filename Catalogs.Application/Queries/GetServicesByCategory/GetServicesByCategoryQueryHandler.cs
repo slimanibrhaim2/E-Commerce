@@ -52,9 +52,9 @@ public class GetServicesByCategoryQueryHandler : IRequestHandler<GetServicesByCa
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var services = (await _repo.GetByCategory(request.CategoryId)).ToList();
+            var paginatedServices = await _repo.GetByCategory(request.CategoryId, request.PageNumber, request.PageSize);
             
-            if (!services.Any())
+            if (!paginatedServices.Data.Any())
             {
                 return Result<PaginatedResult<ServiceDTO>>.Ok(
                     data: PaginatedResult<ServiceDTO>.Create(
@@ -65,13 +65,8 @@ public class GetServicesByCategoryQueryHandler : IRequestHandler<GetServicesByCa
                     message: $"No services found in category ID {request.CategoryId}",
                     resultStatus: ResultStatus.Success);
             }
-
-            var totalCount = services.Count;
-            var pageNumber = request.PageNumber;
-            var pageSize = request.PageSize;
-            var paged = services.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             
-            var dtos = paged.Select(s => new ServiceDTO
+            var dtos = paginatedServices.Data.Select(s => new ServiceDTO
             {
                 Name = s.Name,
                 Description = s.Description,
@@ -92,10 +87,15 @@ public class GetServicesByCategoryQueryHandler : IRequestHandler<GetServicesByCa
                 }).ToList() ?? new List<ServiceFeatureDTO>()
             }).ToList();
 
-            var paginated = PaginatedResult<ServiceDTO>.Create(dtos, pageNumber, pageSize, totalCount);
+            var paginated = PaginatedResult<ServiceDTO>.Create(
+                data: dtos,
+                pageNumber: paginatedServices.PageNumber,
+                pageSize: paginatedServices.PageSize,
+                totalCount: paginatedServices.TotalCount);
+
             return Result<PaginatedResult<ServiceDTO>>.Ok(
                 data: paginated,
-                message: $"Successfully retrieved {dtos.Count} services from category ID {request.CategoryId}",
+                message: $"Successfully retrieved {dtos.Count} services from category ID {request.CategoryId} out of {paginatedServices.TotalCount} total matches",
                 resultStatus: ResultStatus.Success);
         }
         catch (DBConcurrencyException ex)

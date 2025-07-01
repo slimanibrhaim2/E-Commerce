@@ -31,7 +31,7 @@ public class GetServicesByNameQueryHandler : IRequestHandler<GetServicesByNameQu
             if (string.IsNullOrWhiteSpace(request.Name))
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Service name cannot be empty",
+                    message: "لا يمكن أن يكون اسم الخدمة فارغاً",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -39,7 +39,7 @@ public class GetServicesByNameQueryHandler : IRequestHandler<GetServicesByNameQu
             if (request.Parameters.PageNumber < 1)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Page number must be greater than or equal to 1",
+                    message: "يجب أن يكون رقم الصفحة أكبر من أو يساوي 1",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -47,14 +47,14 @@ public class GetServicesByNameQueryHandler : IRequestHandler<GetServicesByNameQu
             if (request.Parameters.PageSize < 1)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Page size must be greater than or equal to 1",
+                    message: "يجب أن يكون حجم الصفحة أكبر من أو يساوي 1",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var services = (await _repository.GetServicesByNameAsync(request.Name)).ToList();
+            var paginatedServices = await _repository.GetServicesByNameAsync(request.Name, request.Parameters.PageNumber, request.Parameters.PageSize);
             
-            if (!services.Any())
+            if (!paginatedServices.Data.Any())
             {
                 return Result<PaginatedResult<ServiceDTO>>.Ok(
                     data: PaginatedResult<ServiceDTO>.Create(
@@ -62,16 +62,11 @@ public class GetServicesByNameQueryHandler : IRequestHandler<GetServicesByNameQu
                         pageNumber: request.Parameters.PageNumber,
                         pageSize: request.Parameters.PageSize,
                         totalCount: 0),
-                    message: $"No services found matching the name '{request.Name}'",
+                    message: $"لم يتم العثور على خدمات تطابق الاسم '{request.Name}'",
                     resultStatus: ResultStatus.Success);
             }
-
-            var totalCount = services.Count;
-            var pageNumber = request.Parameters.PageNumber;
-            var pageSize = request.Parameters.PageSize;
-            var paged = services.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             
-            var dtos = paged.Select(s => new ServiceDTO
+            var dtos = paginatedServices.Data.Select(s => new ServiceDTO
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -82,25 +77,30 @@ public class GetServicesByNameQueryHandler : IRequestHandler<GetServicesByNameQu
                 UserId = s.UserId
             }).ToList();
 
-            var paginated = PaginatedResult<ServiceDTO>.Create(dtos, pageNumber, pageSize, totalCount);
+            var paginated = PaginatedResult<ServiceDTO>.Create(
+                data: dtos,
+                pageNumber: request.Parameters.PageNumber,
+                pageSize: request.Parameters.PageSize,
+                totalCount: paginatedServices.TotalCount);
+
             return Result<PaginatedResult<ServiceDTO>>.Ok(
                 data: paginated,
-                message: $"Successfully retrieved {dtos.Count} services matching the name '{request.Name}'",
+                message: $"تم العثور على {dtos.Count} خدمة تطابق الاسم '{request.Name}'",
                 resultStatus: ResultStatus.Success);
         }
         catch (DBConcurrencyException ex)
         {
-            _logger.LogError(ex, "Database error while searching for services with name '{ServiceName}'", request.Name);
+            _logger.LogError(ex, "خطأ في قاعدة البيانات أثناء البحث عن الخدمات باسم '{ServiceName}'", request.Name);
             return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "Failed to search services due to a database error. Please try again later.",
+                message: "فشل البحث عن الخدمات بسبب خطأ في قاعدة البيانات. يرجى المحاولة مرة أخرى لاحقاً",
                 errorType: "DatabaseError",
                 resultStatus: ResultStatus.InternalServerError);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unexpected error while searching for services with name '{ServiceName}': {Message}", request.Name, ex.Message);
+            _logger.LogError(ex, "خطأ غير متوقع أثناء البحث عن الخدمات باسم '{ServiceName}': {Message}", request.Name, ex.Message);
             return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "An unexpected error occurred while searching for services. Please try again later.",
+                message: "حدث خطأ غير متوقع أثناء البحث عن الخدمات. يرجى المحاولة مرة أخرى لاحقاً",
                 errorType: "UnexpectedError",
                 resultStatus: ResultStatus.Failed);
         }

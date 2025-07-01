@@ -44,7 +44,7 @@ public class GetServicesByDurationQueryHandler : IRequestHandler<GetServicesByDu
             if (request.PageSize < 1)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Page size must be greater than or equal to 1",
+                    message: "يجب أن يكون حجم الصفحة أكبر من أو يساوي 1",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -90,14 +90,14 @@ public class GetServicesByDurationQueryHandler : IRequestHandler<GetServicesByDu
 
             return Result<PaginatedResult<ServiceDTO>>.Ok(
                 data: paginatedResult,
-                message: "Services retrieved successfully",
+                message: "تم جلب الخدمات بنجاح",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error retrieving services in duration range {MinDuration} - {MaxDuration}", request.MinDuration, request.MaxDuration);
+            _logger.LogError(ex, "خطأ في جلب الخدمات في نطاق المدة {MinDuration} - {MaxDuration}", request.MinDuration, request.MaxDuration);
             return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "An error occurred while retrieving services",
+                message: "حدث خطأ أثناء جلب الخدمات",
                 errorType: "GetServicesByDurationFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

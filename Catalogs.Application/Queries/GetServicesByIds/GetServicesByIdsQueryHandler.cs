@@ -61,9 +61,9 @@ public class GetServicesByIdsQueryHandler : IRequestHandler<GetServicesByIdsQuer
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var services = (await _repo.GetByIdsAsync(request.ServiceIds)).ToList();
+            var paginatedServices = await _repo.GetByIdsAsync(request.ServiceIds, request.Parameters.PageNumber, request.Parameters.PageSize);
             
-            if (!services.Any())
+            if (!paginatedServices.Data.Any())
             {
                 return Result<PaginatedResult<ServiceDetailsDTO>>.Ok(
                     data: PaginatedResult<ServiceDetailsDTO>.Create(
@@ -74,13 +74,8 @@ public class GetServicesByIdsQueryHandler : IRequestHandler<GetServicesByIdsQuer
                     message: $"No services found for the provided IDs: {string.Join(", ", request.ServiceIds)}",
                     resultStatus: ResultStatus.Success);
             }
-
-            var totalCount = services.Count;
-            var pageNumber = request.Parameters.PageNumber;
-            var pageSize = request.Parameters.PageSize;
-            var paged = services.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             
-            var dtos = paged.Select(s => new ServiceDetailsDTO
+            var dtos = paginatedServices.Data.Select(s => new ServiceDetailsDTO
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -105,10 +100,10 @@ public class GetServicesByIdsQueryHandler : IRequestHandler<GetServicesByIdsQuer
             }).ToList();
 
             var paginated = PaginatedResult<ServiceDetailsDTO>.Create(
-                data: dtos.ToList(),
-                pageNumber: pageNumber,
-                pageSize: pageSize,
-                totalCount: totalCount);
+                data: dtos,
+                pageNumber: request.Parameters.PageNumber,
+                pageSize: request.Parameters.PageSize,
+                totalCount: paginatedServices.TotalCount);
 
             return Result<PaginatedResult<ServiceDetailsDTO>>.Ok(
                 data: paginated,

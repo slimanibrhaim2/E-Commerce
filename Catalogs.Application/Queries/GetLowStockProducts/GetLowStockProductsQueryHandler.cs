@@ -52,11 +52,9 @@ public class GetLowStockProductsQueryHandler : IRequestHandler<GetLowStockProduc
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var products = await _repo.GetLowStockProducts(request.Threshold);
-            var productList = products.ToList();
-            var totalCount = productList.Count;
+            var paginatedProducts = await _repo.GetLowStockProducts(request.Threshold, request.PageNumber, request.PageSize);
 
-            if (!productList.Any())
+            if (!paginatedProducts.Data.Any())
             {
                 return Result<PaginatedResult<ProductDTO>>.Ok(
                     data: PaginatedResult<ProductDTO>.Create(
@@ -68,12 +66,7 @@ public class GetLowStockProductsQueryHandler : IRequestHandler<GetLowStockProduc
                     resultStatus: ResultStatus.Success);
             }
 
-            var pagedProducts = productList
-                .Skip((request.PageNumber - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .ToList();
-
-            var productDtos = pagedProducts.Select(p => new ProductDTO
+            var productDtos = paginatedProducts.Data.Select(p => new ProductDTO
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -96,15 +89,15 @@ public class GetLowStockProductsQueryHandler : IRequestHandler<GetLowStockProduc
                 }).ToList() ?? new List<ProductFeatureDTO>()
             }).ToList();
 
-            var paginatedProducts = PaginatedResult<ProductDTO>.Create(
+            var result = PaginatedResult<ProductDTO>.Create(
                 data: productDtos,
-                pageNumber: request.PageNumber,
-                pageSize: request.PageSize,
-                totalCount: totalCount);
+                pageNumber: paginatedProducts.PageNumber,
+                pageSize: paginatedProducts.PageSize,
+                totalCount: paginatedProducts.TotalCount);
 
             return Result<PaginatedResult<ProductDTO>>.Ok(
-                data: paginatedProducts,
-                message: $"Successfully retrieved {productDtos.Count} low stock products out of {totalCount} total products",
+                data: result,
+                message: $"Successfully retrieved {productDtos.Count} low stock products out of {paginatedProducts.TotalCount} total products",
                 resultStatus: ResultStatus.Success);
         }
         catch (DBConcurrencyException ex)

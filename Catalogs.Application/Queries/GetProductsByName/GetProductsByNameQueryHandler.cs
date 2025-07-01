@@ -52,9 +52,9 @@ public class GetProductsByNameQueryHandler : IRequestHandler<GetProductsByNameQu
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var products = (await _repo.GetProductsByNameAsync(request.Name)).ToList();
+            var paginatedProducts = await _repo.GetProductsByNameAsync(request.Name, request.Parameters.PageNumber, request.Parameters.PageSize);
             
-            if (!products.Any())
+            if (!paginatedProducts.Data.Any())
             {
                 return Result<PaginatedResult<ProductDTO>>.Ok(
                     data: PaginatedResult<ProductDTO>.Create(
@@ -65,13 +65,8 @@ public class GetProductsByNameQueryHandler : IRequestHandler<GetProductsByNameQu
                     message: $"No products found matching the name '{request.Name}'",
                     resultStatus: ResultStatus.Success);
             }
-
-            var totalCount = products.Count;
-            var pageNumber = request.Parameters.PageNumber;
-            var pageSize = request.Parameters.PageSize;
-            var paged = products.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             
-            var dtos = paged.Select(p => new ProductDTO
+            var dtos = paginatedProducts.Data.Select(p => new ProductDTO
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -94,10 +89,15 @@ public class GetProductsByNameQueryHandler : IRequestHandler<GetProductsByNameQu
                 }).ToList() ?? new List<ProductFeatureDTO>()
             }).ToList();
 
-            var paginated = PaginatedResult<ProductDTO>.Create(dtos, pageNumber, pageSize, totalCount);
+            var result = PaginatedResult<ProductDTO>.Create(
+                data: dtos,
+                pageNumber: paginatedProducts.PageNumber,
+                pageSize: paginatedProducts.PageSize,
+                totalCount: paginatedProducts.TotalCount);
+
             return Result<PaginatedResult<ProductDTO>>.Ok(
-                data: paginated,
-                message: $"Successfully retrieved {dtos.Count} products matching the name '{request.Name}'",
+                data: result,
+                message: $"Successfully retrieved {dtos.Count} products matching the name '{request.Name}' out of {paginatedProducts.TotalCount} total matches",
                 resultStatus: ResultStatus.Success);
         }
         catch (DBConcurrencyException ex)

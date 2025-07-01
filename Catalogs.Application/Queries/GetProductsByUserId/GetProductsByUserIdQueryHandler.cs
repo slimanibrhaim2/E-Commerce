@@ -55,9 +55,9 @@ public class GetProductsByUserIdQueryHandler : IRequestHandler<GetProductsByUser
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var products = (await _repo.GetProductsByUserIdAsync(request.UserId)).ToList();
+            var paginatedProducts = await _repo.GetProductsByUserIdAsync(request.UserId, request.Parameters.PageNumber, request.Parameters.PageSize);
             
-            if (!products.Any())
+            if (!paginatedProducts.Data.Any())
             {
                 return Result<PaginatedResult<ProductDTO>>.Ok(
                     data: PaginatedResult<ProductDTO>.Create(
@@ -72,13 +72,8 @@ public class GetProductsByUserIdQueryHandler : IRequestHandler<GetProductsByUser
             // Get user's favorites
             var userFavorites = await _favoriteRepo.GetFavoritesByUserIdAsync(request.UserId);
             var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
-
-            var totalCount = products.Count;
-            var pageNumber = request.Parameters.PageNumber;
-            var pageSize = request.Parameters.PageSize;
-            var paged = products.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             
-            var dtos = paged.Select(p => new ProductDTO
+            var dtos = paginatedProducts.Data.Select(p => new ProductDTO
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -105,10 +100,15 @@ public class GetProductsByUserIdQueryHandler : IRequestHandler<GetProductsByUser
                 }).ToList() ?? new List<ProductFeatureDTO>()
             }).ToList();
 
-            var paginated = PaginatedResult<ProductDTO>.Create(dtos, pageNumber, pageSize, totalCount);
+            var result = PaginatedResult<ProductDTO>.Create(
+                data: dtos,
+                pageNumber: paginatedProducts.PageNumber,
+                pageSize: paginatedProducts.PageSize,
+                totalCount: paginatedProducts.TotalCount);
+
             return Result<PaginatedResult<ProductDTO>>.Ok(
-                data: paginated,
-                message: $"Successfully retrieved {dtos.Count} products for user {request.UserId} out of {totalCount} total products",
+                data: result,
+                message: $"Successfully retrieved {dtos.Count} products for user {request.UserId} out of {paginatedProducts.TotalCount} total products",
                 resultStatus: ResultStatus.Success);
         }
         catch (DBConcurrencyException ex)

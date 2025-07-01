@@ -34,7 +34,7 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
             if (request.UserId == Guid.Empty)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "User ID is required",
+                    message: "معرف المستخدم مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -42,7 +42,7 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
             if (request.Parameters.PageNumber < 1)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Page number must be greater than or equal to 1",
+                    message: "يجب أن يكون رقم الصفحة أكبر من أو يساوي 1",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
@@ -50,12 +50,12 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
             if (request.Parameters.PageSize < 1)
             {
                 return Result<PaginatedResult<ServiceDTO>>.Fail(
-                    message: "Page size must be greater than or equal to 1",
+                    message: "يجب أن يكون حجم الصفحة أكبر من أو يساوي 1",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
             }
 
-            var services = (await _repository.GetServicesByUserIdAsync(request.UserId)).ToList();
+            var paginatedServices = await _repository.GetServicesByUserIdAsync(request.UserId, request.Parameters.PageNumber, request.Parameters.PageSize);
             
             // Get all favorites for the user if authenticated
             var userFavorites = request.UserId != Guid.Empty 
@@ -65,7 +65,7 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
             // Get all favorite base item IDs for quick lookup
             var favoriteBaseItemIds = userFavorites.Select(f => f.BaseItemId).ToHashSet();
 
-            if (!services.Any())
+            if (!paginatedServices.Data.Any())
             {
                 return Result<PaginatedResult<ServiceDTO>>.Ok(
                     data: PaginatedResult<ServiceDTO>.Create(
@@ -73,16 +73,11 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
                         pageNumber: request.Parameters.PageNumber,
                         pageSize: request.Parameters.PageSize,
                         totalCount: 0),
-                    message: $"No services found for user {request.UserId}",
+                    message: $"لم يتم العثور على خدمات للمستخدم {request.UserId}",
                     resultStatus: ResultStatus.Success);
             }
-
-            var totalCount = services.Count;
-            var pageNumber = request.Parameters.PageNumber;
-            var pageSize = request.Parameters.PageSize;
-            var paged = services.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             
-            var dtos = paged.Select(s => new ServiceDTO
+            var dtos = paginatedServices.Data.Select(s => new ServiceDTO
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -107,20 +102,20 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
 
             var paginated = PaginatedResult<ServiceDTO>.Create(
                 data: dtos,
-                pageNumber: pageNumber,
-                pageSize: pageSize,
-                totalCount: totalCount);
+                pageNumber: request.Parameters.PageNumber,
+                pageSize: request.Parameters.PageSize,
+                totalCount: paginatedServices.TotalCount);
 
             return Result<PaginatedResult<ServiceDTO>>.Ok(
                 data: paginated,
-                message: $"Successfully retrieved {dtos.Count} services for user {request.UserId}",
+                message: $"تم جلب {dtos.Count} خدمة للمستخدم {request.UserId}",
                 resultStatus: ResultStatus.Success);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error retrieving services for user {UserId}", request.UserId);
+            _logger.LogError(ex, "خطأ في جلب الخدمات للمستخدم {UserId}", request.UserId);
             return Result<PaginatedResult<ServiceDTO>>.Fail(
-                message: "An error occurred while retrieving services",
+                message: "حدث خطأ أثناء جلب الخدمات",
                 errorType: "GetServicesByUserIdFailed",
                 resultStatus: ResultStatus.Failed,
                 exception: ex);

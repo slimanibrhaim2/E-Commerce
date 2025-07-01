@@ -10,28 +10,22 @@ namespace Catalogs.Domain.Repositories;
 public interface IServiceRepository : IRepository<Service>
 {
     Task<Service?> GetById(Guid id);
-    Task<IEnumerable<Service>> GetByCategory(Guid categoryId);
-    Task<IEnumerable<Service>> GetByPriceRange(decimal minPrice, decimal maxPrice);
-    Task<IEnumerable<Service>> GetAvailableServices();
+    Task<Service?> GetByIdWithDetails(Guid id);
+    Task<PaginatedResult<Service>> GetByCategory(Guid categoryId, int pageNumber, int pageSize);
+    Task<PaginatedResult<Service>> GetByPriceRange(decimal minPrice, decimal maxPrice, int pageNumber, int pageSize);
+    Task<PaginatedResult<Service>> GetAvailableServices(int pageNumber, int pageSize);
     Task<Service> GetByMediaId(Guid mediaId);
-    Task<IEnumerable<Service>> GetByDurationRange(int minDuration, int maxDuration);
+    Task<PaginatedResult<Service>> GetByDurationRange(int minDuration, int maxDuration, int pageNumber, int pageSize);
     Task<bool> UpdateAsync(Guid id, Service service);
-    Task<IEnumerable<Service>> GetByBrand(Guid brandId);
+    Task<PaginatedResult<Service>> GetByBrand(Guid brandId, int pageNumber, int pageSize);
     Task<bool> AddBrandToServiceAsync(Guid serviceId, Guid brandId);
     Task<bool> RemoveBrandFromServiceAsync(Guid serviceId, Guid brandId);
-    Task<IEnumerable<Service>> GetServicesByUserIdAsync(Guid userId);
-    Task<IEnumerable<Service>> GetServicesByNameAsync(string name);
-    Task<IEnumerable<Service>> GetByIdsAsync(IEnumerable<Guid> ids);
-
+    Task<PaginatedResult<Service>> GetServicesByUserIdAsync(Guid userId, int pageNumber, int pageSize);
+    Task<PaginatedResult<Service>> GetServicesByNameAsync(string name, int pageNumber, int pageSize);
+    Task<PaginatedResult<Service>> GetByIdsAsync(IEnumerable<Guid> ids, int pageNumber, int pageSize);
     Task<Guid?> GetBaseItemIdByServiceIdAsync(Guid serviceId);
-    
-    // Add reverse lookup method
     Task<Guid?> GetServiceIdByBaseItemIdAsync(Guid baseItemId);
-
-    Task<Service?> GetByIdWithDetails(Guid id);
     Task<Service> AddAsync(Service service);
-    Task<PaginatedResult<Service>> GetByPriceRange(decimal minPrice, decimal maxPrice, int pageNumber, int pageSize);
-
     Task<IEnumerable<Service>> GetAllAsync();
-    Task<IEnumerable<Service>> GetAllWithDetails();
+    Task<PaginatedResult<Service>> GetAllWithDetails(int pageNumber, int pageSize);
 } 
