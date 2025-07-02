@@ -677,6 +677,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -1903,6 +1909,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Shared.Contracts.csproj": {
+                "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Shared.Contracts.csproj"
+              },
               "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj": {
                 "projectPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Domain\\Users.Domain.csproj"
               }

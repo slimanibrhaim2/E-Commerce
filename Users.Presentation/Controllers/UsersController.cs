@@ -17,6 +17,7 @@ using Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.IO;
+using Users.Application.Commands.UpdateUserRating;
 
 namespace Users.Presentation.Controllers
 {
@@ -88,6 +89,7 @@ namespace Users.Presentation.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             try
@@ -269,6 +271,7 @@ namespace Users.Presentation.Controllers
         }
 
         [HttpGet("search")]
+        [AllowAnonymous]
         public async Task<IActionResult> SearchByName([FromQuery] string name, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             try
@@ -302,6 +305,7 @@ namespace Users.Presentation.Controllers
         /// Get a user by their ID
         /// </summary>
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Result<UserDTO>>> GetById(Guid id)
         {
             try
@@ -328,6 +332,41 @@ namespace Users.Presentation.Controllers
                 return StatusCode(500, Result<UserDTO>.Fail(
                     message: "حدث خطأ أثناء جلب بيانات المستخدم",
                     errorType: "GetUserByIdFailed",
+                    resultStatus: ResultStatus.Failed,
+                    exception: ex));
+            }
+        }
+
+        [HttpPost("rating")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateRating( [FromBody] UpdateUserRatingDTO dto)
+        {
+            try
+            {
+                if (dto.Rating < 1 || dto.Rating > 5)
+                {
+                    return BadRequest(Result<bool>.Fail(
+                        message: "التقييم يجب أن يكون بين 1 و 5",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                var command = new UpdateUserRatingCommand(dto.userId, dto.Rating, dto.ReviewId);
+                var result = await _mediator.Send(command);
+
+                if (!result.Success)
+                {
+                    return StatusCode(500, result);
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating rating for user {UserId}", dto.userId);
+                return StatusCode(500, Result<bool>.Fail(
+                    message: "فشل في تحديث التقييم",
+                    errorType: "UpdateRatingFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex));
             }

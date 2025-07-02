@@ -310,6 +310,20 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "Shared.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Core": "1.0.0",
+          "MediatR": "12.5.0"
+        },
+        "compile": {
+          "bin/placeholder/Shared.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shared.Contracts.dll": {}
+        }
+      },
       "Users.Application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -317,6 +331,7 @@
           "MediatR": "12.5.0",
           "Microsoft.Extensions.DependencyInjection": "9.0.5",
           "Microsoft.Extensions.Logging": "8.0.1",
+          "Shared.Contracts": "1.0.0",
           "Users.Domain": "1.0.0"
         },
         "compile": {
@@ -778,6 +793,11 @@
       "type": "project",
       "path": "../Core/Core.csproj",
       "msbuildProject": "../Core/Core.csproj"
+    },
+    "Shared.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../Shared.Contracts/Shared.Contracts.csproj",
+      "msbuildProject": "../Shared.Contracts/Shared.Contracts.csproj"
     },
     "Users.Application/1.0.0": {
       "type": "project",

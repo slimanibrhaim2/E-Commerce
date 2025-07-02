@@ -22,11 +22,13 @@ public static class DependencyInjection
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<IFollowerRepository, FollowerRepository>();
         services.AddScoped<INotificationRepository, NotificationRepository>();
+        services.AddScoped<IUserRatingRepository, UserRatingRepository>();
         // Register mappers
         services.AddScoped<IMapper<UserDAO, User>, UserMapper>();
         services.AddScoped<IMapper<AddressDAO, Address>, AddressMapper>();
         services.AddScoped<IMapper<FollowerDAO, Follower>, FollowerMapper>();
         services.AddScoped<IMapper<NotificationDAO, Notification>, NotificationMapper>();
+        services.AddScoped<IMapper<UserRatingDAO, UserRating>, UserRatingMapper>();
         
         return services;
     }

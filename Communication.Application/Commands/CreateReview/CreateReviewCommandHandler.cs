@@ -3,11 +3,13 @@ using Core.Result;
 using Communication.Application.DTOs;
 using Communication.Domain.Entities;
 using Communication.Domain.Repositories;
+using Communication.Domain.Interfaces;
 using Core.Interfaces;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Shared.Contracts.Queries;
+using Shared.Contracts.DTOs;
 
 namespace Communication.Application.Commands.CreateReview
 {
@@ -16,15 +18,18 @@ namespace Communication.Application.Commands.CreateReview
         private readonly IUnitOfWork _unitOfWork;
         private readonly IReviewRepository _reviewRepo;
         private readonly IMediator _mediator;
+        private readonly IReviewEvaluationPublisher _reviewPublisher;
 
         public CreateReviewCommandHandler(
             IUnitOfWork unitOfWork,
             IReviewRepository reviewRepo,
-            IMediator mediator)
+            IMediator mediator,
+            IReviewEvaluationPublisher reviewPublisher)
         {
             _unitOfWork = unitOfWork;
             _reviewRepo = reviewRepo;
             _mediator = mediator;
+            _reviewPublisher = reviewPublisher;
         }
 
         public async Task<Result<Guid>> Handle(CreateReviewCommand request, CancellationToken cancellationToken)
@@ -43,30 +48,28 @@ namespace Communication.Application.Commands.CreateReview
 
                 try
                 {
-                    // 2. Get provider ID from the order
+                    // 2. Get provider ID from order
                     var providerQuery = new GetProviderIdByOrderIdQuery(dto.OrderId);
-                    var providerResult = await _mediator.Send(providerQuery, cancellationToken);
-                    
-                    if (!providerResult.Success)
+                    var providerIdReult = await _mediator.Send(providerQuery);
+                    if (!providerIdReult.Success)
+                    {
                         return Result<Guid>.Fail(
-                            message: "لم يتم العثور على الطلب",
+                            message: "لم يتم العثور على البائع",
                             errorType: "OrderNotFound",
                             resultStatus: ResultStatus.NotFound);
+                    }
 
-                    var providerId = providerResult.Data.ProviderId;
-                    if (providerId == Guid.Empty)
-                        return Result<Guid>.Fail(
-                            message: "لم يتم العثور على معرف المزود في الطلب",
-                            errorType: "ProviderNotFound",
-                            resultStatus: ResultStatus.NotFound);
+                    var providerId = providerIdReult.Data.ProviderId;
 
-                    // 3. Check if user already reviewed this order
+                    // 3. Check if user has already reviewed this order
                     var hasReviewed = await _reviewRepo.HasUserReviewedOrderAsync(reviewerId, dto.OrderId);
                     if (hasReviewed)
+                    {
                         return Result<Guid>.Fail(
-                            message: "لقد قمت بمراجعة هذا الطلب من قبل",
+                            message: "لقد قمت بتقييم هذا الطلب مسبقاً",
                             errorType: "DuplicateReview",
                             resultStatus: ResultStatus.ValidationError);
+                    }
 
                     // 4. Create Review
                     var review = new Review
@@ -89,6 +92,23 @@ namespace Communication.Application.Commands.CreateReview
 
                     await _reviewRepo.AddAsync(review);
                     await _unitOfWork.SaveChangesAsync();
+
+                    // 5. Map and publish review for evaluation
+                    var publishReview = new PublishReview
+                    {
+                        Id = review.Id,
+                        ExperienceDescription = review.ExperienceDescription,
+                        OverallSatisfaction = review.OverallSatisfaction,
+                        ItemQuality = review.ItemQuality,
+                        Communication = review.Communication,
+                        Timeliness = review.Timeliness,
+                        ValueForMoney = review.ValueForMoney,
+                        NetPromoterScore = review.NetPromoterScore,
+                        WillUseAgain = review.WillUseAgain,
+                        ProviderId = review.ProviderId
+                    };
+
+                    await _reviewPublisher.PublishForEvaluationAsync(publishReview);
                     await _unitOfWork.CommitTransaction();
 
                     return Result<Guid>.Ok(
@@ -107,52 +127,72 @@ namespace Communication.Application.Commands.CreateReview
                 return Result<Guid>.Fail(
                     message: "حدث خطأ أثناء إضافة المراجعة",
                     errorType: "CreateReviewFailed",
-                    resultStatus: ResultStatus.InternalServerError,
+                    resultStatus: ResultStatus.Failed,
                     exception: ex);
             }
         }
 
-        private static Result<Guid> ValidateInput(CreateReviewDTO dto)
+        private Result<Guid> ValidateInput(CreateReviewDTO dto)
         {
             if (string.IsNullOrWhiteSpace(dto.ExperienceDescription))
+            {
                 return Result<Guid>.Fail(
                     message: "وصف التجربة مطلوب",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
+            }
             
             if (dto.OverallSatisfaction < 1 || dto.OverallSatisfaction > 5)
+            {
                 return Result<Guid>.Fail(
                     message: "التقييم العام يجب أن يكون بين 1 و 5",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
+            }
             
             if (dto.ItemQuality < 1 || dto.ItemQuality > 5)
+            {
                 return Result<Guid>.Fail(
                     message: "تقييم جودة المنتج يجب أن يكون بين 1 و 5",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
+            }
             
             if (dto.Communication < 1 || dto.Communication > 5)
+            {
                 return Result<Guid>.Fail(
                     message: "تقييم التواصل يجب أن يكون بين 1 و 5",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
+            }
             
             if (dto.Timeliness < 1 || dto.Timeliness > 5)
+            {
                 return Result<Guid>.Fail(
                     message: "تقييم الوقت يجب أن يكون بين 1 و 5",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
-            
-            if (dto.NetPromoterScore < 0 || dto.NetPromoterScore > 10)
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.ValueForMoney))
+            {
                 return Result<Guid>.Fail(
-                    message: "درجة التوصية يجب أن تكون بين 0 و 10",
+                    message: "القيمة مقابل السعر مطلوبة",
                     errorType: "ValidationError",
                     resultStatus: ResultStatus.ValidationError);
+            }
+            
+            if (dto.NetPromoterScore < 0 || dto.NetPromoterScore > 10)
+            {
+                return Result<Guid>.Fail(
+                    message: "مؤشر صافي الترويج يجب أن يكون بين 0 و 10",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError);
+            }
 
             return Result<Guid>.Ok(
                 data: Guid.Empty,
-                message: null,
+                message: "البيانات صحيحة",
                 resultStatus: ResultStatus.Success);
         }
     }

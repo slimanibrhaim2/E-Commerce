@@ -47,7 +47,8 @@ public partial class ECommerceContext : DbContext
     public virtual DbSet<ServiceDAO> Services { get; set; }
     public virtual DbSet<ServiceFeatureDAO> ServiceFeatures { get; set; }
     public virtual DbSet<UserDAO> Users { get; set; }
-
+    public virtual DbSet<UserRatingDAO> UserRatings { get; set; }
+  
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         // Removed hardcoded connection string. Configuration is now handled via DI.
@@ -56,7 +57,6 @@ public partial class ECommerceContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseCollation("Arabic_CI_AS");
-
 
         modelBuilder.Entity<AddressDAO>(entity =>
         {
@@ -214,7 +214,6 @@ public partial class ECommerceContext : DbContext
                 .HasConstraintName("FK_ConversationMember_User");
         });
 
-       
         modelBuilder.Entity<FavoriteDAO>(entity =>
         {
             entity.ToTable("Favorite");
@@ -491,6 +490,26 @@ public partial class ECommerceContext : DbContext
             .WithOne(a => a.User)
             .HasForeignKey(a => a.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<UserRatingDAO>(entity =>
+        {
+            entity.ToTable("UserRating");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Rating).HasColumnType("int");
+            entity.Property(e => e.NumOfReviews).IsRequired();
+
+            entity.HasOne(d => d.User)
+                .WithMany()
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_UserRating_User");
+
+            // Add a unique index on UserId since a user should have only one rating record
+            entity.HasIndex(e => e.UserId)
+                .IsUnique()
+                .HasDatabaseName("IX_UserRating_UserId_Unique")
+                .HasFilter("[DeletedAt] IS NULL");
+        });
 
         OnModelCreatingPartial(modelBuilder);
     }

@@ -984,6 +984,9 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("ProviderId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("Rating")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("ReviewerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1144,6 +1147,40 @@ namespace Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("User", (string)null);
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.UserRatingDAO", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NumOfReviews")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_UserRating_UserId_Unique")
+                        .HasFilter("[DeletedAt] IS NULL");
+
+                    b.ToTable("UserRating", (string)null);
                 });
 
             modelBuilder.Entity("BrandDAOProductDAO", b =>
@@ -1590,6 +1627,18 @@ namespace Infrastructure.Migrations
                         .HasConstraintName("FK_ServiceFeatures_Services");
 
                     b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.UserRatingDAO", b =>
+                {
+                    b.HasOne("Infrastructure.Models.UserDAO", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_UserRating_User");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.AttachmentTypeDAO", b =>

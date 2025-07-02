@@ -15,11 +15,16 @@ namespace Users.Application.Queries.GetUserById
         : IRequestHandler<GetUserByIdQuery, Result<UserDTO>>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IUserRatingRepository _userRatingRepository;
         private readonly ILogger<GetUserByIdQueryHandler> _logger;
 
-        public GetUserByIdQueryHandler(IUserRepository userRepository, ILogger<GetUserByIdQueryHandler> logger)
+        public GetUserByIdQueryHandler(
+            IUserRepository userRepository, 
+            IUserRatingRepository userRatingRepository,
+            ILogger<GetUserByIdQueryHandler> logger)
         {
             _userRepository = userRepository;
+            _userRatingRepository = userRatingRepository;
             _logger = logger;
         }
 
@@ -41,13 +46,21 @@ namespace Users.Application.Queries.GetUserById
                         resultStatus: ResultStatus.NotFound);
                 }
 
+                // Get user rating
+                var userRating = await _userRatingRepository.GetByUserIdAsync(request.UserId);
+
                 var userDto = new UserDTO
                 {
                     Id = user.Id,
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
                     FirstName = user.FirstName,
-                    LastName = user.LastName
+                    MiddleName = user.MiddleName,
+                    LastName = user.LastName,
+                    ProfilePhoto = user.ProfilePhoto,
+                    Description = user.Description,
+                    Rating = userRating?.Rating ?? 3, // Default to 3 if no rating exists
+                    NumOfReviews = userRating?.NumOfReviews ?? 0
                 };
 
                 return Result<UserDTO>.Ok(
@@ -59,7 +72,7 @@ namespace Users.Application.Queries.GetUserById
             {
                 _logger.LogError(ex, "Error getting user with ID: {UserId}", request.UserId);
                 return Result<UserDTO>.Fail(
-                    message: $"فشل في جلب بيانات المستخدم: {ex.Message}",
+                    message: "حدث خطأ أثناء جلب بيانات المستخدم",
                     errorType: "GetUserByIdFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);

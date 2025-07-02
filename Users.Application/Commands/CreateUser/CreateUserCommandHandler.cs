@@ -9,6 +9,7 @@ using Users.Domain.Repositories;
 using Core.Interfaces;
 using Core.Result;
 using Microsoft.Extensions.Logging;
+using Users.Application.Commands.CreateUserRating;
 
 namespace Users.Application.Commands.CreateUser
 {
@@ -17,9 +18,19 @@ namespace Users.Application.Commands.CreateUser
         private readonly IUserRepository _repo;
         private readonly IUnitOfWork _uow;
         private readonly ILogger<CreateUserCommandHandler> _logger;
+        private readonly IMediator _mediator;
 
-        public CreateUserCommandHandler(IUserRepository repo, IUnitOfWork uow, ILogger<CreateUserCommandHandler> logger)
-            => (_repo, _uow, _logger) = (repo, uow, logger);
+        public CreateUserCommandHandler(
+            IUserRepository repo, 
+            IUnitOfWork uow, 
+            ILogger<CreateUserCommandHandler> logger,
+            IMediator mediator)
+        {
+            _repo = repo;
+            _uow = uow;
+            _logger = logger;
+            _mediator = mediator;
+        }
 
         public async Task<Result<Guid>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
@@ -120,6 +131,9 @@ namespace Users.Application.Commands.CreateUser
                 await _repo.AddAsync(user);
                 await _uow.SaveChangesAsync();
 
+                // Create initial user rating
+                await _mediator.Send(new CreateUserRatingCommand(user.Id), cancellationToken);
+
                 _logger.LogInformation("Successfully created user with ID: {UserId}", user.Id);
                 return Result<Guid>.Ok(
                     data: user.Id,
@@ -152,7 +166,6 @@ namespace Users.Application.Commands.CreateUser
 
         private bool IsValidPhoneNumber(string phoneNumber)
         {
-            
             return !string.IsNullOrWhiteSpace(phoneNumber) && phoneNumber.Length == 10 && phoneNumber.StartsWith("09");
         }
     }

@@ -4684,6 +4684,22 @@
   },
   {
     "ContainingType": "Users.Presentation.Controllers.UsersController",
+    "Method": "UpdateRating",
+    "RelativePath": "api/users/rating",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Users.Application.DTOs.UpdateUserRatingDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Users.Presentation.Controllers.UsersController",
     "Method": "SearchByName",
     "RelativePath": "api/users/search",
     "HttpMethod": "GET",

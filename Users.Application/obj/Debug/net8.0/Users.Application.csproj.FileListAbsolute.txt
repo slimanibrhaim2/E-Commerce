@@ -31,3 +31,5 @@ C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Applicatio
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application\obj\Debug\net8.0\refint\Users.Application.dll
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application\obj\Debug\net8.0\Users.Application.pdb
 C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application\obj\Debug\net8.0\ref\Users.Application.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application\bin\Debug\net8.0\Shared.Contracts.dll
+C:\Users\VISION\Desktop\class diagram\projectBackend\E-Commerce\Users.Application\bin\Debug\net8.0\Shared.Contracts.pdb

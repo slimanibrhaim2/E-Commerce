@@ -14,5 +14,7 @@ namespace Users.Application.DTOs
         public string Email { get; set; } = null!;
         public string? ProfilePhoto { get; set; }
         public string? Description { get; set; }
+        public int Rating { get; set; }
+        public int NumOfReviews { get; set; }
     }
 }

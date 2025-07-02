@@ -36,6 +36,7 @@ public class GetReviewsByOrderIdQueryHandler : IRequestHandler<GetReviewsByOrder
                 ValueForMoney = review.ValueForMoney,
                 NetPromoterScore = review.NetPromoterScore,
                 WillUseAgain = review.WillUseAgain,
+                Rating = review.Rating,
                 ReviewerId = review.ReviewerId,
                 ProviderId = review.ProviderId,
                 OrderId = review.OrderId,

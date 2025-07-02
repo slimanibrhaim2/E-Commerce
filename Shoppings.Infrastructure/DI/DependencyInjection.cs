@@ -34,9 +34,6 @@ namespace Shoppings.Infrastructure.DI
             services.AddScoped<IMapper<OrderStatusDAO, OrderStatus>, OrderStatusMapper>();
             services.AddScoped<IMapper<OrderActivityDAO, OrderActivity>, OrderActivityMapper>();
 
-            // Register UnitOfWork
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
             return services;
         }
     }

@@ -1,16 +1,23 @@
-using Communication.Domain.Repositories;
-using Communication.Infrastructure.Repositories;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Communication.Domain.Repositories;
+using Communication.Domain.Interfaces;
+using Communication.Infrastructure.Repositories;
+using Communication.Infrastructure.MessageBus;
+using Communication.Infrastructure.Configuration;
+using Communication.Infrastructure.HealthChecks;
 using Infrastructure.Common;
-using Communication.Infrastructure.Mapping.Mappers;
 using Infrastructure.Models;
 using Communication.Domain.Entities;
+using Communication.Infrastructure.Mapping.Mappers;
 
 namespace Communication.Infrastructure.DI
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddCommunicationInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddCommunicationInfrastructure(
+            this IServiceCollection services,
+            IConfiguration configuration)
         {
             // Register Repositories
             services.AddScoped<IConversationRepository, ConversationRepository>();
@@ -31,6 +38,15 @@ namespace Communication.Infrastructure.DI
             services.AddScoped<IMapper<AttachmentTypeDAO, AttachmentType>, AttachmentTypeMapper>();
             services.AddScoped<IMapper<BaseContentDAO, BaseContent>, BaseContentMapper>();
             services.AddScoped<IMapper<ReviewDAO, Review>, ReviewMapper>();
+
+            // Configure and register message bus
+            services.Configure<MessageBusSettings>(
+                configuration.GetSection("MessageBus"));
+            services.AddSingleton<IReviewEvaluationPublisher, RabbitMQReviewEvaluationPublisher>();
+
+            // Register health checks
+            services.AddHealthChecks()
+                .AddCheck<RabbitMQHealthCheck>("rabbitmq_health_check");
 
             return services;
         }

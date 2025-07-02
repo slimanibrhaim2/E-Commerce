@@ -41,20 +41,32 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 // Add Authentication Services
 builder.Services.AddAuthenticationServices(builder.Configuration);
 
+// Add Core Services
+builder.Services.AddCoreServices(builder.Configuration);
+
+// Add Infrastructure Layer (this registers DbContext and UnitOfWork)
 builder.Services.AddInfrastructure(builder.Configuration);
+
+// Add Application Layers
 builder.Services.AddUsersApplication();
-builder.Services.AddUserInfrastructure();
-builder.Services.AddUserPresentation();
-builder.Services.AddCatalogsInfrastructure(); 
-builder.Services.AddCatalogPresentation(); 
 builder.Services.AddCommunicationApplicationServices();
-builder.Services.AddCommunicationInfrastructure();
-builder.Services.AddShoppingsPresentation();
 builder.Services.AddShoppingsApplication();
-builder.Services.AddShoppingsInfrastructure();
-builder.Services.AddPaymentsPresentation();
 builder.Services.AddPaymentsApplicationServices();
+
+// Add Infrastructure Layers
+builder.Services.AddUserInfrastructure();
+builder.Services.AddCatalogsInfrastructure(); 
+builder.Services.AddCommunicationInfrastructure(builder.Configuration);
+builder.Services.AddShoppingsInfrastructure();
 builder.Services.AddPaymentInfrastructure();
+
+// Add Presentation Layers
+builder.Services.AddUserPresentation();
+builder.Services.AddCatalogPresentation(); 
+builder.Services.AddCommunicationPresentation();
+builder.Services.AddShoppingsPresentation();
+builder.Services.AddPaymentsPresentation();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -83,8 +95,6 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
-
-builder.Services.AddCoreServices(builder.Configuration);
 
 var app = builder.Build();
 

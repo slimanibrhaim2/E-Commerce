@@ -16,6 +16,9 @@ namespace Communication.Domain.Entities
         public int NetPromoterScore { get; set; }
         public bool WillUseAgain { get; set; }
 
+        // Rating of the review itself
+        public int? Rating { get; set; }
+
         // References
         public Guid ReviewerId { get; set; }
         public Guid ProviderId { get; set; }

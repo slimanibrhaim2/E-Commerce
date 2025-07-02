@@ -14,6 +14,7 @@ public class ReviewDTO
     public string ValueForMoney { get; set; }
     public int NetPromoterScore { get; set; }
     public bool WillUseAgain { get; set; }
+    public int? Rating { get; set; }
 
     // Timestamps
     public DateTime CreatedAt { get; set; }

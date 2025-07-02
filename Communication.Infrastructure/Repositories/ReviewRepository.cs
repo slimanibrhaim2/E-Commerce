@@ -120,7 +120,6 @@ namespace Communication.Infrastructure.Repositories
             };
             
             await _dbSet.AddAsync(dao);
-            await _ctx.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(Review review)
@@ -142,7 +141,6 @@ namespace Communication.Infrastructure.Repositories
                 dao.UpdatedAt = DateTime.UtcNow;
 
                 _dbSet.Update(dao);
-                await _ctx.SaveChangesAsync();
             }
         }
 
@@ -152,7 +150,7 @@ namespace Communication.Infrastructure.Repositories
             if (dao != null)
             {
                 dao.DeletedAt = DateTime.UtcNow;
-                await _ctx.SaveChangesAsync();
+                _dbSet.Update(dao);
             }
         }
 

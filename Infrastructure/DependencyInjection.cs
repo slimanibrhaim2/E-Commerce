@@ -12,9 +12,13 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IUnitOfWork,UnitOfWork>();
+            // Register DbContext as Scoped to ensure single instance per request
             services.AddDbContext<ECommerceContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            // Register UnitOfWork as Scoped to ensure single instance per request
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             return services;
         }
      }
