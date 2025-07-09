@@ -43,7 +43,7 @@ namespace Communication.Infrastructure.DI
             services.Configure<MessageBusSettings>(
                 configuration.GetSection("MessageBus"));
             services.AddSingleton<IReviewEvaluationPublisher, RabbitMQReviewEvaluationPublisher>();
-
+        
             // Register health checks
             services.AddHealthChecks()
                 .AddCheck<RabbitMQHealthCheck>("rabbitmq_health_check");

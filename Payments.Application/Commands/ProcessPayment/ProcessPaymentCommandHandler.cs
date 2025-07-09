@@ -3,8 +3,14 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Payments.Domain.Entities;
 using Payments.Domain.Repositories;
+using Payments.Domain.Interfaces;
 using Core.Interfaces;
 using Shared.Contracts.Commands;
+using Shared.Contracts.DTOs.Blockchain;
+using Shared.Contracts.Queries;
+using System.Security.Cryptography;
+using System.Text;
+using System.Linq;
 
 namespace Payments.Application.Commands.ProcessPayment;
 
@@ -16,6 +22,7 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
     private readonly IMediator _mediator;
     private readonly ILogger<ProcessPaymentCommandHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IOrderPaymentBlockchainPublisher _blockchainPublisher;
 
     public ProcessPaymentCommandHandler(
         IPaymentRepository paymentRepository,
@@ -23,7 +30,8 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
         IPaymentStatusRepository paymentStatusRepository,
         IMediator mediator,
         ILogger<ProcessPaymentCommandHandler> logger,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        IOrderPaymentBlockchainPublisher blockchainPublisher)
     {
         _paymentRepository = paymentRepository;
         _paymentMethodRepository = paymentMethodRepository;
@@ -31,6 +39,7 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
         _mediator = mediator;
         _logger = logger;
         _unitOfWork = unitOfWork;
+        _blockchainPublisher = blockchainPublisher;
     }
 
     public async Task<Result<Payment>> Handle(ProcessPaymentCommand request, CancellationToken cancellationToken)
@@ -129,6 +138,19 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
 
                 // Fetch the updated payment to return
                 var updatedPayment = await _paymentRepository.GetByIdAsync(payment.Id);
+
+                // Publish blockchain data synchronously to avoid service provider disposal
+                try
+                {
+                    await PublishBlockchainDataAsync(updatedPayment);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error publishing blockchain data for order {OrderId} and payment {PaymentId}", 
+                        request.OrderId, updatedPayment.Id);
+                    // Don't fail the payment if blockchain publishing fails
+                }
+
                 return Result<Payment>.Ok(
                     data: updatedPayment,
                     message: "تم الدفع بنجاح",
@@ -220,6 +242,80 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
                 message: "حدث خطأ أثناء معالجة طريقة الدفع",
                 errorType: "PaymentMethodProcessingError",
                 resultStatus: ResultStatus.Failed);
+        }
+    }
+
+    private async Task PublishBlockchainDataAsync(Payment payment)
+    {
+        try
+        {
+            // Get payment blockchain details
+            var paymentBlockchainQuery = new GetPaymentBlockchainDetailsQuery(payment.Id);
+            var paymentBlockchainResult = await _mediator.Send(paymentBlockchainQuery);
+
+            // Get order blockchain details
+            var orderBlockchainQuery = new GetOrderBlockchainDetailsQuery(payment.OrderId);
+            var orderBlockchainResult = await _mediator.Send(orderBlockchainQuery);
+
+            // Only publish if both requests are successful
+            if (paymentBlockchainResult.Success && orderBlockchainResult.Success)
+            {
+                var publishBlockChain = new PublishBlockChain
+                {
+                    // Map Order Data
+                    OrderId = orderBlockchainResult.Data.OrderId,
+                    OrderDate = orderBlockchainResult.Data.OrderDate,
+                    OrderStatus = orderBlockchainResult.Data.OrderStatus,
+                    TotalAmount = orderBlockchainResult.Data.TotalAmount,
+                    ShippingAddress = orderBlockchainResult.Data.ShippingAddress ?? "Unknown",
+                    Items = orderBlockchainResult.Data.Items?.Select(item => new OrderItemBlockchain
+                    {
+                        ItemId = item.ItemId,
+                        ItemName = item.ItemName,
+                        Quantity = item.Quantity,
+                        UnitPrice = item.UnitPrice,
+                        TotalPrice = item.TotalPrice
+                    }).ToList() ?? new List<OrderItemBlockchain>(),
+                    
+                    // Map Payment Data
+                    PaymentId = paymentBlockchainResult.Data.PaymentId,
+                    PaymentAmount = paymentBlockchainResult.Data.Amount,
+                    PaymentMethod = paymentBlockchainResult.Data.PaymentMethod,
+                    PaymentStatus = paymentBlockchainResult.Data.PaymentStatus,
+                    TransactionDate = paymentBlockchainResult.Data.TransactionDate,
+                    TransactionHash = paymentBlockchainResult.Data.TransactionHash,
+                    PaymentDetails = paymentBlockchainResult.Data.PaymentDetails,
+                    
+                    // Map User Data
+                    SellerName = orderBlockchainResult.Data.Seller?.Username ?? "Unknown Seller",
+                    SellerPhone = orderBlockchainResult.Data.Seller?.PhoneNumber ?? "Unknown",
+                    CustomerName = orderBlockchainResult.Data.Customer?.Username ?? "Unknown Customer", 
+                    CustomerPhone = orderBlockchainResult.Data.Customer?.PhoneNumber ?? "Unknown",
+                    
+                    // Transaction Metadata
+                    TransactionTimestamp = DateTime.UtcNow,
+                    TransactionType = "ORDER_PAYMENT_COMPLETION"
+                };
+
+                await _blockchainPublisher.PublishOrderPaymentBlockchainAsync(publishBlockChain);
+
+                _logger.LogInformation(
+                    "Successfully published combined blockchain data for order {OrderId} and payment {PaymentId}", 
+                    payment.OrderId, payment.Id);
+            }
+            else
+            {
+                _logger.LogWarning(
+                    "Failed to get blockchain details - Order: {OrderSuccess}, Payment: {PaymentSuccess} for order {OrderId} and payment {PaymentId}",
+                    orderBlockchainResult.Success, paymentBlockchainResult.Success, payment.OrderId, payment.Id);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, 
+                "Error publishing blockchain data for order {OrderId} and payment {PaymentId}", 
+                payment.OrderId, payment.Id);
+            // Don't throw - this is not critical for payment processing
         }
     }
 }

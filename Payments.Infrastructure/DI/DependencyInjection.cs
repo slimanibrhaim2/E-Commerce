@@ -3,8 +3,10 @@ using Infrastructure.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Payments.Domain.Entities;
 using Payments.Domain.Repositories;
+using Payments.Domain.Interfaces;
 using Payments.Infrastructure.Mapping.Mappers;
 using Payments.Infrastructure.Repositories;
+using Payments.Infrastructure.MessageBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,9 @@ namespace Payments.Infrastructure.DI
             services.AddScoped<IMapper<PaymentMethodDAO, PaymentMethod>, PaymentMethodMapper>();
             services.AddScoped<IMapper<PaymentDAO, Payment>, PaymentMapper>();
             services.AddScoped<IMapper<PaymentStatusDAO, PaymentStatus>, PaymentStatusMapper>();
+
+            // Register RabbitMQ Publisher
+            services.AddSingleton<IOrderPaymentBlockchainPublisher, RabbitMQOrderPaymentBlockchainPublisher>();
 
             return services;
         }

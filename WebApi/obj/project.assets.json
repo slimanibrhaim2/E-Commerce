@@ -2005,7 +2005,8 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Payments.Application": "1.0.0",
-          "Payments.Infrastructure.Mapping": "1.0.0"
+          "Payments.Infrastructure.Mapping": "1.0.0",
+          "RabbitMQ.Client": "6.8.1"
         },
         "compile": {
           "bin/placeholder/Payments.Infrastructure.dll": {}
@@ -2095,6 +2096,7 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "Infrastructure": "1.0.0",
+          "RabbitMQ.Client": "6.8.1",
           "Shoppings.Domain": "1.0.0",
           "Shoppings.Infrastructure.Mapping": "1.0.0"
         },

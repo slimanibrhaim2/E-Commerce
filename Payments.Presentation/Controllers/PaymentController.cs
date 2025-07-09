@@ -6,12 +6,15 @@ using Payments.Application.Commands.DeletePayment;
 using Payments.Application.DTOs;
 using Payments.Application.Queries.GetAllPayments;
 using Payments.Application.Queries.GetPaymentById;
+using Payments.Application.Queries.GetPaymentBlockchainDetails;
 using Payments.Domain.Entities;
 using Core.Pagination;
 using Core.Result;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Payments.Application.Commands.ProcessPayment;
+using Shared.Contracts.DTOs.Blockchain;
+using Shared.Contracts.Queries;
 using Core.Authentication;
 
 namespace Payments.Presentation.Controllers
@@ -68,6 +71,36 @@ namespace Payments.Presentation.Controllers
                 return StatusCode(500, Result<PaymentDTO>.Fail(
                     message: "حدث خطأ أثناء استرجاع الدفع",
                     errorType: "GetPaymentFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        [HttpGet("{id}/blockchain")]
+        public async Task<ActionResult<Result<PaymentBlockchainDTO>>> GetPaymentBlockchainDetails(Guid id)
+        {
+            try
+            {
+                var query = new GetPaymentBlockchainDetailsQuery(id);
+                var result = await _mediator.Send(query);
+                
+                if (!result.Success)
+                {
+                    return result.ResultStatus switch
+                    {
+                        ResultStatus.NotFound => NotFound(result),
+                        ResultStatus.ValidationError => BadRequest(result),
+                        _ => StatusCode(500, result)
+                    };
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting blockchain details for payment {PaymentId}", id);
+                return StatusCode(500, Result<PaymentBlockchainDTO>.Fail(
+                    message: "فشل في جلب تفاصيل البلوك تشين للدفع",
+                    errorType: "GetPaymentBlockchainDetailsFailed",
                     resultStatus: ResultStatus.Failed));
             }
         }

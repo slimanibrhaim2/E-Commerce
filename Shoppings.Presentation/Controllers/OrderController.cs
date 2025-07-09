@@ -19,7 +19,10 @@ using Shoppings.Application.Queries.GetOrdersForSeller;
 using Shoppings.Application.Commands.PayOrder;
 using Shoppings.Application.Commands.Checkout;
 using Shoppings.Application.Queries.GetMyCart;
+using Shoppings.Application.Queries.GetOrderBlockchainDetails;
 using Shared.Contracts.Commands;
+using Shared.Contracts.DTOs.Blockchain;
+using Shared.Contracts.Queries;
 
 namespace Shoppings.Presentation.Controllers
 {
@@ -206,6 +209,36 @@ namespace Shoppings.Presentation.Controllers
                 return StatusCode(500, Result<OrderWithItemsDTO>.Fail(
                     message: "فشل في جلب الطلب",
                     errorType: "GetOrderFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        [HttpGet("{id}/blockchain")]
+        public async Task<ActionResult<Result<OrderBlockchainDTO>>> GetOrderBlockchainDetails(Guid id)
+        {
+            try
+            {
+                var query = new GetOrderBlockchainDetailsQuery(id);
+                var result = await _mediator.Send(query);
+                
+                if (!result.Success)
+                {
+                    return result.ResultStatus switch
+                    {
+                        ResultStatus.NotFound => NotFound(result),
+                        ResultStatus.ValidationError => BadRequest(result),
+                        _ => StatusCode(500, result)
+                    };
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting blockchain details for order {OrderId}", id);
+                return StatusCode(500, Result<OrderBlockchainDTO>.Fail(
+                    message: "فشل في جلب تفاصيل البلوك تشين للطلب",
+                    errorType: "GetOrderBlockchainDetailsFailed",
                     resultStatus: ResultStatus.Failed));
             }
         }

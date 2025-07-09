@@ -2361,6 +2361,32 @@
   },
   {
     "ContainingType": "Shoppings.Presentation.Controllers.OrderController",
+    "Method": "GetOrderBlockchainDetails",
+    "RelativePath": "api/Order/{id}/blockchain",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Shared.Contracts.DTOs.Blockchain.OrderBlockchainDTO, Shared.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Shoppings.Presentation.Controllers.OrderController",
     "Method": "CancelOrder",
     "RelativePath": "api/Order/{id}/cancel",
     "HttpMethod": "POST",
@@ -3076,6 +3102,32 @@
     "ReturnTypes": [
       {
         "Type": "Core.Result.Result\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Payments.Presentation.Controllers.PaymentController",
+    "Method": "GetPaymentBlockchainDetails",
+    "RelativePath": "api/Payment/{id}/blockchain",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Core.Result.Result\u00601[[Shared.Contracts.DTOs.Blockchain.PaymentBlockchainDTO, Shared.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
