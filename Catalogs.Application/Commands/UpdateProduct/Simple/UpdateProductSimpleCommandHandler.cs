@@ -57,6 +57,7 @@ public class UpdateProductSimpleCommandHandler : IRequestHandler<UpdateProductSi
                 Price = request.ProductDto.Price,
                 CategoryId = request.ProductDto.CategoryId,
                 SKU = request.ProductDto.SKU,
+                SerialNumber = request.ProductDto.SerialNumber,
                 StockQuantity = request.ProductDto.StockQuantity,
                 IsAvailable = request.ProductDto.IsAvailable,
                 // Add other properties as needed

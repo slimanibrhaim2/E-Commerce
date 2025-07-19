@@ -13,6 +13,7 @@ public class ProductMapper : IMapper<ProductDAO, Product>
         {
             Id = source.Id,
             SKU = source.SKU,
+            SerialNumber = source.SerialNumber,
             StockQuantity = source.StockQuantity,
             Name = source.BaseItem?.Name,
             Description = source.BaseItem?.Description,
@@ -66,6 +67,7 @@ public class ProductMapper : IMapper<ProductDAO, Product>
         {
             Id = target.Id,
             SKU = target.SKU,
+            SerialNumber = target.SerialNumber,
             StockQuantity = target.StockQuantity,
             BaseItemId = target.BaseItemId,
             BaseItem = new BaseItemDAO

@@ -75,6 +75,7 @@ public class GetLowStockProductsQueryHandler : IRequestHandler<GetLowStockProduc
                 StockQuantity = p.StockQuantity,
                 CategoryId = p.CategoryId,
                 SKU = p.SKU,
+                SerialNumber = p.SerialNumber,
                 IsAvailable = p.IsAvailable,
                 UserId = p.UserId,
                 Media = p.Media?.Select(m => new MediaDTO

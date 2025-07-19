@@ -12,6 +12,7 @@ public class ProductDTO
     public Guid CategoryId { get; set; }
     public string CategoryName { get; set; }
     public string SKU { get; set; }
+    public string? SerialNumber { get; set; }
     public double StockQuantity { get; set; }
     public bool IsAvailable { get; set; }
     public bool IsFavorite { get; set; }

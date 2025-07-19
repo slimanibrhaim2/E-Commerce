@@ -78,6 +78,7 @@ public class GetProductsByCategoryQueryHandler : IRequestHandler<GetProductsByCa
                     Price = product.Price,
                     CategoryId = product.CategoryId,
                     SKU = product.SKU,
+                    SerialNumber = product.SerialNumber,
                     StockQuantity = product.StockQuantity,
                     IsAvailable = product.IsAvailable,
                     UserId = product.UserId,

@@ -82,6 +82,7 @@ public class GetProductsByUserIdQueryHandler : IRequestHandler<GetProductsByUser
                 CategoryId = p.CategoryId,
                 CategoryName = p.Category?.Name,
                 SKU = p.SKU,
+                SerialNumber = p.SerialNumber,
                 StockQuantity = p.StockQuantity,
                 IsAvailable = p.IsAvailable,
                 IsFavorite = favoriteBaseItemIds.Contains(p.BaseItemId),

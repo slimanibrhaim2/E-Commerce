@@ -82,6 +82,7 @@ public class CreateProductAggregateCommandHandler : IRequestHandler<CreateProduc
                 Price = dto.Price,
                 CategoryId = dto.CategoryId,
                 SKU = dto.SKU,
+                SerialNumber = dto.SerialNumber,
                 StockQuantity = dto.StockQuantity,
                 IsAvailable = dto.IsAvailable,
                 UserId = request.UserId,

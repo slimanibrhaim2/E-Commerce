@@ -175,6 +175,7 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         // Update Product specific properties
         productDao.StockQuantity = product.StockQuantity;
         productDao.SKU = product.SKU;
+        productDao.SerialNumber = product.SerialNumber;
         productDao.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();

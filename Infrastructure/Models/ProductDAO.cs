@@ -11,6 +11,8 @@ public partial class ProductDAO
 
     public string SKU { get; set; } = null!;
 
+    public string? SerialNumber { get; set; }
+
     public double StockQuantity { get; set; }
 
     public DateTime CreatedAt { get; set; }

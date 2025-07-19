@@ -11,6 +11,7 @@ namespace Catalogs.Domain.Entities
         public Guid Id { get; set; }
         public Guid BaseItemId { get; set; }
         public string SKU { get; set; } = null!;
+        public string? SerialNumber { get; set; }
         public double StockQuantity { get; set; }
         public decimal? DiscountPrice { get; set; }
         public bool HasDiscount => DiscountPrice.HasValue;

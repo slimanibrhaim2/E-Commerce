@@ -70,6 +70,7 @@ public class UpdateProductAggregateCommandHandler : IRequestHandler<UpdateProduc
 
             // Update Product fields
             product.SKU = dto.SKU;
+            product.SerialNumber = dto.SerialNumber;
             product.StockQuantity = dto.StockQuantity;
 
             await _productRepository.UpdateAsync(request.Id, product);

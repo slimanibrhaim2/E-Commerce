@@ -83,6 +83,7 @@ public class GetProductsByIdsQueryHandler : IRequestHandler<GetProductsByIdsQuer
                 Price = p.Price,
                 CategoryId = p.CategoryId,
                 SKU = p.SKU,
+                SerialNumber = p.SerialNumber,
                 StockQuantity = p.StockQuantity,
                 IsAvailable = p.IsAvailable,
                 UserId = p.UserId,
