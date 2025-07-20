@@ -91,6 +91,7 @@ public class GetOrderBlockchainDetailsQueryHandler : IRequestHandler<GetOrderBlo
                 {
                     ItemId = itemDetails.Id,
                     ItemName = itemDetails.GetName(),
+                    SerialNumber = itemDetails is ProductDetailsDTO productDetails ? productDetails.SerialNumber : null,
                     Quantity = Convert.ToInt32(item.Quantity),
                     UnitPrice = Convert.ToDouble(item.Price),
                     TotalPrice = Convert.ToDouble(item.Price * item.Quantity),
@@ -126,6 +127,4 @@ public class GetOrderBlockchainDetailsQueryHandler : IRequestHandler<GetOrderBlo
                 resultStatus: ResultStatus.Failed);
         }
     }
-
-    
 } 

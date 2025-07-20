@@ -3583,6 +3583,11 @@
         "IsRequired": false
       },
       {
+        "Name": "SerialNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "StockQuantity",
         "Type": "System.Int32",
         "IsRequired": false
@@ -3645,6 +3650,11 @@
       },
       {
         "Name": "SKU",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "SerialNumber",
         "Type": "System.String",
         "IsRequired": false
       },

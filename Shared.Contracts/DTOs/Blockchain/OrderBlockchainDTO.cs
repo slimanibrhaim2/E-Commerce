@@ -16,6 +16,7 @@ public record OrderItemBlockchainDTO
 {
     public  Guid ItemId { get; init; }
     public  string ItemName { get; init; }
+    public  string? SerialNumber { get; init; }
     public  double Quantity { get; init; }
     public  double UnitPrice { get; init; }
     public  double TotalPrice { get; init; }

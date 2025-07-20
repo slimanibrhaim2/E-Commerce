@@ -3,8 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250719192350_AddSerialNumber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Infrastructure\\Migrations\\20250719192350_AddSerialNumber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\queries\\getorderblockchaindetails\\getorderblockchaindetailsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\queries\\getorderblockchaindetails\\getorderblockchaindetailsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\queries\\getorderblockchaindetailsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\queries\\getorderblockchaindetailsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\blockchain\\orderblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\blockchain\\orderblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\productdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\productdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\servicedetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\servicedetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\infrastructure\\migrations\\20250719192350_addserialnumber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98EAD072-A447-401B-9A3B-A9B7301AAE0C}|Infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\migrations\\20250719192350_addserialnumber.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A493FE36-F01D-491F-88A8-F724DCCF11E0}|Catalogs.Application\\Catalogs.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\catalogs.application\\di\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,14 +59,6 @@
       "RelativeMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|solutionrelative:payments.application\\commands\\processpayment\\processpaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\blockchain\\orderblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\blockchain\\orderblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\queries\\getorderblockchaindetailsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\queries\\getorderblockchaindetailsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\blockchain\\userblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\blockchain\\userblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -77,10 +89,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\queries\\getproductsbyidsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\queries\\getproductsbyidsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\queries\\getorderblockchaindetails\\getorderblockchaindetailsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\queries\\getorderblockchaindetails\\getorderblockchaindetailsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.application\\queries\\getorderbyid\\getorderbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -370,11 +378,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductDetailsDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
+              "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
+              "RelativeToolTip": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T18:54:20.195Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderBlockchainDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
+              "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
+              "RelativeToolTip": "Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA5wBUAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-09T11:21:12.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GetOrderBlockchainDetailsQuery.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
+              "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
+              "RelativeToolTip": "Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-09T11:32:32.084Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "GetOrderBlockchainDetailsQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
+              "RelativeToolTip": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAIwFgAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-09T11:04:56.722Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ServiceDetailsDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
+              "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
+              "RelativeToolTip": "Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T18:54:11.164Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "20250719192350_AddSerialNumber.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250719192350_AddSerialNumber.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250719192350_AddSerialNumber.cs",
@@ -387,32 +460,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DependencyInjection.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DI\\DependencyInjection.cs",
-              "RelativeDocumentMoniker": "Catalogs.Application\\DI\\DependencyInjection.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DI\\DependencyInjection.cs",
-              "RelativeToolTip": "Catalogs.Application\\DI\\DependencyInjection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-16T09:05:05.088Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Communication.Infrastructure.csproj",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\Communication.Infrastructure.csproj",
-              "RelativeDocumentMoniker": "Communication.Infrastructure\\Communication.Infrastructure.csproj",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\Communication.Infrastructure.csproj",
-              "RelativeToolTip": "Communication.Infrastructure\\Communication.Infrastructure.csproj",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-09T13:58:29.537Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "DependencyInjection.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\DI\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "Communication.Infrastructure\\DI\\DependencyInjection.cs",
@@ -424,7 +472,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
+              "Title": "Communication.Infrastructure.csproj",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\Communication.Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Communication.Infrastructure\\Communication.Infrastructure.csproj",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\Communication.Infrastructure.csproj",
+              "RelativeToolTip": "Communication.Infrastructure\\Communication.Infrastructure.csproj",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-09T13:58:29.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DI\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "Catalogs.Application\\DI\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DI\\DependencyInjection.cs",
+              "RelativeToolTip": "Catalogs.Application\\DI\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-16T09:05:05.088Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "RabbitMQOrderPaymentBlockchainPublisher.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Infrastructure\\MessageBus\\RabbitMQOrderPaymentBlockchainPublisher.cs",
               "RelativeDocumentMoniker": "Payments.Infrastructure\\MessageBus\\RabbitMQOrderPaymentBlockchainPublisher.cs",
@@ -436,7 +508,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "Shoppings.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Infrastructure\\Shoppings.Infrastructure.csproj",
               "RelativeDocumentMoniker": "Shoppings.Infrastructure\\Shoppings.Infrastructure.csproj",
@@ -448,19 +520,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "OrderBlockchainDTO.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
-              "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
-              "RelativeToolTip": "Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAQwAsAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:21:12.272Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "PublishBlockChain.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Entities\\PublishBlockChain.cs",
               "RelativeDocumentMoniker": "Payments.Domain\\Entities\\PublishBlockChain.cs",
@@ -472,7 +532,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "IOrderPaymentBlockchainPublisher.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Interfaces\\IOrderPaymentBlockchainPublisher.cs",
               "RelativeDocumentMoniker": "Payments.Domain\\Interfaces\\IOrderPaymentBlockchainPublisher.cs",
@@ -484,7 +544,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "ProcessPaymentCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
               "RelativeDocumentMoniker": "Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
@@ -496,19 +556,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "GetOrderBlockchainDetailsQuery.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
-              "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
-              "RelativeToolTip": "Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAABfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:32:32.084Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "UserBlockchainDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\UserBlockchainDTO.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\Blockchain\\UserBlockchainDTO.cs",
@@ -520,7 +568,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "GetUserBlockchainInfoQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetUserBlockchainInfo\\GetUserBlockchainInfoQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Queries\\GetUserBlockchainInfo\\GetUserBlockchainInfoQueryHandler.cs",
@@ -532,7 +580,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "IReviewEvaluationPublisher.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Domain\\Interfaces\\IReviewEvaluationPublisher.cs",
               "RelativeDocumentMoniker": "Communication.Domain\\Interfaces\\IReviewEvaluationPublisher.cs",
@@ -544,7 +592,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "GetPaymentBlockchainDetailsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Queries\\GetPaymentBlockchainDetails\\GetPaymentBlockchainDetailsQueryHandler.cs",
               "RelativeDocumentMoniker": "Payments.Application\\Queries\\GetPaymentBlockchainDetails\\GetPaymentBlockchainDetailsQueryHandler.cs",
@@ -556,7 +604,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "PaymentBlockchainDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\PaymentBlockchainDTO.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\Blockchain\\PaymentBlockchainDTO.cs",
@@ -568,7 +616,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "OrderController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\OrderController.cs",
               "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\OrderController.cs",
@@ -580,7 +628,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "PaymentController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Presentation\\Controllers\\PaymentController.cs",
               "RelativeDocumentMoniker": "Payments.Presentation\\Controllers\\PaymentController.cs",
@@ -592,7 +640,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "GetProductsByIdsQuery.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetProductsByIdsQuery.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetProductsByIdsQuery.cs",
@@ -604,19 +652,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "GetOrderBlockchainDetailsQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
-              "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
-              "RelativeToolTip": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAmwF8AAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:04:56.722Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "UpdateUserRatingDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DTOs\\UpdateUserRatingDTO.cs",
               "RelativeDocumentMoniker": "Users.Application\\DTOs\\UpdateUserRatingDTO.cs",
@@ -628,7 +664,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "GetOrderByIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderById\\GetOrderByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrderById\\GetOrderByIdQueryHandler.cs",
@@ -640,7 +676,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Users.Presentation\\Controllers\\UsersController.cs",
@@ -652,7 +688,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 27,
               "Title": "CreateReviewCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\Commands\\CreateReview\\CreateReviewCommandHandler.cs",
               "RelativeDocumentMoniker": "Communication.Application\\Commands\\CreateReview\\CreateReviewCommandHandler.cs",
@@ -664,7 +700,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "UpdateUserRatingCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Commands\\UpdateUserRating\\UpdateUserRatingCommandHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Commands\\UpdateUserRating\\UpdateUserRatingCommandHandler.cs",
@@ -676,7 +712,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "UserRatingRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\Repositories\\UserRatingRepository.cs",
               "RelativeDocumentMoniker": "User.Infrastructure\\Repositories\\UserRatingRepository.cs",
@@ -688,7 +724,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 29,
               "Title": "GetAllUsersQueryHandlerTests.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application.Tests\\GetAllUsersQueryHandlerTests.cs",
               "RelativeDocumentMoniker": "Users.Application.Tests\\GetAllUsersQueryHandlerTests.cs",
@@ -700,7 +736,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 28,
               "Title": "ReviewMapper.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure.Mapping\\Mappers\\ReviewMapper.cs",
               "RelativeDocumentMoniker": "Communication.Infrastructure.Mapping\\Mappers\\ReviewMapper.cs",
@@ -712,7 +748,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 30,
               "Title": "CreateUserCommandHandlerTests.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application.Tests\\CreateUserCommandHandlerTests.cs",
               "RelativeDocumentMoniker": "Users.Application.Tests\\CreateUserCommandHandlerTests.cs",
@@ -724,7 +760,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "GetProviderIdByOrderIdQuery.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetProviderIdByOrderIdQuery.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetProviderIdByOrderIdQuery.cs",
@@ -736,7 +772,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 32,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Program.cs",
               "RelativeDocumentMoniker": "WebApi\\Program.cs",
@@ -748,7 +784,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 33,
               "Title": "GetAllUsersQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
@@ -760,7 +796,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 34,
               "Title": "RabbitMQReviewEvaluationPublisher.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\MessageBus\\RabbitMQReviewEvaluationPublisher.cs",
               "RelativeDocumentMoniker": "Communication.Infrastructure\\MessageBus\\RabbitMQReviewEvaluationPublisher.cs",
@@ -772,7 +808,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 35,
               "Title": "ServiceRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure\\Repositories\\ServiceRepository.cs",
               "RelativeDocumentMoniker": "Catalogs.Infrastructure\\Repositories\\ServiceRepository.cs",
@@ -784,7 +820,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 37,
               "Title": "GetServicesByUserIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
@@ -796,7 +832,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 36,
               "Title": "GetServicesByPriceRangeQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
@@ -808,7 +844,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 38,
               "Title": "GetServicesByNameQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByName\\GetServicesByNameQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByName\\GetServicesByNameQueryHandler.cs",
@@ -820,7 +856,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 40,
               "Title": "GetServicesByIdsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByIds\\GetServicesByIdsQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByIds\\GetServicesByIdsQueryHandler.cs",
@@ -832,7 +868,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 39,
               "Title": "GetServicesByDurationQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
@@ -844,7 +880,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 42,
               "Title": "GetServicesByCategoryQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
@@ -856,7 +892,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 41,
               "Title": "GetAllServicesQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
@@ -868,7 +904,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 44,
               "Title": "GetProductsByUserIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByUserId\\GetProductsByUserIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByUserId\\GetProductsByUserIdQueryHandler.cs",
@@ -880,7 +916,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 43,
               "Title": "GetProductsByNameQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByName\\GetProductsByNameQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByName\\GetProductsByNameQueryHandler.cs",
@@ -892,7 +928,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 45,
               "Title": "GetProductsByIdsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByIds\\GetProductsByIdsQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByIds\\GetProductsByIdsQueryHandler.cs",
@@ -904,7 +940,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 46,
               "Title": "GetProductsByCategoryQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
@@ -916,7 +952,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 47,
               "Title": "GetLowStockProductsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
@@ -928,7 +964,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 48,
               "Title": "ProductRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Infrastructure\\Repositories\\ProductRepository.cs",
               "RelativeDocumentMoniker": "Catalogs.Infrastructure\\Repositories\\ProductRepository.cs",
@@ -940,7 +976,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 49,
               "Title": "GetAllProductsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
@@ -952,7 +988,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 51,
               "Title": "CancelOrderCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\CancelOrder\\CancelOrderCommandHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\CancelOrder\\CancelOrderCommandHandler.cs",
@@ -964,7 +1000,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 52,
               "Title": "ReviewDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\DTOs\\ReviewDTO.cs",
               "RelativeDocumentMoniker": "Communication.Application\\DTOs\\ReviewDTO.cs",
@@ -976,7 +1012,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 91,
               "Title": "20250701114741_updateTheReview.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250701114741_updateTheReview.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250701114741_updateTheReview.cs",
@@ -988,7 +1024,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 50,
               "Title": "CheckoutCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
@@ -1000,7 +1036,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 54,
               "Title": "GetUserByIdQueryHandlerTests.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application.Tests\\GetUserByIdQueryHandlerTests.cs",
               "RelativeDocumentMoniker": "Users.Application.Tests\\GetUserByIdQueryHandlerTests.cs",
@@ -1012,7 +1048,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 53,
               "Title": "ReviewController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Presentation\\Controllers\\ReviewController.cs",
               "RelativeDocumentMoniker": "Communication.Presentation\\Controllers\\ReviewController.cs",
@@ -1024,7 +1060,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 55,
               "Title": "GetUserByIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetUserById\\GetUserByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Queries\\GetUserById\\GetUserByIdQueryHandler.cs",
@@ -1036,7 +1072,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
+              "DocumentIndex": 56,
               "Title": "AddressesController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\AddressesController.cs",
               "RelativeDocumentMoniker": "Users.Presentation\\Controllers\\AddressesController.cs",
@@ -1048,7 +1084,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 59,
               "Title": "ReviewRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\Repositories\\ReviewRepository.cs",
               "RelativeDocumentMoniker": "Communication.Infrastructure\\Repositories\\ReviewRepository.cs",
@@ -1060,7 +1096,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 57,
               "Title": "OrderRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Infrastructure\\Repositories\\OrderRepository.cs",
               "RelativeDocumentMoniker": "Shoppings.Infrastructure\\Repositories\\OrderRepository.cs",
@@ -1072,7 +1108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 60,
               "Title": "GetAllReviewsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\Queries\\GetAllReviews\\GetAllReviewsQueryHandler.cs",
               "RelativeDocumentMoniker": "Communication.Application\\Queries\\GetAllReviews\\GetAllReviewsQueryHandler.cs",
@@ -1084,7 +1120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 58,
               "Title": "UpdateReviewCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\Commands\\UpdateReview\\UpdateReviewCommandHandler.cs",
               "RelativeDocumentMoniker": "Communication.Application\\Commands\\UpdateReview\\UpdateReviewCommandHandler.cs",
@@ -1096,7 +1132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 61,
               "Title": "GetReviewsByUserIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\Queries\\GetReviewsByUserId\\GetReviewsByUserIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Communication.Application\\Queries\\GetReviewsByUserId\\GetReviewsByUserIdQueryHandler.cs",
@@ -1108,7 +1144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 62,
               "Title": "DeleteReviewCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\Commands\\DeleteReview\\DeleteReviewCommandHandler.cs",
               "RelativeDocumentMoniker": "Communication.Application\\Commands\\DeleteReview\\DeleteReviewCommandHandler.cs",
@@ -1120,7 +1156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 63,
               "Title": "IReviewRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Domain\\Repositories\\IReviewRepository.cs",
               "RelativeDocumentMoniker": "Communication.Domain\\Repositories\\IReviewRepository.cs",
@@ -1132,7 +1168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 64,
               "Title": "GetReviewByIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\Queries\\GetReviewById\\GetReviewByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Communication.Application\\Queries\\GetReviewById\\GetReviewByIdQueryHandler.cs",
@@ -1144,7 +1180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 66,
               "Title": "PaymentRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Infrastructure\\Repositories\\PaymentRepository.cs",
               "RelativeDocumentMoniker": "Payments.Infrastructure\\Repositories\\PaymentRepository.cs",
@@ -1156,7 +1192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 65,
               "Title": "GetOrdersForSellerQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrdersForSeller\\GetOrdersForSellerQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrdersForSeller\\GetOrdersForSellerQueryHandler.cs",
@@ -1168,7 +1204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 68,
               "Title": "IPaymentRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Repositories\\IPaymentRepository.cs",
               "RelativeDocumentMoniker": "Payments.Domain\\Repositories\\IPaymentRepository.cs",
@@ -1180,7 +1216,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 67,
               "Title": "CreatePaymentCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommandHandler.cs",
               "RelativeDocumentMoniker": "Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommandHandler.cs",
@@ -1192,7 +1228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 69,
               "Title": "20250630224011_makeTheAmountTypeInPaymentDouble.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250630224011_makeTheAmountTypeInPaymentDouble.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250630224011_makeTheAmountTypeInPaymentDouble.cs",
@@ -1204,7 +1240,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 70,
               "Title": "CreatePaymentDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\DTOs\\CreatePaymentDTO.cs",
               "RelativeDocumentMoniker": "Payments.Application\\DTOs\\CreatePaymentDTO.cs",
@@ -1216,7 +1252,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 72,
               "Title": "UpdatePaymentCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommandHandler.cs",
               "RelativeDocumentMoniker": "Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommandHandler.cs",
@@ -1228,7 +1264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 71,
               "Title": "CreatePaymentCommand.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommand.cs",
               "RelativeDocumentMoniker": "Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommand.cs",
@@ -1240,7 +1276,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 73,
               "Title": "UpdatePaymentCommand.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommand.cs",
               "RelativeDocumentMoniker": "Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommand.cs",
@@ -1252,7 +1288,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 75,
               "Title": "ECommerceContext.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Models\\ECommerceContext.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Models\\ECommerceContext.cs",
@@ -1264,7 +1300,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 74,
               "Title": "PayOrderCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
@@ -1276,7 +1312,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 76,
               "Title": "PaymentDAO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Models\\PaymentDAO.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Models\\PaymentDAO.cs",
@@ -1288,7 +1324,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 77,
               "Title": "PaymentMapper.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Infrastructure.Mapping\\Mappers\\PaymentMapper.cs",
               "RelativeDocumentMoniker": "Payments.Infrastructure.Mapping\\Mappers\\PaymentMapper.cs",
@@ -1300,7 +1336,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 78,
               "Title": "OrderStatusNames.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Domain\\Constants\\OrderStatusNames.cs",
               "RelativeDocumentMoniker": "Shoppings.Domain\\Constants\\OrderStatusNames.cs",
@@ -1312,7 +1348,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 79,
               "Title": "CartController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\CartController.cs",
               "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\CartController.cs",
@@ -1324,7 +1360,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
+              "DocumentIndex": 80,
               "Title": "OrderWithItemsDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
@@ -1336,7 +1372,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 81,
               "Title": "GetItemIdByBaseItemIdQuery.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetItemIdByBaseItemIdQuery.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetItemIdByBaseItemIdQuery.cs",
@@ -1348,7 +1384,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 83,
               "Title": "GetUserIdByItemIdQuery.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetUserIdByItemIdQuery.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetUserIdByItemIdQuery.cs",
@@ -1360,7 +1396,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 82,
               "Title": "GetUserIdByItemIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetUserIdByItemId\\GetUserIdByItemIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetUserIdByItemId\\GetUserIdByItemIdQueryHandler.cs",
@@ -1372,7 +1408,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 84,
               "Title": "BaseItemController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Presentation\\Controllers\\BaseItemController.cs",
               "RelativeDocumentMoniker": "Catalogs.Presentation\\Controllers\\BaseItemController.cs",
@@ -1384,7 +1420,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 85,
               "Title": "SellerOrderDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\DTOs\\SellerOrderDTO.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\DTOs\\SellerOrderDTO.cs",
@@ -1396,7 +1432,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 86,
               "Title": "UpdateProductQuantityCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Commands\\UpdateProductQuantity\\UpdateProductQuantityCommandHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Commands\\UpdateProductQuantity\\UpdateProductQuantityCommandHandler.cs",
@@ -1408,7 +1444,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 88,
               "Title": "GetMyFavoritesQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
@@ -1420,7 +1456,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 87,
               "Title": "FavoriteResponseDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DTOs\\FavoriteResponseDTO.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\DTOs\\FavoriteResponseDTO.cs",
@@ -1432,7 +1468,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 89,
               "Title": "GetMyOrdersQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetMyOrders\\GetMyOrdersQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetMyOrders\\GetMyOrdersQueryHandler.cs",
@@ -1444,7 +1480,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
+              "DocumentIndex": 90,
               "Title": "20250629205106_makeStockQuantityTypeDouble.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250629205106_makeStockQuantityTypeDouble.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250629205106_makeStockQuantityTypeDouble.cs",

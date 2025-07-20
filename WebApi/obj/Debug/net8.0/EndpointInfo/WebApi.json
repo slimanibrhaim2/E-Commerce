@@ -5829,6 +5829,9 @@
                   "SKU": {
                     "type": "string"
                   },
+                  "SerialNumber": {
+                    "type": "string"
+                  },
                   "StockQuantity": {
                     "type": "integer",
                     "format": "int32"
@@ -5871,6 +5874,9 @@
                   "style": "form"
                 },
                 "SKU": {
+                  "style": "form"
+                },
+                "SerialNumber": {
                   "style": "form"
                 },
                 "StockQuantity": {
@@ -6022,6 +6028,9 @@
                   "SKU": {
                     "type": "string"
                   },
+                  "SerialNumber": {
+                    "type": "string"
+                  },
                   "StockQuantity": {
                     "type": "integer",
                     "format": "int32"
@@ -6064,6 +6073,9 @@
                   "style": "form"
                 },
                 "SKU": {
+                  "style": "form"
+                },
+                "SerialNumber": {
                   "style": "form"
                 },
                 "StockQuantity": {
@@ -9311,6 +9323,10 @@
             "format": "uuid"
           },
           "sku": {
+            "type": "string",
+            "nullable": true
+          },
+          "serialNumber": {
             "type": "string",
             "nullable": true
           },

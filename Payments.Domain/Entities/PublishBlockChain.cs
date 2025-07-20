@@ -37,6 +37,7 @@ namespace Payments.Domain.Entities
     {
         public Guid ItemId { get; set; }
         public string ItemName { get; set; } = null!;
+        public string? SerialNumber { get; set; }
         public double Quantity { get; set; }
         public double UnitPrice { get; set; }
         public double TotalPrice { get; set; }
