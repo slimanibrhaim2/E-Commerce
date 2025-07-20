@@ -87,11 +87,26 @@ public class GetOrderBlockchainDetailsQueryHandler : IRequestHandler<GetOrderBlo
                 }
 
                 var itemDetails = itemDetailsResult.Data;
+                
+                // Check the actual type of itemDetails
+                _logger.LogInformation("Item details type: {Type}", itemDetails.GetType().FullName);
+                
+                string serialNumber = null;
+                if (itemDetails is ProductDetailsDTO productDetails)
+                {
+                    _logger.LogInformation("Found product details with serial number: {SerialNumber}", productDetails.SerialNumber);
+                    serialNumber = productDetails.SerialNumber;
+                }
+                else
+                {
+                    _logger.LogWarning("Item details is not ProductDetailsDTO. Actual type: {Type}", itemDetails.GetType().FullName);
+                }
+
                 var orderItemDto = new OrderItemBlockchainDTO
                 {
                     ItemId = itemDetails.Id,
                     ItemName = itemDetails.GetName(),
-                    SerialNumber = itemDetails is ProductDetailsDTO productDetails ? productDetails.SerialNumber : null,
+                    SerialNumber = serialNumber,
                     Quantity = Convert.ToInt32(item.Quantity),
                     UnitPrice = Convert.ToDouble(item.Price),
                     TotalPrice = Convert.ToDouble(item.Price * item.Quantity),
