@@ -7,12 +7,28 @@
       "RelativeMoniker": "D:0:0:{BB83A797-4817-4271-84B8-C580DC42E32D}|Shoppings.Application\\Shoppings.Application.csproj|solutionrelative:shoppings.application\\queries\\getorderblockchaindetails\\getorderblockchaindetailsqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\queries\\getorderblockchaindetailsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\queries\\getorderblockchaindetailsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.application\\commands\\processpayment\\processpaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|solutionrelative:payments.application\\commands\\processpayment\\processpaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{031B1B30-2CD9-4330-8A21-596D07A0B909}|Payments.Domain\\Payments.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.domain\\entities\\publishblockchain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{031B1B30-2CD9-4330-8A21-596D07A0B909}|Payments.Domain\\Payments.Domain.csproj|solutionrelative:payments.domain\\entities\\publishblockchain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\blockchain\\orderblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\blockchain\\orderblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.presentation\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|solutionrelative:shoppings.presentation\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\queries\\getorderblockchaindetailsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\queries\\getorderblockchaindetailsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\productdetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,14 +67,6 @@
       "RelativeMoniker": "D:0:0:{031B1B30-2CD9-4330-8A21-596D07A0B909}|Payments.Domain\\Payments.Domain.csproj|solutionrelative:payments.domain\\interfaces\\iorderpaymentblockchainpublisher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{031B1B30-2CD9-4330-8A21-596D07A0B909}|Payments.Domain\\Payments.Domain.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.domain\\entities\\publishblockchain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{031B1B30-2CD9-4330-8A21-596D07A0B909}|Payments.Domain\\Payments.Domain.csproj|solutionrelative:payments.domain\\entities\\publishblockchain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\payments.application\\commands\\processpayment\\processpaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A661E83F-9617-41AF-94B1-FB512B9C5F43}|Payments.Application\\Payments.Application.csproj|solutionrelative:payments.application\\commands\\processpayment\\processpaymentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\blockchain\\userblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\blockchain\\userblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -81,10 +89,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\dtos\\blockchain\\paymentblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\dtos\\blockchain\\paymentblockchaindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shoppings.presentation\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{134C9087-BBA0-4EE8-9E3E-D91087A895FA}|Shoppings.Presentation\\Shoppings.Presentation.csproj|solutionrelative:shoppings.presentation\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\queries\\getproductsbyidsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -129,10 +133,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\shared.contracts\\queries\\getprovideridbyorderidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BD56C225-840C-4756-8DAA-A4EC6B11DB3E}|Shared.Contracts\\Shared.Contracts.csproj|solutionrelative:shared.contracts\\queries\\getprovideridbyorderidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85305E0B-1C3F-4E3E-B3A4-D4A8E3C9E5CF}|WebApi\\WebApi.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0559D6E4-8876-40AC-A4E5-62D4077D80FA}|Users.Application\\Users.Application.csproj|c:\\users\\vision\\desktop\\class diagram\\projectbackend\\e-commerce\\users.application\\queries\\getallusers\\getallusersqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -378,37 +378,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ProductDetailsDTO.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
-              "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
-              "RelativeToolTip": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAkAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-20T18:54:20.195Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "OrderBlockchainDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
               "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
               "RelativeToolTip": "Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA5wBUAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAqwA4AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-09T11:21:12.272Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GetOrderBlockchainDetailsQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
+              "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs*",
+              "RelativeToolTip": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs*",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAAAHsAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-09T11:04:56.722Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ProcessPaymentCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
+              "RelativeDocumentMoniker": "Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs*",
+              "RelativeToolTip": "Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs*",
+              "ViewState": "AgIAAAwBAAAAAAAAAAAAABQBAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T22:20:00.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PublishBlockChain.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Entities\\PublishBlockChain.cs",
+              "RelativeDocumentMoniker": "Payments.Domain\\Entities\\PublishBlockChain.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Entities\\PublishBlockChain.cs",
+              "RelativeToolTip": "Payments.Domain\\Entities\\PublishBlockChain.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-09T12:11:06.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "Shoppings.Presentation\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAAOEAAAAAAAAAAAAnwO4AAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T12:50:43.991Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "GetOrderBlockchainDetailsQuery.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
@@ -421,20 +460,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GetOrderBlockchainDetailsQueryHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
-              "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
-              "RelativeToolTip": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAAAFgAAAA5AAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Program.cs",
+              "RelativeDocumentMoniker": "WebApi\\Program.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Program.cs",
+              "RelativeToolTip": "WebApi\\Program.cs",
+              "ViewState": "AgIAAIcAAAAAAAAAAAAAAI8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:04:56.722Z",
+              "WhenOpened": "2025-07-02T09:49:32.68Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
+              "Title": "ProductDetailsDTO.cs",
+              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
+              "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
+              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
+              "RelativeToolTip": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwAkAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T18:54:20.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "ServiceDetailsDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
@@ -442,12 +493,11 @@
               "RelativeToolTip": "Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-20T18:54:11.164Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-20T18:54:11.164Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "20250719192350_AddSerialNumber.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Infrastructure\\Migrations\\20250719192350_AddSerialNumber.cs",
               "RelativeDocumentMoniker": "Infrastructure\\Migrations\\20250719192350_AddSerialNumber.cs",
@@ -455,12 +505,11 @@
               "RelativeToolTip": "Infrastructure\\Migrations\\20250719192350_AddSerialNumber.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T19:23:50.998Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-19T19:23:50.998Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "DependencyInjection.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\DI\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "Communication.Infrastructure\\DI\\DependencyInjection.cs",
@@ -472,7 +521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "Communication.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure\\Communication.Infrastructure.csproj",
               "RelativeDocumentMoniker": "Communication.Infrastructure\\Communication.Infrastructure.csproj",
@@ -484,7 +533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "DependencyInjection.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application\\DI\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "Catalogs.Application\\DI\\DependencyInjection.cs",
@@ -496,7 +545,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "RabbitMQOrderPaymentBlockchainPublisher.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Infrastructure\\MessageBus\\RabbitMQOrderPaymentBlockchainPublisher.cs",
               "RelativeDocumentMoniker": "Payments.Infrastructure\\MessageBus\\RabbitMQOrderPaymentBlockchainPublisher.cs",
@@ -508,7 +557,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "Shoppings.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Infrastructure\\Shoppings.Infrastructure.csproj",
               "RelativeDocumentMoniker": "Shoppings.Infrastructure\\Shoppings.Infrastructure.csproj",
@@ -520,19 +569,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "PublishBlockChain.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Entities\\PublishBlockChain.cs",
-              "RelativeDocumentMoniker": "Payments.Domain\\Entities\\PublishBlockChain.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Entities\\PublishBlockChain.cs",
-              "RelativeToolTip": "Payments.Domain\\Entities\\PublishBlockChain.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA0wAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T12:11:06.263Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "IOrderPaymentBlockchainPublisher.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Domain\\Interfaces\\IOrderPaymentBlockchainPublisher.cs",
               "RelativeDocumentMoniker": "Payments.Domain\\Interfaces\\IOrderPaymentBlockchainPublisher.cs",
@@ -544,19 +581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ProcessPaymentCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
-              "RelativeDocumentMoniker": "Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
-              "RelativeToolTip": "Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
-              "ViewState": "AgIAALMAAAAAAAAAAAAEwB0BAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:20:00.036Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "UserBlockchainDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\UserBlockchainDTO.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\Blockchain\\UserBlockchainDTO.cs",
@@ -568,7 +593,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "GetUserBlockchainInfoQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetUserBlockchainInfo\\GetUserBlockchainInfoQueryHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Queries\\GetUserBlockchainInfo\\GetUserBlockchainInfoQueryHandler.cs",
@@ -580,7 +605,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "IReviewEvaluationPublisher.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Domain\\Interfaces\\IReviewEvaluationPublisher.cs",
               "RelativeDocumentMoniker": "Communication.Domain\\Interfaces\\IReviewEvaluationPublisher.cs",
@@ -592,7 +617,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "GetPaymentBlockchainDetailsQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Application\\Queries\\GetPaymentBlockchainDetails\\GetPaymentBlockchainDetailsQueryHandler.cs",
               "RelativeDocumentMoniker": "Payments.Application\\Queries\\GetPaymentBlockchainDetails\\GetPaymentBlockchainDetailsQueryHandler.cs",
@@ -604,7 +629,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "PaymentBlockchainDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\DTOs\\Blockchain\\PaymentBlockchainDTO.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\DTOs\\Blockchain\\PaymentBlockchainDTO.cs",
@@ -616,19 +641,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "Shoppings.Presentation\\Controllers\\OrderController.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Presentation\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "Shoppings.Presentation\\Controllers\\OrderController.cs",
-              "ViewState": "AgIAAPAAAAAAAAAAAAAowCgBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:50:43.991Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "PaymentController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Payments.Presentation\\Controllers\\PaymentController.cs",
               "RelativeDocumentMoniker": "Payments.Presentation\\Controllers\\PaymentController.cs",
@@ -640,7 +653,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "GetProductsByIdsQuery.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetProductsByIdsQuery.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetProductsByIdsQuery.cs",
@@ -652,7 +665,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "UpdateUserRatingDTO.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\DTOs\\UpdateUserRatingDTO.cs",
               "RelativeDocumentMoniker": "Users.Application\\DTOs\\UpdateUserRatingDTO.cs",
@@ -664,7 +677,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "GetOrderByIdQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shoppings.Application\\Queries\\GetOrderById\\GetOrderByIdQueryHandler.cs",
               "RelativeDocumentMoniker": "Shoppings.Application\\Queries\\GetOrderById\\GetOrderByIdQueryHandler.cs",
@@ -676,7 +689,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Users.Presentation\\Controllers\\UsersController.cs",
@@ -688,7 +701,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "CreateReviewCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Application\\Commands\\CreateReview\\CreateReviewCommandHandler.cs",
               "RelativeDocumentMoniker": "Communication.Application\\Commands\\CreateReview\\CreateReviewCommandHandler.cs",
@@ -700,7 +713,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "UpdateUserRatingCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Commands\\UpdateUserRating\\UpdateUserRatingCommandHandler.cs",
               "RelativeDocumentMoniker": "Users.Application\\Commands\\UpdateUserRating\\UpdateUserRatingCommandHandler.cs",
@@ -712,7 +725,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "UserRatingRepository.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\User.Infrastructure\\Repositories\\UserRatingRepository.cs",
               "RelativeDocumentMoniker": "User.Infrastructure\\Repositories\\UserRatingRepository.cs",
@@ -724,7 +737,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "GetAllUsersQueryHandlerTests.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application.Tests\\GetAllUsersQueryHandlerTests.cs",
               "RelativeDocumentMoniker": "Users.Application.Tests\\GetAllUsersQueryHandlerTests.cs",
@@ -736,7 +749,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "ReviewMapper.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Communication.Infrastructure.Mapping\\Mappers\\ReviewMapper.cs",
               "RelativeDocumentMoniker": "Communication.Infrastructure.Mapping\\Mappers\\ReviewMapper.cs",
@@ -748,7 +761,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "CreateUserCommandHandlerTests.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application.Tests\\CreateUserCommandHandlerTests.cs",
               "RelativeDocumentMoniker": "Users.Application.Tests\\CreateUserCommandHandlerTests.cs",
@@ -760,7 +773,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "GetProviderIdByOrderIdQuery.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Shared.Contracts\\Queries\\GetProviderIdByOrderIdQuery.cs",
               "RelativeDocumentMoniker": "Shared.Contracts\\Queries\\GetProviderIdByOrderIdQuery.cs",
@@ -772,18 +785,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Program.cs",
-              "RelativeDocumentMoniker": "WebApi\\Program.cs",
-              "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\Program.cs",
-              "RelativeToolTip": "WebApi\\Program.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAIwDMAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:49:32.68Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 33,
               "Title": "GetAllUsersQueryHandler.cs",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Application\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
@@ -792,7 +793,8 @@
               "RelativeToolTip": "Users.Application\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
               "ViewState": "AgIAAD0AAAAAAAAAAAAIwEYAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:49:01.433Z"
+              "WhenOpened": "2025-07-02T09:49:01.433Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

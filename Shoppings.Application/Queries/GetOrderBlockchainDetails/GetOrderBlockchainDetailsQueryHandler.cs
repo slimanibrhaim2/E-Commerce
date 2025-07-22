@@ -107,9 +107,9 @@ public class GetOrderBlockchainDetailsQueryHandler : IRequestHandler<GetOrderBlo
                     ItemId = itemDetails.Id,
                     ItemName = itemDetails.GetName(),
                     SerialNumber = serialNumber,
-                    Quantity = Convert.ToInt32(item.Quantity),
-                    UnitPrice = Convert.ToDouble(item.Price),
-                    TotalPrice = Convert.ToDouble(item.Price * item.Quantity),
+                    Quantity = item.Quantity,
+                    UnitPrice = item.Price,
+                    TotalPrice = item.Price * item.Quantity,
                 };
 
                 items.Add(orderItemDto);
@@ -121,7 +121,7 @@ public class GetOrderBlockchainDetailsQueryHandler : IRequestHandler<GetOrderBlo
                 OrderId = order.Id,
                 OrderDate = order.CreatedAt,
                 OrderStatus = status.Name,
-                TotalAmount = Convert.ToDouble(order.TotalAmount),
+                TotalAmount = order.TotalAmount,
                 ShippingAddress = order.AddressId.ToString(),
                 Items = items,
                 Seller = sellerResult.Data,

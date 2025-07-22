@@ -274,6 +274,7 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
                         ItemName = item.ItemName,
                         Quantity = item.Quantity,
                         UnitPrice = item.UnitPrice,
+                        SerialNumber=item.SerialNumber,
                         TotalPrice = item.TotalPrice
                     }).ToList() ?? new List<OrderItemBlockchain>(),
                     

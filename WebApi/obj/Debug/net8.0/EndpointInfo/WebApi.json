@@ -10309,6 +10309,10 @@
             "type": "string",
             "nullable": true
           },
+          "serialNumber": {
+            "type": "string",
+            "nullable": true
+          },
           "quantity": {
             "type": "number",
             "format": "double"
