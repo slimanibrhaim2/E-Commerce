@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Users.Application.Command.AddFollowerByUserId;
 using Users.Application.Queries.GetAllFollowersByUserId;
+using Users.Application.Queries.GetAllFollowingByUserId;
 using Core.Result;
 using System.Collections.Generic;
 using Users.Application.DTOs;
@@ -24,10 +25,10 @@ namespace Users.Presentation.Controllers
         public FollowersController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] Guid followerId)
+        public async Task<IActionResult> Add([FromBody] Guid followingId)
         {
             var userId = User.GetId();
-            var cmd = new AddFollowerByUserIdCommand(userId, followerId);
+            var cmd = new AddFollowerByUserIdCommand(followingId, userId);
             var result = await _mediator.Send(cmd);
             if (!result.Success)
                 return StatusCode(500, Result.Fail(
@@ -57,7 +58,25 @@ namespace Users.Presentation.Controllers
                 resultStatus: ResultStatus.Success));
         }
 
-        [HttpDelete("{followerId}/{followingId}")]
+        [HttpGet("following")]
+        public async Task<IActionResult> GetFollowing([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var userId = User.GetId();
+            var pagination = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+            var query = new GetAllFollowingByUserIdQuery(userId, pagination);
+            var result = await _mediator.Send(query);
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب المتابَعين",
+                    errorType: "GetFollowingFailed",
+                    resultStatus: ResultStatus.Failed));
+            return Ok(Result<PaginatedResult<FollowingDTO>>.Ok(
+                data: result.Data,
+                message: "تم جلب المتابَعين بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+
+        [HttpDelete("/{followingId}")]
         public async Task<IActionResult> DeleteFollower(Guid followingId)
         {
             // Get the current user's ID

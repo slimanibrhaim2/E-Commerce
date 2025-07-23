@@ -50,7 +50,7 @@ namespace Users.Application.Commands.UpdateUserRating
                         CreatedAt = DateTime.UtcNow,
                         UpdatedAt = DateTime.UtcNow
                     };
-                    await _userRatingRepo.CreateAsync(userRating);
+                    await _userRatingRepo.AddAsync(userRating);
                 }
 
                 // 3. Calculate new rating
@@ -61,7 +61,7 @@ namespace Users.Application.Commands.UpdateUserRating
                 userRating.NumOfReviews++;
                 userRating.UpdatedAt = DateTime.UtcNow;
 
-                await _userRatingRepo.UpdateAsync(userRating);
+                _userRatingRepo.Update(userRating);
 
                 return Result<bool>.Ok(
                     data: true,

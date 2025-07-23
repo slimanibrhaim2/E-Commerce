@@ -32,7 +32,7 @@ namespace Users.Application.Commands.CreateUserRating
                 CreatedAt = DateTime.UtcNow
             };
 
-            await _userRatingRepository.CreateAsync(userRating);
+            await _userRatingRepository.AddAsync(userRating);
             await _unitOfWork.SaveChangesAsync();
             
             return true;

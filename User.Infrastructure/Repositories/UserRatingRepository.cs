@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Users.Domain.Entities;
 using Users.Domain.Repositories;
 using Infrastructure.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Users.Infrastructure.Repositories
 {
@@ -27,11 +29,19 @@ namespace Users.Infrastructure.Repositories
             return dao != null ? _mapper.Map(dao) : null;
         }
 
-        public async Task<UserRating> GetByUserIdAsync(Guid userId)
+        public async Task<UserRating?> GetByUserIdAsync(Guid userId)
         {
             var dao = await _context.UserRatings
                 .FirstOrDefaultAsync(x => x.UserId == userId && x.DeletedAt == null);
             return dao != null ? _mapper.Map(dao) : null;
+        }
+
+        public async Task<IEnumerable<UserRating>> GetByUserIdsAsync(IEnumerable<Guid> userIds)
+        {
+            var daos = await _context.UserRatings
+                .Where(r => userIds.Contains(r.UserId) && r.DeletedAt == null)
+                .ToListAsync();
+            return daos.Select(dao => _mapper.Map(dao));
         }
 
         public async Task<UserRating> CreateAsync(UserRating userRating)

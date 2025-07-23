@@ -11,7 +11,7 @@ namespace Users.Domain.Repositories
     public interface IFollowerRepository : IRepository<Follower>
     {
         Task<IEnumerable<Follower>> GetFollowersByUserId(Guid userId);
-        Task<User?> GetByFollowerId(Guid followerId);
+        Task<IEnumerable<Follower>> GetFollowingByUserId(Guid userId);
         Task AddAsync(Follower entity);
         Task<Follower?> GetByFollowerAndFollowingId(Guid followerId, Guid followingId);
     }

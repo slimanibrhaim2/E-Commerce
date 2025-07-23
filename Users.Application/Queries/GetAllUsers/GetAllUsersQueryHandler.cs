@@ -40,11 +40,10 @@ namespace Users.Application.Queries.GetAllUsers
                 var usersList = users.ToList();
                 var totalCount = usersList.Count;
 
-                // Get all user ratings
+                // Get all user ratings in a single query
                 var userIds = usersList.Select(u => u.Id).ToList();
-                var userRatings = (await Task.WhenAll(userIds.Select(id => 
-                    _userRatingRepository.GetByUserIdAsync(id))))
-                    .ToDictionary(r => r?.UserId ?? Guid.Empty, r => r);
+                var userRatings = (await _userRatingRepository.GetByUserIdsAsync(userIds))
+                    .ToDictionary(r => r.UserId);
 
                 var userDtos = usersList.Select(user => new UserDTO
                 {
@@ -56,8 +55,8 @@ namespace Users.Application.Queries.GetAllUsers
                     LastName = user.LastName,
                     ProfilePhoto = user.ProfilePhoto,
                     Description = user.Description,
-                    Rating = userRatings.TryGetValue(user.Id, out var rating) ? rating?.Rating ?? 3 : 3,
-                    NumOfReviews = userRatings.TryGetValue(user.Id, out var reviews) ? reviews?.NumOfReviews ?? 0 : 0
+                    Rating = userRatings.TryGetValue(user.Id, out var rating) ? rating.Rating : 3,
+                    NumOfReviews = userRatings.TryGetValue(user.Id, out var reviews) ? reviews.NumOfReviews : 0
                 }).ToList();
 
                 // Apply pagination

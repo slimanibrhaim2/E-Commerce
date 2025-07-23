@@ -6,6 +6,8 @@ namespace Users.Infrastructure.Mapping.Mappers;
 
 public class FollowerMapper : BaseMapper<FollowerDAO, Follower>
 {
+    private readonly UserMapper _userMapper = new UserMapper();
+
     public override Follower Map(FollowerDAO source)
     {
         return SafeMap(source, s => new Follower
@@ -14,7 +16,10 @@ public class FollowerMapper : BaseMapper<FollowerDAO, Follower>
             FollowerId = s.FollowerId,
             FollowingId = s.FollowingId,
             CreatedAt = s.CreatedAt,
-            UpdatedAt = s.UpdatedAt
+            UpdatedAt = s.UpdatedAt,
+            DeletedAt = s.DeletedAt,
+            FollowerUser = s.Follower != null ? _userMapper.Map(s.Follower) : null,
+            Following = s.Following != null ? _userMapper.Map(s.Following) : null
         });
     }
 
@@ -25,8 +30,9 @@ public class FollowerMapper : BaseMapper<FollowerDAO, Follower>
             Id = t.Id,
             FollowerId = t.FollowerId,
             FollowingId = t.FollowingId,
-            CreatedAt=t.CreatedAt,
-            UpdatedAt=t.UpdatedAt
+            CreatedAt = t.CreatedAt,
+            UpdatedAt = t.UpdatedAt,
+            DeletedAt = t.DeletedAt
         });
     }
 }

@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "Users.Presentation.Controllers.FollowersController",
+    "Method": "DeleteFollower",
+    "RelativePath": "{followingId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "followingId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Users.Presentation.Controllers.AddressesController",
     "Method": "AddAddress",
     "RelativePath": "api/Addresses",
@@ -3849,6 +3865,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Catalogs.Presentation.Controllers.ProductsController",
+    "Method": "GetProductsByUserId",
+    "RelativePath": "api/products/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Communication.Presentation.Controllers.ReviewController",
     "Method": "GetAll",
     "RelativePath": "api/Review",
@@ -4624,7 +4666,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "followerId",
+        "Name": "followingId",
         "Type": "System.Guid",
         "IsRequired": true
       }
@@ -4654,21 +4696,21 @@
   },
   {
     "ContainingType": "Users.Presentation.Controllers.FollowersController",
-    "Method": "DeleteFollower",
-    "RelativePath": "api/users/followers/{followerId}/{followingId}",
-    "HttpMethod": "DELETE",
+    "Method": "GetFollowing",
+    "RelativePath": "api/users/followers/following",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "followingId",
-        "Type": "System.Guid",
-        "IsRequired": true
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
       },
       {
-        "Name": "followerId",
-        "Type": "",
-        "IsRequired": true
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

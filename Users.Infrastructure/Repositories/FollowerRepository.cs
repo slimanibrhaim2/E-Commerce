@@ -1,4 +1,4 @@
-﻿using Infrastructure.Common;
+using Infrastructure.Common;
 using Infrastructure.Models;
 using Users.Domain.Entities;
 using Users.Domain.Repositories;
@@ -27,30 +27,47 @@ namespace Users.Infrastructure.Repositories
 
         public async Task<IEnumerable<Follower>> GetFollowersByUserId(Guid userId)
         {
-            var daos = await _dbSet.Where(f => f.FollowingId == userId && f.DeletedAt == null).ToListAsync();
-            return daos.Select(f => _followerMapper.Map(f));
-        }
-        public async Task<IEnumerable<Follower>> GetFollowingByUserId(Guid userId)
-        {
-            var daos = await _dbSet.Where(f => f.FollowerId == userId && f.DeletedAt == null).ToListAsync();
+            var daos = await _dbSet
+                .Include(f => f.Follower) // Include the follower user details
+                .Where(f => f.FollowingId == userId && f.DeletedAt == null)
+                .ToListAsync();
             return daos.Select(f => _followerMapper.Map(f));
         }
 
+        public async Task<IEnumerable<Follower>> GetFollowingByUserId(Guid userId)
+        {
+            var daos = await _dbSet
+                .Include(f => f.Following) // Include the following user details
+                .Where(f => f.FollowerId == userId && f.DeletedAt == null)
+                .ToListAsync();
+            return daos.Select(f => _followerMapper.Map(f));
+        }
+
+        public async Task<User?> GetByFollowerId(Guid followerId)
+        {
+            var followerDao = await _dbSet
+                .Include(f => f.Follower)
+                .FirstOrDefaultAsync(f => f.FollowerId == followerId && f.DeletedAt == null);
+            if (followerDao == null)
+                return null;
+            var userMapper = new UserMapper();
+            return userMapper.Map(followerDao.Follower);
+        }
 
         public async Task<Follower?> GetByFollowerAndFollowingId(Guid followerId, Guid followingId)
         {
-            var dao = await _dbSet.FirstOrDefaultAsync(f => 
-                f.FollowerId == followerId && 
-                f.FollowingId == followingId && 
-                f.DeletedAt == null);
+            var dao = await _dbSet
+                .FirstOrDefaultAsync(f => 
+                    f.FollowerId == followerId && 
+                    f.FollowingId == followingId && 
+                    f.DeletedAt == null);
             return dao == null ? null : _followerMapper.Map(dao);
         }
 
         public async Task AddAsync(Follower entity)
         {
-            FollowerDAO dao = _followerMapper.MapBack(entity);
+            var dao = _followerMapper.MapBack(entity);
             await _dbSet.AddAsync(dao);
         }
-
     }
-}
+} 

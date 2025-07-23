@@ -450,6 +450,23 @@ public class ProductsController : ControllerBase
             resultStatus: ResultStatus.Success));
     }
 
+    [HttpGet("user/{userId}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetProductsByUserId(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        var query = new GetProductsByUserIdQuery(userId, new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize });
+        var result = await _mediator.Send(query);
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب منتجات المستخدم",
+                errorType: "GetProductsByUserIdFailed",
+                resultStatus: ResultStatus.Failed));
+        return Ok(Result<PaginatedResult<ProductDTO>>.Ok(
+            data: result.Data,
+            message: "تم جلب منتجات المستخدم بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
     [HttpGet("search")]
     [AllowAnonymous]
     public async Task<IActionResult> SearchProducts([FromQuery] string name, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
