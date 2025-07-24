@@ -376,4 +376,53 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         var mappedProducts = products.Select(p => _mapper.Map(p)).ToList();
         return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
+
+    public async Task<PaginatedResult<Product>> GetByFiltersWithDetails(
+        Guid? categoryId,
+        decimal? minPrice,
+        decimal? maxPrice,
+        int pageNumber,
+        int pageSize)
+    {
+        var query = _context.Products
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(p => p.ProductFeatures)
+            .Where(p => p.DeletedAt == null);
+
+        // Apply category filter if provided
+        if (categoryId.HasValue)
+        {
+            query = query.Where(p => p.BaseItem.CategoryId == categoryId.Value);
+        }
+
+        // Apply price range filters if provided
+        if (minPrice.HasValue)
+        {
+            query = query.Where(p => p.BaseItem.Price >= (double)minPrice.Value);
+        }
+
+        if (maxPrice.HasValue)
+        {
+            query = query.Where(p => p.BaseItem.Price <= (double)maxPrice.Value);
+        }
+
+        // Order by creation date and optimize query
+        query = query
+            .OrderByDescending(p => p.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var mappedProducts = products.Select(p => _mapper.Map(p)).ToList();
+        return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
+    }
 } 

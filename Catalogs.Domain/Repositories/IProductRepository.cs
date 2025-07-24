@@ -15,16 +15,15 @@ public interface IProductRepository : IRepository<Product>
     Task<PaginatedResult<Product>> GetLowStockProducts(int threshold, int pageNumber, int pageSize);
     Task<Product> GetByMediaId(Guid mediaId);
     Task<bool> UpdateAsync(Guid id, Product product);
-    
-
     Task<PaginatedResult<Product>> GetProductsByUserIdAsync(Guid userId, int pageNumber, int pageSize);
-
     Task<PaginatedResult<Product>> GetProductsByNameAsync(string name, int pageNumber, int pageSize);
-
     Task<PaginatedResult<Product>> GetByIdsAsync(IEnumerable<Guid> ids, int pageNumber, int pageSize);
-
     Task<Guid?> GetBaseItemIdByProductIdAsync(Guid productId);
-    
-    // Add reverse lookup method
     Task<Guid?> GetProductIdByBaseItemIdAsync(Guid baseItemId);
+    Task<PaginatedResult<Product>> GetByFiltersWithDetails(
+        Guid? categoryId,
+        decimal? minPrice,
+        decimal? maxPrice,
+        int pageNumber,
+        int pageSize);
 } 

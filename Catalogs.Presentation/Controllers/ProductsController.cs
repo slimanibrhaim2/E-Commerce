@@ -30,6 +30,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Text.Json;
 using System.ComponentModel.DataAnnotations;
+using Catalogs.Application.Queries.GetProductsByFilters;
 
 namespace Catalogs.Presentation.Controllers;
 
@@ -534,6 +535,31 @@ public class ProductsController : ControllerBase
         return Ok(Result<PaginatedResult<ProductDTO>>.Ok(
             data: result.Data,
             message: "تم جلب المنتجات ذات المخزون المنخفض بنجاح",
+            resultStatus: ResultStatus.Success));
+    }
+
+    [HttpGet("filter")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetProductsByFilters(
+        [FromQuery] Guid? categoryId,
+        [FromQuery] decimal? minPrice,
+        [FromQuery] decimal? maxPrice,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10)
+    {
+        var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+        var query = new GetProductsByFiltersQuery(categoryId, minPrice, maxPrice, userId, pageNumber, pageSize);
+        var result = await _mediator.Send(query);
+
+        if (!result.Success)
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب المنتجات",
+                errorType: "GetFilteredProductsFailed",
+                resultStatus: ResultStatus.Failed));
+
+        return Ok(Result<PaginatedResult<ProductDTO>>.Ok(
+            data: result.Data,
+            message: "تم جلب المنتجات بنجاح",
             resultStatus: ResultStatus.Success));
     }
 

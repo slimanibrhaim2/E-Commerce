@@ -414,8 +414,7 @@
               "RelativeToolTip": "Users.Application\\Commands\\CreateUserRating\\CreateUserRatingCommandHandler.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAIwCIAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T13:40:32.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T13:40:32.834Z"
             },
             {
               "$type": "Document",
@@ -427,8 +426,7 @@
               "RelativeToolTip": "User.Infrastructure\\Repositories\\FollowerRepository.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAcwCYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T12:53:01.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T12:53:01.541Z"
             },
             {
               "$type": "Document",
@@ -440,8 +438,7 @@
               "RelativeToolTip": "Users.Application\\Commands\\UpdateUserRating\\UpdateUserRatingCommandHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T10:42:09.386Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T10:42:09.386Z"
             },
             {
               "$type": "Document",
@@ -451,7 +448,7 @@
               "RelativeDocumentMoniker": "Users.Presentation\\Controllers\\FollowersController.cs",
               "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Users.Presentation\\Controllers\\FollowersController.cs",
               "RelativeToolTip": "Users.Presentation\\Controllers\\FollowersController.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAQwB4AAABKAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAwwEIAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-23T12:42:52.591Z",
               "EditorCaption": ""
@@ -466,8 +463,7 @@
               "RelativeToolTip": "Users.Domain\\Repositories\\IFollowerRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T13:12:50.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T13:12:50.084Z"
             },
             {
               "$type": "Document",
@@ -479,8 +475,7 @@
               "RelativeToolTip": "Users.Application\\Queries\\GetAllFollowingByUserId\\GetAllFollowingByUserIdQueryHandler.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAwwA0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T13:08:18.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T13:08:18.773Z"
             },
             {
               "$type": "Document",
@@ -492,8 +487,7 @@
               "RelativeToolTip": "Users.Application\\Queries\\GetAllFollowersByUserId\\GetAllFollowersByUserIdQueryHandler.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAwwCEAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T13:07:30.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T13:07:30.321Z"
             },
             {
               "$type": "Document",
@@ -517,8 +511,7 @@
               "RelativeToolTip": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
               "ViewState": "AgIAAHUAAAAAAAAAAAAAAHsAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:04:56.722Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T11:04:56.722Z"
             },
             {
               "$type": "Document",
