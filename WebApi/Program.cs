@@ -28,10 +28,14 @@ using Shoppings.Infrastructure.Data;
 using Communication.Infrastructure.Data;
 using Catalogs.Infrastructure.Data;
 using Core.DI;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add logging
+builder.Host.UseSerilog((context, LoggerConfiguration) =>
+    LoggerConfiguration.ReadFrom.Configuration(context.Configuration));
+
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
