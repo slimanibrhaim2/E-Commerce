@@ -52,6 +52,18 @@ namespace Shoppings.Application.Commands.AddToMyCart
 
                 _logger.LogInformation("Adding item {ItemId} to user {UserId} cart", request.ItemId, request.UserId);
 
+                // Check if user is trying to add their own product/service to cart
+                var ownerQuery = new GetUserIdByItemIdQuery(request.ItemId);
+                var ownerResult = await _mediator.Send(ownerQuery, cancellationToken);
+                
+                if (ownerResult.Success && ownerResult.Data == request.UserId)
+                {
+                    return Result.Fail(
+                        message: "لا يمكنك إضافة منتجك أو خدمتك الخاصة إلى سلة التسوق",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError);
+                }
+
                 // Resolve ItemId to BaseItemId first
                 var productQuery = new GetBaseItemIdByProductIdQuery(request.ItemId);
                 var productResult = await _mediator.Send(productQuery, cancellationToken);

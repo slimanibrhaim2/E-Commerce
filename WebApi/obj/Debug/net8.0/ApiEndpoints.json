@@ -4651,22 +4651,6 @@
   },
   {
     "ContainingType": "Users.Presentation.Controllers.FollowersController",
-    "Method": "Add",
-    "RelativePath": "api/users/followers",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "followingId",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Users.Presentation.Controllers.FollowersController",
     "Method": "GetAll",
     "RelativePath": "api/users/followers",
     "HttpMethod": "GET",
@@ -4682,6 +4666,22 @@
         "Name": "pageSize",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Users.Presentation.Controllers.FollowersController",
+    "Method": "Add",
+    "RelativePath": "api/users/followers/{followingId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "followingId",
+        "Type": "System.Guid",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

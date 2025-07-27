@@ -24,8 +24,8 @@ namespace Users.Presentation.Controllers
         private readonly IMediator _mediator;
         public FollowersController(IMediator mediator) => _mediator = mediator;
 
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] Guid followingId)
+        [HttpPost("{followingId}")]
+        public async Task<IActionResult> Add(Guid followingId)
         {
             var userId = User.GetId();
             var cmd = new AddFollowerByUserIdCommand(followingId, userId);

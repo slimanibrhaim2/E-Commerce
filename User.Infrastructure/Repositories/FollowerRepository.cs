@@ -27,12 +27,18 @@ namespace Users.Infrastructure.Repositories
 
         public async Task<IEnumerable<Follower>> GetFollowersByUserId(Guid userId)
         {
-            var daos = await _dbSet.Where(f => f.FollowingId == userId && f.DeletedAt == null).ToListAsync();
+            var daos = await _dbSet
+                .Include(f => f.Follower) // Include the follower user details
+                .Where(f => f.FollowingId == userId && f.DeletedAt == null)
+                .ToListAsync();
             return daos.Select(f => _followerMapper.Map(f));
         }
         public async Task<IEnumerable<Follower>> GetFollowingByUserId(Guid userId)
         {
-            var daos = await _dbSet.Where(f => f.FollowerId == userId && f.DeletedAt == null).ToListAsync();
+            var daos = await _dbSet
+                .Include(f => f.Following) // Include the following user details
+                .Where(f => f.FollowerId == userId && f.DeletedAt == null)
+                .ToListAsync();
             return daos.Select(f => _followerMapper.Map(f));
         }
 

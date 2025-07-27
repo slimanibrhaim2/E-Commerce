@@ -474,8 +474,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -484,7 +488,7 @@
               "RelativeDocumentMoniker": "WebApi\\appsettings.Development.json",
               "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\appsettings.Development.json",
               "RelativeToolTip": "WebApi\\appsettings.Development.json",
-              "ViewState": "AgIAADQAAAAAAAAAAADwvz8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-27T14:01:50.676Z",
               "EditorCaption": ""
@@ -499,21 +503,19 @@
               "RelativeToolTip": "WebApi\\appsettings.json",
               "ViewState": "AgIAAC4AAAAAAAAAAADwvz8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-27T12:10:58.947Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-27T12:10:58.947Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "WebApi",
+              "Title": "WebApi.csproj",
               "DocumentMoniker": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\WebApi.csproj",
               "RelativeDocumentMoniker": "WebApi\\WebApi.csproj",
               "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\WebApi\\WebApi.csproj",
               "RelativeToolTip": "WebApi\\WebApi.csproj",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-27T11:51:42.437Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-27T11:51:42.437Z"
             },
             {
               "$type": "Document",
@@ -525,8 +527,7 @@
               "RelativeToolTip": "Catalogs.Presentation\\DI\\DependencyInjection.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAA9wBIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:19:07.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-27T11:19:07.502Z"
             },
             {
               "$type": "Document",
@@ -538,12 +539,7 @@
               "RelativeToolTip": "Catalogs.Presentation\\Controllers\\ServicesController.cs",
               "ViewState": "AgIAAEwBAAAAAAAAAAAgwCsBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:07:03.376Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "WhenOpened": "2025-07-27T11:07:03.376Z"
             },
             {
               "$type": "Document",
@@ -555,8 +551,7 @@
               "RelativeToolTip": "WebApi\\Program.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAAACMAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:49:32.68Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T09:49:32.68Z"
             },
             {
               "$type": "Document",
@@ -568,8 +563,7 @@
               "RelativeToolTip": "Catalogs.Application\\Commands\\DeleteService\\DeleteServiceAggregateCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:08:53.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-27T11:08:53.227Z"
             },
             {
               "$type": "Document",
@@ -581,8 +575,7 @@
               "RelativeToolTip": "Catalogs.Presentation\\Controllers\\ProductsController.cs",
               "ViewState": "AgIAAGkBAAAAAAAAAAAAAHABAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-24T19:44:25.589Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-24T19:44:25.589Z"
             },
             {
               "$type": "Document",
@@ -594,8 +587,7 @@
               "RelativeToolTip": "Payments.Presentation\\Controllers\\PaymentController.cs",
               "ViewState": "AgIAALUAAAAAAAAAAAAswFUAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:35:47.736Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:35:47.736Z"
             },
             {
               "$type": "Document",
@@ -607,8 +599,7 @@
               "RelativeToolTip": "Catalogs.Application\\Commands\\DeleteProduct\\DeleteProductAggregateCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:08:28.157Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-27T11:08:28.157Z"
             },
             {
               "$type": "Document",
@@ -620,8 +611,7 @@
               "RelativeToolTip": "Catalogs.Application\\Commands\\UpdateService\\UpdateServiceAggregateCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:05:38.068Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-27T11:05:38.068Z"
             },
             {
               "$type": "Document",
@@ -633,8 +623,7 @@
               "RelativeToolTip": "Catalogs.Application\\Commands\\UpdateProduct\\UpdateProductAggregateCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:05:06.988Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-27T11:05:06.988Z"
             },
             {
               "$type": "Document",
@@ -646,8 +635,7 @@
               "RelativeToolTip": "Catalogs.Application\\Commands\\CreateService\\CreateServiceAggregateCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:04:12.304Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-27T11:04:12.304Z"
             },
             {
               "$type": "Document",
@@ -659,8 +647,7 @@
               "RelativeToolTip": "Catalogs.Application\\Commands\\CreateProduct\\CreateProductAggregateCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-27T11:03:00.059Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-27T11:03:00.059Z"
             },
             {
               "$type": "Document",
@@ -672,8 +659,7 @@
               "RelativeToolTip": "Payments.Application\\Queries\\GetPaymentMethodByOrderId\\GetPaymentMethodByOrderIdQueryHandler.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAYwB0AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-26T21:46:12.367Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-26T21:46:12.367Z"
             },
             {
               "$type": "Document",
@@ -685,8 +671,7 @@
               "RelativeToolTip": "Catalogs.Infrastructure.Mapping\\Mappers\\CategoryMapper.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T14:00:11.05Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-25T14:00:11.05Z"
             },
             {
               "$type": "Document",
@@ -698,8 +683,7 @@
               "RelativeToolTip": "Catalogs.Infrastructure\\Repositories\\CategoryRepository.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAQwBcAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T13:59:12.857Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-25T13:59:12.857Z"
             },
             {
               "$type": "Document",
@@ -711,8 +695,7 @@
               "RelativeToolTip": "Payments.Application\\Queries\\GetPaymentByOrderId\\GetPaymentByOrderIdQueryHandler.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAAwBoAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-26T21:46:07.101Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-26T21:46:07.101Z"
             },
             {
               "$type": "Document",
@@ -724,8 +707,7 @@
               "RelativeToolTip": "Catalogs.Application\\Commands\\CreateCategory\\CreateCategoryCommandHandler.cs",
               "ViewState": "AgIAAC8AAAAAAAAAAAArwDUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T13:48:58.892Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-25T13:48:58.892Z"
             },
             {
               "$type": "Document",
@@ -737,8 +719,7 @@
               "RelativeToolTip": "Catalogs.Presentation\\Controllers\\CategoryController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-25T13:47:50.149Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-25T13:47:50.149Z"
             },
             {
               "$type": "Document",
@@ -750,8 +731,7 @@
               "RelativeToolTip": "User.Infrastructure\\Repositories\\FollowerRepository.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAcwCYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T12:53:01.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T12:53:01.541Z"
             },
             {
               "$type": "Document",
@@ -763,8 +743,7 @@
               "RelativeToolTip": "Users.Application\\Commands\\UpdateUserRating\\UpdateUserRatingCommandHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T10:42:09.386Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T10:42:09.386Z"
             },
             {
               "$type": "Document",
@@ -776,8 +755,7 @@
               "RelativeToolTip": "Payments.Application\\Commands\\ProcessPayment\\ProcessPaymentCommandHandler.cs",
               "ViewState": "AgIAACcBAAAAAAAAAIBJwPcAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:20:00.036Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:20:00.036Z"
             },
             {
               "$type": "Document",
@@ -789,8 +767,7 @@
               "RelativeToolTip": "Users.Application\\Commands\\CreateUserRating\\CreateUserRatingCommandHandler.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAIwCIAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T13:40:32.834Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T13:40:32.834Z"
             },
             {
               "$type": "Document",
@@ -802,8 +779,7 @@
               "RelativeToolTip": "Users.Presentation\\Controllers\\FollowersController.cs",
               "ViewState": "AgIAADoAAAAAAAAAAAAwwEIAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T12:42:52.591Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T12:42:52.591Z"
             },
             {
               "$type": "Document",
@@ -815,8 +791,7 @@
               "RelativeToolTip": "Users.Domain\\Repositories\\IFollowerRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T13:12:50.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T13:12:50.084Z"
             },
             {
               "$type": "Document",
@@ -828,8 +803,7 @@
               "RelativeToolTip": "Users.Application\\Queries\\GetAllFollowingByUserId\\GetAllFollowingByUserIdQueryHandler.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAwwA0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T13:08:18.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T13:08:18.773Z"
             },
             {
               "$type": "Document",
@@ -841,8 +815,7 @@
               "RelativeToolTip": "Users.Application\\Queries\\GetAllFollowersByUserId\\GetAllFollowersByUserIdQueryHandler.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAwwCEAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T13:07:30.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-23T13:07:30.321Z"
             },
             {
               "$type": "Document",
@@ -854,8 +827,7 @@
               "RelativeToolTip": "Shared.Contracts\\DTOs\\Blockchain\\OrderBlockchainDTO.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAqwA4AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:21:12.272Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T11:21:12.272Z"
             },
             {
               "$type": "Document",
@@ -867,8 +839,7 @@
               "RelativeToolTip": "Shoppings.Application\\Queries\\GetOrderBlockchainDetails\\GetOrderBlockchainDetailsQueryHandler.cs",
               "ViewState": "AgIAAHIAAAAAAAAAAIBJwHsAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:04:56.722Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T11:04:56.722Z"
             },
             {
               "$type": "Document",
@@ -880,8 +851,7 @@
               "RelativeToolTip": "Payments.Domain\\Entities\\PublishBlockChain.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T12:11:06.263Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T12:11:06.263Z"
             },
             {
               "$type": "Document",
@@ -893,8 +863,7 @@
               "RelativeToolTip": "Shoppings.Presentation\\Controllers\\OrderController.cs",
               "ViewState": "AgIAAOEAAAAAAAAAAAAnwO4AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:50:43.991Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T12:50:43.991Z"
             },
             {
               "$type": "Document",
@@ -906,8 +875,7 @@
               "RelativeToolTip": "Shared.Contracts\\Queries\\GetOrderBlockchainDetailsQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:32:32.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T11:32:32.084Z"
             },
             {
               "$type": "Document",
@@ -919,8 +887,7 @@
               "RelativeToolTip": "Shared.Contracts\\DTOs\\ProductDetailsDTO.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAxwAkAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-20T18:54:20.195Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-20T18:54:20.195Z"
             },
             {
               "$type": "Document",
@@ -932,8 +899,7 @@
               "RelativeToolTip": "Shared.Contracts\\DTOs\\ServiceDetailsDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-20T18:54:11.164Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-20T18:54:11.164Z"
             },
             {
               "$type": "Document",
@@ -945,8 +911,7 @@
               "RelativeToolTip": "Infrastructure\\Migrations\\20250719192350_AddSerialNumber.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T19:23:50.998Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-19T19:23:50.998Z"
             },
             {
               "$type": "Document",
@@ -958,8 +923,7 @@
               "RelativeToolTip": "Communication.Infrastructure\\DI\\DependencyInjection.cs",
               "ViewState": "AgIAACUAAAAAAAAAAAAtwC0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T13:58:58.661Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T13:58:58.661Z"
             },
             {
               "$type": "Document",
@@ -971,8 +935,7 @@
               "RelativeToolTip": "Communication.Infrastructure\\Communication.Infrastructure.csproj",
               "ViewState": "AgIAAAEAAAAAAAAAAABBwAwAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-09T13:58:29.537Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T13:58:29.537Z"
             },
             {
               "$type": "Document",
@@ -984,8 +947,7 @@
               "RelativeToolTip": "Catalogs.Application\\DI\\DependencyInjection.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-16T09:05:05.088Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-16T09:05:05.088Z"
             },
             {
               "$type": "Document",
@@ -997,8 +959,7 @@
               "RelativeToolTip": "Payments.Infrastructure\\MessageBus\\RabbitMQOrderPaymentBlockchainPublisher.cs",
               "ViewState": "AgIAAGYAAAAAAAAAAAAvwHMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T12:39:19.604Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T12:39:19.604Z"
             },
             {
               "$type": "Document",
@@ -1010,8 +971,7 @@
               "RelativeToolTip": "Shoppings.Infrastructure\\Shoppings.Infrastructure.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-09T13:59:28.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T13:59:28.79Z"
             },
             {
               "$type": "Document",
@@ -1023,8 +983,7 @@
               "RelativeToolTip": "Payments.Domain\\Interfaces\\IOrderPaymentBlockchainPublisher.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAcwAoAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T12:07:36.673Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T12:07:36.673Z"
             },
             {
               "$type": "Document",
@@ -1036,8 +995,7 @@
               "RelativeToolTip": "Shared.Contracts\\DTOs\\Blockchain\\UserBlockchainDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T12:11:55.628Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T12:11:55.628Z"
             },
             {
               "$type": "Document",
@@ -1049,8 +1007,7 @@
               "RelativeToolTip": "Users.Application\\Queries\\GetUserBlockchainInfo\\GetUserBlockchainInfoQueryHandler.cs",
               "ViewState": "AgIAABwAAAAAAAAAAAAawCMAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:42:53.691Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T11:42:53.691Z"
             },
             {
               "$type": "Document",
@@ -1062,8 +1019,7 @@
               "RelativeToolTip": "Communication.Domain\\Interfaces\\IReviewEvaluationPublisher.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:54:31.594Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T09:54:31.594Z"
             },
             {
               "$type": "Document",
@@ -1075,8 +1031,7 @@
               "RelativeToolTip": "Payments.Application\\Queries\\GetPaymentBlockchainDetails\\GetPaymentBlockchainDetailsQueryHandler.cs",
               "ViewState": "AgIAAFcAAAAAAAAAAAAjwBwAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:37:07.151Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T11:37:07.151Z"
             },
             {
               "$type": "Document",
@@ -1088,8 +1043,7 @@
               "RelativeToolTip": "Shared.Contracts\\DTOs\\Blockchain\\PaymentBlockchainDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:33:29.059Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T11:33:29.059Z"
             },
             {
               "$type": "Document",
@@ -1101,8 +1055,7 @@
               "RelativeToolTip": "Shared.Contracts\\Queries\\GetProductsByIdsQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-09T11:32:35.476Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-09T11:32:35.476Z"
             },
             {
               "$type": "Document",
@@ -1114,8 +1067,7 @@
               "RelativeToolTip": "Users.Application\\DTOs\\UpdateUserRatingDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T17:52:13.007Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T17:52:13.007Z"
             },
             {
               "$type": "Document",
@@ -1127,8 +1079,7 @@
               "RelativeToolTip": "Shoppings.Application\\Queries\\GetOrderById\\GetOrderByIdQueryHandler.cs",
               "ViewState": "AgIAAFwAAAAAAAAAAAAqwGsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T19:02:49.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T19:02:49.861Z"
             },
             {
               "$type": "Document",
@@ -1140,8 +1091,7 @@
               "RelativeToolTip": "Users.Presentation\\Controllers\\UsersController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYBAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:49:28.411Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T09:49:28.411Z"
             },
             {
               "$type": "Document",
@@ -1153,8 +1103,7 @@
               "RelativeToolTip": "Communication.Application\\Commands\\CreateReview\\CreateReviewCommandHandler.cs",
               "ViewState": "AgIAALYAAAAAAAAAAAAYwMMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T10:28:03.218Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T10:28:03.218Z"
             },
             {
               "$type": "Document",
@@ -1166,8 +1115,7 @@
               "RelativeToolTip": "User.Infrastructure\\Repositories\\UserRatingRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:49:05.86Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T09:49:05.86Z"
             },
             {
               "$type": "Document",
@@ -1179,8 +1127,7 @@
               "RelativeToolTip": "Users.Application.Tests\\GetAllUsersQueryHandlerTests.cs",
               "ViewState": "AgIAADYAAAAAAAAAAAAAwEYAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T10:04:56.36Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T10:04:56.36Z"
             },
             {
               "$type": "Document",
@@ -1192,8 +1139,7 @@
               "RelativeToolTip": "Communication.Infrastructure.Mapping\\Mappers\\ReviewMapper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:24:09.788Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:24:09.788Z"
             },
             {
               "$type": "Document",
@@ -1205,8 +1151,7 @@
               "RelativeToolTip": "Users.Application.Tests\\CreateUserCommandHandlerTests.cs",
               "ViewState": "AgIAAM8AAAAAAAAAAAAYwN0AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T10:04:52.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T10:04:52.254Z"
             },
             {
               "$type": "Document",
@@ -1218,8 +1163,7 @@
               "RelativeToolTip": "Shared.Contracts\\Queries\\GetProviderIdByOrderIdQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T10:01:31.59Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T10:01:31.59Z"
             },
             {
               "$type": "Document",
@@ -1231,8 +1175,7 @@
               "RelativeToolTip": "Users.Application\\Queries\\GetAllUsers\\GetAllUsersQueryHandler.cs",
               "ViewState": "AgIAAD0AAAAAAAAAAAAIwEYAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T09:49:01.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-02T09:49:01.433Z"
             },
             {
               "$type": "Document",
@@ -1244,8 +1187,7 @@
               "RelativeToolTip": "Communication.Infrastructure\\MessageBus\\RabbitMQReviewEvaluationPublisher.cs",
               "ViewState": "AgIAAF8AAAAAAAAAAAAowHkAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T20:34:33.991Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T20:34:33.991Z"
             },
             {
               "$type": "Document",
@@ -1257,8 +1199,7 @@
               "RelativeToolTip": "Catalogs.Infrastructure\\Repositories\\ServiceRepository.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAwwA4AAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T19:21:21.617Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T19:21:21.617Z"
             },
             {
               "$type": "Document",
@@ -1270,8 +1211,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByUserId\\GetServicesByUserIdQueryHandler.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAAwDkAAACbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T19:21:35.25Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T19:21:35.25Z"
             },
             {
               "$type": "Document",
@@ -1283,8 +1223,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByPriceRange\\GetServicesByPriceRangeQueryHandler.cs",
               "ViewState": "AgIAAEAAAAAAAAAAAAAIwEkAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T19:21:05.171Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T19:21:05.171Z"
             },
             {
               "$type": "Document",
@@ -1296,8 +1235,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByName\\GetServicesByNameQueryHandler.cs",
               "ViewState": "AgIAAEsAAAAAAAAAAAAIwDYAAACXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T19:12:14.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T19:12:14.938Z"
             },
             {
               "$type": "Document",
@@ -1309,8 +1247,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByIds\\GetServicesByIdsQueryHandler.cs",
               "ViewState": "AgIAADYAAAAAAAAAAAAAwD8AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T19:10:52.367Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T19:10:52.367Z"
             },
             {
               "$type": "Document",
@@ -1322,8 +1259,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByDuration\\GetServicesByDurationQueryHandler.cs",
               "ViewState": "AgIAAC0AAAAAAAAAAAAowDAAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T19:06:05.594Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T19:06:05.594Z"
             },
             {
               "$type": "Document",
@@ -1335,8 +1271,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetServicesByCategory\\GetServicesByCategoryQueryHandler.cs",
               "ViewState": "AgIAAC0AAAAAAAAAAAAAwDYAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T19:03:29.323Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T19:03:29.323Z"
             },
             {
               "$type": "Document",
@@ -1348,8 +1283,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetAllServices\\GetAllServicesQueryHandler.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAIwDEAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T19:01:55.098Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T19:01:55.098Z"
             },
             {
               "$type": "Document",
@@ -1361,8 +1295,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByUserId\\GetProductsByUserIdQueryHandler.cs",
               "ViewState": "AgIAADAAAAAAAAAAAAAAwDkAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T18:36:05.078Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T18:36:05.078Z"
             },
             {
               "$type": "Document",
@@ -1374,8 +1307,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByName\\GetProductsByNameQueryHandler.cs",
               "ViewState": "AgIAAC0AAAAAAAAAAAAIwDYAAACRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T18:33:19.795Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T18:33:19.795Z"
             },
             {
               "$type": "Document",
@@ -1387,8 +1319,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByIds\\GetProductsByIdsQueryHandler.cs",
               "ViewState": "AgIAADgAAAAAAAAAAAAIwEEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T18:29:34.407Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T18:29:34.407Z"
             },
             {
               "$type": "Document",
@@ -1400,8 +1331,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetProductsByCategory\\GetProductsByCategoryQueryHandler.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAIwDkAAABcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T18:25:10.226Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T18:25:10.226Z"
             },
             {
               "$type": "Document",
@@ -1413,8 +1343,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetLowStockProducts\\GetLowStockProductsQueryHandler.cs",
               "ViewState": "AgIAAC8AAAAAAAAAAAAIwDYAAAB9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T18:25:05.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T18:25:05.957Z"
             },
             {
               "$type": "Document",
@@ -1426,8 +1355,7 @@
               "RelativeToolTip": "Catalogs.Infrastructure\\Repositories\\ProductRepository.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAwwAwAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T18:16:36.219Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T18:16:36.219Z"
             },
             {
               "$type": "Document",
@@ -1439,8 +1367,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetAllProducts\\GetAllProductsQueryHandler.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAwwCEAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T18:16:31.3Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T18:16:31.3Z"
             },
             {
               "$type": "Document",
@@ -1452,8 +1379,7 @@
               "RelativeToolTip": "Shoppings.Application\\Commands\\CancelOrder\\CancelOrderCommandHandler.cs",
               "ViewState": "AgIAAI4AAAAAAAAAAAAowG8AAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T12:09:20.6Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T12:09:20.6Z"
             },
             {
               "$type": "Document",
@@ -1465,8 +1391,7 @@
               "RelativeToolTip": "Communication.Application\\DTOs\\ReviewDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T12:04:20.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T12:04:20.436Z"
             },
             {
               "$type": "Document",
@@ -1478,8 +1403,7 @@
               "RelativeToolTip": "Infrastructure\\Migrations\\20250701114741_updateTheReview.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:47:41.906Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:47:41.906Z"
             },
             {
               "$type": "Document",
@@ -1491,8 +1415,7 @@
               "RelativeToolTip": "Shoppings.Application\\Commands\\Checkout\\CheckoutCommandHandler.cs",
               "ViewState": "AgIAAOgAAAAAAAAAAAAIwBYBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T19:26:55.052Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T19:26:55.052Z"
             },
             {
               "$type": "Document",
@@ -1504,8 +1427,7 @@
               "RelativeToolTip": "Users.Application.Tests\\GetUserByIdQueryHandlerTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:46:05.239Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:46:05.239Z"
             },
             {
               "$type": "Document",
@@ -1517,8 +1439,7 @@
               "RelativeToolTip": "Communication.Presentation\\Controllers\\ReviewController.cs",
               "ViewState": "AgIAAKwAAAAAAAAAAAAqwLcAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:24:21.519Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:24:21.519Z"
             },
             {
               "$type": "Document",
@@ -1530,8 +1451,7 @@
               "RelativeToolTip": "Users.Application\\Queries\\GetUserById\\GetUserByIdQueryHandler.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAAwDEAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:29:58.803Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:29:58.803Z"
             },
             {
               "$type": "Document",
@@ -1543,8 +1463,7 @@
               "RelativeToolTip": "Users.Presentation\\Controllers\\AddressesController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:28:47.658Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:28:47.658Z"
             },
             {
               "$type": "Document",
@@ -1556,8 +1475,7 @@
               "RelativeToolTip": "Communication.Infrastructure\\Repositories\\ReviewRepository.cs",
               "ViewState": "AgIAADEAAAAAAAAAAAAQwHgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:04:39.539Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:04:39.539Z"
             },
             {
               "$type": "Document",
@@ -1569,8 +1487,7 @@
               "RelativeToolTip": "Shoppings.Infrastructure\\Repositories\\OrderRepository.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAYwBEAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T13:17:22.027Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T13:17:22.027Z"
             },
             {
               "$type": "Document",
@@ -1582,8 +1499,7 @@
               "RelativeToolTip": "Communication.Application\\Queries\\GetAllReviews\\GetAllReviewsQueryHandler.cs",
               "ViewState": "AgIAACcAAAAAAAAAAAAIwC0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T10:57:02.653Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T10:57:02.653Z"
             },
             {
               "$type": "Document",
@@ -1595,8 +1511,7 @@
               "RelativeToolTip": "Communication.Application\\Commands\\UpdateReview\\UpdateReviewCommandHandler.cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAIwEIAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T10:53:09.202Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T10:53:09.202Z"
             },
             {
               "$type": "Document",
@@ -1608,8 +1523,7 @@
               "RelativeToolTip": "Communication.Application\\Queries\\GetReviewsByUserId\\GetReviewsByUserIdQueryHandler.cs",
               "ViewState": "AgIAACAAAAAAAAAAACBjwDUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:03:44.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:03:44.775Z"
             },
             {
               "$type": "Document",
@@ -1621,8 +1535,7 @@
               "RelativeToolTip": "Communication.Application\\Commands\\DeleteReview\\DeleteReviewCommandHandler.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAIwCcAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T10:52:32.103Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T10:52:32.103Z"
             },
             {
               "$type": "Document",
@@ -1634,8 +1547,7 @@
               "RelativeToolTip": "Communication.Domain\\Repositories\\IReviewRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:05:25.408Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:05:25.408Z"
             },
             {
               "$type": "Document",
@@ -1647,8 +1559,7 @@
               "RelativeToolTip": "Communication.Application\\Queries\\GetReviewById\\GetReviewByIdQueryHandler.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAAwCAAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T11:02:46.036Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-01T11:02:46.036Z"
             },
             {
               "$type": "Document",
@@ -1660,8 +1571,7 @@
               "RelativeToolTip": "Payments.Infrastructure\\Repositories\\PaymentRepository.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAowBIAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:51:07.764Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:51:07.764Z"
             },
             {
               "$type": "Document",
@@ -1673,8 +1583,7 @@
               "RelativeToolTip": "Shoppings.Application\\Queries\\GetOrdersForSeller\\GetOrdersForSellerQueryHandler.cs",
               "ViewState": "AgIAAIsAAAAAAAAAAAAYwJwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:43:47.016Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T12:43:47.016Z"
             },
             {
               "$type": "Document",
@@ -1686,8 +1595,7 @@
               "RelativeToolTip": "Payments.Domain\\Repositories\\IPaymentRepository.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAwwAoAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:48:45.196Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:48:45.196Z"
             },
             {
               "$type": "Document",
@@ -1699,8 +1607,7 @@
               "RelativeToolTip": "Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommandHandler.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAIwCcAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:35:20.631Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:35:20.631Z"
             },
             {
               "$type": "Document",
@@ -1712,8 +1619,7 @@
               "RelativeToolTip": "Infrastructure\\Migrations\\20250630224011_makeTheAmountTypeInPaymentDouble.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:40:12.561Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:40:12.561Z"
             },
             {
               "$type": "Document",
@@ -1725,8 +1631,7 @@
               "RelativeToolTip": "Payments.Application\\DTOs\\CreatePaymentDTO.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAIAwwAsAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:36:11Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:36:11Z"
             },
             {
               "$type": "Document",
@@ -1738,8 +1643,7 @@
               "RelativeToolTip": "Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommandHandler.cs",
               "ViewState": "AgIAABoAAAAAAAAAAAAIwCMAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:35:33.061Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:35:33.061Z"
             },
             {
               "$type": "Document",
@@ -1751,8 +1655,7 @@
               "RelativeToolTip": "Payments.Application\\Commands\\CreatePayment\\CreatePaymentCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:35:23.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:35:23.428Z"
             },
             {
               "$type": "Document",
@@ -1764,8 +1667,7 @@
               "RelativeToolTip": "Payments.Application\\Commands\\UpdatePayment\\UpdatePaymentCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:36:00.176Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:36:00.176Z"
             },
             {
               "$type": "Document",
@@ -1777,8 +1679,7 @@
               "RelativeToolTip": "Infrastructure\\Models\\ECommerceContext.cs",
               "ViewState": "AgIAAEEBAAAAAAAAAAAAwG4BAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:12:57.28Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:12:57.28Z"
             },
             {
               "$type": "Document",
@@ -1790,8 +1691,7 @@
               "RelativeToolTip": "Shoppings.Application\\Commands\\PayOrder\\PayOrderCommandHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAACBjwA4AAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T13:07:53.86Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T13:07:53.86Z"
             },
             {
               "$type": "Document",
@@ -1803,8 +1703,7 @@
               "RelativeToolTip": "Infrastructure\\Models\\PaymentDAO.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAhwAsAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:09:03.401Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:09:03.401Z"
             },
             {
               "$type": "Document",
@@ -1816,8 +1715,7 @@
               "RelativeToolTip": "Payments.Infrastructure.Mapping\\Mappers\\PaymentMapper.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAowCQAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T22:12:36.104Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T22:12:36.104Z"
             },
             {
               "$type": "Document",
@@ -1829,8 +1727,7 @@
               "RelativeToolTip": "Shoppings.Domain\\Constants\\OrderStatusNames.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T20:06:32.622Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T20:06:32.622Z"
             },
             {
               "$type": "Document",
@@ -1842,8 +1739,7 @@
               "RelativeToolTip": "Shoppings.Presentation\\Controllers\\CartController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:49:57.969Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T12:49:57.969Z"
             },
             {
               "$type": "Document",
@@ -1855,8 +1751,7 @@
               "RelativeToolTip": "Shoppings.Application\\DTOs\\OrderWithItemsDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T19:02:58.579Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T19:02:58.579Z"
             },
             {
               "$type": "Document",
@@ -1868,8 +1763,7 @@
               "RelativeToolTip": "Shared.Contracts\\Queries\\GetItemIdByBaseItemIdQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T13:46:41.696Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T13:46:41.696Z"
             },
             {
               "$type": "Document",
@@ -1881,8 +1775,7 @@
               "RelativeToolTip": "Shared.Contracts\\Queries\\GetUserIdByItemIdQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:45:11.106Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T12:45:11.106Z"
             },
             {
               "$type": "Document",
@@ -1894,8 +1787,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetUserIdByItemId\\GetUserIdByItemIdQueryHandler.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAawCAAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:45:20.999Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T12:45:20.999Z"
             },
             {
               "$type": "Document",
@@ -1907,8 +1799,7 @@
               "RelativeToolTip": "Catalogs.Presentation\\Controllers\\BaseItemController.cs",
               "ViewState": "AgIAAEUAAAAAAAAAAAAAwE4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:44:27.999Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T12:44:27.999Z"
             },
             {
               "$type": "Document",
@@ -1920,8 +1811,7 @@
               "RelativeToolTip": "Shoppings.Application\\DTOs\\SellerOrderDTO.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAlwA0AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T12:44:14.855Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T12:44:14.855Z"
             },
             {
               "$type": "Document",
@@ -1933,8 +1823,7 @@
               "RelativeToolTip": "Catalogs.Application\\Commands\\UpdateProductQuantity\\UpdateProductQuantityCommandHandler.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAYwBUAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T11:09:54.759Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T11:09:54.759Z"
             },
             {
               "$type": "Document",
@@ -1946,8 +1835,7 @@
               "RelativeToolTip": "Catalogs.Application\\Queries\\GetMyFavorites\\GetMyFavoritesQueryHandler.cs",
               "ViewState": "AgIAAFYAAAAAAAAAAAAcwGQAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T08:54:19.752Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T08:54:19.752Z"
             },
             {
               "$type": "Document",
@@ -1959,8 +1847,7 @@
               "RelativeToolTip": "Catalogs.Application\\DTOs\\FavoriteResponseDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-30T08:53:26.268Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-30T08:53:26.268Z"
             },
             {
               "$type": "Document",
@@ -1972,8 +1859,7 @@
               "RelativeToolTip": "Shoppings.Application\\Queries\\GetMyOrders\\GetMyOrdersQueryHandler.cs",
               "ViewState": "AgIAAHUAAAAAAAAAAAAiwFgAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T22:24:38.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-29T22:24:38.556Z"
             },
             {
               "$type": "Document",
@@ -1985,8 +1871,7 @@
               "RelativeToolTip": "Infrastructure\\Migrations\\20250629205106_makeStockQuantityTypeDouble.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T20:51:07.645Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-29T20:51:07.645Z"
             }
           ]
         }
