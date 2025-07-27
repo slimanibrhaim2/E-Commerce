@@ -34,7 +34,9 @@ public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery,
                 Description = category.Description,
                 ParentId = category.ParentCategoryId,
                 IsActive = category.IsActive,
-                ImageUrl = category.ImageUrl
+                ImageUrl = category.ImageUrl,
+                CreatedAt = category.CreatedAt,
+                UpdatedAt = category.UpdatedAt
             };
 
             return Result<CategoryDTO>.Ok(

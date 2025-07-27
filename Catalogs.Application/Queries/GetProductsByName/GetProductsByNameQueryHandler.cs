@@ -78,6 +78,8 @@ public class GetProductsByNameQueryHandler : IRequestHandler<GetProductsByNameQu
                 StockQuantity = p.StockQuantity,
                 IsAvailable = p.IsAvailable,
                 UserId = p.UserId,
+                CreatedAt = p.CreatedAt,
+                UpdatedAt = p.UpdatedAt,
                 Media = p.Media?.Select(m => new MediaDTO
                 {
                     Url = m.MediaUrl,

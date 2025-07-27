@@ -10,50 +10,46 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Catalogs.Application.Commands.CreateService.Aggregate;
+namespace Catalogs.Application.Commands.CreateProduct;
 
-public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServiceAggregateCommand, Result<Guid>>
+public class CreateProductAggregateCommandHandler : IRequestHandler<CreateProductAggregateCommand, Result<Guid>>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IServiceRepository _serviceRepository;
+    private readonly IProductRepository _productRepository;
     private readonly IMediaRepository _mediaRepository;
     private readonly IFeatureRepository _featureRepository;
     private readonly ICategoryRepository _categoryRepository;
     private readonly IBaseItemRepository _baseItemRepository;
 
-    public CreateServiceAggregateCommandHandler(
+    public CreateProductAggregateCommandHandler(
         IUnitOfWork unitOfWork,
-        IServiceRepository serviceRepository,
+        IProductRepository productRepository,
         IMediaRepository mediaRepository,
         IFeatureRepository featureRepository,
         ICategoryRepository categoryRepository,
         IBaseItemRepository baseItemRepository)
     {
         _unitOfWork = unitOfWork;
-        _serviceRepository = serviceRepository;
+        _productRepository = productRepository;
         _mediaRepository = mediaRepository;
         _featureRepository = featureRepository;
         _categoryRepository = categoryRepository;
         _baseItemRepository = baseItemRepository;
     }
 
-    public async Task<Result<Guid>> Handle(CreateServiceAggregateCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(CreateProductAggregateCommand request, CancellationToken cancellationToken)
     {
         await _unitOfWork.BeginTransaction();
         try
         {
-            // 1. Validate service
-            var dto = request.Service;
+            // 1. Validate product
+            var dto = request.Product;
             if (string.IsNullOrWhiteSpace(dto.Name))
-                return Result<Guid>.Fail("اسم الخدمة مطلوب", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("اسم المنتج مطلوب", "ValidationError", ResultStatus.ValidationError);
             if (dto.Price <= 0)
-                return Result<Guid>.Fail("سعر الخدمة يجب أن يكون أكبر من الصفر", "ValidationError", ResultStatus.ValidationError);
+                return Result<Guid>.Fail("سعر المنتج يجب أن يكون أكبر من الصفر", "ValidationError", ResultStatus.ValidationError);
             if (dto.CategoryId == Guid.Empty)
                 return Result<Guid>.Fail("معرف التصنيف مطلوب", "ValidationError", ResultStatus.ValidationError);
-            if (string.IsNullOrWhiteSpace(dto.ServiceType))
-                return Result<Guid>.Fail("نوع الخدمة مطلوب", "ValidationError", ResultStatus.ValidationError);
-            if (dto.Duration <= 0)
-                return Result<Guid>.Fail("مدة الخدمة يجب أن تكون أكبر من الصفر", "ValidationError", ResultStatus.ValidationError);
 
             // 2. Check category existence
             var category = await _categoryRepository.GetByIdAsync(dto.CategoryId);
@@ -76,24 +72,25 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
             if (baseItem == null || baseItem.CategoryId == Guid.Empty)
                 throw new Exception("فشل في إنشاء العنصر الأساسي");
 
-            // 4. Create service with BaseItemId as FK
-            var service = new Service
+            // 4. Create product with BaseItemId as FK
+            var product = new Product
             {
                 Id = Guid.NewGuid(),
+                BaseItemId = baseItem.Id,
                 Name = dto.Name,
                 Description = dto.Description,
                 Price = dto.Price,
                 CategoryId = dto.CategoryId,
-                ServiceType = dto.ServiceType,
-                Duration = dto.Duration,
+                SKU = dto.SKU,
+                SerialNumber = dto.SerialNumber,
+                StockQuantity = dto.StockQuantity,
                 IsAvailable = dto.IsAvailable,
                 UserId = request.UserId,
-                BaseItemId = baseItem.Id
             };
-            await _serviceRepository.AddAsync(service);
+            await _productRepository.AddAsync(product);
             await _unitOfWork.SaveChangesAsync();
-            if (service.Id == Guid.Empty)
-                throw new Exception("فشل في إنشاء الخدمة");
+            if (product.Id == Guid.Empty)
+                throw new Exception("فشل في إنشاء المنتج");
 
             // 5. Add media
             foreach (var media in dto.Media ?? Enumerable.Empty<CreateMediaDTO>())
@@ -104,18 +101,18 @@ public class CreateServiceAggregateCommandHandler : IRequestHandler<CreateServic
             // 6. Add features
             foreach (var feature in dto.Features ?? Enumerable.Empty<CreateFeatureDTO>())
             {
-                await _featureRepository.AddFeatureAsync(service.Id, feature.Name, feature.Value);
+                await _featureRepository.AddFeatureAsync(product.Id, feature.Name, feature.Value);
             }
 
 
             await _unitOfWork.SaveChangesAsync();
             await _unitOfWork.CommitTransaction();
-            return Result<Guid>.Ok(service.Id, "تم إنشاء الخدمة مع الوسائط والميزات والكوبونات بنجاح", ResultStatus.Success);
+            return Result<Guid>.Ok(product.Id, "تم إنشاء المنتج مع الوسائط والميزات والكوبونات بنجاح", ResultStatus.Success);
         }
         catch (Exception ex)
         {
             await _unitOfWork.RollbackTransaction();
-            return Result<Guid>.Fail($"فشل في إنشاء الخدمة: {ex.Message}", "CreateServiceAggregateFailed", ResultStatus.Failed, ex);
+            return Result<Guid>.Fail($"فشل في إنشاء المنتج: {ex.Message}", "CreateProductAggregateFailed", ResultStatus.Failed, ex);
         }
     }
-} 
+}

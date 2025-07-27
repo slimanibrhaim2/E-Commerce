@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Catalogs.Application.Commands.UpdateProduct.Aggregate;
+namespace Catalogs.Application.Commands.UpdateProduct;
 
 public class UpdateProductAggregateCommandHandler : IRequestHandler<UpdateProductAggregateCommand, Result<bool>>
 {

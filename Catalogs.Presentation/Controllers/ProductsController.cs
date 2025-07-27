@@ -2,15 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using Core.Result;
 using Catalogs.Application.DTOs;
-using Catalogs.Application.Commands.CreateProduct.Simple;
-using Catalogs.Application.Commands.CreateProduct.Aggregate;
 using Catalogs.Application.Queries.GetAllProducts;
 using Catalogs.Application.Queries.GetProductById;
 using Core.Pagination;
-using Catalogs.Application.Commands.DeleteProduct.Aggregate;
-using Catalogs.Application.Commands.DeleteProduct.Simple;
-using Catalogs.Application.Commands.UpdateProduct.Aggregate;
-using Catalogs.Application.Commands.UpdateProduct.Simple;
+using Catalogs.Application.Commands.DeleteProduct;
 using Shared.Contracts.DTOs;
 using Catalogs.Application.Queries.GetProductsByUserId;
 using Catalogs.Application.Queries.GetProductsByCategory;
@@ -31,6 +26,8 @@ using Microsoft.AspNetCore.Hosting;
 using System.Text.Json;
 using System.ComponentModel.DataAnnotations;
 using Catalogs.Application.Queries.GetProductsByFilters;
+using Catalogs.Application.Commands.CreateProduct;
+using Catalogs.Application.Commands.UpdateProduct;
 
 namespace Catalogs.Presentation.Controllers;
 
@@ -50,22 +47,6 @@ public class ProductsController : ControllerBase
         _fileService = fileService;
         _logger = logger;
         _webHostEnvironment = webHostEnvironment;
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateProductDTO dto)
-    {
-        var userId = User.GetId();
-        var result = await _mediator.Send(new CreateProductCommand(dto, userId));
-        if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في إنشاء المنتج",
-                errorType: "CreateProductFailed",
-                resultStatus: ResultStatus.Failed));
-        return CreatedAtAction("GetById", new { id = result.Data }, Result<Guid>.Ok(
-            data: result.Data,
-            message: "تم إنشاء المنتج بنجاح",
-            resultStatus: ResultStatus.Success));
     }
 
     [HttpPost("aggregate")]
@@ -384,35 +365,6 @@ public class ProductsController : ControllerBase
                 errorType: "DeleteProductAggregateFailed",
                 resultStatus: ResultStatus.Failed));
         }
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] CreateProductDTO dto)
-    {
-        var userId = User.GetId();
-        var result = await _mediator.Send(new UpdateProductSimpleCommand(id, dto, userId));
-        if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في تحديث المنتج",
-                errorType: "UpdateProductFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم تحديث المنتج بنجاح",
-            resultStatus: ResultStatus.Success));
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
-    {
-        var result = await _mediator.Send(new DeleteProductSimpleCommand(id));
-        if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في حذف المنتج",
-                errorType: "DeleteProductFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم حذف المنتج بنجاح",
-            resultStatus: ResultStatus.Success));
     }
 
     [HttpPost("by-ids")]

@@ -69,6 +69,8 @@ public class GetServicesByDurationQueryHandler : IRequestHandler<GetServicesByDu
                 ServiceType = service.ServiceType,
                 Duration = service.Duration,
                 IsAvailable = service.IsAvailable,
+                CreatedAt = service.CreatedAt,
+                UpdatedAt = service.UpdatedAt,
                 Media = service.Media?.Select(m => new MediaDTO
                 {
                     Url = m.MediaUrl,

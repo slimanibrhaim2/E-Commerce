@@ -21,6 +21,14 @@ namespace Payments.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<Payment?> GetByOrderIdAsync(Guid orderId)
+        {
+            var paymentDAO = await _context.Payments
+                .FirstOrDefaultAsync(p => p.OrderId == orderId && p.DeletedAt == null);
+            
+            return paymentDAO != null ? _mapper.Map(paymentDAO) : null;
+        }
+
         public async Task UpdateFields(Guid id, Dictionary<string, object> fields)
         {
             var payment = await _context.Payments.FindAsync(id);

@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace Catalogs.Application.Commands.DeleteService.Aggregate;
+namespace Catalogs.Application.Commands.DeleteService;
 
 public class DeleteServiceAggregateCommandHandler : IRequestHandler<DeleteServiceAggregateCommand, Result<bool>>
 {

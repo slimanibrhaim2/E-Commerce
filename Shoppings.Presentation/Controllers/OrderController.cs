@@ -194,6 +194,26 @@ namespace Shoppings.Presentation.Controllers
             }
         }
 
+        [HttpGet("by-user/{userId}")]
+        public async Task<ActionResult<Result<PaginatedResult<MyOrderDTO>>>> GetOrdersByUserId(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
+                var query = new GetMyOrdersQuery(userId, parameters); // Using the same query, just with different userId
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting orders for user {UserId}", userId);
+                return StatusCode(500, Result<PaginatedResult<MyOrderDTO>>.Fail(
+                    message: "فشل في جلب طلبات المستخدم",
+                    errorType: "GetOrdersByUserIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Result<OrderWithItemsDTO>>> GetById(Guid id)
         {

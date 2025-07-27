@@ -27,7 +27,9 @@ public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuer
                 Description = c.Description,
                 ParentId = c.ParentCategoryId,
                 IsActive = c.IsActive,
-                ImageUrl = c.ImageUrl
+                ImageUrl = c.ImageUrl,
+                CreatedAt = c.CreatedAt,
+                UpdatedAt = c.UpdatedAt
             }).ToList();
 
             var paginatedResult = PaginatedResult<CategoryDTO>.Create(

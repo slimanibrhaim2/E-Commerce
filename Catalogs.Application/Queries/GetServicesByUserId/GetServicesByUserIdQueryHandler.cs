@@ -87,6 +87,8 @@ public class GetServicesByUserIdQueryHandler : IRequestHandler<GetServicesByUser
                 ServiceType = s.ServiceType,
                 Duration = s.Duration,
                 IsAvailable = s.IsAvailable,
+                CreatedAt = s.CreatedAt,
+                UpdatedAt = s.UpdatedAt,
                 Media = s.Media?.Select(m => new MediaDTO
                 {
                     Url = m.MediaUrl,

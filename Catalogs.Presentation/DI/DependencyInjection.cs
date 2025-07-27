@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using MediatR;
 using System.Reflection;
 using Catalogs.Application.Commands.CreateProduct;
-using Catalogs.Application.Commands.CreateProduct.Simple;
 using Catalogs.Presentation.ModelBinders;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Catalogs.Application.DTOs;
@@ -26,7 +25,7 @@ namespace Catalogs.Presentation.DI
 
             // Add MediatR
             services.AddMediatR(cfg => {
-                cfg.RegisterServicesFromAssembly(typeof(CreateProductCommand).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(CreateProductAggregateCommand).Assembly);
             });
 
             return services;

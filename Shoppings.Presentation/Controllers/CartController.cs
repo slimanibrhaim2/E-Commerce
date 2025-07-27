@@ -58,6 +58,35 @@ namespace Shoppings.Presentation.Controllers
         }
 
         /// <summary>
+        /// Get cart by user ID (admin access)
+        /// </summary>
+        [HttpGet("by-user/{userId}")]
+        public async Task<ActionResult<Result<CartDTO>>> GetCartByUserId(Guid userId)
+        {
+            try
+            {
+                var query = new GetMyCartQuery(userId); // Using the same query, just with different userId
+                var result = await _mediator.Send(query);
+                
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في جلب سلة التسوق",
+                        errorType: "GetCartByUserIdFailed",
+                        resultStatus: ResultStatus.Failed));
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting cart for user {UserId}", userId);
+                return StatusCode(500, Result<CartDTO>.Fail(
+                    message: "فشل في جلب سلة التسوق للمستخدم",
+                    errorType: "GetCartByUserIdFailed",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        /// <summary>
         /// Add item to the current user's cart. If item already exists, increases its quantity.
         /// </summary>
         [HttpPost("add-item")]

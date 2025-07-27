@@ -6,12 +6,7 @@ using Catalogs.Application.Queries.GetAllServices;
 using Catalogs.Application.Queries.GetServiceById;
 using Catalogs.Application.DTOs;
 using Core.Pagination;
-using Catalogs.Application.Commands.CreateService.Simple;
-using Catalogs.Application.Commands.CreateService.Aggregate;
-using Catalogs.Application.Commands.DeleteService.Aggregate;
-using Catalogs.Application.Commands.DeleteService.Simple;
-using Catalogs.Application.Commands.UpdateService.Aggregate;
-using Catalogs.Application.Commands.UpdateService.Simple;
+using Catalogs.Application.Commands.DeleteService;
 using Shared.Contracts.DTOs;
 using Catalogs.Application.Queries.GetServicesByUserId;
 using Catalogs.Application.Queries.GetServicesByName;
@@ -27,6 +22,7 @@ using Core.Interfaces;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Catalogs.Application.Queries.GetAllMediaTypes;
+using Catalogs.Application.Commands.UpdateService;
 
 namespace Catalogs.Presentation.Controllers;
 
@@ -44,22 +40,6 @@ public class ServicesController : ControllerBase
         _mediator = mediator;
         _fileService = fileService;
         _logger = logger;
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateServiceDTO dto)
-    {
-        var userId = User.GetId();
-        var result = await _mediator.Send(new CreateServiceCommand(dto, userId));
-        if (!result.Success || result.Data == Guid.Empty)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في إنشاء الخدمة",
-                errorType: "CreateServiceFailed",
-                resultStatus: ResultStatus.Failed));
-        return CreatedAtAction("GetById", new { id = result.Data }, Result<Guid>.Ok(
-            data: result.Data,
-            message: "تم إنشاء الخدمة بنجاح",
-            resultStatus: ResultStatus.Success));
     }
 
     [HttpPost("aggregate")]
@@ -316,35 +296,6 @@ public class ServicesController : ControllerBase
                 errorType: "DeleteServiceAggregateFailed",
                 resultStatus: ResultStatus.Failed));
         }
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] CreateServiceDTO dto)
-    {
-        var userId = User.GetId();
-        var result = await _mediator.Send(new UpdateServiceSimpleCommand(id, dto, userId));
-        if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في تحديث الخدمة",
-                errorType: "UpdateServiceFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم تحديث الخدمة بنجاح",
-            resultStatus: ResultStatus.Success));
-    }
-
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
-    {
-        var result = await _mediator.Send(new DeleteServiceSimpleCommand(id));
-        if (!result.Success)
-            return StatusCode(500, Result.Fail(
-                message: "فشل في حذف الخدمة",
-                errorType: "DeleteServiceFailed",
-                resultStatus: ResultStatus.Failed));
-        return Ok(Result.Ok(
-            message: "تم حذف الخدمة بنجاح",
-            resultStatus: ResultStatus.Success));
     }
 
     [HttpPost("by-ids")]
