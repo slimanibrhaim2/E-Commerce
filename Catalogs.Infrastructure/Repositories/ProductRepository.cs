@@ -425,4 +425,101 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         var mappedProducts = products.Select(p => _mapper.Map(p)).ToList();
         return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
+
+    public async Task<PaginatedResult<Product>> GetByAdvancedFiltersWithDetails(
+        Guid? categoryId,
+        decimal? minPrice,
+        decimal? maxPrice,
+        List<(string FeatureName, string? FeatureValue)>? features,
+        int pageNumber,
+        int pageSize)
+    {
+        var query = _context.Products
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.ProductMedia)
+                    .ThenInclude(m => m.MediaType)
+            .Include(p => p.BaseItem)
+                .ThenInclude(bi => bi.Category)
+            .Include(p => p.ProductFeatures)
+            .Where(p => p.DeletedAt == null);
+
+        // Apply category filter if provided
+        if (categoryId.HasValue)
+        {
+            query = query.Where(p => p.BaseItem.CategoryId == categoryId.Value);
+        }
+
+        // Apply price range filters if provided
+        if (minPrice.HasValue)
+        {
+            query = query.Where(p => p.BaseItem.Price >= (double)minPrice.Value);
+        }
+
+        if (maxPrice.HasValue)
+        {
+            query = query.Where(p => p.BaseItem.Price <= (double)maxPrice.Value);
+        }
+
+        // Apply feature filters if provided
+        if (features != null && features.Any())
+        {
+            foreach (var feature in features)
+            {
+                if (string.IsNullOrEmpty(feature.FeatureValue))
+                {
+                    // Filter by feature name only (feature exists)
+                    query = query.Where(p => p.ProductFeatures
+                        .Any(pf => pf.Name.ToLower() == feature.FeatureName.ToLower()));
+                }
+                else
+                {
+                    // Filter by both feature name and value
+                    query = query.Where(p => p.ProductFeatures
+                        .Any(pf => pf.Name.ToLower() == feature.FeatureName.ToLower() && 
+                                   pf.Value.ToLower() == feature.FeatureValue.ToLower()));
+                }
+            }
+        }
+
+        // Order by creation date and optimize query
+        query = query
+            .OrderByDescending(p => p.CreatedAt)
+            .AsSplitQuery()
+            .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var mappedProducts = products.Select(p => _mapper.Map(p)).ToList();
+        return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
+    }
+
+    public async Task<List<string>> GetUniqueFeatureNamesAsync()
+    {
+        var featureNames = await _context.ProductFeatures
+            .Where(pf => pf.Product.DeletedAt == null) // Only from active products
+            .Select(pf => pf.Name)
+            .Distinct()
+            .OrderBy(name => name)
+            .ToListAsync();
+
+        return featureNames;
+    }
+
+    public async Task<List<string>> GetUniqueFeatureValuesByNameAsync(string featureName)
+    {
+        var featureValues = await _context.ProductFeatures
+            .Where(pf => pf.Product.DeletedAt == null && // Only from active products
+                        pf.Name.ToLower() == featureName.ToLower()) // Case insensitive match
+            .Select(pf => pf.Value)
+            .Where(value => !string.IsNullOrEmpty(value))
+            .Distinct()
+            .OrderBy(value => value)
+            .ToListAsync();
+
+        return featureValues;
+    }
 } 

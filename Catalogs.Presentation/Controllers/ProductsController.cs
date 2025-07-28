@@ -28,6 +28,9 @@ using System.ComponentModel.DataAnnotations;
 using Catalogs.Application.Queries.GetProductsByFilters;
 using Catalogs.Application.Commands.CreateProduct;
 using Catalogs.Application.Commands.UpdateProduct;
+using Catalogs.Application.Queries.GetProductsByAdvancedFilters;
+using Catalogs.Application.Queries.GetProductFeatureNames;
+using Catalogs.Application.Queries.GetProductFeatureValues;
 
 namespace Catalogs.Presentation.Controllers;
 
@@ -500,7 +503,16 @@ public class ProductsController : ControllerBase
         [FromQuery] int pageSize = 10)
     {
         var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
-        var query = new GetProductsByFiltersQuery(categoryId, minPrice, maxPrice, userId, pageNumber, pageSize);
+        
+        // Normalize parameters - treat 0 or negative values as null for prices
+        var normalizedMinPrice = minPrice.HasValue && minPrice.Value > 0 ? minPrice : null;
+        var normalizedMaxPrice = maxPrice.HasValue && maxPrice.Value > 0 ? maxPrice : null;
+        var normalizedCategoryId = categoryId.HasValue && categoryId.Value != Guid.Empty ? categoryId : null;
+        
+        _logger.LogInformation("Basic Filter Parameters - Original: CategoryId={CategoryId}, MinPrice={MinPrice}, MaxPrice={MaxPrice} | Normalized: CategoryId={NormalizedCategoryId}, MinPrice={NormalizedMinPrice}, MaxPrice={NormalizedMaxPrice}", 
+            categoryId, minPrice, maxPrice, normalizedCategoryId, normalizedMinPrice, normalizedMaxPrice);
+        
+        var query = new GetProductsByFiltersQuery(normalizedCategoryId, normalizedMinPrice, normalizedMaxPrice, userId, pageNumber, pageSize);
         var result = await _mediator.Send(query);
 
         if (!result.Success)
@@ -530,5 +542,167 @@ public class ProductsController : ControllerBase
             data: result.Data,
             message: "تم جلب معرف العنصر الأساسي بنجاح",
             resultStatus: ResultStatus.Success));
+    }
+
+            [HttpGet("advanced-filter")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetProductsByAdvancedFilters(
+            [FromQuery] Guid? categoryId,
+            [FromQuery] decimal? minPrice,
+            [FromQuery] decimal? maxPrice,
+            [FromQuery] string[]? featureNames,
+            [FromQuery] string[]? featureValues,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                var userId = User.Identity.IsAuthenticated ? User.GetId() : Guid.Empty;
+                
+                // Normalize parameters - treat 0 or negative values as null for prices
+                var normalizedMinPrice = minPrice.HasValue && minPrice.Value > 0 ? minPrice : null;
+                var normalizedMaxPrice = maxPrice.HasValue && maxPrice.Value > 0 ? maxPrice : null;
+                var normalizedCategoryId = categoryId.HasValue && categoryId.Value != Guid.Empty ? categoryId : null;
+                
+                _logger.LogInformation("Advanced Filter Parameters - Original: CategoryId={CategoryId}, MinPrice={MinPrice}, MaxPrice={MaxPrice} | Normalized: CategoryId={NormalizedCategoryId}, MinPrice={NormalizedMinPrice}, MaxPrice={NormalizedMaxPrice}", 
+                    categoryId, minPrice, maxPrice, normalizedCategoryId, normalizedMinPrice, normalizedMaxPrice);
+                
+                // Validate price range
+                if (normalizedMinPrice.HasValue && normalizedMaxPrice.HasValue && normalizedMinPrice > normalizedMaxPrice)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "السعر الأدنى يجب أن يكون أقل من أو يساوي السعر الأعلى",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Parse features from separate name and value arrays
+                List<FeatureFilterDTO>? featureFilters = null;
+                if (featureNames != null && featureNames.Any())
+                {
+                    featureFilters = new List<FeatureFilterDTO>();
+                    
+                    for (int i = 0; i < featureNames.Length; i++)
+                    {
+                        var featureName = featureNames[i]?.Trim();
+                        if (!string.IsNullOrEmpty(featureName))
+                        {
+                            var featureValue = featureValues != null && i < featureValues.Length 
+                                ? featureValues[i]?.Trim() 
+                                : null;
+                                
+                            featureFilters.Add(new FeatureFilterDTO
+                            {
+                                FeatureName = featureName,
+                                FeatureValue = string.IsNullOrEmpty(featureValue) ? null : featureValue
+                            });
+                        }
+                    }
+                    
+                    // Remove if no valid features were parsed
+                    if (!featureFilters.Any())
+                    {
+                        featureFilters = null;
+                    }
+                }
+
+                var query = new GetProductsByAdvancedFiltersQuery(
+                    normalizedCategoryId,
+                    normalizedMinPrice,
+                    normalizedMaxPrice,
+                    featureFilters,
+                    userId,
+                    pageNumber,
+                    pageSize);
+
+                var result = await _mediator.Send(query);
+
+                if (!result.Success)
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في جلب المنتجات بالفلاتر المتقدمة",
+                        errorType: "GetProductsByAdvancedFiltersFailed",
+                        resultStatus: ResultStatus.Failed));
+
+                return Ok(Result<PaginatedResult<ProductDTO>>.Ok(
+                    data: result.Data,
+                    message: "تم جلب المنتجات بالفلاتر المتقدمة بنجاح",
+                    resultStatus: ResultStatus.Success));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error in GetProductsByAdvancedFilters endpoint");
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب المنتجات بالفلاتر المتقدمة",
+                    errorType: "GetProductsByAdvancedFiltersFailed", 
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+    [HttpGet("feature-names")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetProductFeatureNames()
+    {
+        try
+        {
+            var query = new GetProductFeatureNamesQuery();
+            var result = await _mediator.Send(query);
+
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب أسماء ميزات المنتجات",
+                    errorType: "GetProductFeatureNamesFailed",
+                    resultStatus: ResultStatus.Failed));
+
+            return Ok(Result<List<string>>.Ok(
+                data: result.Data,
+                message: "تم جلب أسماء ميزات المنتجات بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error in GetProductFeatureNames endpoint");
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب أسماء ميزات المنتجات",
+                errorType: "GetProductFeatureNamesFailed",
+                resultStatus: ResultStatus.Failed));
+        }
+    }
+
+    [HttpGet("feature-values")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetProductFeatureValues([FromQuery] string featureName)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(featureName?.Trim()))
+            {
+                return BadRequest(Result.Fail(
+                    message: "اسم الميزة مطلوب",
+                    errorType: "ValidationError",
+                    resultStatus: ResultStatus.ValidationError));
+            }
+
+            var query = new GetProductFeatureValuesQuery(featureName.Trim());
+            var result = await _mediator.Send(query);
+
+            if (!result.Success)
+                return StatusCode(500, Result.Fail(
+                    message: "فشل في جلب قيم ميزات المنتجات",
+                    errorType: "GetProductFeatureValuesFailed",
+                    resultStatus: ResultStatus.Failed));
+
+            return Ok(Result<List<string>>.Ok(
+                data: result.Data,
+                message: "تم جلب قيم ميزات المنتجات بنجاح",
+                resultStatus: ResultStatus.Success));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error in GetProductFeatureValues endpoint for feature: {FeatureName}", featureName);
+            return StatusCode(500, Result.Fail(
+                message: "فشل في جلب قيم ميزات المنتجات",
+                errorType: "GetProductFeatureValuesFailed",
+                resultStatus: ResultStatus.Failed));
+        }
     }
 } 

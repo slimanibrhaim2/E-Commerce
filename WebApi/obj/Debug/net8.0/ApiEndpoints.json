@@ -3576,6 +3576,52 @@
   },
   {
     "ContainingType": "Catalogs.Presentation.Controllers.ProductsController",
+    "Method": "GetProductsByAdvancedFilters",
+    "RelativePath": "api/products/advanced-filter",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
+        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "minPrice",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxPrice",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "featureNames",
+        "Type": "System.String[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "featureValues",
+        "Type": "System.String[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.ProductsController",
     "Method": "CreateAggregate",
     "RelativePath": "api/products/aggregate",
     "HttpMethod": "POST",
@@ -3764,6 +3810,32 @@
       {
         "Name": "pageSize",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.ProductsController",
+    "Method": "GetProductFeatureNames",
+    "RelativePath": "api/products/feature-names",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Catalogs.Presentation.Controllers.ProductsController",
+    "Method": "GetProductFeatureValues",
+    "RelativePath": "api/products/feature-values",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "featureName",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],

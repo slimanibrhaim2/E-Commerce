@@ -26,4 +26,25 @@ public interface IProductRepository : IRepository<Product>
         decimal? maxPrice,
         int pageNumber,
         int pageSize);
+    
+    /// <summary>
+    /// Gets products filtered by advanced criteria including features
+    /// </summary>
+    Task<PaginatedResult<Product>> GetByAdvancedFiltersWithDetails(
+        Guid? categoryId,
+        decimal? minPrice,
+        decimal? maxPrice,
+        List<(string FeatureName, string? FeatureValue)>? features,
+        int pageNumber,
+        int pageSize);
+    
+    /// <summary>
+    /// Gets unique feature names from all products
+    /// </summary>
+    Task<List<string>> GetUniqueFeatureNamesAsync();
+    
+    /// <summary>
+    /// Gets unique feature values for a specific feature name from all products
+    /// </summary>
+    Task<List<string>> GetUniqueFeatureValuesByNameAsync(string featureName);
 } 

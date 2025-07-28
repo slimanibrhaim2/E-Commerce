@@ -59,6 +59,7 @@ public class GetProductsByFiltersQueryHandler : IRequestHandler<GetProductsByFil
                     Description = product.Description,
                     Price = product.Price,
                     CategoryId = product.CategoryId,
+                    CategoryName = product.Category?.Name,
                     SKU = product.SKU,
                     SerialNumber = product.SerialNumber,
                     StockQuantity = product.StockQuantity,
