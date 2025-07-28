@@ -25,11 +25,12 @@ namespace Catalogs.Application.Queries.GetProductFeatureNames
         {
             try
             {
-                _logger.LogInformation("Getting unique product feature names");
+                _logger.LogInformation("Getting unique product feature names for categoryId: {CategoryId}", request.CategoryId);
 
-                var featureNames = await _productRepository.GetUniqueFeatureNamesAsync();
+                var featureNames = await _productRepository.GetUniqueFeatureNamesAsync(request.CategoryId);
 
-                _logger.LogInformation("Successfully retrieved {Count} unique feature names", featureNames.Count);
+                _logger.LogInformation("Successfully retrieved {Count} unique feature names for categoryId: {CategoryId}", 
+                    featureNames.Count, request.CategoryId);
 
                 return Result<List<string>>.Ok(
                     data: featureNames,
@@ -38,7 +39,7 @@ namespace Catalogs.Application.Queries.GetProductFeatureNames
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting product feature names");
+                _logger.LogError(ex, "Error getting product feature names for categoryId: {CategoryId}", request.CategoryId);
                 return Result<List<string>>.Fail(
                     message: "فشل في جلب أسماء الميزات",
                     errorType: "GetProductFeatureNamesFailed",

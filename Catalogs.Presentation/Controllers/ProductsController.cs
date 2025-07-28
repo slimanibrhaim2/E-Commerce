@@ -640,11 +640,14 @@ public class ProductsController : ControllerBase
 
     [HttpGet("feature-names")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetProductFeatureNames()
+    public async Task<IActionResult> GetProductFeatureNames([FromQuery] Guid? categoryId)
     {
         try
         {
-            var query = new GetProductFeatureNamesQuery();
+            // Normalize categoryId - treat empty GUID as null
+            var normalizedCategoryId = categoryId.HasValue && categoryId.Value != Guid.Empty ? categoryId : null;
+            
+            var query = new GetProductFeatureNamesQuery(CategoryId: normalizedCategoryId);
             var result = await _mediator.Send(query);
 
             if (!result.Success)
@@ -670,7 +673,7 @@ public class ProductsController : ControllerBase
 
     [HttpGet("feature-values")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetProductFeatureValues([FromQuery] string featureName)
+    public async Task<IActionResult> GetProductFeatureValues([FromQuery] string featureName, [FromQuery] Guid? categoryId)
     {
         try
         {
@@ -682,7 +685,10 @@ public class ProductsController : ControllerBase
                     resultStatus: ResultStatus.ValidationError));
             }
 
-            var query = new GetProductFeatureValuesQuery(featureName.Trim());
+            // Normalize categoryId - treat empty GUID as null
+            var normalizedCategoryId = categoryId.HasValue && categoryId.Value != Guid.Empty ? categoryId : null;
+
+            var query = new GetProductFeatureValuesQuery(featureName.Trim(), normalizedCategoryId);
             var result = await _mediator.Send(query);
 
             if (!result.Success)
@@ -705,4 +711,4 @@ public class ProductsController : ControllerBase
                 resultStatus: ResultStatus.Failed));
         }
     }
-} 
+}

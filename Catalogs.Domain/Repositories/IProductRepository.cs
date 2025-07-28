@@ -39,12 +39,12 @@ public interface IProductRepository : IRepository<Product>
         int pageSize);
     
     /// <summary>
-    /// Gets unique feature names from all products
+    /// Gets unique feature names from all products or filtered by category
     /// </summary>
-    Task<List<string>> GetUniqueFeatureNamesAsync();
+    Task<List<string>> GetUniqueFeatureNamesAsync(Guid? categoryId);
     
     /// <summary>
-    /// Gets unique feature values for a specific feature name from all products
+    /// Gets unique feature values for a specific feature name from all products or filtered by category
     /// </summary>
-    Task<List<string>> GetUniqueFeatureValuesByNameAsync(string featureName);
+    Task<List<string>> GetUniqueFeatureValuesByNameAsync(string featureName, Guid? categoryId);
 } 

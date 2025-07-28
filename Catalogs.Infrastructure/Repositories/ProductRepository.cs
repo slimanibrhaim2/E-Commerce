@@ -497,10 +497,18 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         return PaginatedResult<Product>.Create(mappedProducts, pageNumber, pageSize, totalCount);
     }
 
-    public async Task<List<string>> GetUniqueFeatureNamesAsync()
+    public async Task<List<string>> GetUniqueFeatureNamesAsync(Guid? categoryId)
     {
-        var featureNames = await _context.ProductFeatures
-            .Where(pf => pf.Product.DeletedAt == null) // Only from active products
+        var query = _context.ProductFeatures
+            .Where(pf => pf.Product.DeletedAt == null); // Only from active products
+            
+        // Apply category filter if provided
+        if (categoryId.HasValue)
+        {
+            query = query.Where(pf => pf.Product.BaseItem.CategoryId == categoryId.Value);
+        }
+        
+        var featureNames = await query
             .Select(pf => pf.Name)
             .Distinct()
             .OrderBy(name => name)
@@ -509,11 +517,19 @@ public class ProductRepository : BaseRepository<Product, ProductDAO>, IProductRe
         return featureNames;
     }
 
-    public async Task<List<string>> GetUniqueFeatureValuesByNameAsync(string featureName)
+    public async Task<List<string>> GetUniqueFeatureValuesByNameAsync(string featureName, Guid? categoryId)
     {
-        var featureValues = await _context.ProductFeatures
+        var query = _context.ProductFeatures
             .Where(pf => pf.Product.DeletedAt == null && // Only from active products
-                        pf.Name.ToLower() == featureName.ToLower()) // Case insensitive match
+                        pf.Name.ToLower() == featureName.ToLower()); // Case insensitive match
+                        
+        // Apply category filter if provided
+        if (categoryId.HasValue)
+        {
+            query = query.Where(pf => pf.Product.BaseItem.CategoryId == categoryId.Value);
+        }
+        
+        var featureValues = await query
             .Select(pf => pf.Value)
             .Where(value => !string.IsNullOrEmpty(value))
             .Distinct()

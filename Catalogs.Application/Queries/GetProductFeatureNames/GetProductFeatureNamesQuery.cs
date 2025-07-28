@@ -3,5 +3,5 @@ using Core.Result;
 
 namespace Catalogs.Application.Queries.GetProductFeatureNames
 {
-    public record GetProductFeatureNamesQuery() : IRequest<Result<List<string>>>;
+    public record GetProductFeatureNamesQuery(Guid? CategoryId) : IRequest<Result<List<string>>>;
 } 

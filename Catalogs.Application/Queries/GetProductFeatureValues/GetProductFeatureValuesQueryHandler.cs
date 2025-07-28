@@ -34,12 +34,13 @@ namespace Catalogs.Application.Queries.GetProductFeatureValues
                         resultStatus: ResultStatus.ValidationError);
                 }
 
-                _logger.LogInformation("Getting unique feature values for feature: {FeatureName}", request.FeatureName);
+                _logger.LogInformation("Getting unique feature values for feature: {FeatureName}, categoryId: {CategoryId}", 
+                    request.FeatureName, request.CategoryId);
 
-                var featureValues = await _productRepository.GetUniqueFeatureValuesByNameAsync(request.FeatureName);
+                var featureValues = await _productRepository.GetUniqueFeatureValuesByNameAsync(request.FeatureName, request.CategoryId);
 
-                _logger.LogInformation("Successfully retrieved {Count} unique values for feature '{FeatureName}'", 
-                    featureValues.Count, request.FeatureName);
+                _logger.LogInformation("Successfully retrieved {Count} unique values for feature '{FeatureName}', categoryId: {CategoryId}", 
+                    featureValues.Count, request.FeatureName, request.CategoryId);
 
                 return Result<List<string>>.Ok(
                     data: featureValues,
@@ -48,7 +49,8 @@ namespace Catalogs.Application.Queries.GetProductFeatureValues
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error getting feature values for feature name: {FeatureName}", request.FeatureName);
+                _logger.LogError(ex, "Error getting feature values for feature name: {FeatureName}, categoryId: {CategoryId}", 
+                    request.FeatureName, request.CategoryId);
                 return Result<List<string>>.Fail(
                     message: "فشل في جلب قيم الميزة",
                     errorType: "GetProductFeatureValuesFailed",
