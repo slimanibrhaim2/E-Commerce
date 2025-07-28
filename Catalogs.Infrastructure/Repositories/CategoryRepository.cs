@@ -41,6 +41,8 @@ public class CategoryRepository : BaseRepository<Category, CategoryDAO>, ICatego
         if (dao == null) return false;
         dao.Name = category.Name;
         dao.Description = category.Description;
+        dao.ImageUrl = category.ImageUrl;  // ✅ This was missing!
+        dao.IsActive = category.IsActive;  // ✅ This was also missing!
         dao.UpdatedAt = DateTime.UtcNow;
         dao.ParentId = category.ParentCategoryId;
         return true;

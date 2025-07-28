@@ -165,6 +165,17 @@ namespace Catalogs.Presentation.Controllers
             try
             {
                 string imageUrl = null;
+                
+                // Get current category first to get existing image URL
+                var currentCategory = await _mediator.Send(new GetCategoryByIdQuery(id));
+                if (!currentCategory.Success)
+                {
+                    return StatusCode(500, Result.Fail(
+                        message: "Failed to get current category",
+                        errorType: "GetCategoryFailed",
+                        resultStatus: ResultStatus.Failed));
+                }
+                
                 if (imageFile != null)
                 {
                     // Validate file
@@ -180,18 +191,6 @@ namespace Catalogs.Presentation.Controllers
                         return BadRequest(validationResult);
                     }
 
-                    // Get current category to handle image update
-                    var currentCategory = await _mediator.Send(new GetCategoryByIdQuery(id));
-                    if (currentCategory.Success && !string.IsNullOrEmpty(currentCategory.Data.ImageUrl))
-                    {
-                        // Delete old image file
-                        var deleteResult = _fileService.DeleteFile(currentCategory.Data.ImageUrl);
-                        if (!deleteResult.Success)
-                        {
-                            _logger.LogWarning("Failed to delete old image: {Error}", deleteResult.Message);
-                        }
-                    }
-
                     // Save new file using FileService
                     var saveResult = await _fileService.SaveFileAsync(imageFile, "media/categories");
                     if (!saveResult.Success)
@@ -200,16 +199,13 @@ namespace Catalogs.Presentation.Controllers
                         return StatusCode(500, saveResult);
                     }
 
+                    // Set the new image URL
                     imageUrl = saveResult.Data;
                 }
                 else
                 {
                     // If no new image is provided, keep the existing image URL
-                    var currentCategory = await _mediator.Send(new GetCategoryByIdQuery(id));
-                    if (currentCategory.Success)
-                    {
-                        imageUrl = currentCategory.Data.ImageUrl;
-                    }
+                    imageUrl = currentCategory.Data.ImageUrl;
                 }
 
                 // Create the DTO for the command
@@ -221,6 +217,8 @@ namespace Catalogs.Presentation.Controllers
                     IsActive = request.IsActive,
                     ImageUrl = imageUrl
                 };
+
+                _logger.LogInformation("Updating category {CategoryId} with ImageUrl: {ImageUrl}", id, imageUrl);
 
                 var command = new UpdateCategoryCommand(id, dto);
                 var result = await _mediator.Send(command);
@@ -250,18 +248,6 @@ namespace Catalogs.Presentation.Controllers
         {
             try
             {
-                // Get category to handle image deletion
-                var currentCategory = await _mediator.Send(new GetCategoryByIdQuery(id));
-                if (currentCategory.Success && !string.IsNullOrEmpty(currentCategory.Data.ImageUrl))
-                {
-                    // Delete image file using FileService
-                    var deleteResult = _fileService.DeleteFile(currentCategory.Data.ImageUrl);
-                    if (!deleteResult.Success)
-                    {
-                        _logger.LogWarning("Failed to delete image: {Error}", deleteResult.Message);
-                    }
-                }
-
                 var command = new DeleteCategoryCommand(id);
                 var result = await _mediator.Send(command);
                 
@@ -359,5 +345,7 @@ namespace Catalogs.Presentation.Controllers
                     resultStatus: ResultStatus.Failed));
             }
         }
+
+
     }
 } 
