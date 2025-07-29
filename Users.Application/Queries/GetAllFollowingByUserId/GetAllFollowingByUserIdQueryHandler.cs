@@ -42,18 +42,32 @@ namespace Users.Application.Queries.GetAllFollowingByUserId
                             $"User with Id {request.UserId} not found.");
                 }
 
-                // 3. Map to DTOs
+                // 3. Check follow relationships (should always be true since these are users the current user follows)
+                var followingIds = following.Select(f => f.FollowingId).ToList();
+                var followRelations = new HashSet<Guid>();
+                
+                foreach (var followingId in followingIds)
+                {
+                    var relation = await _followerRepo.GetByFollowerAndFollowingId(request.UserId, followingId);
+                    if (relation != null)
+                    {
+                        followRelations.Add(followingId);
+                    }
+                }
+
+                // 4. Map to DTOs with IsFollowed information
                 var dtos = following
                     .Select(f => new FollowingDTO
                     {
                         FollowingId = f.FollowingId,
                         FollowingName = $"{f.Following?.FirstName} {f.Following?.LastName}".Trim(),
                         FollowingProfileUrl = f.Following?.ProfilePhoto ?? string.Empty,
-                        CreatedAt = f.CreatedAt
+                        CreatedAt = f.CreatedAt,
+                        IsFollowed = followRelations.Contains(f.FollowingId) // Should always be true
                     })
                     .AsEnumerable();
 
-                // 4. Create paginated result
+                // 5. Create paginated result
                 var paginatedResult = new PaginatedResult<FollowingDTO>
                 {
                     Data = dtos,
@@ -63,7 +77,7 @@ namespace Users.Application.Queries.GetAllFollowingByUserId
                     TotalPages = (int)Math.Ceiling(dtos.Count() / (double)request.Parameters.PageSize)
                 };
 
-                // 5. Return success result
+                // 6. Return success result
                 return Result<PaginatedResult<FollowingDTO>>.Ok(
                     data: paginatedResult,
                     message: "تم جلب جميع المتابَعين بنجاح",

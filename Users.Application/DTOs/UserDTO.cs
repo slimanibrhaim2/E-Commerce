@@ -16,5 +16,6 @@ namespace Users.Application.DTOs
         public string? Description { get; set; }
         public int Rating { get; set; }
         public int NumOfReviews { get; set; }
+        public bool IsFollowed { get; set; }
     }
 }

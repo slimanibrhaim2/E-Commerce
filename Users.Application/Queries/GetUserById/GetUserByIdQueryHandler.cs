@@ -16,15 +16,18 @@ namespace Users.Application.Queries.GetUserById
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserRatingRepository _userRatingRepository;
+        private readonly IFollowerRepository _followerRepository;
         private readonly ILogger<GetUserByIdQueryHandler> _logger;
 
         public GetUserByIdQueryHandler(
             IUserRepository userRepository, 
             IUserRatingRepository userRatingRepository,
+            IFollowerRepository followerRepository,
             ILogger<GetUserByIdQueryHandler> logger)
         {
             _userRepository = userRepository;
             _userRatingRepository = userRatingRepository;
+            _followerRepository = followerRepository;
             _logger = logger;
         }
 
@@ -49,6 +52,14 @@ namespace Users.Application.Queries.GetUserById
                 // Get user rating
                 var userRating = await _userRatingRepository.GetByUserIdAsync(request.UserId);
 
+                // Check if the requestor follows this user
+                bool isFollowed = false;
+                if (request.RequestorUserId.HasValue && request.RequestorUserId.Value != Guid.Empty && request.RequestorUserId.Value != request.UserId)
+                {
+                    var followRelation = await _followerRepository.GetByFollowerAndFollowingId(request.RequestorUserId.Value, request.UserId);
+                    isFollowed = followRelation != null;
+                }
+
                 var userDto = new UserDTO
                 {
                     Id = user.Id,
@@ -60,7 +71,8 @@ namespace Users.Application.Queries.GetUserById
                     ProfilePhoto = user.ProfilePhoto,
                     Description = user.Description,
                     Rating = userRating?.Rating ?? 3, // Default to 3 if no rating exists
-                    NumOfReviews = userRating?.NumOfReviews ?? 0
+                    NumOfReviews = userRating?.NumOfReviews ?? 0,
+                    IsFollowed = isFollowed
                 };
 
                 return Result<UserDTO>.Ok(

@@ -11705,6 +11705,9 @@
           "numOfReviews": {
             "type": "integer",
             "format": "int32"
+          },
+          "isFollowed": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

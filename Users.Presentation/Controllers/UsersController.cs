@@ -310,7 +310,10 @@ namespace Users.Presentation.Controllers
         {
             try
             {
-                var query = new GetUserByIdQuery(id);
+                // Get current user ID if authenticated, otherwise null
+                var requestorUserId = User.Identity.IsAuthenticated ? User.GetId() : (Guid?)null;
+                
+                var query = new GetUserByIdQuery(id, requestorUserId);
                 var result = await _mediator.Send(query);
                 
                 if (!result.Success)

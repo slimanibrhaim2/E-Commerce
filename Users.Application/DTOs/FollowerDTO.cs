@@ -9,6 +9,7 @@ namespace Users.Application.DTOs
         public string FollowerName { get; set; } = string.Empty;    // Name of the follower
         public string FollowerProfileUrl { get; set; } = string.Empty;    // Profile URL of the follower
         public DateTime CreatedAt { get; set; }
+        public bool IsFollowed { get; set; }    // Whether the current user follows this follower back
     }
 
     public class FollowingDTO
@@ -17,5 +18,6 @@ namespace Users.Application.DTOs
         public string FollowingName { get; set; } = string.Empty;    // Name of the user being followed
         public string FollowingProfileUrl { get; set; } = string.Empty;    // Profile URL of the user being followed
         public DateTime CreatedAt { get; set; }
+        public bool IsFollowed { get; set; }    // Whether the current user follows this user (should always be true for following list)
     }
 }
