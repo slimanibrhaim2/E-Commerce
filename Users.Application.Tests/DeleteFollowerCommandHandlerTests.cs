@@ -110,6 +110,6 @@ public class DeleteFollowerCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("فشل في حذف المتابع", result.Message);
+        Assert.Equal("حدث خطأ أثناء حذف المتابع", result.Message);
     }
 } 

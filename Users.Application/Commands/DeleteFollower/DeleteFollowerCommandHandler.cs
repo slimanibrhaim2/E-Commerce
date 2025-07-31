@@ -34,7 +34,7 @@ namespace Users.Application.Commands.DeleteFollower
                     return Result.Fail(
                         message: "علاقة المتابعة غير موجودة",
                         errorType: "NotFound",
-                        resultStatus: ResultStatus.ValidationError);
+                        resultStatus: ResultStatus.NotFound);
                 }
 
                 if (follower.DeletedAt != null)
@@ -47,8 +47,9 @@ namespace Users.Application.Commands.DeleteFollower
                         resultStatus: ResultStatus.ValidationError);
                 }
 
-                // Use the new soft delete Remove method
-                _followerRepo.Remove(follower);
+                // Soft delete by setting DeletedAt timestamp
+                follower.DeletedAt = DateTime.UtcNow;
+                _followerRepo.Update(follower);
                 await _uow.SaveChangesAsync();
 
                 _logger.LogInformation("Successfully soft deleted follower relationship. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
@@ -62,7 +63,7 @@ namespace Users.Application.Commands.DeleteFollower
                 _logger.LogError(ex, "Error soft deleting follower relationship. FollowerId: {FollowerId}, FollowingId: {FollowingId}", 
                     request.FollowerId, request.FollowingId);
                 return Result.Fail(
-                    message: "فشل في حذف المتابع",
+                    message: "حدث خطأ أثناء حذف المتابع",
                     errorType: "DeleteFollowerFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);

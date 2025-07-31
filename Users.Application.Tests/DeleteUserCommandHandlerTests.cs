@@ -35,7 +35,7 @@ public class DeleteUserCommandHandlerTests
 
         // Assert
         Assert.True(result.Success);
-        Assert.Equal("تم حذف المستخدم بنجاح", result.Message);
+        Assert.Equal("تم حذف الحساب بنجاح", result.Message);
     }
 
     [Fact(DisplayName = "فشل الحذف عند معرف مستخدم غير صالح")]
@@ -51,6 +51,7 @@ public class DeleteUserCommandHandlerTests
         // Assert
         Assert.False(result.Success);
         Assert.Equal("معرف المستخدم غير صالح", result.Message);
+        Assert.Equal(ResultStatus.ValidationError, result.ResultStatus);
     }
 
     [Fact(DisplayName = "فشل الحذف عند عدم وجود المستخدم")]
@@ -67,7 +68,8 @@ public class DeleteUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("المستخدم غير موجود", result.Message);
+        Assert.Equal("لم يتم العثور على المستخدم", result.Message);
+        Assert.Equal(ResultStatus.NotFound, result.ResultStatus);
     }
 
     [Fact(DisplayName = "فشل الحذف عند حدوث استثناء داخلي")]
@@ -84,6 +86,7 @@ public class DeleteUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("فشل في حذف المستخدم", result.Message);
+        Assert.Equal("حدث خطأ أثناء حذف الحساب", result.Message);
+        Assert.Equal(ResultStatus.Failed, result.ResultStatus);
     }
 } 

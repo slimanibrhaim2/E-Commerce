@@ -34,7 +34,7 @@ namespace Users.Application.Commands.DeleteAddress
                     return Result.Fail(
                         message: "العنوان غير موجود",
                         errorType: "NotFound",
-                        resultStatus: ResultStatus.ValidationError);
+                        resultStatus: ResultStatus.NotFound);
                 }
 
                 if (address.DeletedAt != null)
@@ -59,11 +59,11 @@ namespace Users.Application.Commands.DeleteAddress
             {
                 _logger.LogError(ex, "Error soft deleting address with ID: {AddressId}", request.AddressId);
                 return Result.Fail(
-                    message: "فشل في حذف العنوان",
+                    message: "حدث خطأ أثناء حذف العنوان",
                     errorType: "DeleteAddressFailed",
                     resultStatus: ResultStatus.Failed,
                     exception: ex);
             }
         }
     }
-} 
+}

@@ -30,7 +30,7 @@ public class GetUsersByNameQueryHandlerTests
 
         // Assert
         Assert.True(result.Success);
-        Assert.Equal("Users retrieved successfully", result.Message);
+        Assert.Equal("تم العثور على المستخدمين بنجاح", result.Message);
         Assert.NotNull(result.Data);
         Assert.True(result.Data.Data.Any());
     }
@@ -48,7 +48,7 @@ public class GetUsersByNameQueryHandlerTests
 
         // Assert
         Assert.True(result.Success);
-        Assert.Equal("Users retrieved successfully", result.Message);
+        Assert.Equal("تم العثور على المستخدمين بنجاح", result.Message);
         Assert.NotNull(result.Data);
         Assert.Empty(result.Data.Data);
     }
@@ -66,6 +66,6 @@ public class GetUsersByNameQueryHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Contains("Failed to get users", result.Message);
+        Assert.Equal("حدث خطأ أثناء البحث عن المستخدمين", result.Message);
     }
 } 

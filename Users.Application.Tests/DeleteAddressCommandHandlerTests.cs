@@ -27,7 +27,7 @@ public class DeleteAddressCommandHandlerTests
         // Arrange
         var addressId = Guid.NewGuid();
         var addressEntity = new Address { Id = addressId, DeletedAt = null };
-        _addressRepoMock.Setup(r => r.FindAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Address, bool>>>())).ReturnsAsync(new List<Address> { addressEntity });
+        _addressRepoMock.Setup(r => r.GetByIdAsync(addressId)).ReturnsAsync(addressEntity);
         var handler = CreateHandler();
         var cmd = new DeleteAddressCommand(addressId);
         _uowMock.Setup(u => u.SaveChangesAsync()).Returns(Task.CompletedTask);
@@ -45,7 +45,7 @@ public class DeleteAddressCommandHandlerTests
     {
         // Arrange
         var addressId = Guid.NewGuid();
-        _addressRepoMock.Setup(r => r.FindAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Address, bool>>>())).ReturnsAsync(new List<Address>());
+        _addressRepoMock.Setup(r => r.GetByIdAsync(addressId)).ReturnsAsync((Address)null);
         var handler = CreateHandler();
         var cmd = new DeleteAddressCommand(addressId);
 
@@ -63,7 +63,7 @@ public class DeleteAddressCommandHandlerTests
         // Arrange
         var addressId = Guid.NewGuid();
         var addressEntity = new Address { Id = addressId, DeletedAt = DateTime.UtcNow };
-        _addressRepoMock.Setup(r => r.FindAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Address, bool>>>())).ReturnsAsync(new List<Address> { addressEntity });
+        _addressRepoMock.Setup(r => r.GetByIdAsync(addressId)).ReturnsAsync(addressEntity);
         var handler = CreateHandler();
         var cmd = new DeleteAddressCommand(addressId);
 
@@ -80,7 +80,7 @@ public class DeleteAddressCommandHandlerTests
     {
         // Arrange
         var addressId = Guid.NewGuid();
-        _addressRepoMock.Setup(r => r.FindAsync(It.IsAny<System.Linq.Expressions.Expression<System.Func<Address, bool>>>())).ThrowsAsync(new Exception("DB error"));
+        _addressRepoMock.Setup(r => r.GetByIdAsync(addressId)).ThrowsAsync(new Exception("DB error"));
         var handler = CreateHandler();
         var cmd = new DeleteAddressCommand(addressId);
 
@@ -89,6 +89,6 @@ public class DeleteAddressCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("فشل في حذف العنوان", result.Message);
+        Assert.Equal("حدث خطأ أثناء حذف العنوان", result.Message);
     }
 } 

@@ -32,10 +32,11 @@ public class UpdateUserCommandHandlerTests
             FirstName = "محمد",
             LastName = "سعيد",
             Email = "new@example.com",
-            PhoneNumber = "0123456789"
+            PhoneNumber = "0923456789"
         };
         _userRepoMock.Setup(r => r.GetByIdWithDetails(userId)).ReturnsAsync(userEntity);
         _userRepoMock.Setup(r => r.GetByEmail(dto.Email)).ReturnsAsync((User)null);
+        _userRepoMock.Setup(r => r.GetByPhoneNumber(dto.PhoneNumber)).ReturnsAsync((User)null);
         var handler = CreateHandler();
         var cmd = new UpdateUserCommand(userId, dto);
         _uowMock.Setup(u => u.SaveChangesAsync()).Returns(Task.CompletedTask);
@@ -45,7 +46,7 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.True(result.Success);
-        Assert.Equal("تم تحديث بيانات المستخدم بنجاح", result.Message);
+        Assert.Equal("تم تحديث بيانات الحساب بنجاح", result.Message);
     }
 
     [Fact(DisplayName = "فشل التحديث عند معرف مستخدم غير صالح")]
@@ -69,7 +70,7 @@ public class UpdateUserCommandHandlerTests
     {
         // Arrange
         var userId = Guid.NewGuid();
-        var dto = new CreateUserDTO { FirstName = null, LastName = "سعيد", Email = "new@example.com", PhoneNumber = "0123456789" };
+        var dto = new CreateUserDTO { FirstName = null, LastName = "سعيد", Email = "new@example.com", PhoneNumber = "0923456789" };
         var handler = CreateHandler();
         var cmd = new UpdateUserCommand(userId, dto);
 
@@ -78,7 +79,7 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("الاسم الأول مطلوب", result.Message);
+        Assert.Equal("يرجى إدخال الاسم الأول", result.Message);
     }
 
     [Fact(DisplayName = "فشل التحديث عند نقص الاسم الأخير")]
@@ -86,7 +87,7 @@ public class UpdateUserCommandHandlerTests
     {
         // Arrange
         var userId = Guid.NewGuid();
-        var dto = new CreateUserDTO { FirstName = "محمد", LastName = null, Email = "new@example.com", PhoneNumber = "0123456789" };
+        var dto = new CreateUserDTO { FirstName = "محمد", LastName = null, Email = "new@example.com", PhoneNumber = "0923456789" };
         var handler = CreateHandler();
         var cmd = new UpdateUserCommand(userId, dto);
 
@@ -95,7 +96,7 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("الاسم الأخير مطلوب", result.Message);
+        Assert.Equal("يرجى إدخال الاسم الأخير", result.Message);
     }
 
     [Fact(DisplayName = "فشل التحديث عند نقص البريد الإلكتروني")]
@@ -103,7 +104,7 @@ public class UpdateUserCommandHandlerTests
     {
         // Arrange
         var userId = Guid.NewGuid();
-        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = null, PhoneNumber = "0123456789" };
+        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = null, PhoneNumber = "0923456789" };
         var handler = CreateHandler();
         var cmd = new UpdateUserCommand(userId, dto);
 
@@ -112,7 +113,7 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("البريد الإلكتروني مطلوب", result.Message);
+        Assert.Equal("يرجى إدخال البريد الإلكتروني", result.Message);
     }
 
     [Fact(DisplayName = "فشل التحديث عند نقص رقم الهاتف")]
@@ -129,7 +130,7 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("رقم الهاتف مطلوب", result.Message);
+        Assert.Equal("يرجى إدخال رقم الهاتف", result.Message);
     }
 
     [Fact(DisplayName = "فشل التحديث عند صيغة بريد إلكتروني غير صحيحة")]
@@ -137,7 +138,7 @@ public class UpdateUserCommandHandlerTests
     {
         // Arrange
         var userId = Guid.NewGuid();
-        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = "invalid-email", PhoneNumber = "0123456789" };
+        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = "invalid-email", PhoneNumber = "0923456789" };
         var handler = CreateHandler();
         var cmd = new UpdateUserCommand(userId, dto);
 
@@ -146,7 +147,7 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("صيغة البريد الإلكتروني غير صحيحة", result.Message);
+        Assert.Equal("يرجى إدخال بريد إلكتروني صحيح", result.Message);
     }
 
     [Fact(DisplayName = "فشل التحديث عند صيغة رقم هاتف غير صحيحة")]
@@ -163,7 +164,7 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("صيغة رقم الهاتف غير صحيحة", result.Message);
+        Assert.Equal("يرجى إدخال رقم هاتف صحيح (يبدأ بـ 09 ويتكون من 10 أرقام)", result.Message);
     }
 
     [Fact(DisplayName = "فشل التحديث عند عدم وجود المستخدم")]
@@ -171,7 +172,7 @@ public class UpdateUserCommandHandlerTests
     {
         // Arrange
         var userId = Guid.NewGuid();
-        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = "new@example.com", PhoneNumber = "0123456789" };
+        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = "new@example.com", PhoneNumber = "0923456789" };
         _userRepoMock.Setup(r => r.GetByIdWithDetails(userId)).ReturnsAsync((User)null);
         var handler = CreateHandler();
         var cmd = new UpdateUserCommand(userId, dto);
@@ -181,7 +182,7 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("المستخدم غير موجود", result.Message);
+        Assert.Equal("لم يتم العثور على المستخدم", result.Message);
     }
 
     [Fact(DisplayName = "فشل التحديث عند وجود بريد إلكتروني مستخدم مسبقًا")]
@@ -190,7 +191,7 @@ public class UpdateUserCommandHandlerTests
         // Arrange
         var userId = Guid.NewGuid();
         var userEntity = new User { Id = userId, Email = "old@example.com" };
-        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = "used@example.com", PhoneNumber = "0123456789" };
+        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = "used@example.com", PhoneNumber = "0923456789" };
         _userRepoMock.Setup(r => r.GetByIdWithDetails(userId)).ReturnsAsync(userEntity);
         _userRepoMock.Setup(r => r.GetByEmail(dto.Email)).ReturnsAsync(new User());
         var handler = CreateHandler();
@@ -201,7 +202,7 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Contains("مستخدم بالفعل", result.Message);
+        Assert.Equal("البريد الإلكتروني مسجل مسبقاً في النظام", result.Message);
     }
 
     [Fact(DisplayName = "فشل التحديث عند حدوث استثناء داخلي")]
@@ -209,7 +210,7 @@ public class UpdateUserCommandHandlerTests
     {
         // Arrange
         var userId = Guid.NewGuid();
-        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = "new@example.com", PhoneNumber = "0123456789" };
+        var dto = new CreateUserDTO { FirstName = "محمد", LastName = "سعيد", Email = "new@example.com", PhoneNumber = "0923456789" };
         _userRepoMock.Setup(r => r.GetByIdWithDetails(userId)).ThrowsAsync(new Exception("DB error"));
         var handler = CreateHandler();
         var cmd = new UpdateUserCommand(userId, dto);
@@ -219,6 +220,6 @@ public class UpdateUserCommandHandlerTests
 
         // Assert
         Assert.False(result.Success);
-        Assert.Equal("فشل في تحديث بيانات المستخدم", result.Message);
+        Assert.Equal("حدث خطأ أثناء تحديث بيانات الحساب", result.Message);
     }
 } 
