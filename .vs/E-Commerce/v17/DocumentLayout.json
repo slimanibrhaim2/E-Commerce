@@ -504,7 +504,7 @@
               "RelativeDocumentMoniker": "Catalogs.Application.Tests\\GetServicesByIdsQueryHandlerTests.cs",
               "ToolTip": "C:\\Users\\VISION\\Desktop\\class diagram\\projectBackend\\E-Commerce\\Catalogs.Application.Tests\\GetServicesByIdsQueryHandlerTests.cs",
               "RelativeToolTip": "Catalogs.Application.Tests\\GetServicesByIdsQueryHandlerTests.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAwEwAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAAwFAAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-31T21:10:11.156Z",
               "EditorCaption": ""
@@ -519,8 +519,7 @@
               "RelativeToolTip": "Catalogs.Application.Tests\\GetProductsByIdsQueryHandlerTests.cs",
               "ViewState": "AgIAAFAAAAAAAAAAAAAIwFkAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-31T20:55:27.109Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-31T20:55:27.109Z"
             },
             {
               "$type": "Document",
@@ -556,8 +555,7 @@
               "RelativeToolTip": "Catalogs.Presentation\\Controllers\\ProductsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIkCAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-24T19:44:25.589Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-24T19:44:25.589Z"
             },
             {
               "$type": "Document",
