@@ -29,6 +29,7 @@ namespace Payments.Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<Result<Guid>>> Create([FromBody] CreatePaymentMethodDTO dto)
         {
             try
@@ -50,6 +51,7 @@ namespace Payments.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Result<PaymentMethodDTO>>> GetById(Guid id)
         {
             try
@@ -71,6 +73,7 @@ namespace Payments.Presentation.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<Result<PaginatedResult<PaymentMethodDTO>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             try
@@ -91,6 +94,7 @@ namespace Payments.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<Result<bool>>> Update(Guid id, [FromBody] CreatePaymentMethodDTO dto)
         {
             try
@@ -112,6 +116,7 @@ namespace Payments.Presentation.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<Result<bool>>> Delete(Guid id)
         {
             try

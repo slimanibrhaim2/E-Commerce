@@ -37,7 +37,7 @@ namespace Users.Application.Queries.GetAllUsers
             try
             {
                 var users = await _userRepository.GetAllAsync();
-                var usersList = users.ToList();
+                var usersList = users.ToList(); // Return all users (including admins and external systems)
                 var totalCount = usersList.Count;
 
                 // Get all user ratings in a single query
@@ -53,6 +53,7 @@ namespace Users.Application.Queries.GetAllUsers
                     FirstName = user.FirstName,
                     MiddleName = user.MiddleName,
                     LastName = user.LastName,
+                    UserType = user.UserType,
                     ProfilePhoto = user.ProfilePhoto,
                     Description = user.Description,
                     Rating = userRatings.TryGetValue(user.Id, out var rating) ? rating.Rating : 3,

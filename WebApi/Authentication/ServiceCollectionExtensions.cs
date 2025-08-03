@@ -38,6 +38,9 @@ namespace WebApi.Authentication
             // Register OTP Service
             services.AddScoped<IOtpService, OtpService>();
 
+            // Register JWT Service
+            services.AddScoped<JwtService>();
+
             // Register Authentication Controller
             services.AddControllers()
                 .AddApplicationPart(typeof(AuthController).Assembly);

@@ -124,8 +124,12 @@ namespace Users.Application.Commands.CreateUser
                     LastName = request.userDTO.LastName,
                     PhoneNumber = request.userDTO.PhoneNumber,
                     Email = request.userDTO.Email,
+                    Password = request.userDTO.Password,
+                    UserType = string.IsNullOrEmpty(request.userDTO.UserType) ? "user" : request.userDTO.UserType,
                     ProfilePhoto = request.userDTO.ProfilePhoto,
                     Description = request.userDTO.Description,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
                 };
 
                 await _repo.AddAsync(user);

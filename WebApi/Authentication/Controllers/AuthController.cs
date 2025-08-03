@@ -5,6 +5,8 @@ using MediatR;
 using Users.Application.Commands.CreateUser;
 using Users.Domain.Repositories;
 using Core.Result;
+using Users.Domain.Entities;
+using Microsoft.Extensions.Options;
 
 namespace WebApi.Authentication.Controllers
 {
@@ -16,17 +18,20 @@ namespace WebApi.Authentication.Controllers
         private readonly IMediator _mediator;
         private readonly ILogger<AuthController> _logger;
         private readonly IUserRepository _userRepository;
+        private readonly JwtService _jwtService;
 
         public AuthController(
             IOtpService otpService,
             IMediator mediator,
             ILogger<AuthController> logger,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            JwtService jwtService)
         {
             _otpService = otpService;
             _mediator = mediator;
             _logger = logger;
             _userRepository = userRepository;
+            _jwtService = jwtService;
         }
 
         [HttpPost("login")]
@@ -150,7 +155,7 @@ namespace WebApi.Authentication.Controllers
                         resultStatus: ResultStatus.Failed));
                 }
 
-                var token = await _otpService.GenerateJwtTokenAsync(user.Id, request.PhoneNumber);
+                var token = await _otpService.GenerateJwtTokenAsync(user.Id, request.PhoneNumber, user.UserType);
                 return Ok(Result<string>.Ok(
                     data: token,
                     message: "تم التحقق من رمز التحقق بنجاح",
@@ -200,6 +205,220 @@ namespace WebApi.Authentication.Controllers
                 return StatusCode(500, Result.Fail(
                     message: "حدث خطأ أثناء تسجيل المستخدم",
                     errorType: "RegisterUserError",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        [HttpPost("email-login")]
+        public async Task<IActionResult> EmailLogin([FromBody] EmailLoginRequest request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "البيانات المدخلة غير صحيحة",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Check if user exists by email
+                var user = await _userRepository.GetByEmail(request.Email);
+                if (user == null)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+                        errorType: "InvalidCredentials",
+                        resultStatus: ResultStatus.NotFound));
+                }
+
+                // Check if user is deleted
+                if (user.DeletedAt != null)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "الحساب محذوف. يرجى التواصل مع الدعم الفني",
+                        errorType: "UserDeleted",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Check if user has a password set
+                if (string.IsNullOrEmpty(user.Password))
+                {
+                    return BadRequest(Result.Fail(
+                        message: "هذا الحساب لا يدعم تسجيل الدخول بكلمة المرور",
+                        errorType: "NoPasswordSet",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Verify password
+                if (!PasswordHashingService.VerifyPassword(request.Password, user.Password))
+                {
+                    return BadRequest(Result.Fail(
+                        message: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+                        errorType: "InvalidCredentials",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Generate JWT token with user type
+                var token = _jwtService.GenerateToken(user.Id, user.UserType);
+
+                return Ok(Result<string>.Ok(
+                    data: token,
+                    message: "تم تسجيل الدخول بنجاح",
+                    resultStatus: ResultStatus.Success));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during email login for {Email}", request.Email);
+                return StatusCode(500, Result.Fail(
+                    message: "حدث خطأ أثناء تسجيل الدخول",
+                    errorType: "EmailLoginError",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        [HttpPost("register-admin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] AdminRegisterRequest request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "البيانات المدخلة غير صحيحة",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Check if user already exists
+                var existingUser = await _userRepository.GetByEmail(request.Email);
+                if (existingUser != null)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "البريد الإلكتروني مستخدم بالفعل",
+                        errorType: "EmailAlreadyExists",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                existingUser = await _userRepository.GetByPhoneNumber(request.PhoneNumber);
+                if (existingUser != null)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "رقم الهاتف مستخدم بالفعل",
+                        errorType: "PhoneAlreadyExists",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Hash password
+                var hashedPassword = PasswordHashingService.HashPassword(request.Password);
+
+                // Create admin user
+                var createUserCommand = new CreateUserCommand(
+                    new Users.Application.DTOs.CreateUserDTO
+                    {
+                        FirstName = request.FirstName,
+                        MiddleName = request.MiddleName,
+                        LastName = request.LastName,
+                        PhoneNumber = request.PhoneNumber,
+                        Email = request.Email,
+                        Description = request.Description,
+                        Password = hashedPassword,
+                        UserType = "admin"
+                    }
+                );
+
+                var result = await _mediator.Send(createUserCommand);
+                if (!result.Success)
+                {
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في تسجيل المشرف",
+                        errorType: "RegisterAdminFailed",
+                        resultStatus: ResultStatus.Failed));
+                }
+
+                return Ok(Result.Ok(
+                    message: "تم تسجيل المشرف بنجاح",
+                    resultStatus: ResultStatus.Success));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error registering admin");
+                return StatusCode(500, Result.Fail(
+                    message: "حدث خطأ أثناء تسجيل المشرف",
+                    errorType: "RegisterAdminError",
+                    resultStatus: ResultStatus.Failed));
+            }
+        }
+
+        [HttpPost("register-external-system")]
+        public async Task<IActionResult> RegisterExternalSystem([FromBody] ExternalSystemRegisterRequest request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "البيانات المدخلة غير صحيحة",
+                        errorType: "ValidationError",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Check if user already exists
+                var existingUser = await _userRepository.GetByEmail(request.Email);
+                if (existingUser != null)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "البريد الإلكتروني مستخدم بالفعل",
+                        errorType: "EmailAlreadyExists",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                existingUser = await _userRepository.GetByPhoneNumber(request.PhoneNumber);
+                if (existingUser != null)
+                {
+                    return BadRequest(Result.Fail(
+                        message: "رقم الهاتف مستخدم بالفعل",
+                        errorType: "PhoneAlreadyExists",
+                        resultStatus: ResultStatus.ValidationError));
+                }
+
+                // Hash password
+                var hashedPassword = PasswordHashingService.HashPassword(request.Password);
+
+                // Create external system user
+                var createUserCommand = new CreateUserCommand(
+                    new Users.Application.DTOs.CreateUserDTO
+                    {
+                        FirstName = request.SystemName,
+                        MiddleName = request.MiddleName,
+                        LastName = request.SystemType,
+                        PhoneNumber = request.PhoneNumber,
+                        Email = request.Email,
+                        Description = request.Description,
+                        Password = hashedPassword,
+                        UserType = "rating_system"
+                    }
+                );
+
+                var result = await _mediator.Send(createUserCommand);
+                if (!result.Success)
+                {
+                    return StatusCode(500, Result.Fail(
+                        message: "فشل في تسجيل النظام الخارجي",
+                        errorType: "RegisterExternalSystemFailed",
+                        resultStatus: ResultStatus.Failed));
+                }
+
+                return Ok(Result.Ok(
+                    message: "تم تسجيل النظام الخارجي بنجاح",
+                    resultStatus: ResultStatus.Success));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error registering external system");
+                return StatusCode(500, Result.Fail(
+                    message: "حدث خطأ أثناء تسجيل النظام الخارجي",
+                    errorType: "RegisterExternalSystemError",
                     resultStatus: ResultStatus.Failed));
             }
         }

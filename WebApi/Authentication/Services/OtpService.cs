@@ -85,18 +85,23 @@ namespace WebApi.Authentication.Services
             }
         }
 
-        public async Task<string> GenerateJwtTokenAsync(Guid userId,string phoneNumber)
+        public async Task<string> GenerateJwtTokenAsync(Guid userId, string phoneNumber, string userType = "user")
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
+            
+            // Determine expiration based on user type
+            var expiration = GetExpirationByUserType(userType);
+            
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                    new Claim(ClaimTypes.MobilePhone, phoneNumber)
+                    new Claim(ClaimTypes.MobilePhone, phoneNumber),
+                    new Claim(ClaimTypes.Role, userType)
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.ExpiryInMinutes),
+                Expires = expiration,
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature),
@@ -106,6 +111,17 @@ namespace WebApi.Authentication.Services
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        private DateTime GetExpirationByUserType(string userType)
+        {
+            return userType switch
+            {
+                "user" => DateTime.UtcNow.AddMinutes(_jwtSettings.ExpiryInMinutes), // Default: 7 days
+                "admin" => DateTime.UtcNow.AddDays(30), // Admin: 30 days
+                "rating_system" => DateTime.UtcNow.AddYears(1), // Rating System: 1 year
+                _ => DateTime.UtcNow.AddMinutes(_jwtSettings.ExpiryInMinutes) // Default fallback
+            };
         }
     }
 } 

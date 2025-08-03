@@ -22,7 +22,8 @@ public class GetUsersByNameQueryHandler : IRequestHandler<GetUsersByNameQuery, R
     {
         try
         {
-            var users = (await _repository.GetUsersByNameAsync(request.Name)).ToList();
+            var users = (await _repository.GetUsersByNameAsync(request.Name))
+                .ToList(); // Return all users (including admins and external systems)
             var totalCount = users.Count;
             var pageNumber = request.Parameters.PageNumber;
             var pageSize = request.Parameters.PageSize;
@@ -35,6 +36,7 @@ public class GetUsersByNameQueryHandler : IRequestHandler<GetUsersByNameQuery, R
                 LastName = u.LastName,
                 PhoneNumber = u.PhoneNumber,
                 Email = u.Email,
+                UserType = u.UserType,
                 ProfilePhoto = u.ProfilePhoto,
                 Description = u.Description
             }).ToList();

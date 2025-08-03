@@ -6,6 +6,6 @@ namespace WebApi.Authentication.Services
     {
         Task<bool> SendOtpAsync(string phoneNumber);
         Task<bool> VerifyOtpAsync(string phoneNumber, string otp);
-        Task<string> GenerateJwtTokenAsync(Guid userId,string phoneNumber);
+        Task<string> GenerateJwtTokenAsync(Guid userId, string phoneNumber, string userType = "user");
     }
 } 

@@ -14,6 +14,8 @@ namespace Users.Application.DTOs
         public string LastName { set; get; }
         public string PhoneNumber { set; get; }
         public string Email { set; get; }
+        public string? Password { set; get; }
+        public string UserType { set; get; } = "user";
         public string? Description { set; get; }
         
         [JsonIgnore] // This will be set by the controller when handling file upload

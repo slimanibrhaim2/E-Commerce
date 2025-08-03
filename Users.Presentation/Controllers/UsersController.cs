@@ -89,7 +89,7 @@ namespace Users.Presentation.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             try
@@ -106,7 +106,7 @@ namespace Users.Presentation.Controllers
                 // No need to load image data anymore, just return the URLs
                 return Ok(Result<PaginatedResult<UserDTO>>.Ok(
                     data: result.Data,
-                    message: "تم جلب المستخدمين بنجاح",
+                    message: "تم جلب جميع المستخدمين بنجاح (جميع الأنواع - مخصص للمدراء فقط)",
                     resultStatus: ResultStatus.Success));
             }
             catch (Exception ex)
@@ -341,7 +341,7 @@ namespace Users.Presentation.Controllers
         }
 
         [HttpPost("rating")]
-        [AllowAnonymous]
+        [Authorize(Roles = "rating_system")]
         public async Task<IActionResult> UpdateRating( [FromBody] UpdateUserRatingDTO dto)
         {
             try

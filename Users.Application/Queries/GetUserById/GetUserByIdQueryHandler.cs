@@ -68,6 +68,7 @@ namespace Users.Application.Queries.GetUserById
                     FirstName = user.FirstName,
                     MiddleName = user.MiddleName,
                     LastName = user.LastName,
+                    UserType = user.UserType,
                     ProfilePhoto = user.ProfilePhoto,
                     Description = user.Description,
                     Rating = userRating?.Rating ?? 3, // Default to 3 if no rating exists

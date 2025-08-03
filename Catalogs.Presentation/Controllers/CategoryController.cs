@@ -94,6 +94,7 @@ namespace Catalogs.Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([FromForm] CreateCategoryRequest request, IFormFile imageFile)
         {
             try
@@ -160,6 +161,7 @@ namespace Catalogs.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Update(Guid id, [FromForm] CreateCategoryRequest request, IFormFile imageFile)
         {
             try
@@ -244,6 +246,7 @@ namespace Catalogs.Presentation.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             try

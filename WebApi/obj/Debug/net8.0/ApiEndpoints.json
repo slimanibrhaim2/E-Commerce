@@ -397,6 +397,22 @@
   },
   {
     "ContainingType": "WebApi.Authentication.Controllers.AuthController",
+    "Method": "EmailLogin",
+    "RelativePath": "api/Auth/email-login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Authentication.DTOs.EmailLoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Authentication.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
@@ -422,6 +438,38 @@
       {
         "Name": "command",
         "Type": "Users.Application.Commands.CreateUser.CreateUserCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Authentication.Controllers.AuthController",
+    "Method": "RegisterAdmin",
+    "RelativePath": "api/Auth/register-admin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Authentication.DTOs.AdminRegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebApi.Authentication.Controllers.AuthController",
+    "Method": "RegisterExternalSystem",
+    "RelativePath": "api/Auth/register-external-system",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WebApi.Authentication.DTOs.ExternalSystemRegisterRequest",
         "IsRequired": true
       }
     ],
@@ -2308,7 +2356,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Domain.Entities.Order, Shoppings.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "Core.Result.Result\u00601[[Core.Pagination.PaginatedResult\u00601[[Shoppings.Application.DTOs.MyOrderDTO, Shoppings.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -4668,6 +4716,16 @@
         "IsRequired": false
       },
       {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "Description",
         "Type": "System.String",
         "IsRequired": false
@@ -4830,6 +4888,16 @@
       },
       {
         "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserType",
         "Type": "System.String",
         "IsRequired": false
       },

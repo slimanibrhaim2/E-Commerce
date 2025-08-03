@@ -131,6 +131,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
+        await Users.Infrastructure.Data.SeedData.SeedUserData(services);
         await Payments.Infrastructure.Data.SeedData.SeedPaymentData(services);
         await Shoppings.Infrastructure.Data.SeedData.SeedShoppingData(services);
         await Communication.Infrastructure.Data.SeedData.SeedCommunicationData(services);

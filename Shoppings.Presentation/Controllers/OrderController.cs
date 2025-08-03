@@ -165,12 +165,17 @@ namespace Shoppings.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Result<PaginatedResult<Order>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult<Result<PaginatedResult<MyOrderDTO>>>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
             var query = new GetAllOrderQuery(parameters);
             var result = await _mediator.Send(query);
-            return Ok(result);
+            return Ok(result.Success ? 
+                Result<PaginatedResult<MyOrderDTO>>.Ok(
+                    data: result.Data,
+                    message: "تم جلب جميع الطلبات بنجاح (مخصص للمدراء فقط)",
+                    resultStatus: ResultStatus.Success) : result);
         }
 
         [HttpGet("my-orders")]
@@ -195,6 +200,7 @@ namespace Shoppings.Presentation.Controllers
         }
 
         [HttpGet("by-user/{userId}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<Result<PaginatedResult<MyOrderDTO>>>> GetOrdersByUserId(Guid userId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             try
@@ -202,7 +208,11 @@ namespace Shoppings.Presentation.Controllers
                 var parameters = new PaginationParameters { PageNumber = pageNumber, PageSize = pageSize };
                 var query = new GetMyOrdersQuery(userId, parameters); // Using the same query, just with different userId
                 var result = await _mediator.Send(query);
-                return Ok(result);
+                return Ok(result.Success ? 
+                    Result<PaginatedResult<MyOrderDTO>>.Ok(
+                        data: result.Data,
+                        message: "تم جلب طلبات المستخدم بنجاح (مخصص للمدراء فقط)",
+                        resultStatus: ResultStatus.Success) : result);
             }
             catch (Exception ex)
             {

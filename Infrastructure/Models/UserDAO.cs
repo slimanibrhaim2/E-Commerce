@@ -17,6 +17,10 @@ public partial class UserDAO
 
     public string Email { get; set; } = null!;
 
+    public string? Password { get; set; }
+
+    public string UserType { get; set; } = null!;
+
     public DateTime CreatedAt { get; set; }
 
     public DateTime UpdatedAt { get; set; }

@@ -12,6 +12,8 @@ namespace Users.Application.DTOs
         public string LastName { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string Email { get; set; } = null!;
+        public string? Password { get; set; }
+        public string UserType { get; set; } = "user";
         public string? ProfilePhoto { get; set; }
         public string? Description { get; set; }
         public int Rating { get; set; }

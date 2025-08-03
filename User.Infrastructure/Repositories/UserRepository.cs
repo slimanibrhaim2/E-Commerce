@@ -2,18 +2,10 @@
 using Infrastructure.Common;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Users.Domain.Entities;
 using Users.Domain.Repositories;
-using Users.Infrastructure.Mapping;
-using Address = Users.Domain.Entities.Address;
-using Follower = Users.Domain.Entities.Follower;
-using User = Users.Domain.Entities.User;
 using FuzzySharp;
+using Users.Domain.Entities;
 
 namespace Users.Infrastructure.Repositories;
 
